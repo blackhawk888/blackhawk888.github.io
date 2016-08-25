@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-25T05:58:31+00:00</updated>
+  <updated>2016-08-25T06:00:28+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[OctopressとGithub Pagesを使ったブログの作成]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/08/24/octopress/"/>
-    <updated>2016-08-24T23:48:37+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/08/24/octopress</id>
+    <link href="http://blackhawk888.github.io/blog/2016/08/25/octopress/"/>
+    <updated>2016-08-25T15:00:37+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/08/25/octopress</id>
     <content type="html"><![CDATA[<h2>Octopressの特徴</h2>
 
 <ul>
