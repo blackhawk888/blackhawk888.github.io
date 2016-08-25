@@ -356,7 +356,7 @@ new_postの後には記事のタイトルを指定。英数字のみ使用可</p
 
 <p>ここで、title を日本語にすれば良い</p>
 
-<p>ブログのカテゴリ(categories)は以下のように色々あ方法で指定できる。</p>
+<p>ブログのカテゴリ(categories)は以下のように色々な方法で指定できる。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -467,7 +467,7 @@ new_postの後には記事のタイトルを指定。英数字のみ使用可</p
 
 <p> <a href="http://">http://</a>[username].github.ioにアクセスし作成したブログの記事が表示されるのを確認する。</p>
 
-<p>デプロイ時には、下記コマンドを実行しますが、これによって、<code>_deploy/</code> 以下にサイトのコンテンツ一式がビルドされ、その内容が GitHub に <code>push</code> されます。
+<p>デプロイ時には、下記コマンドを実行するが、これによって、<code>_deploy/</code> 以下にサイトのコンテンツ一式がビルドされ、その内容が GitHub に <code>push</code> されます。
 <a href="http://">http://</a>[username].github.io/ にアクセスすると、ローカルまたはCloud9でpreview した画面と同じ内容が表示されるようになる。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -528,11 +528,17 @@ new_postの後には記事のタイトルを指定。英数字のみ使用可</p
   <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2016/08/25/octopress/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2016/08/25/octopress/" >Tweet</a>
   
   
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
   
 </div>
 
     
     <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/08/25/externalservicecooperation/" title="Previous Post: Octopress外部サービス連携">&laquo; Octopress外部サービス連携</a>
       
       
         <a class="basic-alignment right" href="/blog/2016/08/25/octpresseditconfigyml/" title="Next Post: octopressの日時表示設定">octopressの日時表示設定 &raquo;</a>
@@ -555,6 +561,10 @@ new_postの後には記事のタイトルを指定。英数字のみ使用可</p
     
       <li class="post">
         <a href="/blog/2016/08/25/octopress/">OctopressとGithub Pagesを使ったブログの作成</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/08/25/externalservicecooperation/">Octopress外部サービス連携</a>
       </li>
     
   </ul>
@@ -580,7 +590,24 @@ new_postの後には記事のタイトルを指定。英数字のみ使用可</p
 
 
 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
 
 
 
