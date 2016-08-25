@@ -9,9 +9,11 @@
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="Octopressの特徴 Octopress は jekyll を使って作るブログ構築用フレームワーク
-Markdown記法で書ける
-静的ファイル →　軽い 今回はブログ記事そのものは GitHub Pagesにホスティングする。 GitHub Pagesの特徴 &hellip;">
+  <meta name="description" content="日時表示設定 投稿記事の日時はデフォルトでAUG 25TH, 2016 3:00 PMのような表示になっていが、
+rubyの時間表記表現 を使って 好きなように変更可能 _config.yamlを編集 1
+2
+- date_format: &quot;ordinal&quot;
++ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -73,6 +75,49 @@ Markdown記法で書ける
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2016/08/25/octpresseditconfigyml/">Octpressの日時表示設定</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-08-25T20:15:39+00:00'><span class='date'>2016年08月25日</span> <span class='time'>8:15 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>日時表示設定</h2>
+
+<p>投稿記事の日時はデフォルトで<code>AUG 25TH, 2016 3:00 PM</code>のような表示になっていが、
+<a href="http://ruby-doc.org/core-1.9.2/Time.html#method-i-strftim">rubyの時間表記表現</a> を使って 好きなように変更可能</p>
+
+<h3>_config.yamlを編集</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">-</span> <span class="ss">date_format</span><span class="p">:</span> <span class="s2">&quot;ordinal&quot;</span>
+</span><span class='line'><span class="o">+</span> <span class="ss">date_format</span><span class="p">:</span> <span class="s2">&quot;%Y年%m月%d日&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上記の設定で”2016年8月25日”というような表示になる</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2016/08/25/octopress/">OctopressとGithub Pagesを使ったブログの作成</a></h1>
     
     
@@ -82,7 +127,7 @@ Markdown記法で書ける
 
 
 
-<time class='entry-date' datetime='2016-08-25T15:00:37+00:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>3:00 pm</span></time>
+<time class='entry-date' datetime='2016-08-25T15:00:37+00:00'><span class='date'>2016年08月25日</span> <span class='time'>3:00 pm</span></time>
         
       </p>
     
@@ -517,6 +562,10 @@ new_postの後には記事のタイトルを指定。英数字のみ使用可</p
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/08/25/octpresseditconfigyml/">Octpressの日時表示設定</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/08/25/octopress/">OctopressとGithub Pagesを使ったブログの作成</a>
