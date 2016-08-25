@@ -317,11 +317,11 @@ new_postの後には記事のタイトルを指定。英数字のみ使用可</p
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="sx">% bundle </span><span class="nb">exec</span> <span class="n">rake</span> <span class="n">new_post</span><span class="o">[</span><span class="n">title</span><span class="o">]</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">mkdir</span> <span class="o">-</span><span class="nb">p</span> <span class="n">source</span><span class="o">/</span><span class="n">_posts</span>
-</span><span class='line'><span class="no">Creating</span> <span class="kp">new</span> <span class="ss">post</span><span class="p">:</span> <span class="n">source</span><span class="o">/</span><span class="n">_posts</span><span class="o">/</span><span class="mi">2016</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">25</span><span class="o">-</span><span class="n">title</span><span class="o">.</span><span class="n">markdown</span>
+</span><span class='line'><span class="no">Creating</span> <span class="kp">new</span> <span class="ss">post</span><span class="p">:</span> <span class="n">source</span><span class="o">/</span><span class="n">_posts</span><span class="o">/</span><span class="no">YYYY</span><span class="o">-</span><span class="no">MM</span><span class="o">-</span><span class="no">DD</span><span class="o">-</span><span class="n">title</span><span class="o">.</span><span class="n">markdown</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><code>source/_posts/2016-08-26-title.markdown</code>というファイルが生成されるので内容をマークダウンで記述する。
+<p><code>source/_posts/YYYY-MM-DDD-title.markdown</code>というファイルが生成されるので内容をマークダウンで記述する。
 またファイル上部にはブログのメタ情報がYAML FRONT MATTERで記述されているので適宜編集する。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -329,7 +329,7 @@ new_postの後には記事のタイトルを指定。英数字のみ使用可</p
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">source</span><span class="o">/</span>
 </span><span class='line'><span class="err">└──</span> <span class="n">_post</span><span class="o">/</span>
-</span><span class='line'>    <span class="err">└──</span> <span class="mi">2016</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">25</span><span class="o">-</span><span class="n">post</span><span class="o">-</span><span class="n">title</span><span class="o">.</span><span class="n">markdown</span>
+</span><span class='line'>    <span class="err">└──</span> <span class="no">YYYY</span><span class="o">-</span><span class="no">MM</span><span class="o">-</span><span class="no">DD</span><span class="o">-</span><span class="n">post</span><span class="o">-</span><span class="n">title</span><span class="o">.</span><span class="n">markdown</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -383,7 +383,7 @@ new_postの後には記事のタイトルを指定。英数字のみ使用可</p
 
 <h2>Github Pagesにデプロイする</h2>
 
-<h3>ページお生成</h3>
+<h3>ページの生成</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>

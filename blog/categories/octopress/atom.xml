@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-25T06:13:12+00:00</updated>
+  <updated>2016-08-25T06:48:28+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -173,15 +173,15 @@ new_postの後には記事のタイトルを指定。英数字のみ使用可</p
 <pre><code class="ruby">% bundle exec rake new_post[title]
 
 mkdir -p source/_posts
-Creating new post: source/_posts/2016-08-25-title.markdown
+Creating new post: source/_posts/YYYY-MM-DD-title.markdown
 </code></pre>
 
-<p><code>source/_posts/2016-08-26-title.markdown</code>というファイルが生成されるので内容をマークダウンで記述する。
+<p><code>source/_posts/YYYY-MM-DDD-title.markdown</code>というファイルが生成されるので内容をマークダウンで記述する。
 またファイル上部にはブログのメタ情報がYAML FRONT MATTERで記述されているので適宜編集する。</p>
 
 <pre><code>source/
 └── _post/
-    └── 2016-08-25-post-title.markdown
+    └── YYYY-MM-DD-post-title.markdown
 </code></pre>
 
 <pre><code class="yaml">---
@@ -212,7 +212,7 @@ categories:
 
 <h2>Github Pagesにデプロイする</h2>
 
-<h3>ページお生成</h3>
+<h3>ページの生成</h3>
 
 <pre><code class="ruby">$ bundle exec rake generated
 
