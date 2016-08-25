@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-25T06:51:54+00:00</updated>
+  <updated>2016-08-25T07:34:14+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -268,6 +268,13 @@ $ bundle exec rake deploy
 <p>また上記コマンドを別々に実行しなくても以下のコマンドでビルド及びデプロイを同時に行うことができる。</p>
 
 <pre><code>$ bundle exec rake gen_deploy
+</code></pre>
+
+<p>最後に、ソースコードを管理するために、<code>source</code> ブランチも <code>push</code> しておく</p>
+
+<pre><code>$ git add .
+$ git commit -m 'message'
+$ git push origin source
 </code></pre>
 ]]></content>
   </entry>
