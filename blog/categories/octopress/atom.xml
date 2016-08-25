@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Octopress | Wivern Blog]]></title>
+  <link href="http://blackhawk888.github.io/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://blackhawk888.github.io/"/>
+  <updated>2016-08-25T05:37:20+00:00</updated>
+  <id>http://blackhawk888.github.io/</id>
+  <author>
+    <name><![CDATA[wivern]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[OctopressとGithub Pagesを使ったブログの作成]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/08/24/octopress/"/>
+    <updated>2016-08-24T23:48:37+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/08/24/octopress</id>
+    <content type="html"><![CDATA[<h2>Octopressの特徴</h2>
+
+<ul>
+<li>Octopress は jekyll を使って作るブログ構築用フレームワーク</li>
+<li>Markdown記法で書ける</li>
+<li>静的ファイル →　軽い</li>
+</ul>
+
+
+<p>今回はブログ記事そのものは <a href="https://pages.github.com/">GitHub Pages</a>にホスティングする。</p>
+
+<h2>GitHub Pagesの特徴</h2>
+
+<ul>
+<li>GitHubが提供するホスティングサービス</li>
+<li>ウェブページをインターネット上に公開することができる。</li>
+<li>プロジェクトのウェブページをGit/GitHubのリポジトリを用いて、公開することが可能(プロジェクトの場合はプロジェクトリポジトリの gh-pages ブランチで行う)</li>
+<li>HTML,CSS, JavaScriptを配置することが出来るので、ブログだけではなくGitHub Pages だけで静的なページを作成することができる。</li>
+</ul>
+
+
+<p>今回はプロジェクトのウェブページを公開するプロジェクトサイト（Project site）ではなくユーザのウェブページを公開するユーザサイト（User site）[username].github.io
+でアクセスできるようにする。</p>
+
+<h2>Octopressのインストール</h2>
+
+<p>octopress を GitHub からクローンしてくる</p>
+
+<pre><code class="bash">$ git clone git://github.com/imathis/octopress.git octopress
+
+Cloning into 'octopress'...
+remote: Counting objects: 5685, done.
+remote: Compressing objects: 100% (2262/2262), done.
+remote: Total 5685 (delta 3247), reused 5225 (delta 2933)
+Receiving objects: 100% (5685/5685), 1.21 MiB | 435 KiB/s, done.
+Resolving deltas: 100% (3247/3247), done.
+
+$ cd octopuress
+</code></pre>
+
+<p>必要な gem をインストールする</p>
+
+<pre><code class="ruby">bundle --path vendor/bundle
+</code></pre>
+
+<p>Octopressをセットアップ(<code>bundel exec rake install</code>)する前にoctpressディレクトリのRakefileを修正する。
+通常の場合そのまま<code>bundle ecec rake install</code>して問題ないがCloud9を使用いているためその後の<code>bundle exec rake preview</code>を
+実行してプレビューが見れない為の対処</p>
+
+<pre><code class="ruby">themes_dir      = ".themes"   # directory for blog files
+ new_post_ext    = "markdown"  # default new post file extension when using the new_post task
+ new_page_ext    = "markdown"  # default new page file extension when using the new_page task
+-server_port     = "4000"      # port for preview server eg. localhost:4000
++server_host     = ENV['IP'] ||= '0.0.0.0'     # server bind address for preview server
++server_port     = ENV['PORT'] ||= "4000"      # port for preview server eg. localhost:4000
+
+
+ desc "Initial setup for Octopress: copies the default theme into the path of Jekyll's generator. Rake install defaults to rake install[classic] to install a different theme run rake install[some_theme_name]"
+@@ -78,7 +79,7 @@ task :preview do
+   system "compass compile --css-dir #{source_dir}/stylesheets" unless File.exist?("#{source_dir}/stylesheets/screen.css")
+   jekyllPid = Process.spawn({"OCTOPRESS_ENV"=&gt;"preview"}, "jekyll --auto")
+   compassPid = Process.spawn("compass watch")
+-  rackupPid = Process.spawn("rackup --port #{server_port}")
++  rackupPid = Process.spawn("rackup --host #{server_host} --port #{server_port}")
+
+   trap("INT") {
+     [jekyllPid, compassPid, rackupPid].each { |pid| Process.kill(9, pid) rescue Errno::ESRCH }
+</code></pre>
+
+<p>Octopressをセットアップ</p>
+
+<pre><code class="ruby">$ bundle exec rake install
+</code></pre>
+
+<p>プレビューする<br/>
+<code>http://localhost:4000/</code> にアクセスすると、ブログのプレビューを見ることが出来る。<br/>
+今回はCloud9をしようしているので<code>https://workspace_name-account_name.c9users.io</code>でアクセする</p>
+
+<pre><code class="ruby">$ bundle exec rake preview
+</code></pre>
+
+<p><a href="https://gyazo.com/bdc0552c1f616a24f83ba55e74b21f52"><img src="https://i.gyazo.com/bdc0552c1f616a24f83ba55e74b21f52.png" alt="https://gyazo.com/bdc0552c1f616a24f83ba55e74b21f52" /></a></p>
+
+<h2>GitHubにリポジトリを作成</h2>
+
+<p>[username].github.io
+という名前でリポジトリを作る。</p>
+
+<h2>Octopress の初期設定</h2>
+
+<p><code>bundle exec rake setup_github_pages</code> タスクを実行し GitHub Pages にデプロイするファイルを生成する。<br/>
+この時、[username].github.io のように GitHub Pages のリポジトリを git か https プロトコルを指定する</p>
+
+<pre><code class="ruby">% bundle exec rake setup_github_pages
+
+Enter the read/write url for your repository
+(For example, 'git@github.com:[username]/[username].github.io.git)
+           or 'https://github.com/[username]/[username].github.io')
+Repository url: git@github.com:srym/srym.github.io.git
+Added remote git@github.com:srym/srym.github.io.git as origin
+Set origin as default remote
+Master branch renamed to 'source' for committing your blog source files
+rm -rf _deploy
+mkdir _deploy
+cd _deploy
+Initialized empty Git repository in /Users/shiroyama/playGround/octopress/_deploy/.git/
+[master (root-commit) dacfaa2] Octopress init
+ 1 file changed, 1 insertion(+)
+ create mode 100644 index.html
+cd -
+
+---
+## Now you can deploy to git@github.com:srym/srym.github.io.git with `rake deploy` ##
+</code></pre>
+
+<p>これによって、以下のことが行われる。</p>
+
+<ul>
+<li><code>git@github.com:[username]/[username].github.io.git</code> が <code>origin</code> <code>remote</code> として追加される</li>
+<li><code>_deploy/</code> ディレクトリがリポジトリの <code>master</code> ブランチに設定される</li>
+<li>親ディレクトリは <code>source</code> というブランチになる</li>
+</ul>
+
+
+<pre><code class="ruby">% git remote -v
+octopress       git://github.com/imathis/octopress.git (fetch)
+octopress       git://github.com/imathis/octopress.git (push)
+origin          git@github.com:[username]/[username].github.io.git (fetch)
+origin          git@github.com:[username]/[username].github.io.git (push)
+</code></pre>
+
+<h3>_config.yml を編集</h3>
+
+<p>_config.ymlファイルにてブログのタイトル、サブタイトル、筆者を設定する。</p>
+
+<pre><code class="ruby"># _config.yml
+
+url: http://[username].github.io
+title: ブログのタイトル
+subtitle: ブログのサブタイトル
+author: 筆者
+simple_search: http://google.com/search
+description:
+</code></pre>
+
+<h2>記事の投稿</h2>
+
+<h3>記事を書く</h3>
+
+<p>Rake タスクで記事のひな形が生成される。
+new_postの後には記事のタイトルを指定。英数字のみ使用可</p>
+
+<pre><code class="ruby">% bundle exec rake new_post[title]
+
+mkdir -p source/_posts
+Creating new post: source/_posts/2016-08-25-title.markdown
+</code></pre>
+
+<p><code>source/_posts/2016-08-26-title.markdown</code>というファイルが生成されるので内容をマークダウンで記述する。
+またファイル上部にはブログのメタ情報がYAML FRONT MATTERで記述されているので適宜編集する。</p>
+
+<pre><code>source/
+└── _post/
+    └── 2016-08-25-post-title.markdown
+</code></pre>
+
+<pre><code class="yaml">---
+layout: post
+title: "'ブログのタイトル'"
+date: 2016-08-25 00:00:00 +0900
+comments: true
+categories:
+---
+ここ以下に内容をマークダウンで書く
+</code></pre>
+
+<p>ここで、title を日本語にすれば良い</p>
+
+<p>ブログのカテゴリ(categories)は以下のように色々あ方法で指定できる。</p>
+
+<pre><code class="yaml"># One category
+categories: octopress
+
+# Multiple categories example 1
+categories: [octopress, jekyll,]
+
+# Multiple categories example 2
+categories:
+- octopress
+- jekyll
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
