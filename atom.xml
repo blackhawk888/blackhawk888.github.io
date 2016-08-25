@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-25T07:34:40+00:00</updated>
+  <updated>2016-08-25T08:38:20+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -277,7 +277,7 @@ new_postの後には記事のタイトルを指定。英数字のみ使用可</p
 <span class='line-number'>8</span>
 </pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="nn">---</span>
 </span><span class='line'><span class="l-Scalar-Plain">layout</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">post</span>
-</span><span class='line'><span class="l-Scalar-Plain">title</span><span class="p-Indicator">:</span> <span class="s">&quot;&#39;ブログのタイトル&#39;&quot;</span>
+</span><span class='line'><span class="l-Scalar-Plain">title</span><span class="p-Indicator">:</span> <span class="s">&quot;&#39;記事のタイトル&#39;&quot;</span>
 </span><span class='line'><span class="l-Scalar-Plain">date</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">2016-08-25 00:00:00 +0900</span>
 </span><span class='line'><span class="l-Scalar-Plain">comments</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
 </span><span class='line'><span class="l-Scalar-Plain">categories</span><span class="p-Indicator">:</span>
@@ -327,7 +327,7 @@ new_postの後には記事のタイトルを指定。英数字のみ使用可</p
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">bundle</span> <span class="nb">exec</span> <span class="n">rake</span> <span class="n">generated</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">bundle</span> <span class="nb">exec</span> <span class="n">rake</span> <span class="n">generate</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">## Generating Site with Jekyll</span>
 </span><span class='line'>    <span class="n">write</span> <span class="n">source</span><span class="o">/</span><span class="n">stylesheets</span><span class="o">/</span><span class="n">screen</span><span class="o">.</span><span class="n">css</span>
