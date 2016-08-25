@@ -469,6 +469,25 @@ new_postの後には記事のタイトルを指定。英数字のみ使用可</p
 
 
 <p> <a href="http://">http://</a>[username].github.ioにアクセスし作成したブログの記事が表示されるのを確認する。</p>
+
+<p>デプロイ時には、下記コマンドを実行しますが、これによって、<code>_deploy/</code> 以下にサイトのコンテンツ一式がビルドされ、その内容が GitHub に <code>push</code> されます。
+<a href="http://">http://</a>[username].github.io/ にアクセスすると、ローカルまたはCloud9でpreview した画面と同じ内容が表示されるようになる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">bundle</span> <span class="nb">exec</span> <span class="n">rake</span> <span class="n">generate</span>
+</span><span class='line'><span class="err">$</span> <span class="n">bundle</span> <span class="nb">exec</span> <span class="n">rake</span> <span class="n">deploy</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>また上記コマンドを別々に実行しなくても以下のコマンドでビルド及びデプロイを同時に行うことができる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">bundle</span> <span class="nb">exec</span> <span class="n">rake</span> <span class="n">gen_deploy</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
 </div>
   
   
