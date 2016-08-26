@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-26T00:37:27+00:00</updated>
+  <updated>2016-08-26T08:18:26+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,40 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress 続きを読む(Moreタグ)の設定]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/08/26/octopress-displayonlypart/"/>
+    <updated>2016-08-26T17:16:35+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/08/26/octopress-displayonlypart</id>
+    <content type="html"><![CDATA[<h3><code>&lt;!--more--&gt;</code>タグの追加</h3>
+
+<p>ブログを表示すると公開済の記事が時系列順にタイトルと本文が全て表示されるので、
+ブログを表示した時に本文を全て表示するのではなく一部だけを表示しておき、
+全ての本文を読むには「続きを読む >>」と書かれたリンクをクリックした時に
+表示させるよう<code>&lt;!--more--&gt;</code>タグを設置する。</p>
+
+<!--more-->
+
+
+<p> <code>bundel exec rake  new_post[title]</code>で作成後、<code>source/_posts/</code>に<code>source/_posts/YYYY-MM-DDD-title.markdown</code>ファイルができ
+ 記事の途中に以下を追記する。</p>
+
+<pre><code class="`ruby"> &lt;!-- more --&gt;
+</code></pre>
+
+<p> ただし上記の追記だけでは表示が<code>”Read on →“</code>になってるので<code>_config.yml</code>の<code>excerpt_link</code>を変更する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">-</span> <span class="ss">excerpt_link</span><span class="p">:</span> <span class="s2">&quot;Read on &amp;rarr;&quot;</span>  <span class="c1"># &quot;Continue reading&quot; link text at the bottom of excerpted articles</span>
+</span><span class='line'><span class="o">+</span> <span class="ss">excerpt_link</span><span class="p">:</span> <span class="s2">&quot;続きを読む &amp;raquo;&quot;</span>  <span class="c1"># &quot;Continue reading&quot; link text at the bottom of excerpted articles</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress外部サービス連携]]></title>
@@ -23,6 +57,9 @@
 <p><code>_config.yml</code> に <code>Twitter</code>, <code>Google+</code>, <code>Facebook</code> との連携の設定箇所がある。<br/>
 <code>twitter_tweet_button</code>、<code>google_plus_one</code>、<code>facebook_like</code>の値を<code>true</code>にすると、 記事の下にそれぞれのシェアリングボタンが出るようになる(デフォルトだとtwitterだけ表示されるようになっている ) <br/>
 Twitterは<code>twitter_user</code>を記入してやることで 自分のツイート等も表記できるように設定できる。</p>
+
+<!-- more -->
+
 
 <h3>_config.ymal編集</h3>
 
@@ -75,6 +112,9 @@ Twitterは<code>twitter_user</code>を記入してやることで 自分のツ�
 <p>投稿記事の日時はデフォルトで<code>AUG 25TH, 2016 3:00 PM</code>のような表示になっていが、
 <a href="http://ruby-doc.org/core-1.9.2/Time.html#method-i-strftim">rubyの時間表記表現</a> を使って 好きなように変更可能</p>
 
+<!-- more -->
+
+
 <h3>_config.yamlを編集</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -103,6 +143,9 @@ Twitterは<code>twitter_user</code>を記入してやることで 自分のツ�
 
 
 <p>今回はブログ記事そのものは <a href="https://pages.github.com/">GitHub Pages</a>にホスティングする。</p>
+
+<!-- more -->
+
 
 <h2>GitHub Pagesの特徴</h2>
 
