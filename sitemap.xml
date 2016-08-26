@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://blackhawk888.github.io/blog/2016/08/26/octopress-category-list/</loc>
+<lastmod>2016-08-26T23:17:49+00:00</lastmod>
+</url>
+<url>
 <loc>http://blackhawk888.github.io/blog/2016/08/26/octopress-displayonlypart/</loc>
 <lastmod>2016-08-26T17:16:35+00:00</lastmod>
 </url>

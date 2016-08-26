@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Octopress外部サービス連携 - Wivern Blog</title>
+  <title>Octopressにタグクラウドとカテゴリーリストを追加する - Wivern Blog</title>
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="Twitter, Google+, Facebookボタン追加 _config.yml に Twitter, Google+, Facebook との連携の設定箇所がある。
-twitter_tweet_button、google_plus_one、facebook_likeの値をtrueにすると &hellip;">
+  <meta name="description" content="タグリストをサイバーに表示させる。 OctopressのデフォルトのサイドメニューはRecent Postsのみの表示 記事を新規投稿するときにYAML FRONT MATTERでcategoriesを設定しているので、サイドメニューにCategoriesを表示させる。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ twitter_tweet_button、google_plus_one、facebook_likeの値をtrueにすると 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blackhawk888.github.io/blog/2016/08/25/externalservicecooperation/">
+  <link rel="canonical" href="http://blackhawk888.github.io/blog/2016/08/26/octopress-category-list/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Wivern Blog" type="application/atom+xml">
@@ -69,7 +68,7 @@ twitter_tweet_button、google_plus_one、facebook_likeの値をtrueにすると 
   
   <header>
     
-      <h1 class="entry-title">Octopress外部サービス連携</h1>
+      <h1 class="entry-title">Octopressにタグクラウドとカテゴリーリストを追加する</h1>
     
     
       <p class="meta">
@@ -78,25 +77,41 @@ twitter_tweet_button、google_plus_one、facebook_likeの値をtrueにすると 
 
 
 
-<time class='entry-date' datetime='2016-08-25T21:06:09+00:00'><span class='date'>2016年08月25日</span> <span class='time'>9:06 pm</span></time>
+<time class='entry-date' datetime='2016-08-26T23:17:49+00:00'><span class='date'>2016年08月26日</span> <span class='time'>11:17 pm</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h3>Twitter, Google+, Facebookボタン追加</h3>
+<div class="entry-content"><h3>タグリストをサイバーに表示させる。</h3>
 
-<p><code>_config.yml</code> に <code>Twitter</code>, <code>Google+</code>, <code>Facebook</code> との連携の設定箇所がある。<br/>
-<code>twitter_tweet_button</code>、<code>google_plus_one</code>、<code>facebook_like</code>の値を<code>true</code>にすると、 記事の下にそれぞれのシェアリングボタンが出るようになる(デフォルトだとtwitterだけ表示されるようになっている ) <br/>
-Twitterは<code>twitter_user</code>を記入してやることで 自分のツイート等も表記できるように設定できる。</p>
+<p>Octopressのデフォルトのサイドメニューは<code>Recent Posts</code>のみの表示</p>
 
-<!-- more -->
+<p><img src="https://i.gyazo.com/cf857d8c62f5f7564ddbd25c9c754f90.png" alt="Recent posts" /></p>
+
+<!--more-->
 
 
-<h3>_config.ymal編集</h3>
+<p>記事を新規投稿するときにYAML FRONT MATTERで<code>categories</code>を設定しているので、サイドメニューにCategoriesを表示させる。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>Octopress向けに公開されているプラグインを使ってサイドメニューにカテゴリーリストとタグクラウドを実装</p>
+
+<h4>tokkonopapa/octopress-tagcloud プラグイン</h4>
+
+<p><a href="https://github.com/tokkonopapa/octopress-tagcloud">https://github.com/tokkonopapa/octopress-tagcloud</a></p>
+
+<p>tokkonopapa/octopress-tagcloudのソースコードをcloneしてファイルを配布する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone https://github.com/tokkonopapa/octopress-tagcloud.git
+</span><span class='line'>$ cp -p octopress-tagcloud/plugins/tag_cloud.rb plugins/
+</span><span class='line'>$ cp -p octopress-tagcloud/source/_includes/custom/asides/* source/_includes/custom/asides/</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -105,33 +120,35 @@ Twitterは<code>twitter_user</code>を記入してやることで 自分のツ�
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Twitter</span>
-</span><span class='line'><span class="ss">twitter_user</span><span class="p">:</span>
-</span><span class='line'><span class="ss">twitter_tweet_button</span><span class="p">:</span> <span class="kp">true</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># Google +1</span>
-</span><span class='line'><span class="o">-</span> <span class="ss">google_plus_one</span><span class="p">:</span> <span class="kp">false</span>
-</span><span class='line'><span class="o">+</span> <span class="ss">google_plus_one</span><span class="p">:</span> <span class="kp">true</span>
-</span><span class='line'><span class="ss">google_plus_one_size</span><span class="p">:</span> <span class="n">medium</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># Google Plus Profile</span>
-</span><span class='line'><span class="c1"># Hidden: No visible button, just add author information to search results</span>
-</span><span class='line'><span class="ss">googleplus_user</span><span class="p">:</span>
-</span><span class='line'><span class="ss">googleplus_hidden</span><span class="p">:</span> <span class="kp">false</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># Facebook Like</span>
-</span><span class='line'><span class="o">-</span> <span class="ss">facebook_like</span><span class="p">:</span> <span class="kp">false</span>
-</span><span class='line'><span class="o">+</span> <span class="ss">facebook_like</span><span class="p">:</span> <span class="kp">true</span>
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.
+</span><span class='line'>├─ plugins/
+</span><span class='line'>│  └── tag_cloud.rb
+</span><span class='line'>└─ source/
+</span><span class='line'>   └─ _includes/
+</span><span class='line'>      └─ custom/
+</span><span class='line'>         └─ asides/
+</span><span class='line'>            ├─ category_list.html
+</span><span class='line'>            └─ tag_cloud.html</span></code></pre></td></tr></table></div></figure>
 
+
+<p><code>_config.yml</code>に<code>tokkonopapa/octopress-tagcloud</code> プラグインで生成する静的ファイルを
+サイドメニューのコンテンツとして使用するための設定を記述</p>
+
+<p><code>_config.yml</code>に<code>default_asides:</code>から始まる行があるが、サイドメニューに表示するHTMLファイルを配列で記述する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>default_asides: [
+</span><span class='line'>    asides/recent_posts.html,
+</span><span class='line'>  + custom/asides/about.html,
+</span><span class='line'>  + custom/asides/tag_cloud.html
+</span><span class='line'>]</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="https://i.gyazo.com/ef6d723b6ff2a154a49890d11c3c006d.png" alt="octopress-tagcloud" /></p>
 </div>
 
 
@@ -147,7 +164,7 @@ Twitterは<code>twitter_user</code>を記入してやることで 自分のツ�
 
 
 
-<time class='entry-date' datetime='2016-08-25T21:06:09+00:00'><span class='date'>2016年08月25日</span> <span class='time'>9:06 pm</span></time>
+<time class='entry-date' datetime='2016-08-26T23:17:49+00:00'><span class='date'>2016年08月26日</span> <span class='time'>11:17 pm</span></time>
       
 
 <span class="categories">
@@ -161,7 +178,7 @@ Twitterは<code>twitter_user</code>を記入してやることで 自分のツ�
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2016/08/25/externalservicecooperation/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2016/08/25/externalservicecooperation/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2016/08/26/octopress-category-list/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2016/08/26/octopress-category-list/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -174,10 +191,8 @@ Twitterは<code>twitter_user</code>を記入してやることで 自分のツ�
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/08/25/octpresseditconfigyml/" title="Previous Post: octopressの日時表示設定">&laquo; octopressの日時表示設定</a>
+        <a class="basic-alignment left" href="/blog/2016/08/26/octopress-displayonlypart/" title="Previous Post: Octopress 続きを読む(Moreタグ)の設定">&laquo; Octopress 続きを読む(Moreタグ)の設定</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/08/26/octopress-displayonlypart/" title="Next Post: Octopress 続きを読む(Moreタグ)の設定">Octopress 続きを読む(Moreタグ)の設定 &raquo;</a>
       
     </p>
   </footer>

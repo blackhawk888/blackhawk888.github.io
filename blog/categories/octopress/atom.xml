@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-26T08:19:28+00:00</updated>
+  <updated>2016-08-26T14:26:26+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,62 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopressにタグクラウドとカテゴリーリストを追加する]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/08/26/octopress-category-list/"/>
+    <updated>2016-08-26T23:17:49+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/08/26/octopress-category-list</id>
+    <content type="html"><![CDATA[<h3>タグリストをサイバーに表示させる。</h3>
+
+<p>Octopressのデフォルトのサイドメニューは<code>Recent Posts</code>のみの表示</p>
+
+<p><img src="https://i.gyazo.com/cf857d8c62f5f7564ddbd25c9c754f90.png" alt="Recent posts" /></p>
+
+<!--more-->
+
+
+<p>記事を新規投稿するときにYAML FRONT MATTERで<code>categories</code>を設定しているので、サイドメニューにCategoriesを表示させる。</p>
+
+<p>Octopress向けに公開されているプラグインを使ってサイドメニューにカテゴリーリストとタグクラウドを実装</p>
+
+<h4>tokkonopapa/octopress-tagcloud プラグイン</h4>
+
+<p><a href="https://github.com/tokkonopapa/octopress-tagcloud">https://github.com/tokkonopapa/octopress-tagcloud</a></p>
+
+<p>tokkonopapa/octopress-tagcloudのソースコードをcloneしてファイルを配布する。</p>
+
+<pre><code>$ git clone https://github.com/tokkonopapa/octopress-tagcloud.git
+$ cp -p octopress-tagcloud/plugins/tag_cloud.rb plugins/
+$ cp -p octopress-tagcloud/source/_includes/custom/asides/* source/_includes/custom/asides/
+</code></pre>
+
+<pre><code>.
+├─ plugins/
+│  └── tag_cloud.rb
+└─ source/
+   └─ _includes/
+      └─ custom/
+         └─ asides/
+            ├─ category_list.html
+            └─ tag_cloud.html
+</code></pre>
+
+<p><code>_config.yml</code>に<code>tokkonopapa/octopress-tagcloud</code> プラグインで生成する静的ファイルを
+サイドメニューのコンテンツとして使用するための設定を記述</p>
+
+<p><code>_config.yml</code>に<code>default_asides:</code>から始まる行があるが、サイドメニューに表示するHTMLファイルを配列で記述する。</p>
+
+<pre><code>default_asides: [
+    asides/recent_posts.html,
+  + custom/asides/about.html,
+  + custom/asides/tag_cloud.html
+]
+</code></pre>
+
+<p><img src="https://i.gyazo.com/ef6d723b6ff2a154a49890d11c3c006d.png" alt="octopress-tagcloud" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress 続きを読む(Moreタグ)の設定]]></title>

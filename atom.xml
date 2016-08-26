@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-26T08:19:28+00:00</updated>
+  <updated>2016-08-26T14:26:26+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,79 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopressにタグクラウドとカテゴリーリストを追加する]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/08/26/octopress-category-list/"/>
+    <updated>2016-08-26T23:17:49+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/08/26/octopress-category-list</id>
+    <content type="html"><![CDATA[<h3>タグリストをサイバーに表示させる。</h3>
+
+<p>Octopressのデフォルトのサイドメニューは<code>Recent Posts</code>のみの表示</p>
+
+<p><img src="https://i.gyazo.com/cf857d8c62f5f7564ddbd25c9c754f90.png" alt="Recent posts" /></p>
+
+<!--more-->
+
+
+<p>記事を新規投稿するときにYAML FRONT MATTERで<code>categories</code>を設定しているので、サイドメニューにCategoriesを表示させる。</p>
+
+<p>Octopress向けに公開されているプラグインを使ってサイドメニューにカテゴリーリストとタグクラウドを実装</p>
+
+<h4>tokkonopapa/octopress-tagcloud プラグイン</h4>
+
+<p><a href="https://github.com/tokkonopapa/octopress-tagcloud">https://github.com/tokkonopapa/octopress-tagcloud</a></p>
+
+<p>tokkonopapa/octopress-tagcloudのソースコードをcloneしてファイルを配布する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone https://github.com/tokkonopapa/octopress-tagcloud.git
+</span><span class='line'>$ cp -p octopress-tagcloud/plugins/tag_cloud.rb plugins/
+</span><span class='line'>$ cp -p octopress-tagcloud/source/_includes/custom/asides/* source/_includes/custom/asides/</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.
+</span><span class='line'>├─ plugins/
+</span><span class='line'>│  └── tag_cloud.rb
+</span><span class='line'>└─ source/
+</span><span class='line'>   └─ _includes/
+</span><span class='line'>      └─ custom/
+</span><span class='line'>         └─ asides/
+</span><span class='line'>            ├─ category_list.html
+</span><span class='line'>            └─ tag_cloud.html</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>_config.yml</code>に<code>tokkonopapa/octopress-tagcloud</code> プラグインで生成する静的ファイルを
+サイドメニューのコンテンツとして使用するための設定を記述</p>
+
+<p><code>_config.yml</code>に<code>default_asides:</code>から始まる行があるが、サイドメニューに表示するHTMLファイルを配列で記述する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>default_asides: [
+</span><span class='line'>    asides/recent_posts.html,
+</span><span class='line'>  + custom/asides/about.html,
+</span><span class='line'>  + custom/asides/tag_cloud.html
+</span><span class='line'>]</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="https://i.gyazo.com/ef6d723b6ff2a154a49890d11c3c006d.png" alt="octopress-tagcloud" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress 続きを読む(Moreタグ)の設定]]></title>
