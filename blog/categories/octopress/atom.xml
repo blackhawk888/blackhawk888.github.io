@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-26T08:18:26+00:00</updated>
+  <updated>2016-08-26T08:19:28+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress 続きを読む(Moreタグ)の設定]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/08/26/octopress-displayonlypart/"/>
+    <updated>2016-08-26T17:16:35+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/08/26/octopress-displayonlypart</id>
+    <content type="html"><![CDATA[<h3><code>&lt;!--more--&gt;</code>タグの追加</h3>
+
+<p>ブログを表示すると公開済の記事が時系列順にタイトルと本文が全て表示されるので、
+ブログを表示した時に本文を全て表示するのではなく一部だけを表示しておき、
+全ての本文を読むには「続きを読む >>」と書かれたリンクをクリックした時に
+表示させるよう<code>&lt;!--more--&gt;</code>タグを設置する。</p>
+
+<!--more-->
+
+
+<p> <code>bundel exec rake  new_post[title]</code>で作成後、<code>source/_posts/</code>に<code>source/_posts/YYYY-MM-DDD-title.markdown</code>ファイルができ
+ 記事の途中に以下を追記する。</p>
+
+<pre><code class="`ruby"> &lt;!-- more --&gt;
+</code></pre>
+
+<p> ただし上記の追記だけでは表示が<code>”Read on →“</code>になってるので<code>_config.yml</code>の<code>excerpt_link</code>を変更する。</p>
+
+<pre><code class="ruby">- excerpt_link: "Read on &amp;rarr;"  # "Continue reading" link text at the bottom of excerpted articles
++ excerpt_link: "続きを読む &amp;raquo;"  # "Continue reading" link text at the bottom of excerpted articles
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress外部サービス連携]]></title>
