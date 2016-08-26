@@ -9,11 +9,8 @@
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="日時表示設定 投稿記事の日時はデフォルトでAUG 25TH, 2016 3:00 PMのような表示になっていが、
-rubyの時間表記表現 を使って 好きなように変更可能 _config.yamlを編集 1
-2
-- date_format: &quot;ordinal&quot;
-+ &hellip;">
+  <meta name="description" content="Twitter, Google+, Facebookボタン追加 _config.yml に Twitter, Google+, Facebook との連携の設定箇所がある。
+twitter_tweet_button、google_plus_one、facebook_likeの値をtrueにすると &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +66,78 @@ rubyの時間表記表現 を使って 好きなように変更可能 _config.ya
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/08/25/externalservicecooperation/">Octopress外部サービス連携</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-08-25T21:06:09+00:00'><span class='date'>2016年08月25日</span> <span class='time'>9:06 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>Twitter, Google+, Facebookボタン追加</h3>
+
+<p><code>_config.yml</code> に <code>Twitter</code>, <code>Google+</code>, <code>Facebook</code> との連携の設定箇所がある。<br/>
+<code>twitter_tweet_button</code>、<code>google_plus_one</code>、<code>facebook_like</code>の値を<code>true</code>にすると、 記事の下にそれぞれのシェアリングボタンが出るようになる(デフォルトだとtwitterだけ表示されるようになっている ) <br/>
+Twitterは<code>twitter_user</code>を記入してやることで 自分のツイート等も表記できるように設定できる。</p>
+
+<h3>_config.ymal編集</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Twitter</span>
+</span><span class='line'><span class="ss">twitter_user</span><span class="p">:</span>
+</span><span class='line'><span class="ss">twitter_tweet_button</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Google +1</span>
+</span><span class='line'><span class="o">-</span> <span class="ss">google_plus_one</span><span class="p">:</span> <span class="kp">false</span>
+</span><span class='line'><span class="o">+</span> <span class="ss">google_plus_one</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'><span class="ss">google_plus_one_size</span><span class="p">:</span> <span class="n">medium</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Google Plus Profile</span>
+</span><span class='line'><span class="c1"># Hidden: No visible button, just add author information to search results</span>
+</span><span class='line'><span class="ss">googleplus_user</span><span class="p">:</span>
+</span><span class='line'><span class="ss">googleplus_hidden</span><span class="p">:</span> <span class="kp">false</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Facebook Like</span>
+</span><span class='line'><span class="o">-</span> <span class="ss">facebook_like</span><span class="p">:</span> <span class="kp">false</span>
+</span><span class='line'><span class="o">+</span> <span class="ss">facebook_like</span><span class="p">:</span> <span class="kp">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -551,82 +620,6 @@ new_postの後には記事のタイトルを指定。英数字のみ使用可</p
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/08/25/externalservicecooperation/">Octopress外部サービス連携</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-08-25T12:06:09+00:00'><span class='date'>2016年08月25日</span> <span class='time'>12:06 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>Twitter, Google+, Facebook, はてなブックマークボタン追加</h3>
-
-<p><code>_config.yml</code> の後半に <code>Twitter</code>, <code>Google+</code>, <code>Facebook</code> との連携の設定箇所がある。
-<code>twitter_tweet_button</code>、<code>google_plus_one</code>、<code>facebook_like</code>の値を<code>true</code>にすると、 記事の下にそれぞれのシェアリングボタンが出るようになる(デフォルトだとtwitterだけ表示されるようになっている<br/>
-Twitterは<code>twitter_user</code>を記入してやることで 自分のツイート等も表記できるように設定できる。</p>
-
-<h3>_config.ymal編集</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Twitter</span>
-</span><span class='line'><span class="ss">twitter_user</span><span class="p">:</span>
-</span><span class='line'><span class="ss">twitter_tweet_button</span><span class="p">:</span> <span class="kp">true</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># Google +1</span>
-</span><span class='line'><span class="o">-</span> <span class="ss">google_plus_one</span><span class="p">:</span> <span class="kp">false</span>
-</span><span class='line'><span class="o">+</span> <span class="ss">google_plus_one</span><span class="p">:</span> <span class="kp">true</span>
-</span><span class='line'><span class="ss">google_plus_one_size</span><span class="p">:</span> <span class="n">medium</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># Google Plus Profile</span>
-</span><span class='line'><span class="c1"># Hidden: No visible button, just add author information to search results</span>
-</span><span class='line'><span class="ss">googleplus_user</span><span class="p">:</span>
-</span><span class='line'><span class="ss">googleplus_hidden</span><span class="p">:</span> <span class="kp">false</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># Facebook Like</span>
-</span><span class='line'><span class="o">-</span> <span class="ss">facebook_like</span><span class="p">:</span> <span class="kp">false</span>
-</span><span class='line'><span class="o">+</span> <span class="ss">facebook_like</span><span class="p">:</span> <span class="kp">true</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>シェアリングボタンの表記は<code>source/_includes/post/sharing.html</code>に書かれており、</p>
-
-<p><code>sharing.htm</code>lを編集して</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
     <a href="/blog/archives">Blog Archives</a>
@@ -640,15 +633,15 @@ Twitterは<code>twitter_user</code>を記入してやることで 自分のツ�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/08/25/externalservicecooperation/">Octopress外部サービス連携</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/08/25/octpresseditconfigyml/">Octopressの日時表示設定</a>
       </li>
     
       <li class="post">
         <a href="/blog/2016/08/25/octopress/">OctopressとGithub Pagesを使ったブログの作成</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/08/25/externalservicecooperation/">Octopress外部サービス連携</a>
       </li>
     
   </ul>
