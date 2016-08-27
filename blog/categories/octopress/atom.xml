@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-27T04:54:45+00:00</updated>
+  <updated>2016-08-27T06:49:05+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[OctopressでsourceをBitbucket管理]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/08/27/octopress-repository-bitbacket/"/>
+    <updated>2016-08-27T15:47:33+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/08/27/octopress-repository-bitbacket</id>
+    <content type="html"><![CDATA[<h3>ソース情報はBitbucketで管理</h3>
+
+<p>このブログはOctopressでGithubでホスティングしているが、ソースコードもGithubにpushしている。<br/>
+GitHubはいいサービスだと思うのですが、ソースコードの共有が前提となっていて、
+無料プランでは非公開リポジトリを作ることができない。</p>
+
+<!--more-->
+
+
+<p>BitbucketはGitHubと同じ、バージョン管理ツールのリポジトリを預かってくれるホスティングサービス。<br/>
+5ユーザーまでであれば、非公開レポジトリの数は無制限となっており、公開リポジトリがひとつもなくても構いません。<br/>
+Bitbacketのアカウントも取得しているのでソースコードをBitbacketで管理する方法も忘れないように書いておこうと思う。</p>
+
+<h3>Bitbucketでのリポジトリ作成・設定</h3>
+
+<ul>
+<li>BitBucketにログインして、リポジトリ作成</li>
+<li>[Repository name] - [GithubのRipository name]</li>
+<li>[アクセスレベル] - [これは非公開リポジトリです]にチェック</li>
+<li>[リポジトリタイプ] - [Git]</li>
+</ul>
+
+
+<h3>リモートととして登録</h3>
+
+<pre><code>$ git remote add bitbucket git@bitbucket.org:[username]/[username].github.io.git
+$ git push  bitbucket source
+</code></pre>
+
+<p>上記の設定で現在リモートとして <code>origin</code>、<code>octopress</code>、<code>bitbucket</code> の3つが登録されることとなる。</p>
+
+<pre><code>% git remote -v
+bitbucket       git@bitbucket.org:[username]/[username].github.io.git (fetch)
+bitbucket       git@bitbucket.org:wivern888/[username].github.io.git (push)
+octopress       git://github.com/imathis/octopress.git (fetch)
+octopress       git://github.com/imathis/octopress.git (push)
+origin          git@github.com:[username]/[username].github.io.git (fetch)
+origin          git@github.com:[username]/[username].github.io.git (push)
+</code></pre>
+
+<p>記事の投稿をデプロイする場合は<code>bundle exec rake deploy</code>でバックアップは<code>git push bitbacket source</code>でBitbacketできるようになる。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopressにコメントを追加]]></title>
@@ -188,37 +237,6 @@ googleplus_hidden: false
 - facebook_like: false
 + facebook_like: true
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopressの日時表示設定]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/08/25/octpresseditconfigyml/"/>
-    <updated>2016-08-25T20:15:39+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/08/25/octpresseditconfigyml</id>
-    <content type="html"><![CDATA[<h2>日時表示設定</h2>
-
-<p>投稿記事の日時はデフォルトで<code>AUG 25TH, 2016 3:00 PM</code>のような表示になっているが、
-<a href="http://ruby-doc.org/core-1.9.2/Time.html#method-i-strftim">rubyの時間表記表現</a> を使って 好きなように変更可能</p>
-
-<!-- more -->
-
-
-<h3>_config.yamlを編集</h3>
-
-<pre><code class="ruby">- date_format: "ordinal"
-+ date_format: "%Y年%m月%d日" # e.g. 2016年08月25日
-</code></pre>
-
-<p>上記の設定で<code>2016年08月25日 8:15 PM</code>というような表示になる。</p>
-
-<p>時間が12時間表記で気に入らなかったので24時間表記表示にするため<code>_config.ymlを編集</code></p>
-
-<pre><code class="ruby">  date_format: "%Y年%m月%d日" # e.g. 2016年08月25日
-+ time_format: "%H:%M:%S"     # 24 hour time
-</code></pre>
-
-<p>表示が<code>2016年08月25日 20:15:39</code>というような表示になる。</p>
 ]]></content>
   </entry>
   
