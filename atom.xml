@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-27T06:49:05+00:00</updated>
+  <updated>2016-08-27T11:24:43+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,41 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[OctopressにGoogle Analytics導入]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/08/27/octopress-google-analytics/"/>
+    <updated>2016-08-27T20:05:08+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/08/27/octopress-google-analytics</id>
+    <content type="html"><![CDATA[<h3>Google Analytics設定</h3>
+
+<p>Google Analytics(アナリティクス)とは、アクセス解析を行うことができる解析ツール。<br/>
+Octopress は、デフォルトで Google Analytics の設定をすることが可能。</p>
+
+<!--more-->
+
+
+<p>サイトページ内にトラッキングコードと呼ばれるJavaScript コードを埋め込み、
+訪問者がサイトへアクセスした際の閲覧情報がGoogle Analyticsサーバへ送信される仕組み。
+トラッキング IDとはUA-XXXXXXXX-Xのような文字列で、データの送信先となるアカウントや
+プロパティを Google アナリティクス側で特定するためのID。</p>
+
+<p><a href="http://www.google.co.jp/intl/ja/analytics/">Google Analytics</a>サイトに行き、ログインまたは
+アカウントを作成をクリックしログイン後、<code>プロパティ名</code>、<code>デフォルトのURL</code>等を設定し保存すると
+<code>トラッキング ID</code>が表示されるので<code>_config.yml</code>に設定する。</p>
+
+<h3>_config.ymlの編集</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Google Analytics</span>
+</span><span class='line'><span class="ss">google_analytics_tracking_id</span><span class="p">:</span> <span class="no">UA</span><span class="o">-</span><span class="no">XXXXXXXX</span><span class="o">-</span><span class="n">X</span>  <span class="c1"># &lt;- Google Analytics ID を指定</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ブログにアクセスされるたびに Google Analyticsで集計される。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[OctopressでsourceをBitbucket管理]]></title>
@@ -98,7 +133,7 @@ Bitbacketのアカウントも取得しているのでソースコードをBitba
 </ul>
 
 
-<p>DISQUS導入は_config.ymlファイルにDISQUSで取得した<code>Shortname</code>を記載するのみで完了</p>
+<p>Disqus導入は_config.ymlファイルにDisqusで取得した<code>Shortname</code>を記載するのみで完了</p>
 
 <p><code>_config.yml</code> の<code>disqus_short_name</code>に自分のサイトの<code>Shortname</code>を指定</p>
 
