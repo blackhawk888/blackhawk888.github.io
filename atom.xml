@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-26T14:26:26+00:00</updated>
+  <updated>2016-08-27T01:52:54+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,65 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopressにコメントを追加]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/08/27/octpress-comments/"/>
+    <updated>2016-08-27T10:41:24+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/08/27/octpress-comments</id>
+    <content type="html"><![CDATA[<h3>コメント欄を追加</h3>
+
+<p>このブログは個人備忘録として書いているので特にコメント欄は必要ないとは思うが、
+今後導入するかどうかわからないので実際に導入して確認したので忘れないうちに書いておく。</p>
+
+<p>コメントはデフォルトで<a href="https://disqus.com/">Disqus</a>というサービスを利用できる。<br/>
+基本的にはコメントをブログと切り離して管理しブログパーツでコメント欄を提供してくれるサービス。<br/>
+<code>_config.yml</code>にコメントの<code>id</code>を設定することで使用可能。<br/>
+手順は以下のとおり</p>
+
+<!--more-->
+
+
+<ul>
+<li><a href="https://disqus.com/">Disqus</a>にログイン</li>
+<li>Disqus上にてコメントサービスを使うサイトを登録</li>
+<li>登録が完了すると設定ページが表示されるので、ここで設定をしつつ、ページ中段に表示されている<code>Shortname</code>の文字列を確認</li>
+<li>shortnameを<code>_config.yml</code>に入力</li>
+<li>deploy</li>
+</ul>
+
+
+<p>DISQUS導入は_config.ymlファイルにDISQUSで取得した<code>Shortname</code>を記載するのみで完了</p>
+
+<p><code>_config.yml</code> の<code>disqus_short_name</code>に自分のサイトの<code>Shortname</code>を指定</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Disqus Comments</span>
+</span><span class='line'><span class="ss">disqus_short_name</span><span class="p">:</span> <span class="n">sitesshortname</span>
+</span><span class='line'><span class="ss">disqus_show_comment_count</span><span class="p">:</span> <span class="kp">false</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上記を設定すると<code>source/_include/disqus.html</code>によって<code>disqus</code>用のコードを生成してくれる。</p>
+
+<p><img src="https://i.gyazo.com/82f9217e4935ccc5f3dcb1599384a682.png" alt="Disqus Comments" /></p>
+
+<p><code>disqus_show_comment_count</code>は任意でコメント欄のオン/オフは投稿記事単位で設定可能
+<code>disqus_show_comment_count</code> はDISQUSコメント欄を導入するページのヘッダにコメント欄へのリンクを表示させるかどうかを指定する項目。</p>
+
+<p><strong>disqus_show_comment_count: trueのとき</strong></p>
+
+<p><img src="https://i.gyazo.com/7232f4714811db0bcea23e041556a481.png" alt="disqus_show_comment_count: ture" /></p>
+
+<p><strong>disqus_show_comment_count: falseのとき</strong></p>
+
+<p><img src="https://i.gyazo.com/29fc1be984bb3130d74343aa94c4943b.png" alt="disqus_show_comment_count: false" /></p>
+
+<p><code>shortname</code>を後で確認したくなった場合は、Disqusで登録したサイトを選択し、右上にある<code>Setting</code>に移動すると表示される。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopressにタグクラウドとカテゴリーリストを追加する]]></title>
@@ -193,11 +252,22 @@ Twitterは<code>twitter_user</code>を記入してやることで 自分のツ�
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">-</span> <span class="ss">date_format</span><span class="p">:</span> <span class="s2">&quot;ordinal&quot;</span>
-</span><span class='line'><span class="o">+</span> <span class="ss">date_format</span><span class="p">:</span> <span class="s2">&quot;%Y年%m月%d日&quot;</span>
+</span><span class='line'><span class="o">+</span> <span class="ss">date_format</span><span class="p">:</span> <span class="s2">&quot;%Y年%m月%d日&quot;</span> <span class="c1"># e.g. 2016年08月25日</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>上記の設定で”2016年8月25日”というような表示になる</p>
+<p>上記の設定で<code>2016年08月25日 8:15 PM</code>というような表示になる。</p>
+
+<p>時間が12時間表記で気に入らなかったので24時間表記表示にするため<code>_config.ymlを編集</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="ss">date_format</span><span class="p">:</span> <span class="s2">&quot;%Y年%m月%d日&quot;</span> <span class="c1"># e.g. 2016年08月25日</span>
+</span><span class='line'><span class="o">+</span> <span class="ss">time_format</span><span class="p">:</span> <span class="s2">&quot;%H:%M:%S&quot;</span>     <span class="c1"># 24 hour time</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>表示が<code>2016年08月25日 20:15:39</code>というような表示になる。</p>
 ]]></content>
   </entry>
   

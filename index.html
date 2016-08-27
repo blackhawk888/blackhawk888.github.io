@@ -9,7 +9,8 @@
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="タグリストをサイバーに表示させる。 OctopressのデフォルトのサイドメニューはRecent Postsのみの表示 ">
+  <meta name="description" content="コメント欄を追加 このブログは個人備忘録として書いているので特にコメント欄は必要ないとは思うが、
+今後導入するかどうかわからないので実際に導入して確認したので忘れないうちに書いておく。 コメントはデフォルトでDisqusというサービスを利用できる。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,6 +72,48 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2016/08/27/octpress-comments/">Octopressにコメントを追加</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-08-27T10:41:24+00:00'><span class='date'>2016年08月27日</span> <span class='time'>10:41:24</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>コメント欄を追加</h3>
+
+<p>このブログは個人備忘録として書いているので特にコメント欄は必要ないとは思うが、
+今後導入するかどうかわからないので実際に導入して確認したので忘れないうちに書いておく。</p>
+
+<p>コメントはデフォルトで<a href="https://disqus.com/">Disqus</a>というサービスを利用できる。<br/>
+基本的にはコメントをブログと切り離して管理しブログパーツでコメント欄を提供してくれるサービス。<br/>
+<code>_config.yml</code>にコメントの<code>id</code>を設定することで使用可能。<br/>
+手順は以下のとおり</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/08/27/octpress-comments/">続きを読む &raquo;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2016/08/26/octopress-category-list/">Octopressにタグクラウドとカテゴリーリストを追加する</a></h1>
     
     
@@ -80,7 +123,7 @@
 
 
 
-<time class='entry-date' datetime='2016-08-26T23:17:49+00:00'><span class='date'>2016年08月26日</span> <span class='time'>11:17 pm</span></time>
+<time class='entry-date' datetime='2016-08-26T23:17:49+00:00'><span class='date'>2016年08月26日</span> <span class='time'>23:17:49</span></time>
         
       </p>
     
@@ -118,7 +161,7 @@
 
 
 
-<time class='entry-date' datetime='2016-08-26T17:16:35+00:00'><span class='date'>2016年08月26日</span> <span class='time'>5:16 pm</span></time>
+<time class='entry-date' datetime='2016-08-26T17:16:35+00:00'><span class='date'>2016年08月26日</span> <span class='time'>17:16:35</span></time>
         
       </p>
     
@@ -157,7 +200,7 @@
 
 
 
-<time class='entry-date' datetime='2016-08-25T21:06:09+00:00'><span class='date'>2016年08月25日</span> <span class='time'>9:06 pm</span></time>
+<time class='entry-date' datetime='2016-08-25T21:06:09+00:00'><span class='date'>2016年08月25日</span> <span class='time'>21:06:09</span></time>
         
       </p>
     
@@ -195,7 +238,7 @@ Twitterは<code>twitter_user</code>を記入してやることで 自分のツ�
 
 
 
-<time class='entry-date' datetime='2016-08-25T20:15:39+00:00'><span class='date'>2016年08月25日</span> <span class='time'>8:15 pm</span></time>
+<time class='entry-date' datetime='2016-08-25T20:15:39+00:00'><span class='date'>2016年08月25日</span> <span class='time'>20:15:39</span></time>
         
       </p>
     
@@ -232,7 +275,7 @@ Twitterは<code>twitter_user</code>を記入してやることで 自分のツ�
 
 
 
-<time class='entry-date' datetime='2016-08-25T15:00:37+00:00'><span class='date'>2016年08月25日</span> <span class='time'>3:00 pm</span></time>
+<time class='entry-date' datetime='2016-08-25T15:00:37+00:00'><span class='date'>2016年08月25日</span> <span class='time'>15:00:37</span></time>
         
       </p>
     
@@ -274,6 +317,10 @@ Twitterは<code>twitter_user</code>を記入してやることで 自分のツ�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/08/27/octpress-comments/">Octopressにコメントを追加</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/08/26/octopress-category-list/">Octopressにタグクラウドとカテゴリーリストを追加する</a>
       </li>
     
@@ -289,19 +336,15 @@ Twitterは<code>twitter_user</code>を記入してやることで 自分のツ�
         <a href="/blog/2016/08/25/octpresseditconfigyml/">Octopressの日時表示設定</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/08/25/octopress/">OctopressとGithub Pagesを使ったブログの作成</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/octopress/'>octopress (5)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/octopress/'>octopress (6)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(5)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(6)</a> </span>
 </section>
 
 

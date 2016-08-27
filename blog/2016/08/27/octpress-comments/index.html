@@ -5,15 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Octopressの日時表示設定 - Wivern Blog</title>
+  <title>Octopressにコメントを追加 - Wivern Blog</title>
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="日時表示設定 投稿記事の日時はデフォルトでAUG 25TH, 2016 3:00 PMのような表示になっていが、
-rubyの時間表記表現 を使って 好きなように変更可能 _config.yamlを編集 1
-2
-- date_format: &quot;ordinal&quot;
-+ &hellip;">
+  <meta name="description" content="コメント欄を追加 このブログは個人備忘録として書いているので特にコメント欄は必要ないとは思うが、
+今後導入するかどうかわからないので実際に導入して確認したので忘れないうちに書いておく。 コメントはデフォルトでDisqusというサービスを利用できる。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +19,7 @@ rubyの時間表記表現 を使って 好きなように変更可能 _config.ya
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blackhawk888.github.io/blog/2016/08/25/octpresseditconfigyml/">
+  <link rel="canonical" href="http://blackhawk888.github.io/blog/2016/08/27/octpress-comments/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Wivern Blog" type="application/atom+xml">
@@ -72,7 +69,7 @@ rubyの時間表記表現 を使って 好きなように変更可能 _config.ya
   
   <header>
     
-      <h1 class="entry-title">Octopressの日時表示設定</h1>
+      <h1 class="entry-title">Octopressにコメントを追加</h1>
     
     
       <p class="meta">
@@ -81,42 +78,64 @@ rubyの時間表記表現 を使って 好きなように変更可能 _config.ya
 
 
 
-<time class='entry-date' datetime='2016-08-25T20:15:39+00:00'><span class='date'>2016年08月25日</span> <span class='time'>20:15:39</span></time>
+<time class='entry-date' datetime='2016-08-27T10:41:24+00:00'><span class='date'>2016年08月27日</span> <span class='time'>10:41:24</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2>日時表示設定</h2>
+<div class="entry-content"><h3>コメント欄を追加</h3>
 
-<p>投稿記事の日時はデフォルトで<code>AUG 25TH, 2016 3:00 PM</code>のような表示になっていが、
-<a href="http://ruby-doc.org/core-1.9.2/Time.html#method-i-strftim">rubyの時間表記表現</a> を使って 好きなように変更可能</p>
+<p>このブログは個人備忘録として書いているので特にコメント欄は必要ないとは思うが、
+今後導入するかどうかわからないので実際に導入して確認したので忘れないうちに書いておく。</p>
 
-<!-- more -->
+<p>コメントはデフォルトで<a href="https://disqus.com/">Disqus</a>というサービスを利用できる。<br/>
+基本的にはコメントをブログと切り離して管理しブログパーツでコメント欄を提供してくれるサービス。<br/>
+<code>_config.yml</code>にコメントの<code>id</code>を設定することで使用可能。<br/>
+手順は以下のとおり</p>
+
+<!--more-->
 
 
-<h3>_config.yamlを編集</h3>
+<ul>
+<li><a href="https://disqus.com/">Disqus</a>にログイン</li>
+<li>Disqus上にてコメントサービスを使うサイトを登録</li>
+<li>登録が完了すると設定ページが表示されるので、ここで設定をしつつ、ページ中段に表示されている<code>Shortname</code>の文字列を確認</li>
+<li>shortnameを<code>_config.yml</code>に入力</li>
+<li>deploy</li>
+</ul>
+
+
+<p>DISQUS導入は_config.ymlファイルにDISQUSで取得した<code>Shortname</code>を記載するのみで完了</p>
+
+<p><code>_config.yml</code> の<code>disqus_short_name</code>に自分のサイトの<code>Shortname</code>を指定</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">-</span> <span class="ss">date_format</span><span class="p">:</span> <span class="s2">&quot;ordinal&quot;</span>
-</span><span class='line'><span class="o">+</span> <span class="ss">date_format</span><span class="p">:</span> <span class="s2">&quot;%Y年%m月%d日&quot;</span> <span class="c1"># e.g. 2016年08月25日</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Disqus Comments</span>
+</span><span class='line'><span class="ss">disqus_short_name</span><span class="p">:</span> <span class="n">sitesshortname</span>
+</span><span class='line'><span class="ss">disqus_show_comment_count</span><span class="p">:</span> <span class="kp">false</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>上記の設定で<code>2016年08月25日 8:15 PM</code>というような表示になる。</p>
+<p>上記を設定すると<code>source/_include/disqus.html</code>によって<code>disqus</code>用のコードを生成してくれる。</p>
 
-<p>時間が12時間表記で気に入らなかったので24時間表記表示にするため<code>_config.ymlを編集</code></p>
+<p><img src="https://i.gyazo.com/82f9217e4935ccc5f3dcb1599384a682.png" alt="Disqus Comments" /></p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="ss">date_format</span><span class="p">:</span> <span class="s2">&quot;%Y年%m月%d日&quot;</span> <span class="c1"># e.g. 2016年08月25日</span>
-</span><span class='line'><span class="o">+</span> <span class="ss">time_format</span><span class="p">:</span> <span class="s2">&quot;%H:%M:%S&quot;</span>     <span class="c1"># 24 hour time</span>
-</span></code></pre></td></tr></table></div></figure>
+<p><code>disqus_show_comment_count</code>は任意でコメント欄のオン/オフは投稿記事単位で設定可能
+<code>disqus_show_comment_count</code> はDISQUSコメント欄を導入するページのヘッダにコメント欄へのリンクを表示させるかどうかを指定する項目。</p>
 
+<p><strong>disqus_show_comment_count: trueのとき</strong></p>
 
-<p>表示が<code>2016年08月25日 20:15:39</code>というような表示になる。</p>
+<p><img src="https://i.gyazo.com/7232f4714811db0bcea23e041556a481.png" alt="disqus_show_comment_count: ture" /></p>
+
+<p><strong>disqus_show_comment_count: falseのとき</strong></p>
+
+<p><img src="https://i.gyazo.com/29fc1be984bb3130d74343aa94c4943b.png" alt="disqus_show_comment_count: false" /></p>
+
+<p><code>shortname</code>を後で確認したくなった場合は、Disqusで登録したサイトを選択し、右上にある<code>Setting</code>に移動すると表示される。</p>
 </div>
 
 
@@ -132,7 +151,7 @@ rubyの時間表記表現 を使って 好きなように変更可能 _config.ya
 
 
 
-<time class='entry-date' datetime='2016-08-25T20:15:39+00:00'><span class='date'>2016年08月25日</span> <span class='time'>20:15:39</span></time>
+<time class='entry-date' datetime='2016-08-27T10:41:24+00:00'><span class='date'>2016年08月27日</span> <span class='time'>10:41:24</span></time>
       
 
 <span class="categories">
@@ -146,7 +165,7 @@ rubyの時間表記表現 を使って 好きなように変更可能 _config.ya
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2016/08/25/octpresseditconfigyml/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2016/08/25/octpresseditconfigyml/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2016/08/27/octpress-comments/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2016/08/27/octpress-comments/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -159,10 +178,8 @@ rubyの時間表記表現 を使って 好きなように変更可能 _config.ya
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/08/25/octopress/" title="Previous Post: OctopressとGithub Pagesを使ったブログの作成">&laquo; OctopressとGithub Pagesを使ったブログの作成</a>
+        <a class="basic-alignment left" href="/blog/2016/08/26/octopress-category-list/" title="Previous Post: Octopressにタグクラウドとカテゴリーリストを追加する">&laquo; Octopressにタグクラウドとカテゴリーリストを追加する</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/08/25/externalservicecooperation/" title="Next Post: Octopress外部サービス連携">Octopress外部サービス連携 &raquo;</a>
       
     </p>
   </footer>
