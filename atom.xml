@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-27T01:52:54+00:00</updated>
+  <updated>2016-08-27T04:54:45+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -77,7 +77,7 @@
     <link href="http://blackhawk888.github.io/blog/2016/08/26/octopress-category-list/"/>
     <updated>2016-08-26T23:17:49+00:00</updated>
     <id>http://blackhawk888.github.io/blog/2016/08/26/octopress-category-list</id>
-    <content type="html"><![CDATA[<h3>タグリストをサイバーに表示させる。</h3>
+    <content type="html"><![CDATA[<h3>タグリストをサイドバーに表示させる。</h3>
 
 <p>Octopressのデフォルトのサイドメニューは<code>Recent Posts</code>のみの表示</p>
 
@@ -241,7 +241,7 @@ Twitterは<code>twitter_user</code>を記入してやることで 自分のツ�
     <id>http://blackhawk888.github.io/blog/2016/08/25/octpresseditconfigyml</id>
     <content type="html"><![CDATA[<h2>日時表示設定</h2>
 
-<p>投稿記事の日時はデフォルトで<code>AUG 25TH, 2016 3:00 PM</code>のような表示になっていが、
+<p>投稿記事の日時はデフォルトで<code>AUG 25TH, 2016 3:00 PM</code>のような表示になっているが、
 <a href="http://ruby-doc.org/core-1.9.2/Time.html#method-i-strftim">rubyの時間表記表現</a> を使って 好きなように変更可能</p>
 
 <!-- more -->
