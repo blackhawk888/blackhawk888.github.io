@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-28T06:00:01+00:00</updated>
+  <updated>2016-08-28T06:46:31+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress Facebook Like ボタン日本語化]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/08/28/octopress-facebook-like/"/>
+    <updated>2016-08-28T15:43:39+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/08/28/octopress-facebook-like</id>
+    <content type="html"><![CDATA[<h3>FacebookのLikeボタン日本語化</h3>
+
+<p>以前外部サービス連携でFacebookボタンを追加したが[Like]、[share]と英語表記になっているので
+日本語の[いいね]、[シェア]に変更</p>
+
+<!--more-->
+
+
+<h3><code>source/_includes/facebook_like.html</code>の編集</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>- js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+</span><span class='line'>+ js.src = "//connect.facebook.net/ja_JP/all.js#appId=212934732101925&xfbml=1";</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>en_US</code> を <code>ja_JP</code> に変更</p>
+
+<p><strong>変更前</strong>
+<img src="https://i.gyazo.com/d1bf65d5bc104cbe2c271fd9dca76381.png" alt="Facebook Like" /></p>
+
+<p><strong>変更後</strong>
+<img src="https://i.gyazo.com/209f66e232354b53fefa332f6e394dc8.png" alt="Facebook いいね" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[OctopressをGitHubのProject Pageで作成]]></title>
