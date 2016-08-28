@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-28T06:46:31+00:00</updated>
+  <updated>2016-08-28T10:18:52+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,56 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress-theme変更]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/08/28/octopress-theme/"/>
+    <updated>2016-08-28T19:09:08+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/08/28/octopress-theme</id>
+    <content type="html"><![CDATA[<h3>Octopressのテーマを変更</h3>
+
+<p>今回casperというテーマに変更してみる。
+基本Githubにある<code>README.md</code>の手順どおりに進めればよい。</p>
+
+<h3>Installing</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd &lt;octopress directory&gt;
+</span><span class='line'>$ git clone https://github.com/jkrmr/casper .themes/casper
+</span><span class='line'>$ rake install['casper']
+</span><span class='line'>$ rake generate</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!--more-->
+
+
+<h3>Updating</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd &lt;octopress directory&gt;/.themes/casper
+</span><span class='line'>$ git pull
+</span><span class='line'>$ rake install['casper']
+</span><span class='line'># regenerate, make changes, etc...</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>変更前</strong>
+<img src="https://i.gyazo.com/88ee966373339447f99a2e68651eef5a.png" alt="octopress default" /></p>
+
+<p><strong>変更後(casper)</strong>
+<img src="https://i.gyazo.com/df4e94a0feb5a90f467e7c80c925bab2.png" alt="octopress casper" /></p>
+
+<p><strong>変更後(octostrap3)</strong>
+<img src="https://i.gyazo.com/c2f349654d830dde84fd2e1780df8326.png" alt="octopress octostrap3" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress Facebook Like ボタン日本語化]]></title>

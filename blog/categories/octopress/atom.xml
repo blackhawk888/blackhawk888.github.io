@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-28T06:46:31+00:00</updated>
+  <updated>2016-08-28T10:18:52+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,46 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress-theme変更]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/08/28/octopress-theme/"/>
+    <updated>2016-08-28T19:09:08+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/08/28/octopress-theme</id>
+    <content type="html"><![CDATA[<h3>Octopressのテーマを変更</h3>
+
+<p>今回casperというテーマに変更してみる。
+基本Githubにある<code>README.md</code>の手順どおりに進めればよい。</p>
+
+<h3>Installing</h3>
+
+<pre><code>$ cd &lt;octopress directory&gt;
+$ git clone https://github.com/jkrmr/casper .themes/casper
+$ rake install['casper']
+$ rake generate
+</code></pre>
+
+<!--more-->
+
+
+<h3>Updating</h3>
+
+<pre><code>$ cd &lt;octopress directory&gt;/.themes/casper
+$ git pull
+$ rake install['casper']
+# regenerate, make changes, etc...
+</code></pre>
+
+<p><strong>変更前</strong>
+<img src="https://i.gyazo.com/88ee966373339447f99a2e68651eef5a.png" alt="octopress default" /></p>
+
+<p><strong>変更後(casper)</strong>
+<img src="https://i.gyazo.com/df4e94a0feb5a90f467e7c80c925bab2.png" alt="octopress casper" /></p>
+
+<p><strong>変更後(octostrap3)</strong>
+<img src="https://i.gyazo.com/c2f349654d830dde84fd2e1780df8326.png" alt="octopress octostrap3" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress Facebook Like ボタン日本語化]]></title>
@@ -164,61 +204,6 @@ origin          git@github.com:[username]/[username].github.io.git (push)
 </code></pre>
 
 <p>記事の投稿をデプロイする場合は<code>bundle exec rake deploy</code>でバックアップは<code>git push bitbacket source</code>でBitbacketできるようになる。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopressにコメントを追加]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/08/27/octpress-comments/"/>
-    <updated>2016-08-27T10:41:24+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/08/27/octpress-comments</id>
-    <content type="html"><![CDATA[<h3>コメント欄を追加</h3>
-
-<p>このブログは個人備忘録として書いているので特にコメント欄は必要ないとは思うが、
-今後導入するかどうかわからないので実際に導入して確認したので忘れないうちに書いておく。</p>
-
-<p>コメントはデフォルトで<a href="https://disqus.com/">Disqus</a>というサービスを利用できる。<br/>
-基本的にはコメントをブログと切り離して管理しブログパーツでコメント欄を提供してくれるサービス。<br/>
-<code>_config.yml</code>にコメントの<code>id</code>を設定することで使用可能。<br/>
-手順は以下のとおり</p>
-
-<!--more-->
-
-
-<ul>
-<li><a href="https://disqus.com/">Disqus</a>にログイン</li>
-<li>Disqus上にてコメントサービスを使うサイトを登録</li>
-<li>登録が完了すると設定ページが表示されるので、ここで設定をしつつ、ページ中段に表示されている<code>Shortname</code>の文字列を確認</li>
-<li>shortnameを<code>_config.yml</code>に入力</li>
-<li>deploy</li>
-</ul>
-
-
-<p>Disqus導入は_config.ymlファイルにDisqusで取得した<code>Shortname</code>を記載するのみで完了</p>
-
-<p><code>_config.yml</code> の<code>disqus_short_name</code>に自分のサイトの<code>Shortname</code>を指定</p>
-
-<pre><code class="ruby"># Disqus Comments
-disqus_short_name: sitesshortname
-disqus_show_comment_count: false
-</code></pre>
-
-<p>上記を設定すると<code>source/_include/disqus.html</code>によって<code>disqus</code>用のコードを生成してくれる。</p>
-
-<p><img src="https://i.gyazo.com/82f9217e4935ccc5f3dcb1599384a682.png" alt="Disqus Comments" /></p>
-
-<p><code>disqus_show_comment_count</code>は任意でコメント欄のオン/オフは投稿記事単位で設定可能
-<code>disqus_show_comment_count</code> はDISQUSコメント欄を導入するページのヘッダにコメント欄へのリンクを表示させるかどうかを指定する項目。</p>
-
-<p><strong>disqus_show_comment_count: trueのとき</strong></p>
-
-<p><img src="https://i.gyazo.com/7232f4714811db0bcea23e041556a481.png" alt="disqus_show_comment_count: ture" /></p>
-
-<p><strong>disqus_show_comment_count: falseのとき</strong></p>
-
-<p><img src="https://i.gyazo.com/29fc1be984bb3130d74343aa94c4943b.png" alt="disqus_show_comment_count: false" /></p>
-
-<p><code>shortname</code>を後で確認したくなった場合は、Disqusで登録したサイトを選択し、右上にある<code>Setting</code>に移動すると表示される。</p>
 ]]></content>
   </entry>
   
