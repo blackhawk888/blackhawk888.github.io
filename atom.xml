@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-27T11:24:43+00:00</updated>
+  <updated>2016-08-28T05:58:11+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,54 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[OctopressをGitHubのProject Pagedeで作成]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/08/28/octopress-projectpage-ghpages/"/>
+    <updated>2016-08-28T14:56:55+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/08/28/octopress-projectpage-ghpages</id>
+    <content type="html"><![CDATA[<h3>Project Page (gh-pages) にデプロイする場合</h3>
+
+<p>Github Pagesでサイトを公開する場合は<code>[username].github.io</code>というリポジトリを作成し、
+デプロイすることで<code>https://[username].github.io</code>でアクセスすることができるが、任意のリポジトリを作成し、
+Project Page(gh-pages)にデプロイすることもできる。</p>
+
+<!--more -->
+
+
+<p>ユーザのウェブページを公開するユーザサイト（User site）[username].github.io でアクセスとの違いは、
+URlが<code>https://[username].github.io/[repository_name/]</code>になることと
+<code>[username].github.io</code> リポジトリのときとは異なり、<code>_deploy/</code> ディレクトリは <code>gh-pages</code> ブランチに設定される。</p>
+
+<p>Octopressのインストールは以前書いたとおり<code>git clone</code>するだけ。<br/>
+あとは必要な<code>gem</code>を<code>bundle --path vendor/bunde</code>、<code>bundel exec rake install</code>でインストール。</p>
+
+<p>事前にGithubでリポジトリを作成しておく。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake setup_github_pages
+</span><span class='line'>Repository url: git@github.com:[username]/[username].github.io.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上記によって、以下のことが行われる。</p>
+
+<ul>
+<li><code>git@github.com:[username]/[username].github.io.git</code> が <code>origin remote</code> として追加される</li>
+<li><code>_deploy/</code> ディレクトリがリポジトリの <code>gh-pages</code> ブランチに設定される</li>
+<li>親ディレクトリは <code>source</code> ブランチになる</li>
+</ul>
+
+
+<p>ソースコードを管理するため、remote のリポジトリURLを設定</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git remote add origin git@github.com:[username]/[repository_name].git 
+</span><span class='line'>$ git config branch.master.remote origin</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[OctopressにGoogle Analytics導入]]></title>

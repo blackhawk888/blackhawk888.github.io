@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-27T11:24:43+00:00</updated>
+  <updated>2016-08-28T05:58:11+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,50 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[OctopressをGitHubのProject Pagedeで作成]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/08/28/octopress-projectpage-ghpages/"/>
+    <updated>2016-08-28T14:56:55+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/08/28/octopress-projectpage-ghpages</id>
+    <content type="html"><![CDATA[<h3>Project Page (gh-pages) にデプロイする場合</h3>
+
+<p>Github Pagesでサイトを公開する場合は<code>[username].github.io</code>というリポジトリを作成し、
+デプロイすることで<code>https://[username].github.io</code>でアクセスすることができるが、任意のリポジトリを作成し、
+Project Page(gh-pages)にデプロイすることもできる。</p>
+
+<!--more -->
+
+
+<p>ユーザのウェブページを公開するユーザサイト（User site）[username].github.io でアクセスとの違いは、
+URlが<code>https://[username].github.io/[repository_name/]</code>になることと
+<code>[username].github.io</code> リポジトリのときとは異なり、<code>_deploy/</code> ディレクトリは <code>gh-pages</code> ブランチに設定される。</p>
+
+<p>Octopressのインストールは以前書いたとおり<code>git clone</code>するだけ。<br/>
+あとは必要な<code>gem</code>を<code>bundle --path vendor/bunde</code>、<code>bundel exec rake install</code>でインストール。</p>
+
+<p>事前にGithubでリポジトリを作成しておく。</p>
+
+<pre><code>$ rake setup_github_pages
+Repository url: git@github.com:[username]/[username].github.io.git
+</code></pre>
+
+<p>上記によって、以下のことが行われる。</p>
+
+<ul>
+<li><code>git@github.com:[username]/[username].github.io.git</code> が <code>origin remote</code> として追加される</li>
+<li><code>_deploy/</code> ディレクトリがリポジトリの <code>gh-pages</code> ブランチに設定される</li>
+<li>親ディレクトリは <code>source</code> ブランチになる</li>
+</ul>
+
+
+<p>ソースコードを管理するため、remote のリポジトリURLを設定</p>
+
+<pre><code>$ git remote add origin git@github.com:[username]/[repository_name].git 
+$ git config branch.master.remote origin
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[OctopressにGoogle Analytics導入]]></title>
@@ -202,35 +246,6 @@ $ cp -p octopress-tagcloud/source/_includes/custom/asides/* source/_includes/cus
 </code></pre>
 
 <p><img src="https://i.gyazo.com/ef6d723b6ff2a154a49890d11c3c006d.png" alt="octopress-tagcloud" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress 続きを読む(Moreタグ)の設定]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/08/26/octopress-displayonlypart/"/>
-    <updated>2016-08-26T17:16:35+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/08/26/octopress-displayonlypart</id>
-    <content type="html"><![CDATA[<h3><code>&lt;!--more--&gt;</code>タグの追加</h3>
-
-<p>ブログを表示すると公開済の記事が時系列順にタイトルと本文が全て表示されるので、
-ブログを表示した時に本文を全て表示するのではなく一部だけを表示しておき、
-全ての本文を読むには「続きを読む >>」と書かれたリンクをクリックした時に
-表示させるよう<code>&lt;!--more--&gt;</code>タグを設置する。</p>
-
-<!--more-->
-
-
-<p> <code>bundel exec rake  new_post[title]</code>で作成後、<code>source/_posts/</code>に<code>source/_posts/YYYY-MM-DDD-title.markdown</code>ファイルができ
- 記事の途中に以下を追記する。</p>
-
-<pre><code class="`ruby"> &lt;!-- more --&gt;
-</code></pre>
-
-<p> ただし上記の追記だけでは表示が<code>”Read on →“</code>になってるので<code>_config.yml</code>の<code>excerpt_link</code>を変更する。</p>
-
-<pre><code class="ruby">- excerpt_link: "Read on &amp;rarr;"  # "Continue reading" link text at the bottom of excerpted articles
-+ excerpt_link: "続きを読む &amp;raquo;"  # "Continue reading" link text at the bottom of excerpted articles
-</code></pre>
 ]]></content>
   </entry>
   
