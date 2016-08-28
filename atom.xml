@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-28T10:18:52+00:00</updated>
+  <updated>2016-08-28T23:27:22+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,42 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress-Googleウェブマスターツール登録]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/08/28/octopress-webmaster/"/>
+    <updated>2016-08-28T19:47:11+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/08/28/octopress-webmaster</id>
+    <content type="html"><![CDATA[<h3>Googleウェブマスターツールとは</h3>
+
+<p>Googleウェブマスターツールは、Googleが公式で提供するウェブ担当者・管理者のためのツール</p>
+
+<p>Googleウェブマスターツールに登録することで、</p>
+
+<ul>
+<li>自分のサイトをGoogleの検索エンジンに早く見つけてもらえる。</li>
+<li>どんなキーワードで表示されているかが分かる。</li>
+<li>そのページがよく検索されているのかがわかる。</li>
+<li>サイトの集客をアップさせたり、SEOにも役立つ</li>
+</ul>
+
+
+<p>Googleアカウントが必須</p>
+
+<p>手順は以下のとおり</p>
+
+<ul>
+<li>Googleアカウントでログイン
+
+<ul>
+<li>サイトのドメインを入力</li>
+</ul>
+</li>
+<li></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress-theme変更]]></title>
