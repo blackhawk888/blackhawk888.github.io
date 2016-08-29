@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-29T05:59:17+00:00</updated>
+  <updated>2016-08-29T11:33:32+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress 記事の削除]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/08/29/octopress-post-delete/"/>
+    <updated>2016-08-29T20:21:05+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/08/29/octopress-post-delete</id>
+    <content type="html"><![CDATA[<p>該当するmarkdownファイルを削除しデプロイするだけ。<br/>
+ディレクトリの場所: source/_posts/</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rm source/_posts/post-title.markdown
+</span><span class='line'>$ rake gen_deploy</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress-Googleウェブマスターツール登録]]></title>

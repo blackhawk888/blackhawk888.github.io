@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-29T05:59:17+00:00</updated>
+  <updated>2016-08-29T11:33:32+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,20 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress 記事の削除]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/08/29/octopress-post-delete/"/>
+    <updated>2016-08-29T20:21:05+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/08/29/octopress-post-delete</id>
+    <content type="html"><![CDATA[<p>該当するmarkdownファイルを削除しデプロイするだけ。<br/>
+ディレクトリの場所: source/_posts/</p>
+
+<pre><code>$ rm source/_posts/post-title.markdown
+$ rake gen_deploy
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress-Googleウェブマスターツール登録]]></title>
@@ -197,38 +211,6 @@ Repository url: git@github.com:[username]/[username].github.io.git
 <pre><code>$ git remote add origin git@github.com:[username]/[repository_name].git 
 $ git config branch.master.remote origin
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[OctopressにGoogle Analytics導入]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/08/27/octopress-google-analytics/"/>
-    <updated>2016-08-27T20:05:08+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/08/27/octopress-google-analytics</id>
-    <content type="html"><![CDATA[<h3>Google Analytics設定</h3>
-
-<p>Google Analytics(アナリティクス)とは、アクセス解析を行うことができる解析ツール。<br/>
-Octopress は、デフォルトで Google Analytics の設定をすることが可能。</p>
-
-<!--more-->
-
-
-<p>サイトページ内にトラッキングコードと呼ばれるJavaScript コードを埋め込み、
-訪問者がサイトへアクセスした際の閲覧情報がGoogle Analyticsサーバへ送信される仕組み。
-トラッキング IDとはUA-XXXXXXXX-Xのような文字列で、データの送信先となるアカウントや
-プロパティを Google アナリティクス側で特定するためのID。</p>
-
-<p><a href="http://www.google.co.jp/intl/ja/analytics/">Google Analytics</a>サイトに行き、ログインまたは
-アカウントを作成をクリックしログイン後、<code>プロパティ名</code>、<code>デフォルトのURL</code>等を設定し保存すると
-<code>トラッキング ID</code>が表示されるので<code>_config.yml</code>に設定する。</p>
-
-<h3>_config.ymlの編集</h3>
-
-<pre><code class="ruby"># Google Analytics
-google_analytics_tracking_id: UA-XXXXXXXX-X  # &lt;- Google Analytics ID を指定
-</code></pre>
-
-<p>ブログにアクセスされるたびに Google Analyticsで集計される。</p>
 ]]></content>
   </entry>
   

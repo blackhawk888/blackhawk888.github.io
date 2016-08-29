@@ -6,15 +6,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="google-site-verification" content="vY2EmWIVKKAtlat_5KCgpFUJrL4LWlUa0XZ2xv7RQ1s" />
-  <title>Octopressの日時表示設定 - Wivern Blog</title>
+  <title>Octopress 記事の削除 - Wivern Blog</title>
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="日時表示設定 投稿記事の日時はデフォルトでAUG 25TH, 2016 3:00 PMのような表示になっているが、
-rubyの時間表記表現 を使って 好きなように変更可能 _config.yamlを編集 1
+  <meta name="description" content="該当するmarkdownファイルを削除しデプロイするだけ。
+ディレクトリの場所: source/_posts/ 1
 2
-- date_format: &quot;ordinal&quot;
-+ &hellip;">
+$ rm source/_posts/post-title.markdown
+$ rake gen_deploy ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -23,7 +23,7 @@ rubyの時間表記表現 を使って 好きなように変更可能 _config.ya
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blackhawk888.github.io/blog/2016/08/25/octpresseditconfigyml/">
+  <link rel="canonical" href="http://blackhawk888.github.io/blog/2016/08/29/octopress-post-delete/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Wivern Blog" type="application/atom+xml">
@@ -85,7 +85,7 @@ rubyの時間表記表現 を使って 好きなように変更可能 _config.ya
   
   <header>
     
-      <h1 class="entry-title">Octopressの日時表示設定</h1>
+      <h1 class="entry-title">Octopress 記事の削除</h1>
     
     
       <p class="meta">
@@ -94,42 +94,21 @@ rubyの時間表記表現 を使って 好きなように変更可能 _config.ya
 
 
 
-<time class='entry-date' datetime='2016-08-25T20:15:39+00:00'><span class='date'>2016年08月25日</span> <span class='time'>20:15:39</span></time>
+<time class='entry-date' datetime='2016-08-29T20:21:05+00:00'><span class='date'>2016年08月29日</span> <span class='time'>20:21:05</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2>日時表示設定</h2>
+<div class="entry-content"><p>該当するmarkdownファイルを削除しデプロイするだけ。<br/>
+ディレクトリの場所: source/_posts/</p>
 
-<p>投稿記事の日時はデフォルトで<code>AUG 25TH, 2016 3:00 PM</code>のような表示になっているが、
-<a href="http://ruby-doc.org/core-1.9.2/Time.html#method-i-strftim">rubyの時間表記表現</a> を使って 好きなように変更可能</p>
-
-<!-- more -->
-
-
-<h3>_config.yamlを編集</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">-</span> <span class="ss">date_format</span><span class="p">:</span> <span class="s2">&quot;ordinal&quot;</span>
-</span><span class='line'><span class="o">+</span> <span class="ss">date_format</span><span class="p">:</span> <span class="s2">&quot;%Y年%m月%d日&quot;</span> <span class="c1"># e.g. 2016年08月25日</span>
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rm source/_posts/post-title.markdown
+</span><span class='line'>$ rake gen_deploy</span></code></pre></td></tr></table></div></figure>
 
-
-<p>上記の設定で<code>2016年08月25日 8:15 PM</code>というような表示になる。</p>
-
-<p>時間が12時間表記で気に入らなかったので24時間表記表示にするため<code>_config.ymlを編集</code></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="ss">date_format</span><span class="p">:</span> <span class="s2">&quot;%Y年%m月%d日&quot;</span> <span class="c1"># e.g. 2016年08月25日</span>
-</span><span class='line'><span class="o">+</span> <span class="ss">time_format</span><span class="p">:</span> <span class="s2">&quot;%H:%M:%S&quot;</span>     <span class="c1"># 24 hour time</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>表示が<code>2016年08月25日 20:15:39</code>というような表示になる。</p>
 </div>
 
 
@@ -145,7 +124,7 @@ rubyの時間表記表現 を使って 好きなように変更可能 _config.ya
 
 
 
-<time class='entry-date' datetime='2016-08-25T20:15:39+00:00'><span class='date'>2016年08月25日</span> <span class='time'>20:15:39</span></time>
+<time class='entry-date' datetime='2016-08-29T20:21:05+00:00'><span class='date'>2016年08月29日</span> <span class='time'>20:21:05</span></time>
       
 
 <span class="categories">
@@ -159,7 +138,7 @@ rubyの時間表記表現 を使って 好きなように変更可能 _config.ya
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2016/08/25/octpresseditconfigyml/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2016/08/25/octpresseditconfigyml/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2016/08/29/octopress-post-delete/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2016/08/29/octopress-post-delete/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -172,10 +151,8 @@ rubyの時間表記表現 を使って 好きなように変更可能 _config.ya
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/08/25/octopress/" title="Previous Post: OctopressとGithub Pagesを使ったブログの作成">&laquo; OctopressとGithub Pagesを使ったブログの作成</a>
+        <a class="basic-alignment left" href="/blog/2016/08/28/octopress-webmaster/" title="Previous Post: Octopress-Googleウェブマスターツール登録">&laquo; Octopress-Googleウェブマスターツール登録</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/08/25/externalservicecooperation/" title="Next Post: Octopress外部サービス連携">Octopress外部サービス連携 &raquo;</a>
       
     </p>
   </footer>
