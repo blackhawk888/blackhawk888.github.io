@@ -10,11 +10,10 @@
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="該当するmarkdownファイルを削除しデプロイするだけ。
-ディレクトリの場所: source/_posts/ 1
+  <meta name="description" content="新規投稿bundle exec rake new_post[title]ではなく新規ページを作成する。 新規ページ作成 1
 2
-$ rm source/_posts/post-title.markdown
-$ rake gen_deploy ">
+$ rake new_page[page_name]
+Creating new page: source/[page_name]/index.markdown ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -75,6 +74,7 @@ $ rake gen_deploy ">
 <ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
 </ul>
 
 </nav>
@@ -82,6 +82,50 @@ $ rake gen_deploy ">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/08/29/octopress-newpage/">Octopress-新規ページ作成</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-08-29T21:40:50+00:00'><span class='date'>2016年08月29日</span> <span class='time'>21:40:50</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>新規投稿<code>bundle exec rake new_post[title]</code>ではなく新規ページを作成する。</p>
+
+<h3>新規ページ作成</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake new_page[page_name]
+</span><span class='line'>Creating new page: source/[page_name]/index.markdown</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/08/29/octopress-newpage/">続きを読む &raquo;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -446,45 +490,6 @@ GitHubはいいサービスだと思うのですが、ソースコードの共�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/08/26/octopress-displayonlypart/">Octopress 続きを読む(Moreタグ)の設定</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-08-26T17:16:35+00:00'><span class='date'>2016年08月26日</span> <span class='time'>17:16:35</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3><code>&lt;!--more--&gt;</code>タグの追加</h3>
-
-<p>ブログを表示すると公開済の記事が時系列順にタイトルと本文が全て表示されるので、
-ブログを表示した時に本文を全て表示するのではなく一部だけを表示しておき、
-全ての本文を読むには「続きを読む >>」と書かれたリンクをクリックした時に
-表示させるよう<code>&lt;!--more--&gt;</code>タグを設置する。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2016/08/26/octopress-displayonlypart/">続きを読む &raquo;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -498,6 +503,10 @@ GitHubはいいサービスだと思うのですが、ソースコードの共�
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/08/29/octopress-newpage/">Octopress-新規ページ作成</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/08/29/octopress-post-delete/">Octopress 記事の削除</a>
@@ -515,19 +524,15 @@ GitHubはいいサービスだと思うのですが、ソースコードの共�
         <a href="/blog/2016/08/28/octopress-facebook-like/">Octopress Facebook Like ボタン日本語化</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/08/28/octopress-projectpage-ghpages/">OctopressをGitHubのProject Pageで作成</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (13)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (14)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 104.61538461538461%'>bitbacket(1)</a> <a href='/blog/categories/google-analytics' style='font-size: 104.61538461538461%'>google analytics(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(13)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 104.28571428571429%'>bitbacket(1)</a> <a href='/blog/categories/google-analytics' style='font-size: 104.28571428571429%'>google analytics(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(14)</a> </span>
 </section>
 
 

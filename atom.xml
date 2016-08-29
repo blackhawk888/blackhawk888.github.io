@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-29T11:33:32+00:00</updated>
+  <updated>2016-08-29T13:05:36+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,76 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress-新規ページ作成]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/08/29/octopress-newpage/"/>
+    <updated>2016-08-29T21:40:50+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/08/29/octopress-newpage</id>
+    <content type="html"><![CDATA[<p>新規投稿<code>bundle exec rake new_post[title]</code>ではなく新規ページを作成する。</p>
+
+<h3>新規ページ作成</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake new_page[page_name]
+</span><span class='line'>Creating new page: source/[page_name]/index.markdown</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!--more-->
+
+
+<h3>新規ページ編集</h3>
+
+<p>ナビゲーションバーから新規ページへのリンクを追加<br/>
+<code>source/_includes/custom/navigation.html</code>を編集</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;ul class="main"&gt;
+</span><span class='line'>    &lt;li&gt;&lt;a href="http://blackhawk888.github.io/"&gt;Blog&lt;/a&gt;&lt;/li&gt;
+</span><span class='line'>    &lt;li&gt;&lt;a href="http://blackhawk888.github.io/blog/archives"&gt;Archives&lt;/a&gt;&lt;/li&gt;
+</span><span class='line'>    + &lt;li&gt;&lt;a href="http://blackhawk888.github.io/about"&gt;[new_page]&lt;/a&gt;&lt;/li&gt;
+</span><span class='line'>&lt;/ul&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>新規ページを編集<br/>
+<code>source/[new_page]/index.markdown</code>を編集</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>---
+</span><span class='line'>layout: page
+</span><span class='line'>title: "[new_page]"
+</span><span class='line'>date: 2016-08-29 21:30
+</span><span class='line'>comments: false
+</span><span class='line'>sharing: true
+</span><span class='line'>footer: true
+</span><span class='line'>---
+</span><span class='line'>
+</span><span class='line'>###本文
+</span><span class='line'>hoge hoge
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ナビゲーションバーに新しく作成したページのタイトルが表示されリンクをクリックいて
+ページが遷移することを確認する。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress 記事の削除]]></title>
