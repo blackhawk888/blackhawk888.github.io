@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-28T23:31:47+00:00</updated>
+  <updated>2016-08-29T00:02:44+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Octopress-Googleウェブマスターツール登録]]></title>
     <link href="http://blackhawk888.github.io/blog/2016/08/28/octopress-webmaster/"/>
-    <updated>2016-08-28T19:47:11+00:00</updated>
+    <updated>2016-08-28T20:47:11+00:00</updated>
     <id>http://blackhawk888.github.io/blog/2016/08/28/octopress-webmaster</id>
     <content type="html"><![CDATA[<h3>Googleウェブマスターツールとは</h3>
 
@@ -25,25 +25,69 @@
 <p>Googleウェブマスターツールに登録することで、</p>
 
 <ul>
-<li>自分のサイトをGoogleの検索エンジンに早く見つけてもらえる。</li>
-<li>どんなキーワードで表示されているかが分かる。</li>
-<li>そのページがよく検索されているのかがわかる。</li>
+<li>自分のサイトをGoogleの検索エンジンに早く見つけてもらえる</li>
+<li>どんなキーワードで表示されているかが分かる</li>
+<li>そのページがよく検索されているのかがわかる</li>
 <li>サイトの集客をアップさせたり、SEOにも役立つ</li>
 </ul>
 
 
-<p>Googleアカウントが必須</p>
+<!--more-->
+
 
 <p>手順は以下のとおり</p>
 
 <ul>
-<li>Googleアカウントでログイン
+<li>Googleアカウントでログイン</li>
+<li>サイトのドメインを入力</li>
+<li>[確認方法]タブのHTML ファイルをアップロードにチェック</li>
+<li>確認ファイル(googleXXXXXXXXXXX.html)が作成されるので<code>_deploy</code> ディレクトリにコピーし、リモートにプッシュ</li>
+</ul>
+
+
+<p>上記の手順で確認用URLが表示されるのでアップロードが正しく行われたことの確認を行い、問題なければ確認ボタンを押すことで所有権を紐付ける。<br/>
+ただしこの方法では、次回記事をデプロイした時に確認用ファイルが消されてしまうので、確認用ファイルをリモートにプッシュする方法ではなく
+メタ タグをサイトのホームページに追加する方法にする</p>
+
+<p>以下手順</p>
 
 <ul>
-<li>サイトのドメインを入力</li>
+<li>[確認方法]タブのHTMLタグにチェック</li>
+<li>meta タグが作成されるので、コピーする。</li>
+<li>source/_includes/head.html にメタタグを貼り付け</li>
 </ul>
-</li>
-<li></li>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;!DOCTYPE html&gt;
+</span><span class='line'>&lt;!--[if IEMobile 7 ]&gt;&lt;html class="no-js iem7"&gt;&lt;![endif]--&gt;
+</span><span class='line'>&lt;!--[if lt IE 9]&gt;&lt;html class="no-js lte-ie8"&gt;&lt;![endif]--&gt;
+</span><span class='line'>&lt;!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]&gt;&lt;!--&gt;&lt;html class="no-js" lang="en"&gt;&lt;!--&lt;![endif]--&gt;
+</span><span class='line'>&lt;head&gt;
+</span><span class='line'>  &lt;meta charset="utf-8"&gt;
+</span><span class='line'>+ &lt;meta name="google-site-verification" content="XXXXXXXXXXXX_XXXXXXXXXXXXXXXXXXXX" /&gt;
+</span><span class='line'>  &lt;title&gt;Octopress-Googleウェブマスターツール登録 - Wivern Blog&lt;/title&gt;
+</span><span class='line'>  &lt;meta name="author" content="wivern"&gt;
+</span><span class='line'>
+</span><span class='line'>  
+</span><span class='line'>  &lt;meta name="description" content=""&gt;
+</span><span class='line'>  </span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>デプロイ</li>
 </ul>
 
 ]]></content>
