@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-29T13:05:36+00:00</updated>
+  <updated>2016-08-29T22:49:44+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -22,7 +22,7 @@
 
 <h3>新規ページ作成</h3>
 
-<pre><code>$ rake new_page[page_name]
+<pre><code>$ bundle exec rake new_page[page_name]
 Creating new page: source/[page_name]/index.markdown
 </code></pre>
 
@@ -64,7 +64,7 @@ sharing: true</p>
 
 <p>```</p>
 
-<p>ナビゲーションバーに新しく作成したページのタイトルが表示されリンクをクリックいて
+<p>ナビゲーションバーに新しく作成したページタイトルが表示されクリックして
 ページが遷移することを確認する。</p>
 ]]></content>
   </entry>
@@ -75,7 +75,7 @@ sharing: true</p>
     <updated>2016-08-29T20:21:05+00:00</updated>
     <id>http://blackhawk888.github.io/blog/2016/08/29/octopress-post-delete</id>
     <content type="html"><![CDATA[<p>該当するmarkdownファイルを削除しデプロイするだけ。<br/>
-ディレクトリの場所: source/_posts/</p>
+ディレクトリの場所: <code>source/_posts/</code></p>
 
 <pre><code>$ rm source/_posts/post-title.markdown
 $ rake gen_deploy
