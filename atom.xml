@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-29T00:02:44+00:00</updated>
+  <updated>2016-08-29T00:18:45+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -38,7 +38,7 @@
 <p>手順は以下のとおり</p>
 
 <ul>
-<li>Googleアカウントでログイン</li>
+<li><a href="https://www.google.com/webmasters/tools/home?hl=ja">Googleアカウント</a>でログイン</li>
 <li>サイトのドメインを入力</li>
 <li>[確認方法]タブのHTML ファイルをアップロードにチェック</li>
 <li>確認ファイル(googleXXXXXXXXXXX.html)が作成されるので<code>_deploy</code> ディレクトリにコピーし、リモートにプッシュ</li>
@@ -54,7 +54,7 @@
 <ul>
 <li>[確認方法]タブのHTMLタグにチェック</li>
 <li>meta タグが作成されるので、コピーする。</li>
-<li>source/_includes/head.html にメタタグを貼り付け</li>
+<li>source/_includes/head.html にメタタグを貼り付ける。</li>
 </ul>
 
 
@@ -88,6 +88,7 @@
 
 <ul>
 <li>デプロイ</li>
+<li>Googleウェブマスターツールのサイトの画面で[確認]をクリックし所有権を紐付ける。</li>
 </ul>
 
 ]]></content>
