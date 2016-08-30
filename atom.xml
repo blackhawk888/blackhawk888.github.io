@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-30T07:06:48+00:00</updated>
+  <updated>2016-08-30T07:08:02+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Octopress-サイドバーにgravatar追加]]></title>
+    <title type="html"><![CDATA[Octopress-サイドバーにGravatar追加]]></title>
     <link href="http://blackhawk888.github.io/blog/2016/08/30/octopress-sidebar-gravatar/"/>
     <updated>2016-08-30T16:00:38+00:00</updated>
     <id>http://blackhawk888.github.io/blog/2016/08/30/octopress-sidebar-gravatar</id>
