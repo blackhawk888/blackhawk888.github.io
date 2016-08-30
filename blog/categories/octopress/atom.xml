@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-30T04:22:40+00:00</updated>
+  <updated>2016-08-30T04:24:27+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Octopress-サイドバーにProfile追加]]></title>
     <link href="http://blackhawk888.github.io/blog/2016/08/30/octopress-sidebar-profile/"/>
-    <updated>2016-08-30T00:20:53+00:00</updated>
+    <updated>2016-08-30T13:23:53+00:00</updated>
     <id>http://blackhawk888.github.io/blog/2016/08/30/octopress-sidebar-profile</id>
     <content type="html"><![CDATA[<p>デフォルトでプロフィール用のHTMLは以下の場所に作成されている。<br/>
 <code>source/_includes/custom/asides/about.html</code></p>
