@@ -10,10 +10,12 @@
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="新規投稿bundle exec rake new_post[title]ではなく新規ページを作成する。 新規ページ作成 1
+  <meta name="description" content="デフォルトでプロフィール用のHTMLは以下の場所に作成されている。
+source/_includes/custom/asides/about.html about.htmlファイルを編集 1
 2
-$ bundle exec rake new_page[page_name]
-Creating new page: source/[page_name]/index. &hellip;">
+3
+4
+&lt;section&gt; &lt;h1&gt;About Me&lt;/h1&gt; & &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +84,55 @@ Creating new page: source/[page_name]/index. &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/08/30/octopress-sidebar-profile/">Octopress-サイドバーにProfile追加</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-08-30T00:20:53+00:00'><span class='date'>2016年08月30日</span> <span class='time'>00:20:53</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>デフォルトでプロフィール用のHTMLは以下の場所に作成されている。<br/>
+<code>source/_includes/custom/asides/about.html</code></p>
+
+<h3>about.htmlファイルを編集</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;section&gt;
+</span><span class='line'>  &lt;h1&gt;About Me&lt;/h1&gt;
+</span><span class='line'>  &lt;p&gt;A little something about me.&lt;/p&gt;
+</span><span class='line'>&lt;/section&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/08/30/octopress-sidebar-profile/">続きを読む &raquo;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -452,44 +503,6 @@ GitHubはいいサービスだと思うのですが、ソースコードの共�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/08/26/octopress-category-list/">Octopressにタグクラウドとカテゴリーリストを追加する</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-08-26T23:17:49+00:00'><span class='date'>2016年08月26日</span> <span class='time'>23:17:49</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>タグリストをサイドバーに表示させる。</h3>
-
-<p>Octopressのデフォルトのサイドメニューは<code>Recent Posts</code>のみの表示</p>
-
-<p><img src="https://i.gyazo.com/cf857d8c62f5f7564ddbd25c9c754f90.png" alt="Recent posts" /></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2016/08/26/octopress-category-list/">続きを読む &raquo;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -501,8 +514,17 @@ GitHubはいいサービスだと思うのですが、ソースコードの共�
 <aside class="sidebar">
   
     <section>
+  <h1>Profile</h1>
+  <p>Author: Wivern</p>
+  <p>Profession: ネットワーク、サーバエンジニア</p>
+</section>
+<section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/08/30/octopress-sidebar-profile/">Octopress-サイドバーにProfile追加</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/08/29/octopress-newpage/">Octopress-新規ページ作成</a>
@@ -520,19 +542,15 @@ GitHubはいいサービスだと思うのですが、ソースコードの共�
         <a href="/blog/2016/08/28/octopress-theme/">Octopress-theme変更</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/08/28/octopress-facebook-like/">Octopress Facebook Like ボタン日本語化</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (14)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (15)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 104.28571428571429%'>bitbacket(1)</a> <a href='/blog/categories/google-analytics' style='font-size: 104.28571428571429%'>google analytics(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(14)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 104.0%'>bitbacket(1)</a> <a href='/blog/categories/google-analytics' style='font-size: 104.0%'>google analytics(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(15)</a> </span>
 </section>
 
 

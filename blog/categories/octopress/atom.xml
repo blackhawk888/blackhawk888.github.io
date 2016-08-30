@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-29T22:49:44+00:00</updated>
+  <updated>2016-08-30T04:22:40+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress-サイドバーにProfile追加]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/08/30/octopress-sidebar-profile/"/>
+    <updated>2016-08-30T00:20:53+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/08/30/octopress-sidebar-profile</id>
+    <content type="html"><![CDATA[<p>デフォルトでプロフィール用のHTMLは以下の場所に作成されている。<br/>
+<code>source/_includes/custom/asides/about.html</code></p>
+
+<h3>about.htmlファイルを編集</h3>
+
+<pre><code>&lt;section&gt;
+  &lt;h1&gt;About Me&lt;/h1&gt;
+  &lt;p&gt;A little something about me.&lt;/p&gt;
+&lt;/section&gt;
+</code></pre>
+
+<!--more-->
+
+
+<p>サイドバーにabout.htmlを追加する場合は<code>_config.yml</code>に追記</p>
+
+<h3>_config.ymlの編集</h3>
+
+<p>サイドバーの先頭にプロフィールを表示させたいので、先頭に追記</p>
+
+<pre><code># list each of the sidebar modules you want to include, in the order you want them to appear.
+# To add custom asides, create files in /source/_includes/custom/asides/ and add them to the list like 'custom/asides/custom_aside_name.html'
+# default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
+default_asides: [
+  + custom/asides/about.html,
+    asides/recent_posts.html,
+    custom/asides/category_list.html,
+    custom/asides/tag_cloud.html,
+    asides/github.html, 
+    asides/delicious.html,
+    asides/pinboard.html, 
+    asides/googleplus.html
+    ]
+</code></pre>
+
+<p>サイドバーの<code>Recent Posts</code>の上に<code>Profile</code>で作成した<code>About Me</code>が表示される。</p>
+
+<p><img src="https://i.gyazo.com/3e88876a3442a236f47464741b565551.png" alt="octopress-sidebar-profile" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress-新規ページ作成]]></title>
@@ -194,35 +240,6 @@ $ rake install['casper']
 
 <p><strong>変更後(octostrap3)</strong>
 <img src="https://i.gyazo.com/c2f349654d830dde84fd2e1780df8326.png" alt="octopress octostrap3" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress Facebook Like ボタン日本語化]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/08/28/octopress-facebook-like/"/>
-    <updated>2016-08-28T15:43:39+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/08/28/octopress-facebook-like</id>
-    <content type="html"><![CDATA[<h3>FacebookのLikeボタン日本語化</h3>
-
-<p>以前外部サービス連携でFacebookボタンを追加したが[Like]、[share]と英語表記になっているので
-日本語の[いいね]、[シェア]に変更</p>
-
-<!--more-->
-
-
-<h3><code>source/_includes/facebook_like.html</code>の編集</h3>
-
-<pre><code>- js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&amp;xfbml=1";
-+ js.src = "//connect.facebook.net/ja_JP/all.js#appId=212934732101925&amp;xfbml=1";
-</code></pre>
-
-<p><code>en_US</code> を <code>ja_JP</code> に変更</p>
-
-<p><strong>変更前</strong>
-<img src="https://i.gyazo.com/d1bf65d5bc104cbe2c271fd9dca76381.png" alt="Facebook Like" /></p>
-
-<p><strong>変更後</strong>
-<img src="https://i.gyazo.com/209f66e232354b53fefa332f6e394dc8.png" alt="Facebook いいね" /></p>
 ]]></content>
   </entry>
   

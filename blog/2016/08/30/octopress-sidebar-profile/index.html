@@ -6,15 +6,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="google-site-verification" content="vY2EmWIVKKAtlat_5KCgpFUJrL4LWlUa0XZ2xv7RQ1s" />
-  <title>About - Wivern Blog</title>
+  <title>Octopress-サイドバーにProfile追加 - Wivern Blog</title>
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="About 2016年08月29日 21:35:00 ネットワーク、サーバエンジニア 2月17日にラムゼイハント症候群という病気を発症し歩行障害、
-顔面麻痺にかかり只今リハビリ奮闘中！！ GitHub
-Qiita
-Twitter
-Another Blog 2016年08月29日 21:35:00 &hellip;">
+  <meta name="description" content="デフォルトでプロフィール用のHTMLは以下の場所に作成されている。
+source/_includes/custom/asides/about.html about.htmlファイルを編集 1
+2
+3
+4
+&lt;section&gt; &lt;h1&gt;About Me&lt;/h1&gt; & &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -23,7 +24,7 @@ Another Blog 2016年08月29日 21:35:00 &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blackhawk888.github.io/about/">
+  <link rel="canonical" href="http://blackhawk888.github.io/blog/2016/08/30/octopress-sidebar-profile/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Wivern Blog" type="application/atom+xml">
@@ -82,47 +83,113 @@ Another Blog 2016年08月29日 21:35:00 &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">About</h1>
-    <p class="meta">
-
-
-
-
-<time class='entry-date' datetime='2016-08-29T21:35:00+00:00'><span class='date'>2016年08月29日</span> <span class='time'>21:35:00</span></time></p>
-  </header>
-  
-  <h3>ネットワーク、サーバエンジニア</h3>
-
-<p>2月17日にラムゼイハント症候群という病気を発症し歩行障害、
-顔面麻痺にかかり只今リハビリ奮闘中！！</p>
-
-<ul>
-<li><a href="@">GitHub</a></li>
-<li><a href="@">Qiita</a></li>
-<li><a href="@">Twitter</a></li>
-<li><a href="https://blackhawk888.github.io">Another Blog</a></li>
-</ul>
-
-
-  
-    <footer>
+    
+      <h1 class="entry-title">Octopress-サイドバーにProfile追加</h1>
+    
+    
       <p class="meta">
         
-        
 
 
 
 
-<time class='entry-date' datetime='2016-08-29T21:35:00+00:00'><span class='date'>2016年08月29日</span> <span class='time'>21:35:00</span></time>
+<time class='entry-date' datetime='2016-08-30T00:20:53+00:00'><span class='date'>2016年08月30日</span> <span class='time'>00:20:53</span></time>
         
       </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>デフォルトでプロフィール用のHTMLは以下の場所に作成されている。<br/>
+<code>source/_includes/custom/asides/about.html</code></p>
+
+<h3>about.htmlファイルを編集</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;section&gt;
+</span><span class='line'>  &lt;h1&gt;About Me&lt;/h1&gt;
+</span><span class='line'>  &lt;p&gt;A little something about me.&lt;/p&gt;
+</span><span class='line'>&lt;/section&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!--more-->
+
+
+<p>サイドバーにabout.htmlを追加する場合は<code>_config.yml</code>に追記</p>
+
+<h3>_config.ymlの編集</h3>
+
+<p>サイドバーの先頭にプロフィールを表示させたいので、先頭に追記</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># list each of the sidebar modules you want to include, in the order you want them to appear.
+</span><span class='line'># To add custom asides, create files in /source/_includes/custom/asides/ and add them to the list like 'custom/asides/custom_aside_name.html'
+</span><span class='line'># default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
+</span><span class='line'>default_asides: [
+</span><span class='line'>  + custom/asides/about.html,
+</span><span class='line'>    asides/recent_posts.html,
+</span><span class='line'>    custom/asides/category_list.html,
+</span><span class='line'>    custom/asides/tag_cloud.html,
+</span><span class='line'>    asides/github.html, 
+</span><span class='line'>    asides/delicious.html,
+</span><span class='line'>    asides/pinboard.html, 
+</span><span class='line'>    asides/googleplus.html
+</span><span class='line'>    ]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>サイドバーの<code>Recent Posts</code>の上に<code>Profile</code>で作成した<code>About Me</code>が表示される。</p>
+
+<p><img src="https://i.gyazo.com/3e88876a3442a236f47464741b565551.png" alt="octopress-sidebar-profile" /></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
       
-        <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/about/index.html" data-via="" data-counturl="http://blackhawk888.github.io/about/index.html" >Tweet</a>
+
+<span class="byline author vcard">Posted by <span class="fn">wivern</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-08-30T00:20:53+00:00'><span class='date'>2016年08月30日</span> <span class='time'>00:20:53</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/octopress/'>octopress</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2016/08/30/octopress-sidebar-profile/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2016/08/30/octopress-sidebar-profile/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -132,9 +199,14 @@ Another Blog 2016年08月29日 21:35:00 &hellip;">
   
 </div>
 
+    
+    <p class="meta">
       
-    </footer>
-  
+        <a class="basic-alignment left" href="/blog/2016/08/29/octopress-newpage/" title="Previous Post: Octopress-新規ページ作成">&laquo; Octopress-新規ページ作成</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>

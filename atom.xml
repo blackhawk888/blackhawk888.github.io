@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-29T22:49:44+00:00</updated>
+  <updated>2016-08-30T04:22:40+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,71 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress-サイドバーにProfile追加]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/08/30/octopress-sidebar-profile/"/>
+    <updated>2016-08-30T00:20:53+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/08/30/octopress-sidebar-profile</id>
+    <content type="html"><![CDATA[<p>デフォルトでプロフィール用のHTMLは以下の場所に作成されている。<br/>
+<code>source/_includes/custom/asides/about.html</code></p>
+
+<h3>about.htmlファイルを編集</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;section&gt;
+</span><span class='line'>  &lt;h1&gt;About Me&lt;/h1&gt;
+</span><span class='line'>  &lt;p&gt;A little something about me.&lt;/p&gt;
+</span><span class='line'>&lt;/section&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!--more-->
+
+
+<p>サイドバーにabout.htmlを追加する場合は<code>_config.yml</code>に追記</p>
+
+<h3>_config.ymlの編集</h3>
+
+<p>サイドバーの先頭にプロフィールを表示させたいので、先頭に追記</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># list each of the sidebar modules you want to include, in the order you want them to appear.
+</span><span class='line'># To add custom asides, create files in /source/_includes/custom/asides/ and add them to the list like 'custom/asides/custom_aside_name.html'
+</span><span class='line'># default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
+</span><span class='line'>default_asides: [
+</span><span class='line'>  + custom/asides/about.html,
+</span><span class='line'>    asides/recent_posts.html,
+</span><span class='line'>    custom/asides/category_list.html,
+</span><span class='line'>    custom/asides/tag_cloud.html,
+</span><span class='line'>    asides/github.html, 
+</span><span class='line'>    asides/delicious.html,
+</span><span class='line'>    asides/pinboard.html, 
+</span><span class='line'>    asides/googleplus.html
+</span><span class='line'>    ]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>サイドバーの<code>Recent Posts</code>の上に<code>Profile</code>で作成した<code>About Me</code>が表示される。</p>
+
+<p><img src="https://i.gyazo.com/3e88876a3442a236f47464741b565551.png" alt="octopress-sidebar-profile" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress-新規ページ作成]]></title>
