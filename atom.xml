@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-30T04:24:52+00:00</updated>
+  <updated>2016-08-30T07:04:31+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,155 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress-サイドバーにgravatar追加]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/08/30/octopress-sidebar-gravatar/"/>
+    <updated>2016-08-30T16:00:38+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/08/30/octopress-sidebar-gravatar</id>
+    <content type="html"><![CDATA[<p>サイドバーにProfileを表示させるようにしたのでついでにGravatarも表示させてみる。</p>
+
+<p><a href="https://ja.gravatar.com/site/implement/">Gravatarに開発者向け資料</a>があったので
+見てみるとJSONでプロフィール情報を返すAPIを提供しているようなのでそれ使って情報を持ってきて、
+画面に反映させなきゃいけないと思っていてGithubを眺めていたらOctopressでGravatarを表示させる
+プラグインがあったのでそれを使用してみることにした。</p>
+
+<!--more-->
+
+
+<p><a href="https://github.com/joet3ch/gravatar-octopress">joet3ch/gravatar-octopress</a><br/>
+簡単に説明するとGravatarの画像をimgタグでひっぱってこれるようになるので、
+それを参考にしつつ、souce/_include/custom/asides/about.html を編集するという流れ。</p>
+
+<p>以下手順</p>
+
+<h3>インストール</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone https://github.com/joet3ch/gravatar-octopress.git</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><code>gravatar.html</code>を<code>_includes/custom/asides</code>にコピー</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd gravatar-octopress
+</span><span class='line'>$ cp gravatar.html [directory_name]/_includes/custom/asides</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>_config.ymlに追記</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>+ # Gravatar  
+</span><span class='line'>+ gravatar_email: youraddress@example.com</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>_config.ymlのdefault_asides変数にgravatar.htmlを追加</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># list each of the sidebar modules you want to include, in the order you want them to appear.
+</span><span class='line'># To add custom asides, create files in /source/_includes/custom/asides/ and add them to the list like 'custom/asides/custom_aside_name.html'
+</span><span class='line'># default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
+</span><span class='line'>default_asides: [
+</span><span class='line'>  + custom/asides/about.html,
+</span><span class='line'>    asides/recent_posts.html,
+</span><span class='line'>    custom/asides/category_list.html,
+</span><span class='line'>    custom/asides/tag_cloud.html,
+</span><span class='line'>    asides/github.html, 
+</span><span class='line'>    asides/delicious.html,
+</span><span class='line'>    asides/pinboard.html, 
+</span><span class='line'>    asides/googleplus.html
+</span><span class='line'>    ]</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Gravatar導入前</strong></p>
+
+<p><img src="https://i.gyazo.com/26245cde8185fad41104a09e79e3a8cc.png" alt="Gravatar導入前" /></p>
+
+<p><strong>Gravatar導入後</strong></p>
+
+<p><img src="https://i.gyazo.com/0211d5f0a5057fcf087250a9248d0b6c.png" alt="Gravatar導入後" /></p>
+
+<p>Gravatarの画像がProfileの上に来ているので<code>config.yml</code>の<code>asides</code>に設定するのではなく
+<code>souce/_include/custom/asides/about.html</code>を編集するように変更。</p>
+
+<h3>_config.ymlの編集</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># list each of the sidebar modules you want to include, in the order you want them to appear.
+</span><span class='line'># To add custom asides, create files in /source/_includes/custom/asides/ and add them to the list like 'custom/asides/custom_aside_name.html'
+</span><span class='line'># default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
+</span><span class='line'>default_asides: [
+</span><span class='line'>  - custom/asides/about.html,
+</span><span class='line'>    asides/recent_posts.html,
+</span><span class='line'>    custom/asides/category_list.html,
+</span><span class='line'>    custom/asides/tag_cloud.html,
+</span><span class='line'>    asides/github.html, 
+</span><span class='line'>    asides/delicious.html,
+</span><span class='line'>    asides/pinboard.html, 
+</span><span class='line'>    asides/googleplus.html
+</span><span class='line'>    ]</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>souce/_include/custom/asides/about.html編集</h3>
+
+<p><code>about.html</code>を以下のように変更</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;section&gt;
+</span><span class='line'>  &lt;h1&gt;Profile&lt;/h1&gt;
+</span><span class='line'>  
+</span><span class='line'>    &lt;img src="http://www.gravatar.com/avatar/d193dda398c5fa836f1d8007d64be8de" alt="Gravatar of wivern" title="Gravatar of wivern" align="left" style="margin-right:10px;" /&gt;
+</span><span class='line'>  
+</span><span class='line'>  Hoge Hoge
+</span><span class='line'>  &lt;br clear="left"&gt;
+</span><span class='line'>&lt;/section&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>about.html編集後</strong></p>
+
+<p><img src="https://i.gyazo.com/8459f225d4670991f1b76d844b772e6f.png" alt="about.html編集後" /></p>
+
+<p>Gravatarの画像イメージサイズは<code>gravatar.html</code>を編集することで可能</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;img src="http://www.gravatar.com/avatar/d193dda398c5fa836f1d8007d64be8de?s=200" alt="Gravatar of wivern " title="Gravatar of wivern" /&gt;</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress-サイドバーにProfile追加]]></title>
@@ -456,7 +605,7 @@ Bitbacketのアカウントも取得しているのでソースコードをBitba
 <span class='line-number'>7</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>% git remote -v
 </span><span class='line'>bitbucket       git@bitbucket.org:[username]/[username].github.io.git (fetch)
-</span><span class='line'>bitbucket       git@bitbucket.org:wivern888/[username].github.io.git (push)
+</span><span class='line'>bitbucket       git@bitbucket.org:[username]/[username].github.io.git (push)
 </span><span class='line'>octopress       git://github.com/imathis/octopress.git (fetch)
 </span><span class='line'>octopress       git://github.com/imathis/octopress.git (push)
 </span><span class='line'>origin          git@github.com:[username]/[username].github.io.git (fetch)

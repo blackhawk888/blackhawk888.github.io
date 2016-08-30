@@ -10,12 +10,8 @@
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="デフォルトでプロフィール用のHTMLは以下の場所に作成されている。
-source/_includes/custom/asides/about.html about.htmlファイルを編集 1
-2
-3
-4
-&lt;section&gt; &lt;h1&gt;About Me&lt;/h1&gt; & &hellip;">
+  <meta name="description" content="サイドバーにProfileを表示させるようにしたのでついでにGravatarも表示させてみる。 Gravatarに開発者向け資料があったので
+見てみるとJSONでプロフィール情報を返すAPIを提供しているようなのでそれ使って情報を持ってきて、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,6 +80,45 @@ source/_includes/custom/asides/about.html about.htmlファイルを編集 1
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/08/30/octopress-sidebar-gravatar/">Octopress-サイドバーにgravatar追加</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-08-30T16:00:38+00:00'><span class='date'>2016年08月30日</span> <span class='time'>16:00:38</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>サイドバーにProfileを表示させるようにしたのでついでにGravatarも表示させてみる。</p>
+
+<p><a href="https://ja.gravatar.com/site/implement/">Gravatarに開発者向け資料</a>があったので
+見てみるとJSONでプロフィール情報を返すAPIを提供しているようなのでそれ使って情報を持ってきて、
+画面に反映させなきゃいけないと思っていてGithubを眺めていたらOctopressでGravatarを表示させる
+プラグインがあったのでそれを使用してみることにした。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/08/30/octopress-sidebar-gravatar/">続きを読む &raquo;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -461,48 +496,6 @@ GitHubはいいサービスだと思うのですが、ソースコードの共�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/08/27/octpress-comments/">Octopressにコメントを追加</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-08-27T10:41:24+00:00'><span class='date'>2016年08月27日</span> <span class='time'>10:41:24</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>コメント欄を追加</h3>
-
-<p>このブログは個人備忘録として書いているので特にコメント欄は必要ないとは思うが、
-今後導入するかどうかわからないので実際に導入して確認したので忘れないうちに書いておく。</p>
-
-<p>コメントはデフォルトで<a href="https://disqus.com/">Disqus</a>というサービスを利用できる。<br/>
-基本的にはコメントをブログと切り離して管理しブログパーツでコメント欄を提供してくれるサービス。<br/>
-<code>_config.yml</code>にコメントの<code>id</code>を設定することで使用可能。<br/>
-手順は以下のとおり</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2016/08/27/octpress-comments/">続きを読む &raquo;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -515,12 +508,19 @@ GitHubはいいサービスだと思うのですが、ソースコードの共�
   
     <section>
   <h1>Profile</h1>
+  
+    <img src="http://www.gravatar.com/avatar/d193dda398c5fa836f1d8007d64be8de" alt="Gravatar of wivern" title="Gravatar of wivern" align="left" style="margin-right:10px;" />
+  
   <p>Author: Wivern</p>
   <p>Profession: ネットワーク、サーバエンジニア</p>
-</section>
-<section>
+  <br clear="left">
+</section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/08/30/octopress-sidebar-gravatar/">Octopress-サイドバーにgravatar追加</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/08/30/octopress-sidebar-profile/">Octopress-サイドバーにProfile追加</a>
@@ -536,10 +536,6 @@ GitHubはいいサービスだと思うのですが、ソースコードの共�
     
       <li class="post">
         <a href="/blog/2016/08/28/octopress-webmaster/">Octopress-Googleウェブマスターツール登録</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/08/28/octopress-theme/">Octopress-theme変更</a>
       </li>
     
   </ul>
