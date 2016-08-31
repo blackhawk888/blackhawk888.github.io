@@ -10,8 +10,9 @@
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="サイドバーにProfileを表示させるようにしたのでついでにGravatarも表示させてみる。 Gravatarに開発者向け資料があったので
-見てみるとJSONでプロフィール情報を返すAPIを提供しているようなのでそれ使って情報を持ってきて、 &hellip;">
+  <meta name="description" content="下書きしていて完成してない状態でも、他の部分だけを公開したい時があると思う。
+その時はYAMLブロックにpublished:false加えるとそのファイルはbundle exec rake generateを実行すると
+下書きは生成されないが、bundle exec rake &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +81,68 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/08/31/octopress-draft/">Octopress-下書きをdeployしないようにする</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-08-31T15:59:56+00:00'><span class='date'>2016年08月31日</span> <span class='time'>15:59:56</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>下書きしていて完成してない状態でも、他の部分だけを公開したい時があると思う。<br/>
+その時はYAMLブロックに<code>published:false</code>加えるとそのファイルは<code>bundle exec rake generate</code>を実行すると
+下書きは生成されないが、<code>bundle exec rake preview</code>をした時は表示される。</p>
+
+<figure class='code'><figcaption><span>exsample.markdown </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">---</span>
+</span><span class='line'><span class="ss">layout</span><span class="p">:</span> <span class="n">post</span>
+</span><span class='line'><span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;exsample&quot;</span>
+</span><span class='line'><span class="ss">date</span><span class="p">:</span> <span class="mi">2016</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">31</span> <span class="mi">08</span><span class="p">:</span><span class="mi">42</span><span class="p">:</span><span class="mi">56</span> <span class="o">+</span><span class="mo">0000</span>
+</span><span class='line'><span class="ss">comments</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'><span class="ss">categories</span><span class="p">:</span> <span class="o">[</span><span class="n">exsample</span><span class="o">]</span>
+</span><span class='line'><span class="ss">published</span><span class="p">:</span> <span class="kp">false</span>
+</span><span class='line'><span class="o">---</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">### 下書き中</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/08/31/octopress-draft/">続きを読む &raquo;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -458,44 +521,6 @@ Octopress は、デフォルトで Google Analytics の設定をすることが�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/08/27/octopress-repository-bitbacket/">OctopressでsourceをBitbucket管理</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-08-27T15:47:33+00:00'><span class='date'>2016年08月27日</span> <span class='time'>15:47:33</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>ソース情報はBitbucketで管理</h3>
-
-<p>このブログはOctopressでGithubでホスティングしているが、ソースコードもGithubにpushしている。<br/>
-GitHubはいいサービスだと思うのですが、ソースコードの共有が前提となっていて、
-無料プランでは非公開リポジトリを作ることができない。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2016/08/27/octopress-repository-bitbacket/">続きを読む &raquo;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -519,6 +544,10 @@ GitHubはいいサービスだと思うのですが、ソースコードの共�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/08/31/octopress-draft/">Octopress-下書きをdeployしないようにする</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/08/30/octopress-sidebar-gravatar/">Octopress-サイドバーにGravatar追加</a>
       </li>
     
@@ -534,19 +563,15 @@ GitHubはいいサービスだと思うのですが、ソースコードの共�
         <a href="/blog/2016/08/29/octopress-post-delete/">Octopress 記事の削除</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/08/28/octopress-webmaster/">Octopress-Googleウェブマスターツール登録</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (15)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (16)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 104.0%'>bitbacket(1)</a> <a href='/blog/categories/google-analytics' style='font-size: 104.0%'>google analytics(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(15)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 103.75%'>bitbacket(1)</a> <a href='/blog/categories/google-analytics' style='font-size: 103.75%'>google analytics(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(16)</a> </span>
 </section>
 
 

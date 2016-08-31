@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-31T00:37:33+00:00</updated>
+  <updated>2016-08-31T07:01:06+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress-下書きをdeployしないようにする]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/08/31/octopress-draft/"/>
+    <updated>2016-08-31T15:59:56+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/08/31/octopress-draft</id>
+    <content type="html"><![CDATA[<p>下書きしていて完成してない状態でも、他の部分だけを公開したい時があると思う。<br/>
+その時はYAMLブロックに<code>published:false</code>加えるとそのファイルは<code>bundle exec rake generate</code>を実行すると
+下書きは生成されないが、<code>bundle exec rake preview</code>をした時は表示される。</p>
+
+<h2><figure class='code'><figcaption><span>exsample.markdown </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sr">/h2&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;layout: post</span>
+</span><span class='line'><span class="sr">title: &amp;ldquo;exsample&amp;rdquo;</span>
+</span><span class='line'><span class="sr">date: 2016-08-31 08:42:56 +0000</span>
+</span><span class='line'><span class="sr">comments: true</span>
+</span><span class='line'><span class="sr">categories: [exsample]&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h2</span><span class="o">&gt;</span><span class="ss">published</span><span class="p">:</span> <span class="kp">false</span><span class="o">&lt;</span><span class="sr">/h2&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;h3&gt;下書き中&lt;/</span><span class="n">h3</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<!--more-->
+
+
+<p><code>bundle exec gen_deploy</code>は<code>generate</code>が失敗した場合でも<code>deploy</code>を実行するので
+<code>generate</code>失敗な形で投稿されてしまうことがある。
+また下にある<code>published</code>のステートメントは最後の方に判断されるので、 後で投稿しようと思っている下書きがあって、
+今書いているものを投稿しようと<code>bundle exec gen_deploy</code>すると、 中途半端な今の記事と後で投稿する予定だった
+下書きの方が送られてしまうことがあるので ちょっとした変更以外は一旦<code>bundele exec generate</code>した方がよいかもしれない。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress-サイドバーにProfile追加]]></title>
@@ -200,46 +249,6 @@ $ rake gen_deploy
 <li>Googleウェブマスターツールのサイトの画面で[確認]をクリックし所有権を紐付ける。</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress-theme変更]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/08/28/octopress-theme/"/>
-    <updated>2016-08-28T19:09:08+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/08/28/octopress-theme</id>
-    <content type="html"><![CDATA[<h3>Octopressのテーマを変更</h3>
-
-<p>今回casperというテーマに変更してみる。
-基本Githubにある<code>README.md</code>の手順どおりに進めればよい。</p>
-
-<h3>Installing</h3>
-
-<pre><code>$ cd &lt;octopress directory&gt;
-$ git clone https://github.com/jkrmr/casper .themes/casper
-$ rake install['casper']
-$ rake generate
-</code></pre>
-
-<!--more-->
-
-
-<h3>Updating</h3>
-
-<pre><code>$ cd &lt;octopress directory&gt;/.themes/casper
-$ git pull
-$ rake install['casper']
-# regenerate, make changes, etc...
-</code></pre>
-
-<p><strong>変更前</strong>
-<img src="https://i.gyazo.com/88ee966373339447f99a2e68651eef5a.png" alt="octopress default" /></p>
-
-<p><strong>変更後(casper)</strong>
-<img src="https://i.gyazo.com/df4e94a0feb5a90f467e7c80c925bab2.png" alt="octopress casper" /></p>
-
-<p><strong>変更後(octostrap3)</strong>
-<img src="https://i.gyazo.com/c2f349654d830dde84fd2e1780df8326.png" alt="octopress octostrap3" /></p>
 ]]></content>
   </entry>
   

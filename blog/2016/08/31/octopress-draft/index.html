@@ -6,15 +6,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="google-site-verification" content="vY2EmWIVKKAtlat_5KCgpFUJrL4LWlUa0XZ2xv7RQ1s" />
-  <title>Octopressの日時表示設定 - Wivern Blog</title>
+  <title>Octopress-下書きをdeployしないようにする - Wivern Blog</title>
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="日時表示設定 投稿記事の日時はデフォルトでAUG 25TH, 2016 3:00 PMのような表示になっているが、
-rubyの時間表記表現 を使って 好きなように変更可能 _config.yamlを編集 1
-2
-- date_format: &quot;ordinal&quot;
-+ &hellip;">
+  <meta name="description" content="下書きしていて完成してない状態でも、他の部分だけを公開したい時があると思う。
+その時はYAMLブロックにpublished:false加えるとそのファイルはbundle exec rake generateを実行すると
+下書きは生成されないが、bundle exec rake &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -23,7 +21,7 @@ rubyの時間表記表現 を使って 好きなように変更可能 _config.ya
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blackhawk888.github.io/blog/2016/08/25/octpresseditconfigyml/">
+  <link rel="canonical" href="http://blackhawk888.github.io/blog/2016/08/31/octopress-draft/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Wivern Blog" type="application/atom+xml">
@@ -86,7 +84,7 @@ rubyの時間表記表現 を使って 好きなように変更可能 _config.ya
   
   <header>
     
-      <h1 class="entry-title">Octopressの日時表示設定</h1>
+      <h1 class="entry-title">Octopress-下書きをdeployしないようにする</h1>
     
     
       <p class="meta">
@@ -95,42 +93,51 @@ rubyの時間表記表現 を使って 好きなように変更可能 _config.ya
 
 
 
-<time class='entry-date' datetime='2016-08-25T20:15:39+00:00'><span class='date'>2016年08月25日</span> <span class='time'>20:15:39</span></time>
+<time class='entry-date' datetime='2016-08-31T15:59:56+00:00'><span class='date'>2016年08月31日</span> <span class='time'>15:59:56</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2>日時表示設定</h2>
+<div class="entry-content"><p>下書きしていて完成してない状態でも、他の部分だけを公開したい時があると思う。<br/>
+その時はYAMLブロックに<code>published:false</code>加えるとそのファイルは<code>bundle exec rake generate</code>を実行すると
+下書きは生成されないが、<code>bundle exec rake preview</code>をした時は表示される。</p>
 
-<p>投稿記事の日時はデフォルトで<code>AUG 25TH, 2016 3:00 PM</code>のような表示になっているが、
-<a href="http://ruby-doc.org/core-1.9.2/Time.html#method-i-strftim">rubyの時間表記表現</a> を使って 好きなように変更可能</p>
-
-<!-- more -->
-
-
-<h3>_config.yamlを編集</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>exsample.markdown </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">-</span> <span class="ss">date_format</span><span class="p">:</span> <span class="s2">&quot;ordinal&quot;</span>
-</span><span class='line'><span class="o">+</span> <span class="ss">date_format</span><span class="p">:</span> <span class="s2">&quot;%Y年%m月%d日&quot;</span> <span class="c1"># e.g. 2016年08月25日</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">---</span>
+</span><span class='line'><span class="ss">layout</span><span class="p">:</span> <span class="n">post</span>
+</span><span class='line'><span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;exsample&quot;</span>
+</span><span class='line'><span class="ss">date</span><span class="p">:</span> <span class="mi">2016</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">31</span> <span class="mi">08</span><span class="p">:</span><span class="mi">42</span><span class="p">:</span><span class="mi">56</span> <span class="o">+</span><span class="mo">0000</span>
+</span><span class='line'><span class="ss">comments</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'><span class="ss">categories</span><span class="p">:</span> <span class="o">[</span><span class="n">exsample</span><span class="o">]</span>
+</span><span class='line'><span class="ss">published</span><span class="p">:</span> <span class="kp">false</span>
+</span><span class='line'><span class="o">---</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">### 下書き中</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>上記の設定で<code>2016年08月25日 8:15 PM</code>というような表示になる。</p>
-
-<p>時間が12時間表記で気に入らなかったので24時間表記表示にするため<code>_config.ymlを編集</code></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="ss">date_format</span><span class="p">:</span> <span class="s2">&quot;%Y年%m月%d日&quot;</span> <span class="c1"># e.g. 2016年08月25日</span>
-</span><span class='line'><span class="o">+</span> <span class="ss">time_format</span><span class="p">:</span> <span class="s2">&quot;%H:%M:%S&quot;</span>     <span class="c1"># 24 hour time</span>
-</span></code></pre></td></tr></table></div></figure>
 
 
-<p>表示が<code>2016年08月25日 20:15:39</code>というような表示になる。</p>
+<!--more-->
+
+
+<p><code>bundle exec gen_deploy</code>は<code>generate</code>が失敗した場合でも<code>deploy</code>を実行するので
+<code>generate</code>失敗な形で投稿されてしまうことがある。
+また下にある<code>published</code>のステートメントは最後の方に判断されるので、 後で投稿しようと思っている下書きがあって、
+今書いているものを投稿しようと<code>bundle exec gen_deploy</code>すると、 中途半端な今の記事と後で投稿する予定だった
+下書きの方が送られてしまうことがあるので ちょっとした変更以外は一旦<code>bundele exec generate</code>した方がよいかもしれない。</p>
 </div>
 
 
@@ -146,7 +153,7 @@ rubyの時間表記表現 を使って 好きなように変更可能 _config.ya
 
 
 
-<time class='entry-date' datetime='2016-08-25T20:15:39+00:00'><span class='date'>2016年08月25日</span> <span class='time'>20:15:39</span></time>
+<time class='entry-date' datetime='2016-08-31T15:59:56+00:00'><span class='date'>2016年08月31日</span> <span class='time'>15:59:56</span></time>
       
 
 <span class="categories">
@@ -160,7 +167,7 @@ rubyの時間表記表現 を使って 好きなように変更可能 _config.ya
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2016/08/25/octpresseditconfigyml/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2016/08/25/octpresseditconfigyml/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2016/08/31/octopress-draft/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2016/08/31/octopress-draft/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -173,10 +180,8 @@ rubyの時間表記表現 を使って 好きなように変更可能 _config.ya
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/08/25/octopress/" title="Previous Post: OctopressとGithub Pagesを使ったブログの作成">&laquo; OctopressとGithub Pagesを使ったブログの作成</a>
+        <a class="basic-alignment left" href="/blog/2016/08/30/octopress-sidebar-gravatar/" title="Previous Post: Octopress-サイドバーにGravatar追加">&laquo; Octopress-サイドバーにGravatar追加</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/08/25/externalservicecooperation/" title="Next Post: Octopress外部サービス連携">Octopress外部サービス連携 &raquo;</a>
       
     </p>
   </footer>
