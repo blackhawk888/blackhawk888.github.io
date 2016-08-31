@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-30T07:08:37+00:00</updated>
+  <updated>2016-08-31T00:30:12+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -50,10 +50,12 @@
 
 <h3>_config.ymlに追記</h3>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>_config.yml </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>+ # Gravatar  
-</span><span class='line'>+ gravatar_email: youraddress@example.com</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'> <span class="l-Scalar-Plain">+</span> <span class="c1"># Gravatar  </span>
+</span><span class='line'> <span class="l-Scalar-Plain">+ gravatar_email</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">youraddress@example.com</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>_config.ymlのdefault_asides変数にgravatar.htmlを追加</h3>
@@ -224,6 +226,48 @@
 <p>サイドバーの<code>Recent Posts</code>の上に<code>Profile</code>で作成した<code>About Me</code>が表示される。</p>
 
 <p><img src="https://i.gyazo.com/3e88876a3442a236f47464741b565551.png" alt="octopress-sidebar-profile" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress Draft]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/08/30/octopress-draft/"/>
+    <updated>2016-08-30T00:00:00+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/08/30/octopress-draft</id>
+    <content type="html"><![CDATA[<p>下書きしていて完成してない状態でも、他の部分だけを公開したい時があると思う。<br/>
+その時はYAMLブロックに<code>published:false</code>加えるとそのファイルはpreviewでは見れるが、deployされない。</p>
+
+<figure class='code'><figcaption><span>exsample.markdown </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">---</span>
+</span><span class='line'><span class="ss">layout</span><span class="p">:</span> <span class="n">post</span>
+</span><span class='line'><span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;exsample&quot;</span>
+</span><span class='line'><span class="ss">date</span><span class="p">:</span> <span class="mi">2016</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">31</span> <span class="mi">08</span><span class="p">:</span><span class="mi">42</span><span class="p">:</span><span class="mi">56</span> <span class="o">+</span><span class="mo">0000</span>
+</span><span class='line'><span class="ss">comments</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'><span class="ss">categories</span><span class="p">:</span> <span class="o">[</span><span class="n">exsample</span><span class="o">]</span>
+</span><span class='line'><span class="ss">published</span><span class="p">:</span><span class="kp">false</span>
+</span><span class='line'><span class="o">---</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">### 下書き中</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>bundle exec rake generate</code>では下書きは生成されないが、<code>bundle exec rake preview</code>をした時は表示される。</p>
+
+<p><code>bundle exec gen_deploy</code>は<code>generate</code>が失敗した場合でも<code>deploy</code>を実行するので
+<code>generate</code>失敗時な形で投稿されてしまうことがある。
+さらに、下にある<code>published</code>のステートメントは最後の方に判断されるので、 後で投稿しようと思っている下書きがあって、
+今書いているものを投稿しようとしてその時に<code>gen_deploy</code>すると、 中途半端な今の記事と後で投稿する予定の下書きの方
+送られてしまうことがあるので ちょっとした変更以外は一回ちゃんと<code>generate</code>した方がよいかもしれない。</p>
 ]]></content>
   </entry>
   

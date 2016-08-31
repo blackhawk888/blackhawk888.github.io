@@ -174,6 +174,68 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2016/08/30/octopress-draft/">Octopress Draft</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-08-30T00:00:00+00:00'><span class='date'>2016年08月30日</span> <span class='time'>00:00:00</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>下書きしていて完成してない状態でも、他の部分だけを公開したい時があると思う。<br/>
+その時はYAMLブロックに<code>published:false</code>加えるとそのファイルはpreviewでは見れるが、deployされない。</p>
+
+<figure class='code'><figcaption><span>exsample.markdown </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">---</span>
+</span><span class='line'><span class="ss">layout</span><span class="p">:</span> <span class="n">post</span>
+</span><span class='line'><span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;exsample&quot;</span>
+</span><span class='line'><span class="ss">date</span><span class="p">:</span> <span class="mi">2016</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">31</span> <span class="mi">08</span><span class="p">:</span><span class="mi">42</span><span class="p">:</span><span class="mi">56</span> <span class="o">+</span><span class="mo">0000</span>
+</span><span class='line'><span class="ss">comments</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'><span class="ss">categories</span><span class="p">:</span> <span class="o">[</span><span class="n">exsample</span><span class="o">]</span>
+</span><span class='line'><span class="ss">published</span><span class="p">:</span><span class="kp">false</span>
+</span><span class='line'><span class="o">---</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">### 下書き中</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>bundle exec rake generate</code>では下書きは生成されないが、<code>bundle exec rake preview</code>をした時は表示される。</p>
+
+<p><code>bundle exec gen_deploy</code>は<code>generate</code>が失敗した場合でも<code>deploy</code>を実行するので
+<code>generate</code>失敗時な形で投稿されてしまうことがある。
+さらに、下にある<code>published</code>のステートメントは最後の方に判断されるので、 後で投稿しようと思っている下書きがあって、
+今書いているものを投稿しようとしてその時に<code>gen_deploy</code>すると、 中途半端な今の記事と後で投稿する予定の下書きの方
+送られてしまうことがあるので ちょっとした変更以外は一回ちゃんと<code>generate</code>した方がよいかもしれない。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2016/08/29/octopress-newpage/">Octopress-新規ページ作成</a></h1>
     
     
@@ -458,44 +520,6 @@ Octopress は、デフォルトで Google Analytics の設定をすることが�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/08/27/octopress-repository-bitbacket/">OctopressでsourceをBitbucket管理</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-08-27T15:47:33+00:00'><span class='date'>2016年08月27日</span> <span class='time'>15:47:33</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>ソース情報はBitbucketで管理</h3>
-
-<p>このブログはOctopressでGithubでホスティングしているが、ソースコードもGithubにpushしている。<br/>
-GitHubはいいサービスだと思うのですが、ソースコードの共有が前提となっていて、
-無料プランでは非公開リポジトリを作ることができない。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2016/08/27/octopress-repository-bitbacket/">続きを読む &raquo;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -527,15 +551,15 @@ GitHubはいいサービスだと思うのですが、ソースコードの共�
       </li>
     
       <li class="post">
+        <a href="/blog/2016/08/30/octopress-draft/">Octopress Draft</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/08/29/octopress-newpage/">Octopress-新規ページ作成</a>
       </li>
     
       <li class="post">
         <a href="/blog/2016/08/29/octopress-post-delete/">Octopress 記事の削除</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/08/28/octopress-webmaster/">Octopress-Googleウェブマスターツール登録</a>
       </li>
     
   </ul>
