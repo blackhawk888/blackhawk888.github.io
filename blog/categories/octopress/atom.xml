@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-31T07:01:06+00:00</updated>
+  <updated>2016-08-31T10:08:53+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress-Rakefile編集]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/08/31/octopress-edit-rakefile/"/>
+    <updated>2016-08-31T19:06:16+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/08/31/octopress-edit-rakefile</id>
+    <content type="html"><![CDATA[<p>新規作成時<code>bundle exec rake new_post[title]</code>に前回書いた<code>published</code>や<code>&lt;--more--&gt;</code>タグが初期値として
+入ってくれたらよいと思うので<code>Rakefile</code>を修正する。
+115行目あたりにかいてある。</p>
+
+<p><figure class='code'><figcaption><span>Rakefile </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span>
+</span><span class='line'><span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="ss">layout</span><span class="p">:</span> <span class="n">post</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span>
+</span><span class='line'><span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="ss">title</span><span class="p">:</span> <span class="p">\</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span><span class="c1">#{title.gsub(/&amp;amp;/,&amp;lsquo;&amp;amp;&amp;rsquo;)}\&amp;ldquo;&amp;rdquo;</span>
+</span><span class='line'><span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="ss">date</span><span class="p">:</span> <span class="c1">#{Time.now.strftime(&amp;lsquo;%Y-%m-%d %H:%M:%S %z&amp;rsquo;)}&amp;rdquo;</span>
+</span><span class='line'><span class="o">+</span> <span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="ss">author</span><span class="p">:</span> <span class="o">[</span><span class="n">author</span><span class="o">]&amp;</span><span class="n">rdquo</span><span class="p">;</span>
+</span><span class='line'><span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="ss">comments</span><span class="p">:</span> <span class="kp">true</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span> <span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="ss">published</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'><span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;categories: &amp;rdquo;</span>
+</span><span class='line'><span class="s2">post.puts &amp;ldquo;&amp;mdash;&amp;rdquo;</span>
+</span><span class='line'><span class="s2">+ post.puts &amp;ldquo;&amp;rdquo;</span>
+</span><span class='line'><span class="s2">+ post.puts &amp;ldquo;＜!&amp;ndash;more&amp;ndash;＞&amp;rdquo;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<!--more-->
+
+
+<p><code>published</code>の他に、<code>author</code>の項目があるのでそれも設定。
+これで<code>bunde exec rake new_post[title]</code>を実行するとテンプレートとしてデフォルト
+<code>published: true</code>と<code>author: [author]</code>と記事に頭で<code>&lt;!—more—&gt;</code>が初期値として入るようになるので
+必要に併せて下書き中でdeployしたくなかったら<code>published: false</code>に変更し、<code>&lt;!--more--&gt;</code>タグの
+位置も変更すればよい。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress-下書きをdeployしないようにする]]></title>
@@ -175,80 +220,6 @@ sharing: true</p>
 <pre><code>$ rm source/_posts/post-title.markdown
 $ rake gen_deploy
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress-Googleウェブマスターツール登録]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/08/28/octopress-webmaster/"/>
-    <updated>2016-08-28T20:47:11+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/08/28/octopress-webmaster</id>
-    <content type="html"><![CDATA[<h3>Googleウェブマスターツールとは</h3>
-
-<p>Googleが公式で提供するウェブ担当者・管理者のためのツール</p>
-
-<p>Googleウェブマスターツールに登録することで、</p>
-
-<ul>
-<li>自分のサイトをGoogleの検索エンジンに早く見つけてもらえ</li>
-<li>どんなキーワードで表示されているかが分かる</li>
-<li>そのページがよく検索されているのかがわかる</li>
-<li>サイトの集客をアップさせたり、SEOにも役立つ</li>
-</ul>
-
-
-<!--more-->
-
-
-<p>手順は以下のとおり</p>
-
-<ul>
-<li><a href="https://www.google.com/webmasters/tools/home?hl=ja">Googleアカウント</a>でログイン</li>
-<li>サイトのドメインを入力</li>
-<li>[確認方法]タブのHTML ファイルをアップロードにチェック</li>
-<li>確認ファイル(googleXXXXXXXXXXX.html)が作成されるので<code>_deploy</code> ディレクトリにコピーし、リモートにプッシュ</li>
-</ul>
-
-
-<p>上記の手順で確認用URLが表示されるのでアップロードが正しく行われたことの確認を行い、問題なければ確認ボタンを押すことで所有権を紐付ける。<br/>
-ただしこの方法では、次回記事をデプロイした時に確認用ファイルが消されてしまうので、確認用ファイルをリモートにプッシュする方法ではなく
-メタ タグをサイトのホームページに追加する方法にする</p>
-
-<p>以下手順</p>
-
-<ul>
-<li>[確認方法]タブのHTMLタグにチェック</li>
-<li>meta タグが作成されるので、コピーする。</li>
-<li>source/_includes/head.html にメタタグを貼り付ける。</li>
-</ul>
-
-
-<p>```
-&lt;!DOCTYPE html></p>
-
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-
-
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-
-
-<p><!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-+ <meta name="google-site-verification" content="XXXXXXXXXXXX_XXXXXXXXXXXXXXXXXXXX" />
-  <title>Category: Octopress - Wivern Blog</title>
-  <meta name="author" content="wivern"></p>
-
-<p>  
-  <meta name="description" content="Category: octopress">
-  
-```</p>
-
-<ul>
-<li>デプロイ</li>
-<li>Googleウェブマスターツールのサイトの画面で[確認]をクリックし所有権を紐付ける。</li>
-</ul>
-
 ]]></content>
   </entry>
   

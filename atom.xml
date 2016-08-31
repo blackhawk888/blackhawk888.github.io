@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-08-31T07:01:06+00:00</updated>
+  <updated>2016-08-31T10:08:53+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,54 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress-Rakefile編集]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/08/31/octopress-edit-rakefile/"/>
+    <updated>2016-08-31T19:06:16+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/08/31/octopress-edit-rakefile</id>
+    <content type="html"><![CDATA[<p>新規作成時<code>bundle exec rake new_post[title]</code>に前回書いた<code>published</code>や<code>&lt;--more--&gt;</code>タグが初期値として
+入ってくれたらよいと思うので<code>Rakefile</code>を修正する。
+115行目あたりにかいてある。</p>
+
+<figure class='code'><figcaption><span>Rakefile </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;---&quot;</span>
+</span><span class='line'><span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;layout: post&quot;</span>
+</span><span class='line'><span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;title: </span><span class="se">\&quot;</span><span class="si">#{</span><span class="n">title</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/&amp;/</span><span class="p">,</span><span class="s1">&#39;&amp;amp;&#39;</span><span class="p">)</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;date: </span><span class="si">#{</span><span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-%d %H:%M:%S %z&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="o">+</span> <span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;author: [author]&quot;</span>
+</span><span class='line'><span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;comments: true&quot;</span>
+</span><span class='line'><span class="o">+</span> <span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;published: true</span>
+</span><span class='line'><span class="s2">post.puts &quot;</span><span class="ss">categories</span><span class="p">:</span> <span class="s2">&quot;</span>
+</span><span class='line'><span class="s2">post.puts &quot;</span><span class="o">---</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="s2">+ post.puts &quot;&quot;</span>
+</span><span class='line'><span class="s2">+ post.puts &quot;</span><span class="err">＜</span><span class="o">!--</span><span class="n">more</span><span class="o">--</span><span class="err">＞</span><span class="s2">&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!--more-->
+
+
+<p><code>published</code>の他に、<code>author</code>の項目があるのでそれも設定。
+これで<code>bunde exec rake new_post[title]</code>を実行するとテンプレートとしてデフォルト
+<code>published: true</code>と<code>author: [author]</code>と記事に頭で<code>&lt;!—more—&gt;</code>が初期値として入るようになるので
+必要に併せて下書き中でdeployしたくなかったら<code>published: false</code>に変更し、<code>&lt;!--more--&gt;</code>タグの
+位置も変更すればよい。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress-下書きをdeployしないようにする]]></title>
