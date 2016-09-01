@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Octopress-Rakefile編集"
+title: "Octopress-Rakefileカスタマイズ"
 date: 2016-08-31 19:06:16 +0000
 comments: true
 categories: [octopress]
