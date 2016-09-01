@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-09-01T12:13:38+00:00</updated>
+  <updated>2016-09-01T22:56:54+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,60 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Slack-Mention機能]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/09/02/slack-mention/"/>
+    <updated>2016-09-02T07:53:33+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/09/02/slack-mention</id>
+    <content type="html"><![CDATA[<p>Slackを使っていて、たまにMention機能を使おうとして忘れてしまうのでメモを残しておく。</p>
+
+<p>Mention機能とは<code>@</code>を利用してチャンネル内全員や特定の個人、グループに通知をともなって言及する機能</p>
+
+<!--more-->
+
+
+<p><strong>Mention対象者と用途</strong></p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;"> Mention方法 </th>
+<th style="text-align:left;"> 対象者 </th>
+<th style="text-align:left;"> 用途 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;"> @[:username] </td>
+<td style="text-align:left;"> 特定の個人 </td>
+<td style="text-align:left;"> 特定の人に言及したいとき、連続で組み合わせることで複数人を対象にできる。 </td>
+</tr>
+<tr>
+<td style="text-align:left;"> @here </td>
+<td style="text-align:left;"> チャンネル内でそのときアクティブなメンバーだけが対象 </td>
+<td style="text-align:left;"> 全員必須ではなくアクティブな人だけに言及したいときや、誰でも良いのでなるべくすぐに返信がほしいとき </td>
+</tr>
+<tr>
+<td style="text-align:left;"> @channel </td>
+<td style="text-align:left;"> チャンネル内全員 </td>
+<td style="text-align:left;"> 全員に言及したいときや、緊急度が高いとき </td>
+</tr>
+<tr>
+<td style="text-align:left;"> @everyone </td>
+<td style="text-align:left;"> チーム全員 </td>
+<td style="text-align:left;"> チームメンバー全員に言及したいとき </td>
+</tr>
+<tr>
+<td style="text-align:left;"> @[:usergroup] </td>
+<td style="text-align:left;"> あらかじめ作成したUserGroupe </td>
+<td style="text-align:left;"> @channelなどで言及うするには範囲が広いときや特定のメンバーに@するには人数が多いとき(有料プランのみ) </td>
+</tr>
+</tbody>
+</table>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress-markdownでtableを作成できるようにする]]></title>
@@ -1213,43 +1267,6 @@ Twitterは<code>twitter_user</code>を記入してやることで 自分のツ�
 </span><span class='line'><span class="o">+</span> <span class="ss">facebook_like</span><span class="p">:</span> <span class="kp">true</span>
 </span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopressの日時表示設定]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/08/25/octpresseditconfigyml/"/>
-    <updated>2016-08-25T20:15:39+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/08/25/octpresseditconfigyml</id>
-    <content type="html"><![CDATA[<h2>日時表示設定</h2>
-
-<p>投稿記事の日時はデフォルトで<code>AUG 25TH, 2016 3:00 PM</code>のような表示になっているが、
-<a href="http://ruby-doc.org/core-1.9.2/Time.html#method-i-strftim">rubyの時間表記表現</a> を使って 好きなように変更可能</p>
-
-<!-- more -->
-
-
-<h3>_config.yamlを編集</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">-</span> <span class="ss">date_format</span><span class="p">:</span> <span class="s2">&quot;ordinal&quot;</span>
-</span><span class='line'><span class="o">+</span> <span class="ss">date_format</span><span class="p">:</span> <span class="s2">&quot;%Y年%m月%d日&quot;</span> <span class="c1"># e.g. 2016年08月25日</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>上記の設定で<code>2016年08月25日 8:15 PM</code>というような表示になる。</p>
-
-<p>時間が12時間表記で気に入らなかったので24時間表記表示にするため<code>_config.ymlを編集</code></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="ss">date_format</span><span class="p">:</span> <span class="s2">&quot;%Y年%m月%d日&quot;</span> <span class="c1"># e.g. 2016年08月25日</span>
-</span><span class='line'><span class="o">+</span> <span class="ss">time_format</span><span class="p">:</span> <span class="s2">&quot;%H:%M:%S&quot;</span>     <span class="c1"># 24 hour time</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>表示が<code>2016年08月25日 20:15:39</code>というような表示になる。</p>
 ]]></content>
   </entry>
   
