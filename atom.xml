@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-09-01T11:15:01+00:00</updated>
+  <updated>2016-09-01T12:13:38+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,147 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress-markdownでtableを作成できるようにする]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/09/01/octopress-markdown-table/"/>
+    <updated>2016-09-01T17:22:02+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/09/01/octopress-markdown-table</id>
+    <content type="html"><![CDATA[<p>前回記事でMercurialとGitのコマンド比較をするためMarkdownでTableを作成したのだが、
+<code>bundle exec rake preview</code>を実行しても表が作成されない！
+調べてたらTableをMarkdownで編集できるようにする方法があったので、
+忘れないように書いておく</p>
+
+<!--more-->
+
+
+<h3>CSSファイルtable.cssの追加</h3>
+
+<p><code>source/stylesheets/</code>に<code>table.css</code>を追加</p>
+
+<figure class='code'><figcaption><span>table.css </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">border-style</span><span class="o">:</span><span class="k">solid</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">border-width</span><span class="o">:</span><span class="m">1px</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">border-color</span><span class="o">:</span><span class="m">#e7e3e7</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">margin</span><span class="o">:</span> <span class="m">10px</span> <span class="m">0</span> <span class="m">30px</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">th</span><span class="o">,</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">border-style</span><span class="o">:</span><span class="k">dashed</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">border-width</span><span class="o">:</span><span class="m">1px</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">border-color</span><span class="o">:</span><span class="m">#8888AA</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">th</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">border-top</span><span class="o">:</span>    <span class="m">1px</span> <span class="m">#666688</span> <span class="k">solid</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">border-bottom</span><span class="o">:</span> <span class="m">2px</span> <span class="m">#666688</span> <span class="k">solid</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">font-weight</span><span class="o">:</span><span class="k">bold</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">background-color</span><span class="o">:</span> <span class="m">#C0C0C0</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">2px</span> <span class="m">9px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">border-bottom</span><span class="o">:</span> <span class="m">1px</span> <span class="m">#666688</span> <span class="k">solid</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">background-color</span><span class="o">:</span> <span class="m">#F0F0F0</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">0</span> <span class="m">10px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">th</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="o">],</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="o">]</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">text-align</span><span class="o">:</span><span class="k">left</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">th</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="o">],</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="o">]</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">text-align</span><span class="o">:</span><span class="k">right</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">th</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="o">],</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="o">]</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">text-align</span><span class="o">:</span><span class="k">center</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>headerにcssのリンクを追加</h3>
+
+<p><code>source/_includes/head.html</code>にコードを追加</p>
+
+<figure class='code'><figcaption><span>head.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;/stylesheets/table.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>記事のMarkdownファイルにTableを書く</h3>
+
+<figure class='code'><figcaption><span>exsample.md </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">hoge</span><span class="o">|</span><span class="nt">foo</span><span class="o">|</span><span class="nt">bar</span>
+</span><span class='line'><span class="nd">:---</span><span class="o">|</span><span class="nd">:--</span><span class="o">:|</span><span class="nt">---</span><span class="o">:</span>
+</span><span class='line'><span class="nt">aa</span><span class="o">|</span><span class="nt">bb</span><span class="o">|</span><span class="nt">cc</span><span class="o">|</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以下のように自動でテーブルに変換される</p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">hoge</th>
+<th style="text-align:center;">foo</th>
+<th style="text-align:right;">bar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">aa</td>
+<td style="text-align:center;">bb</td>
+<td style="text-align:right;">cc</td>
+</tr>
+</tbody>
+</table>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MercurialとGitコマンド比較]]></title>
@@ -1109,427 +1250,6 @@ Twitterは<code>twitter_user</code>を記入してやることで 自分のツ�
 
 
 <p>表示が<code>2016年08月25日 20:15:39</code>というような表示になる。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[OctopressとGithub Pagesを使ったブログの作成]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/08/25/octopress/"/>
-    <updated>2016-08-25T15:00:37+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/08/25/octopress</id>
-    <content type="html"><![CDATA[<h2>Octopressの特徴</h2>
-
-<ul>
-<li>Octopress は jekyll を使って作るブログ構築用フレームワーク</li>
-<li>Markdown記法で書ける</li>
-<li>静的ファイル →　軽い</li>
-</ul>
-
-
-<p>今回はブログ記事そのものは <a href="https://pages.github.com/">GitHub Pages</a>にホスティングする。</p>
-
-<!-- more -->
-
-
-<h2>GitHub Pagesの特徴</h2>
-
-<ul>
-<li>GitHubが提供するホスティングサービス</li>
-<li>ウェブページをインターネット上に公開することができる。</li>
-<li>プロジェクトのウェブページをGit/GitHubのリポジトリを用いて、公開することが可能(プロジェクトの場合はプロジェクトリポジトリの gh-pages ブランチで行う)</li>
-<li>HTML,CSS, JavaScriptを配置することが出来るので、ブログだけではなくGitHub Pages だけで静的なページを作成することができる。</li>
-</ul>
-
-
-<p>今回はプロジェクトのウェブページを公開するプロジェクトサイト（Project site）ではなくユーザのウェブページを公開するユーザサイト（User site）[username].github.io
-でアクセスできるようにする。</p>
-
-<h2>Octopressのインストール</h2>
-
-<p>octopress を GitHub からクローンしてくる</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git clone git://github.com/imathis/octopress.git octopress
-</span><span class='line'>
-</span><span class='line'>Cloning into <span class="s1">&#39;octopress&#39;</span>...
-</span><span class='line'>remote: Counting objects: 5685, <span class="k">done</span>.
-</span><span class='line'>remote: Compressing objects: 100% <span class="o">(</span>2262/2262<span class="o">)</span>, <span class="k">done</span>.
-</span><span class='line'>remote: Total <span class="m">5685</span> <span class="o">(</span>delta 3247<span class="o">)</span>, reused <span class="m">5225</span> <span class="o">(</span>delta 2933<span class="o">)</span>
-</span><span class='line'>Receiving objects: 100% <span class="o">(</span>5685/5685<span class="o">)</span>, 1.21 MiB <span class="p">|</span> <span class="m">435</span> KiB/s, <span class="k">done</span>.
-</span><span class='line'>Resolving deltas: 100% <span class="o">(</span>3247/3247<span class="o">)</span>, <span class="k">done</span>.
-</span><span class='line'>
-</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>octopuress
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>必要な gem をインストールする</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">bundle</span> <span class="o">--</span><span class="n">path</span> <span class="n">vendor</span><span class="o">/</span><span class="n">bundle</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Octopressをセットアップ(<code>bundel exec rake install</code>)する前にoctpressディレクトリのRakefileを修正する。
-通常の場合そのまま<code>bundle ecec rake install</code>して問題ないがCloud9を使用いているためその後の<code>bundle exec rake preview</code>を
-実行してプレビューが見れない為の対処</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">themes_dir</span>      <span class="o">=</span> <span class="s2">&quot;.themes&quot;</span>   <span class="c1"># directory for blog files</span>
-</span><span class='line'> <span class="n">new_post_ext</span>    <span class="o">=</span> <span class="s2">&quot;markdown&quot;</span>  <span class="c1"># default new post file extension when using the new_post task</span>
-</span><span class='line'> <span class="n">new_page_ext</span>    <span class="o">=</span> <span class="s2">&quot;markdown&quot;</span>  <span class="c1"># default new page file extension when using the new_page task</span>
-</span><span class='line'><span class="o">-</span><span class="n">server_port</span>     <span class="o">=</span> <span class="s2">&quot;4000&quot;</span>      <span class="c1"># port for preview server eg. localhost:4000</span>
-</span><span class='line'><span class="o">+</span><span class="n">server_host</span>     <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;IP&#39;</span><span class="o">]</span> <span class="o">||=</span> <span class="s1">&#39;0.0.0.0&#39;</span>     <span class="c1"># server bind address for preview server</span>
-</span><span class='line'><span class="o">+</span><span class="n">server_port</span>     <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;PORT&#39;</span><span class="o">]</span> <span class="o">||=</span> <span class="s2">&quot;4000&quot;</span>      <span class="c1"># port for preview server eg. localhost:4000</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'> <span class="n">desc</span> <span class="s2">&quot;Initial setup for Octopress: copies the default theme into the path of Jekyll&#39;s generator. Rake install defaults to rake install[classic] to install a different theme run rake install[some_theme_name]&quot;</span>
-</span><span class='line'><span class="err">@@</span> <span class="o">-</span><span class="mi">78</span><span class="p">,</span><span class="mi">7</span> <span class="o">+</span><span class="mi">79</span><span class="p">,</span><span class="mi">7</span> <span class="err">@@</span> <span class="n">task</span> <span class="ss">:preview</span> <span class="k">do</span>
-</span><span class='line'>   <span class="nb">system</span> <span class="s2">&quot;compass compile --css-dir </span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/stylesheets&quot;</span> <span class="k">unless</span> <span class="no">File</span><span class="o">.</span><span class="n">exist?</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/stylesheets/screen.css&quot;</span><span class="p">)</span>
-</span><span class='line'>   <span class="n">jekyllPid</span> <span class="o">=</span> <span class="no">Process</span><span class="o">.</span><span class="n">spawn</span><span class="p">({</span><span class="s2">&quot;OCTOPRESS_ENV&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;preview&quot;</span><span class="p">},</span> <span class="s2">&quot;jekyll --auto&quot;</span><span class="p">)</span>
-</span><span class='line'>   <span class="n">compassPid</span> <span class="o">=</span> <span class="no">Process</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="s2">&quot;compass watch&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="o">-</span>  <span class="n">rackupPid</span> <span class="o">=</span> <span class="no">Process</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="s2">&quot;rackup --port </span><span class="si">#{</span><span class="n">server_port</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="o">+</span>  <span class="n">rackupPid</span> <span class="o">=</span> <span class="no">Process</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="s2">&quot;rackup --host </span><span class="si">#{</span><span class="n">server_host</span><span class="si">}</span><span class="s2"> --port </span><span class="si">#{</span><span class="n">server_port</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>   <span class="nb">trap</span><span class="p">(</span><span class="s2">&quot;INT&quot;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>     <span class="o">[</span><span class="n">jekyllPid</span><span class="p">,</span> <span class="n">compassPid</span><span class="p">,</span> <span class="n">rackupPid</span><span class="o">].</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">pid</span><span class="o">|</span> <span class="no">Process</span><span class="o">.</span><span class="n">kill</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="n">pid</span><span class="p">)</span> <span class="k">rescue</span> <span class="no">Errno</span><span class="o">::</span><span class="no">ESRCH</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Octopressをセットアップ</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">bundle</span> <span class="nb">exec</span> <span class="n">rake</span> <span class="n">install</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>プレビューする<br/>
-<code>http://localhost:4000/</code> にアクセスすると、ブログのプレビューを見ることが出来る。<br/>
-今回はCloud9をしようしているので<code>https://workspace_name-account_name.c9users.io</code>でアクセする</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">bundle</span> <span class="nb">exec</span> <span class="n">rake</span> <span class="n">preview</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><a href="https://gyazo.com/bdc0552c1f616a24f83ba55e74b21f52"><img src="https://i.gyazo.com/bdc0552c1f616a24f83ba55e74b21f52.png" alt="https://gyazo.com/bdc0552c1f616a24f83ba55e74b21f52" /></a></p>
-
-<h2>GitHubにリポジトリを作成</h2>
-
-<p>[username].github.io
-という名前でリポジトリを作る。</p>
-
-<h2>Octopress の初期設定</h2>
-
-<p><code>bundle exec rake setup_github_pages</code> タスクを実行し GitHub Pages にデプロイするファイルを生成する。<br/>
-この時、[username].github.io のように GitHub Pages のリポジトリを git か https プロトコルを指定する</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="sx">% bundle </span><span class="nb">exec</span> <span class="n">rake</span> <span class="n">setup_github_pages</span>
-</span><span class='line'>
-</span><span class='line'><span class="no">Enter</span> <span class="n">the</span> <span class="n">read</span><span class="o">/</span><span class="n">write</span> <span class="n">url</span> <span class="k">for</span> <span class="n">your</span> <span class="n">repository</span>
-</span><span class='line'><span class="p">(</span><span class="no">For</span> <span class="n">example</span><span class="p">,</span> <span class="s1">&#39;git@github.com:[username]/[username].github.io.git)</span>
-</span><span class='line'><span class="s1">           or &#39;</span><span class="ss">https</span><span class="p">:</span><span class="sr">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/[</span><span class="n">username</span><span class="o">]/[</span><span class="n">username</span><span class="o">].</span><span class="n">github</span><span class="o">.</span><span class="n">io</span><span class="s1">&#39;)</span>
-</span><span class='line'><span class="s1">Repository url: git@github.com:srym/srym.github.io.git</span>
-</span><span class='line'><span class="s1">Added remote git@github.com:srym/srym.github.io.git as origin</span>
-</span><span class='line'><span class="s1">Set origin as default remote</span>
-</span><span class='line'><span class="s1">Master branch renamed to &#39;</span><span class="n">source</span><span class="err">&#39;</span> <span class="k">for</span> <span class="n">committing</span> <span class="n">your</span> <span class="n">blog</span> <span class="n">source</span> <span class="n">files</span>
-</span><span class='line'><span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="n">_deploy</span>
-</span><span class='line'><span class="n">mkdir</span> <span class="n">_deploy</span>
-</span><span class='line'><span class="n">cd</span> <span class="n">_deploy</span>
-</span><span class='line'><span class="no">Initialized</span> <span class="n">empty</span> <span class="no">Git</span> <span class="n">repository</span> <span class="k">in</span> <span class="sr">/Users/s</span><span class="n">hiroyama</span><span class="o">/</span><span class="n">playGround</span><span class="o">/</span><span class="n">octopress</span><span class="o">/</span><span class="n">_deploy</span><span class="o">/.</span><span class="n">git</span><span class="o">/</span>
-</span><span class='line'><span class="o">[</span><span class="n">master</span> <span class="p">(</span><span class="n">root</span><span class="o">-</span><span class="n">commit</span><span class="p">)</span> <span class="n">dacfaa2</span><span class="o">]</span> <span class="no">Octopress</span> <span class="n">init</span>
-</span><span class='line'> <span class="mi">1</span> <span class="n">file</span> <span class="n">changed</span><span class="p">,</span> <span class="mi">1</span> <span class="n">insertion</span><span class="p">(</span><span class="o">+</span><span class="p">)</span>
-</span><span class='line'> <span class="n">create</span> <span class="n">mode</span> <span class="mi">100644</span> <span class="n">index</span><span class="o">.</span><span class="n">html</span>
-</span><span class='line'><span class="n">cd</span> <span class="o">-</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">---</span>
-</span><span class='line'><span class="c1">## Now you can deploy to git@github.com:srym/srym.github.io.git with `rake deploy` ##</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これによって、以下のことが行われる。</p>
-
-<ul>
-<li><code>git@github.com:[username]/[username].github.io.git</code> が <code>origin</code> <code>remote</code> として追加される</li>
-<li><code>_deploy/</code> ディレクトリがリポジトリの <code>master</code> ブランチに設定される</li>
-<li>親ディレクトリは <code>source</code> というブランチになる</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="sx">% git </span><span class="n">remote</span> <span class="o">-</span><span class="n">v</span>
-</span><span class='line'><span class="n">octopress</span>       <span class="ss">git</span><span class="p">:</span><span class="sr">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">imathis</span><span class="o">/</span><span class="n">octopress</span><span class="o">.</span><span class="n">git</span> <span class="p">(</span><span class="n">fetch</span><span class="p">)</span>
-</span><span class='line'><span class="n">octopress</span>       <span class="ss">git</span><span class="p">:</span><span class="sr">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">imathis</span><span class="o">/</span><span class="n">octopress</span><span class="o">.</span><span class="n">git</span> <span class="p">(</span><span class="n">push</span><span class="p">)</span>
-</span><span class='line'><span class="n">origin</span>          <span class="n">git</span><span class="vi">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="o">[</span><span class="n">username</span><span class="o">]/[</span><span class="n">username</span><span class="o">].</span><span class="n">github</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">git</span> <span class="p">(</span><span class="n">fetch</span><span class="p">)</span>
-</span><span class='line'><span class="n">origin</span>          <span class="n">git</span><span class="vi">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="o">[</span><span class="n">username</span><span class="o">]/[</span><span class="n">username</span><span class="o">].</span><span class="n">github</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">git</span> <span class="p">(</span><span class="n">push</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>_config.yml を編集</h3>
-
-<p>_config.ymlファイルにてブログのタイトル、サブタイトル、筆者を設定する。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># _config.yml</span>
-</span><span class='line'>
-</span><span class='line'><span class="ss">url</span><span class="p">:</span> <span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="o">[</span><span class="n">username</span><span class="o">].</span><span class="n">github</span><span class="o">.</span><span class="n">io</span>
-</span><span class='line'><span class="ss">title</span><span class="p">:</span> <span class="err">ブログのタイトル</span>
-</span><span class='line'><span class="ss">subtitle</span><span class="p">:</span> <span class="err">ブログのサブタイトル</span>
-</span><span class='line'><span class="ss">author</span><span class="p">:</span> <span class="err">筆者</span>
-</span><span class='line'><span class="ss">simple_search</span><span class="p">:</span> <span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">google</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">search</span>
-</span><span class='line'><span class="ss">description</span><span class="p">:</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>記事の投稿</h2>
-
-<h3>記事を書く</h3>
-
-<p>Rake タスクで記事のひな形が生成される。
-new_postの後には記事のタイトルを指定。英数字のみ使用可</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="sx">% bundle </span><span class="nb">exec</span> <span class="n">rake</span> <span class="n">new_post</span><span class="o">[</span><span class="n">title</span><span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">mkdir</span> <span class="o">-</span><span class="nb">p</span> <span class="n">source</span><span class="o">/</span><span class="n">_posts</span>
-</span><span class='line'><span class="no">Creating</span> <span class="kp">new</span> <span class="ss">post</span><span class="p">:</span> <span class="n">source</span><span class="o">/</span><span class="n">_posts</span><span class="o">/</span><span class="no">YYYY</span><span class="o">-</span><span class="no">MM</span><span class="o">-</span><span class="no">DD</span><span class="o">-</span><span class="n">title</span><span class="o">.</span><span class="n">markdown</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>source/_posts/YYYY-MM-DDD-title.markdown</code>というファイルが生成されるので内容をマークダウンで記述する。
-またファイル上部にはブログのメタ情報がYAML FRONT MATTERで記述されているので適宜編集する。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">source</span><span class="o">/</span>
-</span><span class='line'><span class="err">└──</span> <span class="n">_post</span><span class="o">/</span>
-</span><span class='line'>    <span class="err">└──</span> <span class="no">YYYY</span><span class="o">-</span><span class="no">MM</span><span class="o">-</span><span class="no">DD</span><span class="o">-</span><span class="n">post</span><span class="o">-</span><span class="n">title</span><span class="o">.</span><span class="n">markdown</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="nn">---</span>
-</span><span class='line'><span class="l-Scalar-Plain">layout</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">post</span>
-</span><span class='line'><span class="l-Scalar-Plain">title</span><span class="p-Indicator">:</span> <span class="s">&quot;&#39;記事のタイトル&#39;&quot;</span>
-</span><span class='line'><span class="l-Scalar-Plain">date</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">2016-08-25 00:00:00 +0900</span>
-</span><span class='line'><span class="l-Scalar-Plain">comments</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
-</span><span class='line'><span class="l-Scalar-Plain">categories</span><span class="p-Indicator">:</span>
-</span><span class='line'><span class="nn">---</span>
-</span><span class='line'><span class="l-Scalar-Plain">ここ以下に内容をマークダウンで書く</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ここで、title を日本語にすれば良い</p>
-
-<p>ブログのカテゴリ(categories)は以下のように色々な方法で指定できる。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="c1"># One category</span>
-</span><span class='line'><span class="l-Scalar-Plain">categories</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">octopress</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># Multiple categories example 1</span>
-</span><span class='line'><span class="l-Scalar-Plain">categories</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">octopress</span><span class="p-Indicator">,</span> <span class="nv">jekyll</span><span class="p-Indicator">,]</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># Multiple categories example 2</span>
-</span><span class='line'><span class="l-Scalar-Plain">categories</span><span class="p-Indicator">:</span>
-</span><span class='line'><span class="p-Indicator">-</span> <span class="l-Scalar-Plain">octopress</span>
-</span><span class='line'><span class="p-Indicator">-</span> <span class="l-Scalar-Plain">jekyll</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Github Pagesにデプロイする</h2>
-
-<h3>ページの生成</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">bundle</span> <span class="nb">exec</span> <span class="n">rake</span> <span class="n">generate</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">## Generating Site with Jekyll</span>
-</span><span class='line'>    <span class="n">write</span> <span class="n">source</span><span class="o">/</span><span class="n">stylesheets</span><span class="o">/</span><span class="n">screen</span><span class="o">.</span><span class="n">css</span>
-</span><span class='line'><span class="no">Configuration</span> <span class="ss">file</span><span class="p">:</span> <span class="sr">/home/u</span><span class="n">buntu</span><span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">octopress</span><span class="o">/</span><span class="n">_config</span><span class="o">.</span><span class="n">yml</span>
-</span><span class='line'>            <span class="ss">Source</span><span class="p">:</span> <span class="n">source</span>
-</span><span class='line'>       <span class="ss">Destination</span><span class="p">:</span> <span class="kp">public</span>
-</span><span class='line'>      <span class="no">Generating</span><span class="o">.</span><span class="n">.</span><span class="o">.</span>
-</span><span class='line'>                    <span class="n">done</span><span class="o">.</span>
-</span><span class='line'> <span class="no">Auto</span><span class="o">-</span><span class="ss">regeneration</span><span class="p">:</span> <span class="n">disabled</span><span class="o">.</span> <span class="no">Use</span> <span class="o">--</span><span class="n">watch</span> <span class="n">to</span> <span class="n">enable</span><span class="o">.</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Github Pagesにデプロイ</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">bundle</span> <span class="nb">exec</span> <span class="n">rake</span> <span class="n">deploy</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">## Deploying branch to Github Pages </span>
-</span><span class='line'><span class="c1">## Pulling any updates from Github Pages </span>
-</span><span class='line'><span class="n">cd</span> <span class="n">_deploy</span>
-</span><span class='line'><span class="no">There</span> <span class="n">is</span> <span class="n">no</span> <span class="n">tracking</span> <span class="n">information</span> <span class="k">for</span> <span class="n">the</span> <span class="n">current</span> <span class="n">branch</span><span class="o">.</span>
-</span><span class='line'><span class="no">Please</span> <span class="n">specify</span> <span class="n">which</span> <span class="n">branch</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">merge</span> <span class="n">with</span><span class="o">.</span>
-</span><span class='line'><span class="no">See</span> <span class="n">git</span><span class="o">-</span><span class="n">pull</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">details</span><span class="o">.</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">~</span><span class="err">略</span><span class="o">~</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">## Pushing generated _deploy website</span>
-</span><span class='line'><span class="no">Username</span> <span class="k">for</span> <span class="s1">&#39;https://github.com&#39;</span><span class="p">:</span> <span class="no">Github</span><span class="err">のユーザアカウントを入力</span>
-</span><span class='line'><span class="no">Password</span> <span class="k">for</span> <span class="s1">&#39;https://wivern888#gmail.com@github.com&#39;</span><span class="p">:</span> <span class="err">パスワードを入力</span>
-</span><span class='line'>
-</span><span class='line'><span class="no">Counting</span> <span class="ss">objects</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span> <span class="n">done</span><span class="o">.</span>
-</span><span class='line'><span class="no">Delta</span> <span class="n">compression</span> <span class="n">using</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">8</span> <span class="n">threads</span><span class="o">.</span>
-</span><span class='line'><span class="no">Compressing</span> <span class="ss">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">17</span><span class="o">/</span><span class="mi">17</span><span class="p">),</span> <span class="n">done</span><span class="o">.</span>
-</span><span class='line'><span class="no">Writing</span> <span class="ss">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">24</span><span class="o">/</span><span class="mi">24</span><span class="p">),</span> <span class="mi">9</span><span class="o">.</span><span class="mi">98</span> <span class="no">KiB</span> <span class="o">|</span> <span class="mi">0</span> <span class="n">bytes</span><span class="o">/</span><span class="n">s</span><span class="p">,</span> <span class="n">done</span><span class="o">.</span>
-</span><span class='line'><span class="no">Total</span> <span class="mi">24</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">11</span><span class="p">),</span> <span class="n">reused</span> <span class="mi">0</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">0</span><span class="p">)</span>
-</span><span class='line'><span class="ss">remote</span><span class="p">:</span> <span class="no">Resolving</span> <span class="ss">deltas</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">11</span><span class="o">/</span><span class="mi">11</span><span class="p">),</span> <span class="n">completed</span> <span class="n">with</span> <span class="mi">2</span> <span class="n">local</span> <span class="n">objects</span><span class="o">.</span>
-</span><span class='line'><span class="no">To</span> <span class="ss">https</span><span class="p">:</span><span class="sr">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">blackhawk888</span><span class="o">/</span><span class="n">blackhawk888</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">git</span>
-</span><span class='line'>   <span class="n">b6205ae</span><span class="o">.</span><span class="n">.f7112f2</span>  <span class="n">master</span> <span class="o">-&gt;</span> <span class="n">master</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">## Github Pages deploy complete</span>
-</span><span class='line'><span class="n">cd</span> <span class="o">-</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p> <a href="http://">http://</a>[username].github.ioにアクセスし作成したブログの記事が表示されるのを確認する。</p>
-
-<p>デプロイ時には、下記コマンドを実行するが、これによって、<code>_deploy/</code> 以下にサイトのコンテンツ一式がビルドされ、その内容が GitHub に <code>push</code> されます。
-<a href="http://">http://</a>[username].github.io/ にアクセスすると、ローカルまたはCloud9でpreview した画面と同じ内容が表示されるようになる。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">bundle</span> <span class="nb">exec</span> <span class="n">rake</span> <span class="n">generate</span>
-</span><span class='line'><span class="err">$</span> <span class="n">bundle</span> <span class="nb">exec</span> <span class="n">rake</span> <span class="n">deploy</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>また上記コマンドを別々に実行しなくても以下のコマンドでビルド及びデプロイを同時に行うことができる。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">bundle</span> <span class="nb">exec</span> <span class="n">rake</span> <span class="n">gen_deploy</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>最後に、ソースコードを管理するために、<code>source</code> ブランチも <code>push</code> しておく</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">git</span> <span class="n">add</span> <span class="o">.</span>
-</span><span class='line'><span class="err">$</span> <span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s1">&#39;message&#39;</span>
-</span><span class='line'><span class="err">$</span> <span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">source</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
 ]]></content>
   </entry>
   

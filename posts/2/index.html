@@ -10,11 +10,16 @@
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="FacebookのLikeボタン日本語化 以前外部サービス連携でFacebookボタンを追加したが[Like]、[share]と英語表記になっているので
-日本語の[いいね]、[シェア]に変更 ">
+  <meta name="description" content="Octopressのテーマを変更 今回casperというテーマに変更してみる。
+基本GithubにあるREADME.mdの手順どおりに進めればよい。 Installing 1
+2
+3
+4
+$ cd &lt;octopress directory&gt;
+$ git clone https:// &hellip;">
   
   
-  <link href="/stylesheets/data-table.css" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/table.css" rel="stylesheet" type="text/css" />
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -82,6 +87,57 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/08/28/octopress-theme/">Octopress-theme変更</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-08-28T19:09:08+00:00'><span class='date'>2016年08月28日</span> <span class='time'>19:09:08</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>Octopressのテーマを変更</h3>
+
+<p>今回casperというテーマに変更してみる。
+基本Githubにある<code>README.md</code>の手順どおりに進めればよい。</p>
+
+<h3>Installing</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd &lt;octopress directory&gt;
+</span><span class='line'>$ git clone https://github.com/jkrmr/casper .themes/casper
+</span><span class='line'>$ rake install['casper']
+</span><span class='line'>$ rake generate</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/08/28/octopress-theme/">続きを読む &raquo;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -427,50 +483,9 @@ Twitterは<code>twitter_user</code>を記入してやることで 自分のツ�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/08/25/octopress/">OctopressとGithub Pagesを使ったブログの作成</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-08-25T15:00:37+00:00'><span class='date'>2016年08月25日</span> <span class='time'>15:00:37</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Octopressの特徴</h2>
-
-<ul>
-<li>Octopress は jekyll を使って作るブログ構築用フレームワーク</li>
-<li>Markdown記法で書ける</li>
-<li>静的ファイル →　軽い</li>
-</ul>
-
-
-<p>今回はブログ記事そのものは <a href="https://pages.github.com/">GitHub Pages</a>にホスティングする。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2016/08/25/octopress/">続きを読む &raquo;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/posts/3">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -493,6 +508,10 @@ Twitterは<code>twitter_user</code>を記入してやることで 自分のツ�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/09/01/octopress-markdown-table/">Octopress-markdownでtableを作成できるようにする</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/09/01/mercurial-git/">MercurialとGitコマンド比較</a>
       </li>
     
@@ -508,19 +527,15 @@ Twitterは<code>twitter_user</code>を記入してやることで 自分のツ�
         <a href="/blog/2016/08/31/octopress-draft/">Octopress-下書きをdeployしないようにする</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/08/30/octopress-sidebar-gravatar/">Octopress-サイドバーにGravatar追加</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/git/'>git (1)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/mercurial/'>mercurial (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (17)</a></li><li><a href='/blog/categories/slack/'>slack (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/git/'>git (1)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/mercurial/'>mercurial (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (18)</a></li><li><a href='/blog/categories/slack/'>slack (1)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 103.52941176470588%'>bitbacket(1)</a> <a href='/blog/categories/git' style='font-size: 103.52941176470588%'>git(1)</a> <a href='/blog/categories/google-analytics' style='font-size: 103.52941176470588%'>google analytics(1)</a> <a href='/blog/categories/mercurial' style='font-size: 103.52941176470588%'>mercurial(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(17)</a> <a href='/blog/categories/slack' style='font-size: 103.52941176470588%'>slack(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 103.33333333333333%'>bitbacket(1)</a> <a href='/blog/categories/git' style='font-size: 103.33333333333333%'>git(1)</a> <a href='/blog/categories/google-analytics' style='font-size: 103.33333333333333%'>google analytics(1)</a> <a href='/blog/categories/mercurial' style='font-size: 103.33333333333333%'>mercurial(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(18)</a> <a href='/blog/categories/slack' style='font-size: 103.33333333333333%'>slack(1)</a> </span>
 </section>
 
 

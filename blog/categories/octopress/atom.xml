@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-09-01T11:15:01+00:00</updated>
+  <updated>2016-09-01T12:13:38+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,172 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress-markdownでtableを作成できるようにする]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/09/01/octopress-markdown-table/"/>
+    <updated>2016-09-01T17:22:02+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/09/01/octopress-markdown-table</id>
+    <content type="html"><![CDATA[<p>前回記事でMercurialとGitのコマンド比較をするためMarkdownでTableを作成したのだが、
+<code>bundle exec rake preview</code>を実行しても表が作成されない！
+調べてたらTableをMarkdownで編集できるようにする方法があったので、
+忘れないように書いておく</p>
+
+<!--more-->
+
+
+<h3>CSSファイルtable.cssの追加</h3>
+
+<p><code>source/stylesheets/</code>に<code>table.css</code>を追加</p>
+
+<p><figure class='code'><figcaption><span>table.css </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">border-style</span><span class="o">:</span><span class="k">solid</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">border-width</span><span class="o">:</span><span class="m">1px</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">border-color</span><span class="o">:</span><span class="m">#e7e3e7</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">margin</span><span class="o">:</span> <span class="m">10px</span> <span class="m">0</span> <span class="m">30px</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span><span class="nt">table</span> <span class="nt">th</span><span class="o">,</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span> <span class="p">{</span>
+</span><span class='line'><span class="k">border-style</span><span class="o">:</span><span class="k">dashed</span><span class="p">;</span>
+</span><span class='line'><span class="k">border-width</span><span class="o">:</span><span class="m">1px</span><span class="p">;</span>
+</span><span class='line'><span class="k">border-color</span><span class="o">:</span><span class="m">#8888AA</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span><span class="nt">table</span> <span class="nt">th</span> <span class="p">{</span>
+</span><span class='line'><span class="k">border-top</span><span class="o">:</span>    <span class="m">1px</span> <span class="m">#666688</span> <span class="k">solid</span><span class="p">;</span>
+</span><span class='line'><span class="k">border-bottom</span><span class="o">:</span> <span class="m">2px</span> <span class="m">#666688</span> <span class="k">solid</span><span class="p">;</span>
+</span><span class='line'><span class="k">font-weight</span><span class="o">:</span><span class="k">bold</span><span class="p">;</span>
+</span><span class='line'><span class="k">background-color</span><span class="o">:</span> <span class="m">#C0C0C0</span><span class="p">;</span>
+</span><span class='line'><span class="k">padding</span><span class="o">:</span> <span class="m">2px</span> <span class="m">9px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span><span class="nt">table</span> <span class="nt">td</span> <span class="p">{</span>
+</span><span class='line'><span class="k">border-bottom</span><span class="o">:</span> <span class="m">1px</span> <span class="m">#666688</span> <span class="k">solid</span><span class="p">;</span>
+</span><span class='line'><span class="k">background-color</span><span class="o">:</span> <span class="m">#F0F0F0</span><span class="p">;</span>
+</span><span class='line'><span class="k">padding</span><span class="o">:</span> <span class="m">0</span> <span class="m">10px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span><span class="nt">table</span> <span class="nt">th</span><span class="o">[</span><span class="nt">align</span><span class="o">=&amp;</span><span class="nt">ldquo</span><span class="o">;</span><span class="nt">left</span><span class="o">&amp;</span><span class="nt">rdquo</span><span class="o">;],</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span><span class="o">[</span><span class="nt">align</span><span class="o">=&amp;</span><span class="nt">ldquo</span><span class="o">;</span><span class="nt">left</span><span class="o">&amp;</span><span class="nt">rdquo</span><span class="o">;]</span> <span class="p">{</span>
+</span><span class='line'><span class="k">text-align</span><span class="o">:</span><span class="k">left</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span><span class="nt">table</span> <span class="nt">th</span><span class="o">[</span><span class="nt">align</span><span class="o">=&amp;</span><span class="nt">ldquo</span><span class="o">;</span><span class="nt">right</span><span class="o">&amp;</span><span class="nt">rdquo</span><span class="o">;],</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span><span class="o">[</span><span class="nt">align</span><span class="o">=&amp;</span><span class="nt">ldquo</span><span class="o">;</span><span class="nt">right</span><span class="o">&amp;</span><span class="nt">rdquo</span><span class="o">;]</span> <span class="p">{</span>
+</span><span class='line'><span class="k">text-align</span><span class="o">:</span><span class="k">right</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span><span class="nt">table</span> <span class="nt">th</span><span class="o">[</span><span class="nt">align</span><span class="o">=&amp;</span><span class="nt">ldquo</span><span class="o">;</span><span class="nt">center</span><span class="o">&amp;</span><span class="nt">rdquo</span><span class="o">;],</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span><span class="o">[</span><span class="nt">align</span><span class="o">=&amp;</span><span class="nt">ldquo</span><span class="o">;</span><span class="nt">center</span><span class="o">&amp;</span><span class="nt">rdquo</span><span class="o">;]</span> <span class="p">{</span>
+</span><span class='line'><span class="k">text-align</span><span class="o">:</span><span class="k">center</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></li>
+</ul>
+</li>
+</ul>
+
+
+<h3>headerにcssのリンクを追加</h3>
+
+<p><code>source/_includes/head.html</code>にコードを追加</p>
+
+<p><figure class='code'><figcaption><span>head.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;http://blackhawk888.github.io/stylesheets/table.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h3>記事のMarkdownファイルにTableを書く</h3>
+
+<p><figure class='code'><figcaption><span>exsample.md </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">hoge</span><span class="o">|</span><span class="nt">foo</span><span class="o">|</span><span class="nt">bar</span>
+</span><span class='line'><span class="o">:&amp;</span><span class="nt">mdash</span><span class="o">;|:&amp;</span><span class="nt">ndash</span><span class="o">;:|&amp;</span><span class="nt">mdash</span><span class="o">;:</span>
+</span><span class='line'><span class="nt">aa</span><span class="o">|</span><span class="nt">bb</span><span class="o">|</span><span class="nt">cc</span><span class="o">|</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>以下のように自動でテーブルに変換される</p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">hoge</th>
+<th style="text-align:center;">foo</th>
+<th style="text-align:right;">bar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">aa</td>
+<td style="text-align:center;">bb</td>
+<td style="text-align:right;">cc</td>
+</tr>
+</tbody>
+</table>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress-Rakefileカスタマイズ]]></title>
@@ -206,20 +372,6 @@ sharing: true</p>
 
 <p>ナビゲーションバーに新しく作成したページタイトルが表示されクリックして
 ページが遷移することを確認する。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress 記事の削除]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/08/29/octopress-post-delete/"/>
-    <updated>2016-08-29T20:21:05+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/08/29/octopress-post-delete</id>
-    <content type="html"><![CDATA[<p>該当するmarkdownファイルを削除しデプロイするだけ。<br/>
-ディレクトリの場所: <code>source/_posts/</code></p>
-
-<pre><code>$ rm source/_posts/post-title.markdown
-$ rake gen_deploy
-</code></pre>
 ]]></content>
   </entry>
   
