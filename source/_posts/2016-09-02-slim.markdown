@@ -1,0 +1,117 @@
+---
+layout: post
+title: "HTMLが高速に記述できるslimで書く"
+date: 2016-09-02 17:48:08 +0000
+comments: true
+published: true
+categories: [slim]
+---
+
+このブログはoctpressなので記事はmarkdownで書いているが、一時期静的サイトジェネレータのnanocを使ってたことがありその時にHamlで書いていたのだが
+どうにも使いにくい印象があった。  
+slimは高速に書くことができるということなので試してみる。middlemanはSlimで書くことができるのだがoctpressは書くことができるのだろうか。
+
+試した結論からいうとMarkdownと同じぐらいいやそれ以上に簡単！
+
+
+Slimeの特徴をあげると
+
+- Ruby製のテンプレートエンジン
+- 高速、軽量
+- タブによりHTMLのタグ構造を表すので、必要最低限のコードだけで良いのでコーディング時間が減る
+- 上記と関係があるがタブにより構造を表すのでインデント必須
+- デフォルトでHTMLエスケープをするので安全
+- erbに比べて、スピードが速い
+
+<!--more-->
+
+### Slimの環境
+
+Rubyのgemなので、Rubyの環境が整っていれば`gem install slim`でさくっとインストールできる。
+
+{% codeblock lang:ruby slim %}
+$ gem install slim
+Fetching: temple-0.7.7.gem (100%)
+Successfully installed temple-0.7.7
+Fetching: slim-3.0.7.gem (100%)
+Successfully installed slim-3.0.7
+2 gems installed
+{% endcodeblock %}
+
+では通常どおりHTMLを書くと。。。
+
+{% codeblock lang:html exsample.html %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>exsample</title>
+</head>
+<body>
+    <div>
+        <h1>Hoge Hoge</h1>
+        
+        <p>foo</p>
+        <p>bar</p>
+    </div>
+</body>
+</html>
+{% endcodeblock %}
+
+これをSlimで書くとこうなる
+
+{% codeblock lang:slim exsample.slim %}
+doctype html
+html
+	head
+		meta chrset="utf-8"
+		title exsample
+	body
+		#contents
+			h1 Hoge Hoge
+
+			p foo
+			p bar
+{% endcodeblock %}
+
+
+slimからhtmlへの変換は以下のコマンドを実行
+
+{% codeblock lang:ruby slim %}
+slimrb -p exsample.slim > exsample.html
+{% endcodeblock %}
+
+変換後のコードは以下のようになる
+
+{% codeblock lang:html exsample.html %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta chrset="utf-8" />
+    <title>exsample</title>
+  </head>
+  <body>
+    <div id="contents">
+      <h1>
+        Hoge Hoge
+      </h1>
+      <p>
+        foo
+      </p>
+      <p>
+        bar
+      </p>
+    </div>
+  </body>
+</html>
+{% endcodeblock %}
+
+### Slim文法
+
+- DOCTYPE宣言は`doctype html`と書く
+- HTMLから<, >, /> を除去。タグ名をそのまま書く
+- id名やclass名は、CSSのように#, .が使える。
+- ２種類のコメントがあり。
+    - / このコメントは変換後表示されない
+    - /! このコメントは変換後、HTMLコメントになる
+- 複数行に渡るテキストは｜（パイプ）の後に書く
