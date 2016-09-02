@@ -6,11 +6,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="google-site-verification" content="vY2EmWIVKKAtlat_5KCgpFUJrL4LWlUa0XZ2xv7RQ1s" />
-  <title>Category: Mercurial - Wivern Blog</title>
+  <title>Slack-googleカレンダー連携 - Wivern Blog</title>
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="Category: mercurial">
+  <meta name="description" content="Slackの外部サービス連携機能を使いgoogleカレンダーを連携させ
+自分のスケジュールをSlack上で通知されるように設定する。 連携手順 Slackログイン後、左メニュー上部にTeam名が表示されているのでそれをクリック。
+Apps &amp; Custom Integrationsを選択 &hellip;">
   
   
   <link href="/stylesheets/table.css" rel="stylesheet" type="text/css" />
@@ -21,7 +23,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blackhawk888.github.io/blog/categories/mercurial/">
+  <link rel="canonical" href="http://blackhawk888.github.io/blog/2016/09/02/slack-googlecalendar/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Wivern Blog" type="application/atom+xml">
@@ -80,35 +82,94 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Mercurial</h1>
+    
+      <h1 class="entry-title">Slack-googleカレンダー連携</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-09-02T16:13:12+00:00'><span class='date'>2016年09月02日</span> <span class='time'>16:13:12</span></time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>Slackの外部サービス連携機能を使いgoogleカレンダーを連携させ
+自分のスケジュールをSlack上で通知されるように設定する。</p>
 
-  
-  <h2>2016</h2>
-
-<article>
-  
-<h1><a href="/blog/2016/09/01/mercurial-git/">MercurialとGitコマンド比較</a></h1>
-<time datetime="2016-09-01T15:16:42+00:00" pubdate><span class='month'>Sep</span> <span class='day'>01</span> <span class='year'>2016</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/mercurial/'>mercurial</a></span>
-</footer>
+<!--more-->
 
 
-</article>
+<h3>連携手順</h3>
 
+<ol>
+<li>Slackログイン後、左メニュー上部に<code>Team</code>名が表示されているのでそれをクリック。</li>
+<li><code>Apps &amp; Custom Integrations</code>を選択</li>
+<li><code>App Directory</code>検索画面で<code>google calendar</code>を入力</li>
+<li>連携させたいSlackグループを選ぶ</li>
+<li>Googleアカウントを同期させ、通知先のチャンネルを設定(どのチャンネルにも設定でき、自分だけに通知が飛ぶようにもできる)</li>
+<li>予定の何分前に通知するか、終日で設定されている予定はいつ通知するか、1日の予定のサマリーを通知するか、1周間の予定のサマリーを通知するか等の設定項目があるが好みで設定。</li>
+<li><code>save Integration</code>をクリックし保存</li>
+<li><code>Your calendar is connected!</code>と表示されるので<code>Im done!</code>をクリックし完了</li>
+</ol>
+
+
+<p>上記の設定を行うと毎朝指定の時間に自分の1日の予定がSlack上に表示することが可能。</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">wivern</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-09-02T16:13:12+00:00'><span class='date'>2016年09月02日</span> <span class='time'>16:13:12</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/slack/'>slack</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2016/09/02/slack-googlecalendar/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2016/09/02/slack-googlecalendar/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/09/02/slack-mention/" title="Previous Post: Slack-Mention機能">&laquo; Slack-Mention機能</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>

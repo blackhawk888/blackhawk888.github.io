@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Slack | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/slack/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-09-01T22:56:54+00:00</updated>
+  <updated>2016-09-02T07:17:00+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Slack-googleカレンダー連携]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/09/02/slack-googlecalendar/"/>
+    <updated>2016-09-02T16:13:12+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/09/02/slack-googlecalendar</id>
+    <content type="html"><![CDATA[<p>Slackの外部サービス連携機能を使いgoogleカレンダーを連携させ
+自分のスケジュールをSlack上で通知されるように設定する。</p>
+
+<!--more-->
+
+
+<h3>連携手順</h3>
+
+<ol>
+<li>Slackログイン後、左メニュー上部に<code>Team</code>名が表示されているのでそれをクリック。</li>
+<li><code>Apps &amp; Custom Integrations</code>を選択</li>
+<li><code>App Directory</code>検索画面で<code>google calendar</code>を入力</li>
+<li>連携させたいSlackグループを選ぶ</li>
+<li>Googleアカウントを同期させ、通知先のチャンネルを設定(どのチャンネルにも設定でき、自分だけに通知が飛ぶようにもできる)</li>
+<li>予定の何分前に通知するか、終日で設定されている予定はいつ通知するか、1日の予定のサマリーを通知するか、1周間の予定のサマリーを通知するか等の設定項目があるが好みで設定。</li>
+<li><code>save Integration</code>をクリックし保存</li>
+<li><code>Your calendar is connected!</code>と表示されるので<code>Im done!</code>をクリックし完了</li>
+</ol>
+
+
+<p>上記の設定を行うと毎朝指定の時間に自分の1日の予定がSlack上に表示することが可能。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Slack-Mention機能]]></title>
