@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-09-02T08:52:00+00:00</updated>
+  <updated>2016-09-02T08:53:33+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -22,7 +22,7 @@
 どうにも使いにくい印象があった。<br/>
 slimは高速に書くことができるということなので試してみる。middlemanはSlimで書くことができるのだがoctpressは書くことができるのだろうか。</p>
 
-<p>試した結論からうとMarkdownと同じぐらいいやそれ以上に簡単！</p>
+<p>試した結論からいうとMarkdownと同じぐらいいやそれ以上に簡単！</p>
 
 <p>Slimeの特徴をあげると</p>
 
