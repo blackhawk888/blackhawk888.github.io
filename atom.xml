@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-09-02T07:17:00+00:00</updated>
+  <updated>2016-09-02T08:52:00+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,189 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[HTMLが高速に記述できるslimで書く]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/09/02/slim/"/>
+    <updated>2016-09-02T17:48:08+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/09/02/slim</id>
+    <content type="html"><![CDATA[<p>このブログはoctpressなので記事はmarkdownで書いているが、一時期静的サイトジェネレータのnanocを使ってたことがありその時にHamlで書いていたのだが
+どうにも使いにくい印象があった。<br/>
+slimは高速に書くことができるということなので試してみる。middlemanはSlimで書くことができるのだがoctpressは書くことができるのだろうか。</p>
+
+<p>試した結論からうとMarkdownと同じぐらいいやそれ以上に簡単！</p>
+
+<p>Slimeの特徴をあげると</p>
+
+<ul>
+<li>Ruby製のテンプレートエンジン</li>
+<li>高速、軽量</li>
+<li>タブによりHTMLのタグ構造を表すので、必要最低限のコードだけで良いのでコーディング時間が減る</li>
+<li>上記と関係があるがタブにより構造を表すのでインデント必須</li>
+<li>デフォルトでHTMLエスケープをするので安全</li>
+<li>erbに比べて、スピードが速い</li>
+</ul>
+
+
+<!--more-->
+
+
+<h3>Slimの環境</h3>
+
+<p>Rubyのgemなので、Rubyの環境が整っていれば<code>gem install slim</code>でさくっとインストールできる。</p>
+
+<figure class='code'><figcaption><span>slim </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">gem</span> <span class="n">install</span> <span class="n">slim</span>
+</span><span class='line'><span class="ss">Fetching</span><span class="p">:</span> <span class="n">temple</span><span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="n">gem</span> <span class="p">(</span><span class="mi">100</span><span class="sx">%)</span>
+</span><span class='line'><span class="sx">Successfully installed temple-0.7.7</span>
+</span><span class='line'><span class="sx">Fetching: slim-3.0.7.gem (100%)</span>
+</span><span class='line'><span class="no">Successfully</span> <span class="n">installed</span> <span class="n">slim</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">7</span>
+</span><span class='line'><span class="mi">2</span> <span class="n">gems</span> <span class="n">installed</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>では通常どおりHTMLを書くと。。。</p>
+
+<figure class='code'><figcaption><span>exsample.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;ja&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;UTF-8&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;title&gt;</span>exsample<span class="nt">&lt;/title&gt;</span>
+</span><span class='line'><span class="nt">&lt;/head&gt;</span>
+</span><span class='line'><span class="nt">&lt;body&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;h1&gt;</span>Hoge Hoge<span class="nt">&lt;/h1&gt;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nt">&lt;p&gt;</span>foo<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;p&gt;</span>bar<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これをSlimで書くとこうなる</p>
+
+<figure class='code'><figcaption><span>exsample.slim </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='slim'><span class='line'><span class="nt">doctype</span> html
+</span><span class='line'><span class="nt">html</span>
+</span><span class='line'>  <span class="nt">head</span>
+</span><span class='line'>      <span class="nt">meta</span><span class="na"> chrset</span><span class="p">=</span><span class="s2">&quot;utf-8&quot;</span>
+</span><span class='line'>      <span class="nt">title</span> exsample
+</span><span class='line'>  <span class="nt">body</span>
+</span><span class='line'>      <span class="nf">#contents</span>
+</span><span class='line'>          <span class="nt">h1</span> Hoge Hoge
+</span><span class='line'>
+</span><span class='line'>          <span class="nt">p</span> foo
+</span><span class='line'>          <span class="nt">p</span> bar
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>slimからhtmlへの変換は以下のコマンドを実行</p>
+
+<figure class='code'><figcaption><span>slim </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">slimrb</span> <span class="o">-</span><span class="nb">p</span> <span class="n">exsample</span><span class="o">.</span><span class="n">slim</span> <span class="o">&gt;</span> <span class="n">exsample</span><span class="o">.</span><span class="n">html</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>変換後のコードは以下のようになる</p>
+
+<figure class='code'><figcaption><span>exsample.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">chrset=</span><span class="s">&quot;utf-8&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;title&gt;</span>exsample<span class="nt">&lt;/title&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;contents&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;h1&gt;</span>
+</span><span class='line'>        Hoge Hoge
+</span><span class='line'>      <span class="nt">&lt;/h1&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;p&gt;</span>
+</span><span class='line'>        foo
+</span><span class='line'>      <span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;p&gt;</span>
+</span><span class='line'>        bar
+</span><span class='line'>      <span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Slim文法</h3>
+
+<ul>
+<li>DOCTYPE宣言は<code>doctype html</code>と書く</li>
+<li>HTMLから&lt;, >, /> を除去。タグ名をそのまま書く</li>
+<li>id名やclass名は、CSSのように#, .が使える。</li>
+<li>２種類のコメントがあり。
+
+<ul>
+<li>/ このコメントは変換後表示されない</li>
+<li>/! このコメントは変換後、HTMLコメントになる</li>
+</ul>
+</li>
+<li>複数行に渡るテキストは｜（パイプ）の後に書く</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Slack-googleカレンダー連携]]></title>
@@ -1207,40 +1390,6 @@ Bitbacketのアカウントも取得しているのでソースコードをBitba
 
 
 <p><img src="https://i.gyazo.com/ef6d723b6ff2a154a49890d11c3c006d.png" alt="octopress-tagcloud" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress 続きを読む(Moreタグ)の設定]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/08/26/octopress-displayonlypart/"/>
-    <updated>2016-08-26T17:16:35+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/08/26/octopress-displayonlypart</id>
-    <content type="html"><![CDATA[<h3><code>&lt;!--more--&gt;</code>タグの追加</h3>
-
-<p>ブログを表示すると公開済の記事が時系列順にタイトルと本文が全て表示されるので、
-ブログを表示した時に本文を全て表示するのではなく一部だけを表示しておき、
-全ての本文を読むには「続きを読む >>」と書かれたリンクをクリックした時に
-表示させるよう<code>&lt;!--more--&gt;</code>タグを設置する。</p>
-
-<!--more-->
-
-
-<p> <code>bundel exec rake  new_post[title]</code>で作成後、<code>source/_posts/</code>に<code>source/_posts/YYYY-MM-DDD-title.markdown</code>ファイルができ
- 記事の途中に以下を追記する。</p>
-
-<pre><code class="`ruby"> &lt;!-- more --&gt;
-</code></pre>
-
-<p> ただし上記の追記だけでは表示が<code>”Read on →“</code>になってるので<code>_config.yml</code>の<code>excerpt_link</code>を変更する。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">-</span> <span class="ss">excerpt_link</span><span class="p">:</span> <span class="s2">&quot;Read on &amp;rarr;&quot;</span>  <span class="c1"># &quot;Continue reading&quot; link text at the bottom of excerpted articles</span>
-</span><span class='line'><span class="o">+</span> <span class="ss">excerpt_link</span><span class="p">:</span> <span class="s2">&quot;続きを読む &amp;raquo;&quot;</span>  <span class="c1"># &quot;Continue reading&quot; link text at the bottom of excerpted articles</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
 ]]></content>
   </entry>
   
