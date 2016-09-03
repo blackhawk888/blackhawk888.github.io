@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-09-03T12:45:51+00:00</updated>
+  <updated>2016-09-03T12:47:42+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Octpress-画像保存先]]></title>
+    <title type="html"><![CDATA[Octopress-画像保存先]]></title>
     <link href="http://blackhawk888.github.io/blog/2016/09/03/octpress-img/"/>
     <updated>2016-09-03T21:42:43+00:00</updated>
     <id>http://blackhawk888.github.io/blog/2016/09/03/octpress-img</id>
@@ -25,9 +25,6 @@ Octopressのディレクトリ指定の仕方は<a href="http://octopress.org/do
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">img</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;[class names]&quot;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;/path/to/image&quot;</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;[width] [height] [title text [alt text]]&quot;</span> <span class="o">&gt;</span>
 </span></code></pre></td></tr></table></div></figure></p>
-
-<!--more-->
-
 
 <h3>Examples</h3>
 
@@ -41,6 +38,9 @@ Octopressのディレクトリ指定の仕方は<a href="http://octopress.org/do
 </span><span class='line'><span class="o">&lt;</span><span class="n">img</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;right &lt;a&quot;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;href=&quot;</span><span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">placekitten</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="mi">300</span><span class="o">/</span><span class="mi">500</span><span class="s2">&quot;&gt;http://placekitten.com/300/500&lt;/a&gt;&quot;</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;150&quot;</span> <span class="n">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Place Kitten #3&quot;</span> <span class="o">&gt;</span>
 </span><span class='line'><span class="o">&lt;</span><span class="n">img</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;right &lt;a&quot;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;href=&quot;</span><span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">placekitten</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="mi">300</span><span class="o">/</span><span class="mi">500</span><span class="s2">&quot;&gt;http://placekitten.com/300/500&lt;/a&gt;&quot;</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;150&quot;</span> <span class="n">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;&amp;lsquo;Place Kitten #4&amp;rsquo; &amp;lsquo;An image of a very cute kitten&amp;rsquo;&quot;</span> <span class="o">&gt;</span>
 </span></code></pre></td></tr></table></div></figure></p>
+
+<!--more-->
+
 
 <p>Octopressと同じサイト内で画像を挿入させるには、通常<code>source/images/</code>に画像を入れ、</p>
 
