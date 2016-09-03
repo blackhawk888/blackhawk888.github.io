@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-09-03T12:44:25+00:00</updated>
+  <updated>2016-09-03T12:45:51+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -25,6 +25,9 @@ Octopressのディレクトリ指定の仕方は<a href="http://octopress.org/do
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">img</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;[class names]&quot;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;/path/to/image&quot;</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;[width] [height] [title text [alt text]]&quot;</span> <span class="o">&gt;</span>
 </span></code></pre></td></tr></table></div></figure></p>
+
+<!--more-->
+
 
 <h3>Examples</h3>
 
@@ -73,9 +76,6 @@ Octopressのディレクトリ指定の仕方は<a href="http://octopress.org/do
 </span></code></pre></td></tr></table></div></figure></p>
 
 <p><img src="/images/exsample02.png" alt="exsample" /></p>
-
-<!--more-->
-
 ]]></content>
   </entry>
   
