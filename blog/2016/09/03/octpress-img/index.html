@@ -11,8 +11,7 @@
 
   
   <meta name="description" content="Octopressでこのブログを投稿するときに画像を挿入する場合はGyazoを使っていたが、
-Octopressのディレクトリ指定の仕方は公式ブログに書いてるとおり以下の設定をすればOK Syntax 1
-&lt;img class=&quot;[class names]&quot; src=& &hellip;">
+Octopressのディレクトリ指定の仕方は公式ブログに書いてるとおり以下の設定をすればOK Examples Octopressと同じサイト内で画像を挿入させるには、通常source/images/ &hellip;">
   
   
   <link href="/stylesheets/table.css" rel="stylesheet" type="text/css" />
@@ -105,38 +104,18 @@ Octopressのディレクトリ指定の仕方は公式ブログに書いてる�
 <div class="entry-content"><p>Octopressでこのブログを投稿するときに画像を挿入する場合はGyazoを使っていたが、
 Octopressのディレクトリ指定の仕方は<a href="http://octopress.org/docs/plugins/image-tag/">公式ブログ</a>に書いてるとおり以下の設定をすればOK</p>
 
-<figure class='code'><figcaption><span>Syntax </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">img</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;[class names]&quot;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;/path/to/image&quot;</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;[width] [height] [title text [alt text]]&quot;</span> <span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<p><img src="https://i.gyazo.com/edd7ead3590c7abb464947353233cf2a.png" alt="image" /></p>
 
 <h3>Examples</h3>
 
-<figure class='code'><figcaption><span>Syntax </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;http://placekitten.com/890/280&quot;</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">img</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;left&quot;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;http://placekitten.com/320/250&quot;</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Place Kitten #2&quot;</span> <span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">img</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;right&quot;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;http://placekitten.com/300/500&quot;</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;150&quot;</span> <span class="n">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Place Kitten #3&quot;</span> <span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">img</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;right&quot;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;http://placekitten.com/300/500&quot;</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;150&quot;</span> <span class="n">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Place Kitten #4&quot;</span> <span class="n">alt</span><span class="o">=</span><span class="s2">&quot;An image of a very cute kitten&quot;</span><span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
+<p><img src="https://i.gyazo.com/6bc83b2de50448c94071c7f6b8bb7d8b.png" alt="imag" /></p>
 
 <!--more-->
 
 
 <p>Octopressと同じサイト内で画像を挿入させるには、通常<code>source/images/</code>に画像を入れ、</p>
 
-<figure class='code'><figcaption><span>Syntax </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;/images/exsample.png&quot;</span><span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<p><img src="https://i.gyazo.com/2b6d41ed5f773f7a2909fa71c091046f.png" alt="image" /></p>
 
 <p><img src="/images/exsample.png" width="300" height="400">
 <img class="right" src="/images/exsample02.png" width="300" height="400"></p>
