@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-09-02T08:54:31+00:00</updated>
+  <updated>2016-09-03T12:44:25+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,78 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octpress-画像保存先]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/09/03/octpress-img/"/>
+    <updated>2016-09-03T21:42:43+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/09/03/octpress-img</id>
+    <content type="html"><![CDATA[<p>Octopressでこのブログを投稿するときに画像を挿入する場合はGyazoを使っていたが、
+Octopressのディレクトリ指定の仕方は<a href="http://octopress.org/docs/plugins/image-tag/">公式ブログ</a>に書いてるとおり以下の設定をすればOK</p>
+
+<figure class='code'><figcaption><span>Syntax </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">img</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;[class names]&quot;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;/path/to/image&quot;</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;[width] [height] [title text [alt text]]&quot;</span> <span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Examples</h3>
+
+<figure class='code'><figcaption><span>Syntax </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;http://placekitten.com/890/280&quot;</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">img</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;left&quot;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;http://placekitten.com/320/250&quot;</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Place Kitten #2&quot;</span> <span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">img</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;right&quot;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;http://placekitten.com/300/500&quot;</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;150&quot;</span> <span class="n">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Place Kitten #3&quot;</span> <span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">img</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;right&quot;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;http://placekitten.com/300/500&quot;</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;150&quot;</span> <span class="n">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Place Kitten #4&quot;</span> <span class="n">alt</span><span class="o">=</span><span class="s2">&quot;An image of a very cute kitten&quot;</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Octopressと同じサイト内で画像を挿入させるには、通常<code>source/images/</code>に画像を入れ、</p>
+
+<figure class='code'><figcaption><span>Syntax </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;/images/exsample.png&quot;</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://blackhawk888.github.io/images/exsample.png" width="300" height="400">
+<img class="right" src="http://blackhawk888.github.io/images/exsample02.png" width="300" height="400"></p>
+
+<h3>Markdown形式の場合は</h3>
+
+<figure class='code'><figcaption><span>Markdown </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">![</span><span class="n">alt</span> <span class="n">title</span><span class="o">]</span><span class="p">(</span><span class="n">image</span> <span class="no">URL</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>絶対指定をすると</p>
+
+<figure class='code'><figcaption><span>Markdown </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">![</span><span class="n">exsample</span><span class="o">]</span><span class="p">(</span><span class="ss">https</span><span class="p">:</span><span class="sr">//</span><span class="n">blackhawk888</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">exsample</span><span class="o">.</span><span class="n">png</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="https://blackhawk888.github.io/images/exsample.png" alt="exsample" /></p>
+
+<p>相対指定をすると</p>
+
+<figure class='code'><figcaption><span>Markdown </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">![</span><span class="n">exsample</span><span class="o">]</span><span class="p">(</span><span class="sr">/images/exs</span><span class="n">ample02</span><span class="o">.</span><span class="n">png</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://blackhawk888.github.io/images/exsample02.png" alt="exsample" /></p>
+
+<!--more-->
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[HTMLが高速に記述できるslimで書く]]></title>
@@ -1317,79 +1389,6 @@ Bitbacketのアカウントも取得しているのでソースコードをBitba
 <p><img src="https://i.gyazo.com/29fc1be984bb3130d74343aa94c4943b.png" alt="disqus_show_comment_count: false" /></p>
 
 <p><code>shortname</code>を後で確認したくなった場合は、Disqusで登録したサイトを選択し、右上にある<code>Setting</code>に移動すると表示される。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopressにタグクラウドとカテゴリーリストを追加する]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/08/26/octopress-category-list/"/>
-    <updated>2016-08-26T23:17:49+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/08/26/octopress-category-list</id>
-    <content type="html"><![CDATA[<h3>タグリストをサイドバーに表示させる。</h3>
-
-<p>Octopressのデフォルトのサイドメニューは<code>Recent Posts</code>のみの表示</p>
-
-<p><img src="https://i.gyazo.com/cf857d8c62f5f7564ddbd25c9c754f90.png" alt="Recent posts" /></p>
-
-<!--more-->
-
-
-<p>記事を新規投稿するときにYAML FRONT MATTERで<code>categories</code>を設定しているので、サイドメニューにCategoriesを表示させる。</p>
-
-<p>Octopress向けに公開されているプラグインを使ってサイドメニューにカテゴリーリストとタグクラウドを実装</p>
-
-<h4>tokkonopapa/octopress-tagcloud プラグイン</h4>
-
-<p><a href="https://github.com/tokkonopapa/octopress-tagcloud">https://github.com/tokkonopapa/octopress-tagcloud</a></p>
-
-<p>tokkonopapa/octopress-tagcloudのソースコードをcloneしてファイルを配布する。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone https://github.com/tokkonopapa/octopress-tagcloud.git
-</span><span class='line'>$ cp -p octopress-tagcloud/plugins/tag_cloud.rb plugins/
-</span><span class='line'>$ cp -p octopress-tagcloud/source/_includes/custom/asides/* source/_includes/custom/asides/</span></code></pre></td></tr></table></div></figure>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>.
-</span><span class='line'>├─ plugins/
-</span><span class='line'>│  └── tag_cloud.rb
-</span><span class='line'>└─ source/
-</span><span class='line'>   └─ _includes/
-</span><span class='line'>      └─ custom/
-</span><span class='line'>         └─ asides/
-</span><span class='line'>            ├─ category_list.html
-</span><span class='line'>            └─ tag_cloud.html</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>_config.yml</code>に<code>tokkonopapa/octopress-tagcloud</code> プラグインで生成する静的ファイルを
-サイドメニューのコンテンツとして使用するための設定を記述</p>
-
-<p><code>_config.yml</code>に<code>default_asides:</code>から始まる行があるが、サイドメニューに表示するHTMLファイルを配列で記述する。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>default_asides: [
-</span><span class='line'>    asides/recent_posts.html,
-</span><span class='line'>  + custom/asides/about.html,
-</span><span class='line'>  + custom/asides/tag_cloud.html
-</span><span class='line'>]</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="https://i.gyazo.com/ef6d723b6ff2a154a49890d11c3c006d.png" alt="octopress-tagcloud" /></p>
 ]]></content>
   </entry>
   

@@ -10,9 +10,9 @@
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="このブログはoctpressなので記事はmarkdownで書いているが、一時期静的サイトジェネレータのnanocを使ってたことがありその時にHamlで書いていたのだが
-どうにも使いにくい印象があった。
-slimは高速に書くことができるということなので試してみる。 &hellip;">
+  <meta name="description" content="Octopressでこのブログを投稿するときに画像を挿入する場合はGyazoを使っていたが、
+Octopressのディレクトリ指定の仕方は公式ブログに書いてるとおり以下の設定をすればOK Syntax 1
+&lt;img class=&quot;[class names]&quot; src=& &hellip;">
   
   
   <link href="/stylesheets/table.css" rel="stylesheet" type="text/css" />
@@ -83,6 +83,100 @@ slimは高速に書くことができるということなので試してみる�
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/09/03/octpress-img/">Octpress-画像保存先</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-09-03T21:42:43+00:00'><span class='date'>2016年09月03日</span> <span class='time'>21:42:43</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Octopressでこのブログを投稿するときに画像を挿入する場合はGyazoを使っていたが、
+Octopressのディレクトリ指定の仕方は<a href="http://octopress.org/docs/plugins/image-tag/">公式ブログ</a>に書いてるとおり以下の設定をすればOK</p>
+
+<figure class='code'><figcaption><span>Syntax </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">img</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;[class names]&quot;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;/path/to/image&quot;</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;[width] [height] [title text [alt text]]&quot;</span> <span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Examples</h3>
+
+<figure class='code'><figcaption><span>Syntax </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;http://placekitten.com/890/280&quot;</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">img</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;left&quot;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;http://placekitten.com/320/250&quot;</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Place Kitten #2&quot;</span> <span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">img</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;right&quot;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;http://placekitten.com/300/500&quot;</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;150&quot;</span> <span class="n">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Place Kitten #3&quot;</span> <span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">img</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;right&quot;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;http://placekitten.com/300/500&quot;</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;150&quot;</span> <span class="n">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Place Kitten #4&quot;</span> <span class="n">alt</span><span class="o">=</span><span class="s2">&quot;An image of a very cute kitten&quot;</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Octopressと同じサイト内で画像を挿入させるには、通常<code>source/images/</code>に画像を入れ、</p>
+
+<figure class='code'><figcaption><span>Syntax </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;/images/exsample.png&quot;</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/exsample.png" width="300" height="400">
+<img class="right" src="/images/exsample02.png" width="300" height="400"></p>
+
+<h3>Markdown形式の場合は</h3>
+
+<figure class='code'><figcaption><span>Markdown </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">![</span><span class="n">alt</span> <span class="n">title</span><span class="o">]</span><span class="p">(</span><span class="n">image</span> <span class="no">URL</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>絶対指定をすると</p>
+
+<figure class='code'><figcaption><span>Markdown </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">![</span><span class="n">exsample</span><span class="o">]</span><span class="p">(</span><span class="ss">https</span><span class="p">:</span><span class="sr">//</span><span class="n">blackhawk888</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">exsample</span><span class="o">.</span><span class="n">png</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="https://blackhawk888.github.io/images/exsample.png" alt="exsample" /></p>
+
+<p>相対指定をすると</p>
+
+<figure class='code'><figcaption><span>Markdown </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">![</span><span class="n">exsample</span><span class="o">]</span><span class="p">(</span><span class="sr">/images/exs</span><span class="n">ample02</span><span class="o">.</span><span class="n">png</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/exsample02.png" alt="exsample" /></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/09/03/octpress-img/">続きを読む &raquo;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -483,55 +577,6 @@ slimは高速に書くことができるということなので試してみる�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/08/30/octopress-sidebar-profile/">Octopress-サイドバーにProfile追加</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-08-30T13:23:53+00:00'><span class='date'>2016年08月30日</span> <span class='time'>13:23:53</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>デフォルトでプロフィール用のHTMLは以下の場所に作成されている。<br/>
-<code>source/_includes/custom/asides/about.html</code></p>
-
-<h3>about.htmlファイルを編集</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;section&gt;
-</span><span class='line'>  &lt;h1&gt;About Me&lt;/h1&gt;
-</span><span class='line'>  &lt;p&gt;A little something about me.&lt;/p&gt;
-</span><span class='line'>&lt;/section&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2016/08/30/octopress-sidebar-profile/">続きを読む &raquo;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -555,6 +600,10 @@ slimは高速に書くことができるということなので試してみる�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/09/03/octpress-img/">Octpress-画像保存先</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/09/02/slim/">HTMLが高速に記述できるslimで書く</a>
       </li>
     
@@ -570,19 +619,15 @@ slimは高速に書くことができるということなので試してみる�
         <a href="/blog/2016/09/01/octopress-markdown-table/">Octopress-markdownでtableを作成できるようにする</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/09/01/mercurial-git/">MercurialとGitコマンド比較</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/git/'>git (1)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/mercurial/'>mercurial (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (18)</a></li><li><a href='/blog/categories/slack/'>slack (3)</a></li><li><a href='/blog/categories/slim/'>slim (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/git/'>git (1)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/mercurial/'>mercurial (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (19)</a></li><li><a href='/blog/categories/slack/'>slack (3)</a></li><li><a href='/blog/categories/slim/'>slim (1)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 103.33333333333333%'>bitbacket(1)</a> <a href='/blog/categories/git' style='font-size: 103.33333333333333%'>git(1)</a> <a href='/blog/categories/google-analytics' style='font-size: 103.33333333333333%'>google analytics(1)</a> <a href='/blog/categories/mercurial' style='font-size: 103.33333333333333%'>mercurial(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(18)</a> <a href='/blog/categories/slack' style='font-size: 110.0%'>slack(3)</a> <a href='/blog/categories/slim' style='font-size: 103.33333333333333%'>slim(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 103.15789473684211%'>bitbacket(1)</a> <a href='/blog/categories/git' style='font-size: 103.15789473684211%'>git(1)</a> <a href='/blog/categories/google-analytics' style='font-size: 103.15789473684211%'>google analytics(1)</a> <a href='/blog/categories/mercurial' style='font-size: 103.15789473684211%'>mercurial(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(19)</a> <a href='/blog/categories/slack' style='font-size: 109.47368421052632%'>slack(3)</a> <a href='/blog/categories/slim' style='font-size: 103.15789473684211%'>slim(1)</a> </span>
 </section>
 
 
