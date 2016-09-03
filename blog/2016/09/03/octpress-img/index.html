@@ -11,7 +11,8 @@
 
   
   <meta name="description" content="Octopressでこのブログを投稿するときに画像を挿入する場合はGyazoを使っていたが、
-Octopressのディレクトリ指定の仕方は公式ブログに書いてるとおり以下の設定をすればOK Examples Octopressと同じサイト内で画像を挿入させるには、通常source/images/ &hellip;">
+Octopressのディレクトリ指定の仕方は公式ブログに書いてるとおり以下の設定をすればOK Syntax 1
+{% img [class names] /path/to/image [width] [ &hellip;">
   
   
   <link href="/stylesheets/table.css" rel="stylesheet" type="text/css" />
@@ -94,7 +95,7 @@ Octopressのディレクトリ指定の仕方は公式ブログに書いてる�
 
 
 
-<time class='entry-date' datetime='2016-09-03T21:42:43+00:00'><span class='date'>2016年09月03日</span> <span class='time'>21:42:43</span></time>
+<time class='entry-date' datetime='2016-09-03T22:30:43+00:00'><span class='date'>2016年09月03日</span> <span class='time'>22:30:43</span></time>
         
       </p>
     
@@ -104,18 +105,38 @@ Octopressのディレクトリ指定の仕方は公式ブログに書いてる�
 <div class="entry-content"><p>Octopressでこのブログを投稿するときに画像を挿入する場合はGyazoを使っていたが、
 Octopressのディレクトリ指定の仕方は<a href="http://octopress.org/docs/plugins/image-tag/">公式ブログ</a>に書いてるとおり以下の設定をすればOK</p>
 
-<p><img src="https://i.gyazo.com/edd7ead3590c7abb464947353233cf2a.png" alt="image" /></p>
+<figure class='code'><figcaption><span>Syntax </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="p">{</span><span class="o">%</span> <span class="n">img</span> <span class="o">[</span><span class="k">class</span> <span class="n">names</span><span class="o">]</span> <span class="sr">/path/</span><span class="n">to</span><span class="o">/</span><span class="n">image</span> <span class="o">[</span><span class="n">width</span><span class="o">]</span> <span class="o">[</span><span class="n">height</span><span class="o">]</span> <span class="o">[</span><span class="n">title</span> <span class="n">text</span> <span class="o">[</span><span class="n">alt</span> <span class="n">text</span><span class="o">]]</span> <span class="o">%</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>Examples</h3>
 
-<p><img src="https://i.gyazo.com/6bc83b2de50448c94071c7f6b8bb7d8b.png" alt="imag" /></p>
+<figure class='code'><figcaption><span>Syntax </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="p">{</span><span class="o">%</span> <span class="n">img</span> <span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">placekitten</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="mi">890</span><span class="o">/</span><span class="mi">280</span> <span class="sx">%}</span>
+</span><span class='line'><span class="sx">{% img left http://placekitten.com/320/250 Place Kitten #2 %}</span>
+</span><span class='line'><span class="p">{</span><span class="o">%</span> <span class="n">img</span> <span class="n">right</span> <span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">placekitten</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="mi">300</span><span class="o">/</span><span class="mi">500</span> <span class="mi">150</span> <span class="mi">250</span> <span class="no">Place</span> <span class="no">Kitten</span> <span class="c1">#3 %}</span>
+</span><span class='line'><span class="p">{</span><span class="o">%</span> <span class="n">img</span> <span class="n">right</span> <span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">placekitten</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="mi">300</span><span class="o">/</span><span class="mi">500</span> <span class="mi">150</span> <span class="mi">250</span> <span class="s1">&#39;Place Kitten #4&#39;</span> <span class="s1">&#39;An image of a very cute kitten&#39;</span> <span class="o">%</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
 
 <!--more-->
 
 
 <p>Octopressと同じサイト内で画像を挿入させるには、通常<code>source/images/</code>に画像を入れ、</p>
 
-<p><img src="https://i.gyazo.com/2b6d41ed5f773f7a2909fa71c091046f.png" alt="image" /></p>
+<figure class='code'><figcaption><span>Syntax </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="p">{</span><span class="o">%</span> <span class="n">img</span> <span class="sr">/images/exs</span><span class="n">ample</span><span class="o">.</span><span class="n">png</span> <span class="o">%</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p><img src="/images/exsample.png" width="300" height="400">
 <img class="right" src="/images/exsample02.png" width="300" height="400"></p>
@@ -162,7 +183,7 @@ Octopressのディレクトリ指定の仕方は<a href="http://octopress.org/do
 
 
 
-<time class='entry-date' datetime='2016-09-03T21:42:43+00:00'><span class='date'>2016年09月03日</span> <span class='time'>21:42:43</span></time>
+<time class='entry-date' datetime='2016-09-03T22:30:43+00:00'><span class='date'>2016年09月03日</span> <span class='time'>22:30:43</span></time>
       
 
 <span class="categories">
