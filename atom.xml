@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-09-10T00:37:31+00:00</updated>
+  <updated>2016-09-10T11:57:23+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,369 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git基本]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/09/10/git-basic/"/>
+    <updated>2016-09-10T20:54:11+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/09/10/git-basic</id>
+    <content type="html"><![CDATA[<p>gitをいつも使用しているのだが、基本<code>git add</code>して<code>git commit</code>して<code>git push</code>するのがメインでたまにしか使わないコマンドもあるので忘れないように備忘録として残しておく</p>
+
+<h2>Gitを用いた開発の流れ</h2>
+
+<p>基本的なGitの作業の流れは下記のようになる。</p>
+
+<ol>
+<li>リポジトリを作成(<code>git init</code>)、または複製(<code>git clone</code>)する</li>
+<li>ファイルの作成、編集を行う</li>
+<li>ファイルの作成/変更/削除をgitのインデックスに追加(<code>git add</code>)</li>
+<li>変更結果をローカルリポジトリにコミット(<code>git commit</code>)</li>
+<li>ローカルリポジトリをプッシュしてリモートリポジトリへ反映(<code>git push</code>)</li>
+</ol>
+
+
+<!--more-->
+
+
+<h2>ブランチを用いた開発の流れ</h2>
+
+<p>Gitを用いた開発の流れにある2,3,4をmasterブランチではなく、分岐させたブランチ内で開発していくことになる。
+分岐させたブランチ内でコミットを進め追加機能などのまとまった開発が完成すると、masterブランチに戻り、分岐させたブランチをマージして追加機能などの内容を取り取り込む。</p>
+
+<ol>
+<li>masterブランチなどを元に、ブランチを作成 (<code>git branch [new_branch_name]</code>)</li>
+<li>作成したブランチに移動 (<code>git checkout [new_branch_name]</code>)</li>
+<li>移動先のブランチで開発し、コミット</li>
+<li>ブランチでの開発が終わると、分岐元のブランチ（masterブランチ）に戻る (<code>git checkout master</code>)</li>
+<li>元のブランチに作成したブランチの内容を取り込む (<code>git merge [new_branch_name]</code>)</li>
+</ol>
+
+
+<h2>コミットを取り消す</h2>
+
+<p><code>git reset</code></p>
+
+<figure class='code'><figcaption><span>exsample </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git reset 過去のコミット
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>過去のコミットでコミットを指定して<code>git reset</code>すると、指定した過去のコミットまで戻る。<br/>
+現在のコミットから指定した過去のコミットまでのコミットは取り消される。<br/>
+コミット履歴自体を変更することになるので、注意！！</p>
+
+<p>直前のコミットを取り消したい場合は以下を実行</p>
+
+<figure class='code'><figcaption><span>exsample </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git reset HEAD^
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>オプションによってファイルの変更がどうなるかが決まる
+オプションには <code>--soft</code> と <code>--mixed</code> と <code>--hard</code> がある。</p>
+
+<ul>
+<li><code>git reset --soft 過去のコミット</code> : ファイル変更は過去に戻らないが、コミットだけ取り消される。それまでのファイル変更はインデックスに追加される。</li>
+<li><code>git reset --mixed 過去のコミッ</code> : ファイル変更は過去に戻らないが、コミットだけ取り消される。それまでのファイル変更はワーキングツリーに追加される。</li>
+<li><code>git reset --hard 過去のコミット</code> : ファイル変更も過去に戻り、コミットも取り消される。それまでのコミットは無かったことになる。</li>
+</ul>
+
+
+<p>オプションのない<code>git reset</code>は<code>--mixed</code>と同様の結果になる。。
+<code>--hard</code>を実行してしまうと、完全に取り消すことになるので注意！！</p>
+
+<h2>差分を表示</h2>
+
+<p><code>git diff</code></p>
+
+<figure class='code'><figcaption><span>exsample </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git diff
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>git diff</code> は色々なコマンドやオプションが用意されている。</p>
+
+<ul>
+<li><code>git diff</code> : ワーキングツリーとインデックスとの差分を表示</li>
+<li><code>git diff —-cached</code>: インデックスとHEADとの差分を表示</li>
+<li><code>git diff HEAD^..HEAD</code> : 直前のコミットと、その更に前のコミットの差分を表示</li>
+</ul>
+
+
+<p>HEADとは、直前のコミットのこと。 <br/>
+HEAD^とは、HEADの更に１つ前のコミットのこと。<br/>
+以下に、作業フローの中での <code>git diff</code> の使い方</p>
+
+<ol>
+<li>ファイルを更新する</li>
+<li><code>git diff</code> や <code>git status</code> で変更を確認</li>
+<li>1,2を繰り返す</li>
+<li><code>git add .</code>で更新ファイルをインデックスに追加</li>
+<li><code>git diff —-cached</code> や <code>git status</code>でこれからコミットする内容の最終チェック</li>
+<li><code>git commit -m "[commit_message]"</code> でコミット</li>
+<li><code>git diff HEAD^..HEAD</code> で直前にコミットしたもの(HEAD)と、その更に１つ前のコミット(HEAD^)の差分を見ることで、直前のコミットの差分を見ることができる。</li>
+</ol>
+
+
+<h2>ログを確認</h2>
+
+<p><code>git log</code></p>
+
+<figure class='code'><figcaption><span>exsample </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git log
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>git log</code> には便利なオプションがいくつかある。<br/>
+よく使われるのは &ndash;stat オプション</p>
+
+<figure class='code'><figcaption><span>exsample </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git log --stat
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>実行すると、コミットメッセージに加えて、何のファイルがどの程度増減したかも表示される。<br/>
+また、いくつかオプションを組み合わせて実行することで、コミットログが視覚的に把握しやすくなる。</p>
+
+<figure class='code'><figcaption><span>exsample </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git log --graph --decorate --oneline
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>ブランチに関するコマンド</h2>
+
+<p><code>git branch</code>, <code>git checkout</code></p>
+
+<h3>ブランチ作成</h3>
+
+<figure class='code'><figcaption><span>exsample </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git branch <span class="o">[</span>branch_name<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>ブランチ移動</h3>
+
+<figure class='code'><figcaption><span>exsample </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git checkout <span class="o">[</span>branch_name<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ブランチを作成したら、そのブランチに移動<br/>
+また、<code>-b</code> オプションを付与すると、ブランチの作成と移動を一度にすることが可能</p>
+
+<figure class='code'><figcaption><span>exsample </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git checkout -b <span class="o">[</span>blanch_name<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>ブランチ一覧表示</h3>
+
+<figure class='code'><figcaption><span>exsample </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git branch
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ブランチの一覧を表示すると * master などブランチ名の前に*がついているものがある。<br/>
+これが現在のブランチ</p>
+
+<p><code>-a</code>オプションを付与すると、登録したリモートリポジトリを含めた全てのブランチの一覧を表示</p>
+
+<figure class='code'><figcaption><span>exsample </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git branch -a
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>ブランチ削除</h3>
+
+<figure class='code'><figcaption><span>exsample </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git branch -d <span class="o">[</span>branch_name<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ブランチが増えてくると煩雑になるので、役目を終えたブランチを削除するようにする。</p>
+
+<h2>ブランチを取り込む</h2>
+
+<p><code>git merge</code>コマンドの注意すべきこと</p>
+
+<ul>
+<li>指定したブランチは影響を受けない</li>
+<li>現在のブランチに、指定したブランチのコミット履歴分を取り込む</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>exsample </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git checkout master
+</span><span class='line'><span class="nv">$ </span>git merge <span class="o">[</span>branch_name<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上記の場合、<code>git checkout master</code>としているので、現在のブランチ<code>はmaster</code><br/>
+次のマージコマンドでは、[branch_name]のコミット履歴分が、現在のブランチであるmasterに取り込まれる。<br/>
+したがって、[branch_name]のブランチに影響はないが、<code>master</code>のコミット履歴は更新される。</p>
+
+<h3>merge後のコンフリクト</h3>
+
+<p>コンフリクトの解消と再マージ</p>
+
+<p>コンフリクトがおきたファイルを開くと、&lt;&lt;&lt; HEAD, ===, >>> XXXといった形でコンフリクト箇所が示される<br/>
+コンフリクトが起きている箇所を修正し、保存。<br/>
+次に、<code>git add [file_name]</code> でコンフリクトした[file_name]をインデックスに追加<br/>
+次に、<code>git commit -m [commit_message]</code> でコミット</p>
+
+<h2>リモートコマンド</h2>
+
+<p><code>git clone</code></p>
+
+<p><code>git clone</code>コマンドは、公開されているリポジトリをローカルに複製するコマンド</p>
+
+<figure class='code'><figcaption><span>exsample </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git clone <span class="o">[</span>remote repository<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>リモートリポジトリ方式</h3>
+
+<p>リモートリポジトリをクローンする際に必要なリモートリポジトリの入力には2種類がある。</p>
+
+<ul>
+<li>HTTPS方式</li>
+<li>SSH方式</li>
+</ul>
+
+
+<p>GitHubの場合
+（ ユーザ名 にはGitHubのユーザ名、リポジトリ名 にはGitHubのリポジトリ名を入力）</p>
+
+<ul>
+<li>HTTPS方式でクローン
+
+<ul>
+<li><code>git clone https://github.com/[user_name]/[repository_name].git</code></li>
+</ul>
+</li>
+<li>SSH方式でクローン
+
+<ul>
+<li><code>git clone git@github.com:[user_name]/[repository_name].git</code></li>
+</ul>
+</li>
+</ul>
+
+
+<h3>リモートリポジトリを操作</h3>
+
+<p><code>git remote</code>コマンドはリモートリポジトリの登録や確認を行うコマンド</p>
+
+<p>ローカルリポジトリにリモートリポジトリを登録<br/>
+<code>git pull</code> や <code>git push</code> などリモートリポジトリと通信する場合に必要な登録</p>
+
+<figure class='code'><figcaption><span>exsample </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git remote add 登録名 <span class="o">[</span>remote repository<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>登録名には慣習がある。</p>
+
+<ul>
+<li>自分が管理しているリモートリポジトリの場合は、 <code>origin</code></li>
+<li>他人が管理しているリモートリポジトリの場合は、 <code>upstream</code></li>
+</ul>
+
+
+<figure class='code'><figcaption><span>exsample </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git remote add origin https://github.com/<span class="o">[</span>user_name<span class="o">]</span>/<span class="o">[</span>repository_name<span class="o">]</span>.git
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>初めに一度行えば、今後はリモートリポジトリを <code>origin</code> や <code>upstream</code>として扱える。</p>
+
+<h3>登録されているリモートリポジトリ一覧表示</h3>
+
+<p><code>-v</code> オプションをつけることで登録したリモートリポジトリの詳細を表示することが可能</p>
+
+<figure class='code'><figcaption><span>exsample </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git remote -v
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>リモートリポジトリの登録削除</h3>
+
+<figure class='code'><figcaption><span>exsample </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git remote rm <span class="o">[</span>repository_name<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ローカルリポジトリにあるリモートリポジトリの登録を削除するだけ。<br/>
+リモートリポジトリ自体が削除されるわけではない。</p>
+
+<h3>リモートリポジトリへ変更を反映(</h3>
+
+<p><code>git push</code>コマンドは、ローカルリポジトリのコミット履歴をリモートリポジトリに反映させるコマンド</p>
+
+<figure class='code'><figcaption><span>exsample </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git push 登録名 <span class="o">[</span>branch_name<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>登録名で登録されているリモートリポジトリに向けて、[branch_name]で指定したブランチがプッシュされる。</p>
+
+<p>ローカルリポジトリのmasterブランチの更新を、リモートリポジトリのmasterにマージするコマンド</p>
+
+<figure class='code'><figcaption><span>exsample </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git push origin master
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>リモートリポジトリの変更を取り込む</h3>
+
+<p><code>git pull</code>コマンドは、指定したリモートリポジトリの更新分をマージする。
+プルはリモートリポジトリのブランチからローカルリポジトリのブランチにマージする。</p>
+
+<p>他人がプッシュした変更分を定期的に取り込んでいかなければ、自分のローカルリポジトリはリモートリポジトリに対して遅れを取ることになり、開発を進められなくなる。</p>
+
+<figure class='code'><figcaption><span>exsample </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git pull 登録名 <span class="o">[</span>branch_name<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>自分が管理しているリモートリポジトリからmasterブランチの更新を、ローカルリポジトリのmasterにマージするコマンド</p>
+
+<figure class='code'><figcaption><span>exsample </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git checkout master
+</span><span class='line'><span class="nv">$ </span>git pull origin master
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>プルでもコンフリクトが起こる場合がある。<br/>
+また、<code>pull</code>コマンドでは自分のコードと他人のコードがマージされる。<br/>
+まずは取り込むだけにしたい場合は、<code>fetch</code>コマンドを実行。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[CSSスタイル適用順序]]></title>
@@ -2132,54 +2495,6 @@ slimは高速に書くことができるということなので試してみる�
 
 <p><strong>変更後</strong>
 <img src="https://i.gyazo.com/209f66e232354b53fefa332f6e394dc8.png" alt="Facebook いいね" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[OctopressをGitHubのProject Pageで作成]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/08/28/octopress-projectpage-ghpages/"/>
-    <updated>2016-08-28T14:56:55+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/08/28/octopress-projectpage-ghpages</id>
-    <content type="html"><![CDATA[<h3>Project Page (gh-pages) にデプロイする場合</h3>
-
-<p>Github Pagesでサイトを公開する場合は<code>[username].github.io</code>というリポジトリを作成し、
-デプロイすることで<code>https://[username].github.io</code>でアクセスすることができるが、任意のリポジトリを作成し、
-Project Page(gh-pages)にデプロイすることもできる。</p>
-
-<!--more -->
-
-
-<p>ユーザのウェブページを公開するユーザサイト（User site）[username].github.io でアクセスとの違いは、
-URlが<code>https://[username].github.io/[repository_name/]</code>になることと
-<code>[username].github.io</code> リポジトリのときとは異なり、<code>_deploy/</code> ディレクトリは <code>gh-pages</code> ブランチに設定される。</p>
-
-<p>Octopressのインストールは以前書いたとおり<code>git clone</code>するだけ。<br/>
-あとは必要な<code>gem</code>を<code>bundle --path vendor/bunde</code>、<code>bundel exec rake install</code>でインストール。</p>
-
-<p>事前にGithubでリポジトリを作成しておく。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake setup_github_pages
-</span><span class='line'>Repository url: git@github.com:[username]/[username].github.io.git</span></code></pre></td></tr></table></div></figure>
-
-
-<p>上記によって、以下のことが行われる。</p>
-
-<ul>
-<li><code>git@github.com:[username]/[username].github.io.git</code> が <code>origin remote</code> として追加される</li>
-<li><code>_deploy/</code> ディレクトリがリポジトリの <code>gh-pages</code> ブランチに設定される</li>
-<li>親ディレクトリは <code>source</code> ブランチになる</li>
-</ul>
-
-
-<p>ソースコードを管理するため、remote のリポジトリURLを設定</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ git remote add origin git@github.com:[username]/[repository_name].git 
-</span><span class='line'>$ git config branch.master.remote origin</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   

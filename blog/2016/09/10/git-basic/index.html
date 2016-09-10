@@ -1,24 +1,106 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Git | Wivern Blog]]></title>
-  <link href="http://blackhawk888.github.io/blog/categories/git/atom.xml" rel="self"/>
-  <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-09-10T11:57:23+00:00</updated>
-  <id>http://blackhawk888.github.io/</id>
-  <author>
-    <name><![CDATA[wivern]]></name>
-    
-  </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="vY2EmWIVKKAtlat_5KCgpFUJrL4LWlUa0XZ2xv7RQ1s" />
+  <title>Git基本 - Wivern Blog</title>
+  <meta name="author" content="wivern">
 
   
-  <entry>
-    <title type="html"><![CDATA[Git基本]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/09/10/git-basic/"/>
-    <updated>2016-09-10T20:54:11+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/09/10/git-basic</id>
-    <content type="html"><![CDATA[<p>gitをいつも使用しているのだが、基本<code>git add</code>して<code>git commit</code>して<code>git push</code>するのがメインでたまにしか使わないコマンドもあるので忘れないように備忘録として残しておく</p>
+  <meta name="description" content="gitをいつも使用しているのだが、基本git addしてgit commitしてgit pushするのがメインでたまにしか使わないコマンドもあるので忘れないように備忘録として残しておく Gitを用いた開発の流れ 基本的なGitの作業の流れは下記のようになる。 リポジトリを作成(git init)、 &hellip;">
+  
+  
+  <link href="/stylesheets/table.css" rel="stylesheet" type="text/css" />
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blackhawk888.github.io/blog/2016/09/10/git-basic/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Wivern Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-83193160-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Wivern Blog</a></h1>
+  
+    <h2>Personal-Tech memorandum</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="blackhawk888.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Git基本</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-09-10T20:54:11+00:00'><span class='date'>2016年09月10日</span> <span class='time'>20:54:11</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>gitをいつも使用しているのだが、基本<code>git add</code>して<code>git commit</code>して<code>git push</code>するのがメインでたまにしか使わないコマンドもあるので忘れないように備忘録として残しておく</p>
 
 <h2>Gitを用いた開発の流れ</h2>
 
@@ -54,10 +136,11 @@
 
 <p><code>git reset</code></p>
 
-<p><figure class='code'><figcaption><span>exsample </span></figcaption>
+<figure class='code'><figcaption><span>exsample </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git reset 過去のコミット
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>過去のコミットでコミットを指定して<code>git reset</code>すると、指定した過去のコミットまで戻る。<br/>
 現在のコミットから指定した過去のコミットまでのコミットは取り消される。<br/>
@@ -65,10 +148,11 @@
 
 <p>直前のコミットを取り消したい場合は以下を実行</p>
 
-<p><figure class='code'><figcaption><span>exsample </span></figcaption>
+<figure class='code'><figcaption><span>exsample </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git reset HEAD^
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>オプションによってファイルの変更がどうなるかが決まる
 オプションには <code>--soft</code> と <code>--mixed</code> と <code>--hard</code> がある。</p>
@@ -87,10 +171,11 @@
 
 <p><code>git diff</code></p>
 
-<p><figure class='code'><figcaption><span>exsample </span></figcaption>
+<figure class='code'><figcaption><span>exsample </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git diff
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p><code>git diff</code> は色々なコマンドやオプションが用意されている。</p>
 
@@ -120,26 +205,29 @@ HEAD^とは、HEADの更に１つ前のコミットのこと。<br/>
 
 <p><code>git log</code></p>
 
-<p><figure class='code'><figcaption><span>exsample </span></figcaption>
+<figure class='code'><figcaption><span>exsample </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git log
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p><code>git log</code> には便利なオプションがいくつかある。<br/>
 よく使われるのは &ndash;stat オプション</p>
 
-<p><figure class='code'><figcaption><span>exsample </span></figcaption>
+<figure class='code'><figcaption><span>exsample </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git log <span class="p">&amp;</span>ndash<span class="p">;</span>stat
-</span></code></pre></td></tr></table></div></figure></p>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git log --stat
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>実行すると、コミットメッセージに加えて、何のファイルがどの程度増減したかも表示される。<br/>
 また、いくつかオプションを組み合わせて実行することで、コミットログが視覚的に把握しやすくなる。</p>
 
-<p><figure class='code'><figcaption><span>exsample </span></figcaption>
+<figure class='code'><figcaption><span>exsample </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git log <span class="p">&amp;</span>ndash<span class="p">;</span>graph <span class="p">&amp;</span>ndash<span class="p">;</span>decorate <span class="p">&amp;</span>ndash<span class="p">;</span>oneline
-</span></code></pre></td></tr></table></div></figure></p>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git log --graph --decorate --oneline
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h2>ブランチに関するコマンド</h2>
 
@@ -147,49 +235,55 @@ HEAD^とは、HEADの更に１つ前のコミットのこと。<br/>
 
 <h3>ブランチ作成</h3>
 
-<p><figure class='code'><figcaption><span>exsample </span></figcaption>
+<figure class='code'><figcaption><span>exsample </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git branch <span class="o">[</span>branch_name<span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>ブランチ移動</h3>
 
-<p><figure class='code'><figcaption><span>exsample </span></figcaption>
+<figure class='code'><figcaption><span>exsample </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git checkout <span class="o">[</span>branch_name<span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>ブランチを作成したら、そのブランチに移動<br/>
 また、<code>-b</code> オプションを付与すると、ブランチの作成と移動を一度にすることが可能</p>
 
-<p><figure class='code'><figcaption><span>exsample </span></figcaption>
+<figure class='code'><figcaption><span>exsample </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git checkout -b <span class="o">[</span>blanch_name<span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>ブランチ一覧表示</h3>
 
-<p><figure class='code'><figcaption><span>exsample </span></figcaption>
+<figure class='code'><figcaption><span>exsample </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git branch
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>ブランチの一覧を表示すると * master などブランチ名の前に*がついているものがある。<br/>
 これが現在のブランチ</p>
 
 <p><code>-a</code>オプションを付与すると、登録したリモートリポジトリを含めた全てのブランチの一覧を表示</p>
 
-<p><figure class='code'><figcaption><span>exsample </span></figcaption>
+<figure class='code'><figcaption><span>exsample </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git branch -a
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>ブランチ削除</h3>
 
-<p><figure class='code'><figcaption><span>exsample </span></figcaption>
+<figure class='code'><figcaption><span>exsample </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git branch -d <span class="o">[</span>branch_name<span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>ブランチが増えてくると煩雑になるので、役目を終えたブランチを削除するようにする。</p>
 
@@ -203,12 +297,13 @@ HEAD^とは、HEADの更に１つ前のコミットのこと。<br/>
 </ul>
 
 
-<p><figure class='code'><figcaption><span>exsample </span></figcaption>
+<figure class='code'><figcaption><span>exsample </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git checkout master
 </span><span class='line'><span class="nv">$ </span>git merge <span class="o">[</span>branch_name<span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>上記の場合、<code>git checkout master</code>としているので、現在のブランチ<code>はmaster</code><br/>
 次のマージコマンドでは、[branch_name]のコミット履歴分が、現在のブランチであるmasterに取り込まれる。<br/>
@@ -229,10 +324,11 @@ HEAD^とは、HEADの更に１つ前のコミットのこと。<br/>
 
 <p><code>git clone</code>コマンドは、公開されているリポジトリをローカルに複製するコマンド</p>
 
-<p><figure class='code'><figcaption><span>exsample </span></figcaption>
+<figure class='code'><figcaption><span>exsample </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git clone <span class="o">[</span>remote repository<span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>リモートリポジトリ方式</h3>
 
@@ -270,10 +366,11 @@ HEAD^とは、HEADの更に１つ前のコミットのこと。<br/>
 <p>ローカルリポジトリにリモートリポジトリを登録<br/>
 <code>git pull</code> や <code>git push</code> などリモートリポジトリと通信する場合に必要な登録</p>
 
-<p><figure class='code'><figcaption><span>exsample </span></figcaption>
+<figure class='code'><figcaption><span>exsample </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git remote add 登録名 <span class="o">[</span>remote repository<span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>登録名には慣習がある。</p>
 
@@ -283,10 +380,11 @@ HEAD^とは、HEADの更に１つ前のコミットのこと。<br/>
 </ul>
 
 
-<p><figure class='code'><figcaption><span>exsample </span></figcaption>
+<figure class='code'><figcaption><span>exsample </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git remote add origin &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/&quot;</span>&gt;https://github.com/&lt;/a&gt;<span class="o">[</span>user_name<span class="o">]</span>/<span class="o">[</span>repository_name<span class="o">]</span>.git
-</span></code></pre></td></tr></table></div></figure></p>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git remote add origin https://github.com/<span class="o">[</span>user_name<span class="o">]</span>/<span class="o">[</span>repository_name<span class="o">]</span>.git
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>初めに一度行えば、今後はリモートリポジトリを <code>origin</code> や <code>upstream</code>として扱える。</p>
 
@@ -294,17 +392,19 @@ HEAD^とは、HEADの更に１つ前のコミットのこと。<br/>
 
 <p><code>-v</code> オプションをつけることで登録したリモートリポジトリの詳細を表示することが可能</p>
 
-<p><figure class='code'><figcaption><span>exsample </span></figcaption>
+<figure class='code'><figcaption><span>exsample </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git remote -v
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>リモートリポジトリの登録削除</h3>
 
-<p><figure class='code'><figcaption><span>exsample </span></figcaption>
+<figure class='code'><figcaption><span>exsample </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git remote rm <span class="o">[</span>repository_name<span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>ローカルリポジトリにあるリモートリポジトリの登録を削除するだけ。<br/>
 リモートリポジトリ自体が削除されるわけではない。</p>
@@ -313,19 +413,21 @@ HEAD^とは、HEADの更に１つ前のコミットのこと。<br/>
 
 <p><code>git push</code>コマンドは、ローカルリポジトリのコミット履歴をリモートリポジトリに反映させるコマンド</p>
 
-<p><figure class='code'><figcaption><span>exsample </span></figcaption>
+<figure class='code'><figcaption><span>exsample </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git push 登録名 <span class="o">[</span>branch_name<span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>登録名で登録されているリモートリポジトリに向けて、[branch_name]で指定したブランチがプッシュされる。</p>
 
 <p>ローカルリポジトリのmasterブランチの更新を、リモートリポジトリのmasterにマージするコマンド</p>
 
-<p><figure class='code'><figcaption><span>exsample </span></figcaption>
+<figure class='code'><figcaption><span>exsample </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git push origin master
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>リモートリポジトリの変更を取り込む</h3>
 
@@ -334,125 +436,175 @@ HEAD^とは、HEADの更に１つ前のコミットのこと。<br/>
 
 <p>他人がプッシュした変更分を定期的に取り込んでいかなければ、自分のローカルリポジトリはリモートリポジトリに対して遅れを取ることになり、開発を進められなくなる。</p>
 
-<p><figure class='code'><figcaption><span>exsample </span></figcaption>
+<figure class='code'><figcaption><span>exsample </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git pull 登録名 <span class="o">[</span>branch_name<span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>自分が管理しているリモートリポジトリからmasterブランチの更新を、ローカルリポジトリのmasterにマージするコマンド</p>
 
-<p><figure class='code'><figcaption><span>exsample </span></figcaption>
+<figure class='code'><figcaption><span>exsample </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git checkout master
 </span><span class='line'><span class="nv">$ </span>git pull origin master
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>プルでもコンフリクトが起こる場合がある。<br/>
 また、<code>pull</code>コマンドでは自分のコードと他人のコードがマージされる。<br/>
 まずは取り込むだけにしたい場合は、<code>fetch</code>コマンドを実行。</p>
-]]></content>
-  </entry>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
   
-  <entry>
-    <title type="html"><![CDATA[MercurialとGitコマンド比較]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/09/01/mercurial-git/"/>
-    <updated>2016-09-01T15:16:42+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/09/01/mercurial-git</id>
-    <content type="html"><![CDATA[<p>gitはいつも使っているのだが、他のVCSとしてSubversion、Bazaar、Mercurialとあるが、
-最近Mercurialが気になっていてコマンドの違いを比較してみた。</p>
 
-<p>gitとMercurial の特徴は以下のとおり</p>
+<span class="byline author vcard">Posted by <span class="fn">wivern</span></span>
 
-<!--more-->
+      
 
 
-<h3>Mercurial の特徴</h3>
-
-<ul>
-<li>クロスプラットフォームの分散型バージョン管理システム</li>
-<li>ライセンスはGPL v2</li>
-<li>高度なブランチ機能とマージ機能がある。</li>
-<li>Webインターフェイスもある。</li>
-<li>他のバージョン管理システムで管理されたソースコードを取り込む機能がある。</li>
-</ul>
 
 
-<h3>Git の特徴</h3>
+<time class='entry-date' datetime='2016-09-10T20:54:11+00:00'><span class='date'>2016年09月10日</span> <span class='time'>20:54:11</span></time>
+      
 
-<ul>
-<li>分散型バージョン管理システム</li>
-<li>ライセンスはGPL v2</li>
-<li>中央サーバへのアクセスが不可能な状態であってもリビジョン間の履歴を調査することができる。</li>
-</ul>
-
-
-<table>
-<thead>
-<tr>
-<th style="text-align:left;"> Mercurial </th>
-<th style="text-align:left;"> Git </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;"> hg add </td>
-<td style="text-align:left;"> git add </td>
-</tr>
-<tr>
-<td style="text-align:left;"> hg blame </td>
-<td style="text-align:left;"> git blame </td>
-</tr>
-<tr>
-<td style="text-align:left;"> hg cat </td>
-<td style="text-align:left;"> git show </td>
-</tr>
-<tr>
-<td style="text-align:left;"> hg clone </td>
-<td style="text-align:left;">git clone </td>
-</tr>
-<tr>
-<td style="text-align:left;"> hg commit ; hg push </td>
-<td style="text-align:left;"> git commit -a ; git push </td>
-</tr>
-<tr>
-<td style="text-align:left;"> hg remove </td>
-<td style="text-align:left;"> git rm</td>
-</tr>
-<tr>
-<td style="text-align:left;"> hg diff </td>
-<td style="text-align:left;"> git diff, git diff –cached </td>
-</tr>
-<tr>
-<td style="text-align:left;"> hg help </td>
-<td style="text-align:left;"> git help </td>
-</tr>
-<tr>
-<td style="text-align:left;"> hg log </td>
-<td style="text-align:left;"> git log </td>
-</tr>
-<tr>
-<td style="text-align:left;"> hg revert </td>
-<td style="text-align:left;"> git checkout -f </td>
-</tr>
-<tr>
-<td style="text-align:left;"> hg status </td>
-<td style="text-align:left;"> git status </td>
-</tr>
-<tr>
-<td style="text-align:left;"> hg pull –update </td>
-<td style="text-align:left;"> git pull </td>
-</tr>
-<tr>
-<td style="text-align:left;"> hg move/rename </td>
-<td style="text-align:left;"> git mv </td>
-</tr>
-</tbody>
-</table>
-
-
-<p>Subversion のものにとても似ているようなので、その2つのツール間の移行を容易にしていると思われる。</p>
-]]></content>
-  </entry>
+<span class="categories">
   
-</feed>
+    <a class='category' href='/blog/categories/git/'>git</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2016/09/10/git-basic/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2016/09/10/git-basic/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/09/10/css-style-application-order/" title="Previous Post: CSSスタイル適用順序">&laquo; CSSスタイル適用順序</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Profile</h1>
+  
+    <img src="http://www.gravatar.com/avatar/d193dda398c5fa836f1d8007d64be8de" alt="Gravatar of wivern" title="Gravatar of wivern" align="left" style="margin-right:10px;" />
+  
+  <p>Author: Wivern</p>
+  <p>Profession: ネットワーク、サーバエンジニア</p>
+  <br clear="left">
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/09/10/git-basic/">Git基本</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/09/10/css-style-application-order/">CSSスタイル適用順序</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/09/10/css-combination/">CSSセレクタの組み合わせ</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/09/08/bootstrap-basic/">Bootstrapの基本</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/09/03/octpress-img/">Octopress-画像保存先</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/bootstrap/'>bootstrap (1)</a></li><li><a href='/blog/categories/css/'>css (2)</a></li><li><a href='/blog/categories/git/'>git (2)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/mercurial/'>mercurial (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (19)</a></li><li><a href='/blog/categories/slack/'>slack (3)</a></li><li><a href='/blog/categories/slim/'>slim (1)</a></li></ul>
+</section>
+<section>
+  <h1>Tag Cloud</h1>
+    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 103.15789473684211%'>bitbacket(1)</a> <a href='/blog/categories/bootstrap' style='font-size: 103.15789473684211%'>bootstrap(1)</a> <a href='/blog/categories/css' style='font-size: 106.3157894736842%'>css(2)</a> <a href='/blog/categories/git' style='font-size: 106.3157894736842%'>git(2)</a> <a href='/blog/categories/google-analytics' style='font-size: 103.15789473684211%'>google analytics(1)</a> <a href='/blog/categories/mercurial' style='font-size: 103.15789473684211%'>mercurial(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(19)</a> <a href='/blog/categories/slack' style='font-size: 109.47368421052632%'>slack(3)</a> <a href='/blog/categories/slim' style='font-size: 103.15789473684211%'>slim(1)</a> </span>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - wivern -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/ja_JP/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
