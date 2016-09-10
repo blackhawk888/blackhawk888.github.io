@@ -10,7 +10,9 @@
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="CSSを久しぶりに書いて見るとCSSの組み合わせを忘れていたのでメモ。 ">
+  <meta name="description" content="今までは漠然と以下の感じと思っていた 基本的に 下に書かれたものが優先
+CSSはより 詳細なセレクタのほうが優先
+詳細なセレクタはできるだけ下に書くようにする 考え方は間違ってはいないと思うが、詳細を調べたのでメモとして残しておく。 ">
   
   
   <link href="/stylesheets/table.css" rel="stylesheet" type="text/css" />
@@ -81,6 +83,49 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/09/10/css-style-application-order/">CSSスタイル適用順序</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-09-10T09:35:59+00:00'><span class='date'>2016年09月10日</span> <span class='time'>09:35:59</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今までは漠然と以下の感じと思っていた</p>
+
+<ul>
+<li>基本的に 下に書かれたものが優先</li>
+<li>CSSはより 詳細なセレクタのほうが優先</li>
+<li>詳細なセレクタはできるだけ下に書くようにする</li>
+</ul>
+
+
+<p>考え方は間違ってはいないと思うが、詳細を調べたのでメモとして残しておく。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/09/10/css-style-application-order/">続きを読む &raquo;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -455,70 +500,6 @@ slimは高速に書くことができるということなので試してみる�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/08/31/octopress-edit-rakefile/">Octopress-Rakefileカスタマイズ</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-08-31T19:06:16+00:00'><span class='date'>2016年08月31日</span> <span class='time'>19:06:16</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>新規作成時<code>bundle exec rake new_post[title]</code>に前回書いた<code>published</code>や<code>&lt;--more--&gt;</code>タグが初期値として
-入ってくれたらよいと思うので<code>Rakefile</code>を修正する。
-115行目あたりにかいてある。</p>
-
-<figure class='code'><figcaption><span>Rakefile </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;---&quot;</span>
-</span><span class='line'><span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;layout: post&quot;</span>
-</span><span class='line'><span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;title: </span><span class="se">\&quot;</span><span class="si">#{</span><span class="n">title</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/&amp;/</span><span class="p">,</span><span class="s1">&#39;&amp;amp;&#39;</span><span class="p">)</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
-</span><span class='line'><span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;date: </span><span class="si">#{</span><span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-%d %H:%M:%S %z&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'><span class="o">+</span> <span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;author: [author]&quot;</span>
-</span><span class='line'><span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;comments: true&quot;</span>
-</span><span class='line'><span class="o">+</span> <span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;published: true</span>
-</span><span class='line'><span class="s2">post.puts &quot;</span><span class="ss">categories</span><span class="p">:</span> <span class="s2">&quot;</span>
-</span><span class='line'><span class="s2">post.puts &quot;</span><span class="o">---</span><span class="s2">&quot;</span>
-</span><span class='line'><span class="s2">+ post.puts &quot;&quot;</span>
-</span><span class='line'><span class="s2">+ post.puts &quot;</span><span class="err">＜</span><span class="o">!--</span><span class="n">more</span><span class="o">--</span><span class="err">＞</span><span class="s2">&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2016/08/31/octopress-edit-rakefile/">続きを読む &raquo;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -542,6 +523,10 @@ slimは高速に書くことができるということなので試してみる�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/09/10/css-style-application-order/">CSSスタイル適用順序</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/09/10/css-combination/">CSSセレクタの組み合わせ</a>
       </li>
     
@@ -557,19 +542,15 @@ slimは高速に書くことができるということなので試してみる�
         <a href="/blog/2016/09/02/slim/">HTMLが高速に記述できるslimで書く</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/09/02/slack-googlecalendar/">Slack-googleカレンダー連携</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/bootstrap/'>bootstrap (1)</a></li><li><a href='/blog/categories/css/'>css (1)</a></li><li><a href='/blog/categories/git/'>git (1)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/mercurial/'>mercurial (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (19)</a></li><li><a href='/blog/categories/slack/'>slack (3)</a></li><li><a href='/blog/categories/slim/'>slim (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/bootstrap/'>bootstrap (1)</a></li><li><a href='/blog/categories/css/'>css (2)</a></li><li><a href='/blog/categories/git/'>git (1)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/mercurial/'>mercurial (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (19)</a></li><li><a href='/blog/categories/slack/'>slack (3)</a></li><li><a href='/blog/categories/slim/'>slim (1)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 103.15789473684211%'>bitbacket(1)</a> <a href='/blog/categories/bootstrap' style='font-size: 103.15789473684211%'>bootstrap(1)</a> <a href='/blog/categories/css' style='font-size: 103.15789473684211%'>css(1)</a> <a href='/blog/categories/git' style='font-size: 103.15789473684211%'>git(1)</a> <a href='/blog/categories/google-analytics' style='font-size: 103.15789473684211%'>google analytics(1)</a> <a href='/blog/categories/mercurial' style='font-size: 103.15789473684211%'>mercurial(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(19)</a> <a href='/blog/categories/slack' style='font-size: 109.47368421052632%'>slack(3)</a> <a href='/blog/categories/slim' style='font-size: 103.15789473684211%'>slim(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 103.15789473684211%'>bitbacket(1)</a> <a href='/blog/categories/bootstrap' style='font-size: 103.15789473684211%'>bootstrap(1)</a> <a href='/blog/categories/css' style='font-size: 106.3157894736842%'>css(2)</a> <a href='/blog/categories/git' style='font-size: 103.15789473684211%'>git(1)</a> <a href='/blog/categories/google-analytics' style='font-size: 103.15789473684211%'>google analytics(1)</a> <a href='/blog/categories/mercurial' style='font-size: 103.15789473684211%'>mercurial(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(19)</a> <a href='/blog/categories/slack' style='font-size: 109.47368421052632%'>slack(3)</a> <a href='/blog/categories/slim' style='font-size: 103.15789473684211%'>slim(1)</a> </span>
 </section>
 
 

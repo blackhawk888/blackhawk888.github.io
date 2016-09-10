@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-09-10T00:17:50+00:00</updated>
+  <updated>2016-09-10T00:37:31+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,83 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[CSSスタイル適用順序]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/09/10/css-style-application-order/"/>
+    <updated>2016-09-10T09:35:59+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/09/10/css-style-application-order</id>
+    <content type="html"><![CDATA[<p>今までは漠然と以下の感じと思っていた</p>
+
+<ul>
+<li>基本的に 下に書かれたものが優先</li>
+<li>CSSはより 詳細なセレクタのほうが優先</li>
+<li>詳細なセレクタはできるだけ下に書くようにする</li>
+</ul>
+
+
+<p>考え方は間違ってはいないと思うが、詳細を調べたのでメモとして残しておく。</p>
+
+<!--more-->
+
+
+<p>セレクタには詳細度というものがあり、セレクタの設定によって詳細度が変化し、セレクタの詳細度によって優先されるスタイルが上書きされる。<br/>
+各セレクタを組み合わせて記述することが多いが組み合わせることで詳細度に変化が生じる。 <br/>
+詳細度の高い方が優先される。(数値の大きいものが優先される)</p>
+
+<h2>詳細度の分類及び具体的な考え方</h2>
+
+<ul>
+<li>要素セレクタの数量より1つのクラスセレクタが優先</li>
+<li>クラスセレクタの数量より1つのIDセレクタが優先</li>
+<li>各セレクタの数量より1つのインラインや!imporantが優先</li>
+</ul>
+
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;"> 詳細順位 </th>
+<th style="text-align:left;"> セレクタ名 </th>
+<th style="text-align:left;"> 詳細数値 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;"> 1 </td>
+<td style="text-align:left;"> !important </td>
+<td style="text-align:left;"> 1.0.0.0.0 </td>
+</tr>
+<tr>
+<td style="text-align:left;"> 2 </td>
+<td style="text-align:left;"> インライン記述(style属性) </td>
+<td style="text-align:left;"> 0.1.0.0.0 </td>
+</tr>
+<tr>
+<td style="text-align:left;"> 3 </td>
+<td style="text-align:left;"> idセレクタ </td>
+<td style="text-align:left;"> 0.0.1.0.0 </td>
+</tr>
+<tr>
+<td style="text-align:left;"> 4 </td>
+<td style="text-align:left;"> 属性セレクタ・classセレクタ・擬似クラス   </td>
+<td style="text-align:left;"> 0.0.0.1.0 </td>
+</tr>
+<tr>
+<td style="text-align:left;"> 5 </td>
+<td style="text-align:left;"> 要素セレクタ・擬似要素 </td>
+<td style="text-align:left;"> 0.0.0.0.1 </td>
+</tr>
+<tr>
+<td style="text-align:left;"> 6 </td>
+<td style="text-align:left;"> ユニバーサルセレクタ </td>
+<td style="text-align:left;"> 0.0.0.0.0 </td>
+</tr>
+</tbody>
+</table>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[CSSセレクタの組み合わせ]]></title>
@@ -2103,41 +2180,6 @@ URlが<code>https://[username].github.io/[repository_name/]</code>になるこ�
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ git remote add origin git@github.com:[username]/[repository_name].git 
 </span><span class='line'>$ git config branch.master.remote origin</span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[OctopressにGoogle Analytics導入]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/08/27/octopress-google-analytics/"/>
-    <updated>2016-08-27T20:05:08+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/08/27/octopress-google-analytics</id>
-    <content type="html"><![CDATA[<h3>Google Analytics設定</h3>
-
-<p>Google Analytics(アナリティクス)とは、アクセス解析を行うことができる解析ツール。<br/>
-Octopress は、デフォルトで Google Analytics の設定をすることが可能。</p>
-
-<!--more-->
-
-
-<p>サイトページ内にトラッキングコードと呼ばれるJavaScript コードを埋め込み、
-訪問者がサイトへアクセスした際の閲覧情報がGoogle Analyticsサーバへ送信される仕組み。
-トラッキング IDとはUA-XXXXXXXX-Xのような文字列で、データの送信先となるアカウントや
-プロパティを Google アナリティクス側で特定するためのID。</p>
-
-<p><a href="http://www.google.co.jp/intl/ja/analytics/">Google Analytics</a>サイトに行き、ログインまたは
-アカウントを作成をクリックしログイン後、<code>プロパティ名</code>、<code>デフォルトのURL</code>等を設定し保存すると
-<code>トラッキング ID</code>が表示されるので<code>_config.yml</code>に設定する。</p>
-
-<h3>_config.ymlの編集</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Google Analytics</span>
-</span><span class='line'><span class="ss">google_analytics_tracking_id</span><span class="p">:</span> <span class="no">UA</span><span class="o">-</span><span class="no">XXXXXXXX</span><span class="o">-</span><span class="n">X</span>  <span class="c1"># &lt;- Google Analytics ID を指定</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ブログにアクセスされるたびに Google Analyticsで集計される。</p>
 ]]></content>
   </entry>
   

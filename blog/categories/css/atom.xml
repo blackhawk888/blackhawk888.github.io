@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Css | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-09-10T00:17:50+00:00</updated>
+  <updated>2016-09-10T00:37:31+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,83 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[CSSスタイル適用順序]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/09/10/css-style-application-order/"/>
+    <updated>2016-09-10T09:35:59+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/09/10/css-style-application-order</id>
+    <content type="html"><![CDATA[<p>今までは漠然と以下の感じと思っていた</p>
+
+<ul>
+<li>基本的に 下に書かれたものが優先</li>
+<li>CSSはより 詳細なセレクタのほうが優先</li>
+<li>詳細なセレクタはできるだけ下に書くようにする</li>
+</ul>
+
+
+<p>考え方は間違ってはいないと思うが、詳細を調べたのでメモとして残しておく。</p>
+
+<!--more-->
+
+
+<p>セレクタには詳細度というものがあり、セレクタの設定によって詳細度が変化し、セレクタの詳細度によって優先されるスタイルが上書きされる。<br/>
+各セレクタを組み合わせて記述することが多いが組み合わせることで詳細度に変化が生じる。 <br/>
+詳細度の高い方が優先される。(数値の大きいものが優先される)</p>
+
+<h2>詳細度の分類及び具体的な考え方</h2>
+
+<ul>
+<li>要素セレクタの数量より1つのクラスセレクタが優先</li>
+<li>クラスセレクタの数量より1つのIDセレクタが優先</li>
+<li>各セレクタの数量より1つのインラインや!imporantが優先</li>
+</ul>
+
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;"> 詳細順位 </th>
+<th style="text-align:left;"> セレクタ名 </th>
+<th style="text-align:left;"> 詳細数値 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;"> 1 </td>
+<td style="text-align:left;"> !important </td>
+<td style="text-align:left;"> 1.0.0.0.0 </td>
+</tr>
+<tr>
+<td style="text-align:left;"> 2 </td>
+<td style="text-align:left;"> インライン記述(style属性) </td>
+<td style="text-align:left;"> 0.1.0.0.0 </td>
+</tr>
+<tr>
+<td style="text-align:left;"> 3 </td>
+<td style="text-align:left;"> idセレクタ </td>
+<td style="text-align:left;"> 0.0.1.0.0 </td>
+</tr>
+<tr>
+<td style="text-align:left;"> 4 </td>
+<td style="text-align:left;"> 属性セレクタ・classセレクタ・擬似クラス   </td>
+<td style="text-align:left;"> 0.0.0.1.0 </td>
+</tr>
+<tr>
+<td style="text-align:left;"> 5 </td>
+<td style="text-align:left;"> 要素セレクタ・擬似要素 </td>
+<td style="text-align:left;"> 0.0.0.0.1 </td>
+</tr>
+<tr>
+<td style="text-align:left;"> 6 </td>
+<td style="text-align:left;"> ユニバーサルセレクタ </td>
+<td style="text-align:left;"> 0.0.0.0.0 </td>
+</tr>
+</tbody>
+</table>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[CSSセレクタの組み合わせ]]></title>
