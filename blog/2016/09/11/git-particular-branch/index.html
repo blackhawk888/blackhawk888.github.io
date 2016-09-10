@@ -6,12 +6,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="google-site-verification" content="vY2EmWIVKKAtlat_5KCgpFUJrL4LWlUa0XZ2xv7RQ1s" />
-  <title>OctopressをGitHubのProject Pageで作成 - Wivern Blog</title>
+  <title>Git-特定のブランチを指定してclone - Wivern Blog</title>
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="Project Page (gh-pages) にデプロイする場合 Github Pagesでサイトを公開する場合は[username].github.ioというリポジトリを作成し、
-デプロイすることでhttps://[username].github.ioでアクセスすることができるが、 &hellip;">
+  <meta name="description" content="リモートから特定のブランチを指定してcloneには以下を実行 git-particular 1
+$ git clone -b [blanch_name] https://[repository_address] ">
   
   
   <link href="/stylesheets/table.css" rel="stylesheet" type="text/css" />
@@ -22,7 +22,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blackhawk888.github.io/blog/2016/08/28/octopress-projectpage-ghpages/">
+  <link rel="canonical" href="http://blackhawk888.github.io/blog/2016/09/11/git-particular-branch/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Wivern Blog" type="application/atom+xml">
@@ -85,7 +85,7 @@
   
   <header>
     
-      <h1 class="entry-title">OctopressをGitHubのProject Pageで作成</h1>
+      <h1 class="entry-title">Git-特定のブランチを指定してclone</h1>
     
     
       <p class="meta">
@@ -94,52 +94,21 @@
 
 
 
-<time class='entry-date' datetime='2016-08-28T14:56:55+00:00'><span class='date'>2016年08月28日</span> <span class='time'>14:56:55</span></time>
+<time class='entry-date' datetime='2016-09-11T08:02:12+00:00'><span class='date'>2016年09月11日</span> <span class='time'>08:02:12</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h3>Project Page (gh-pages) にデプロイする場合</h3>
+<div class="entry-content"><p>リモートから特定のブランチを指定してcloneには以下を実行</p>
 
-<p>Github Pagesでサイトを公開する場合は<code>[username].github.io</code>というリポジトリを作成し、
-デプロイすることで<code>https://[username].github.io</code>でアクセスすることができるが、任意のリポジトリを作成し、
-Project Page(gh-pages)にデプロイすることもできる。</p>
-
-<!--more -->
-
-
-<p>ユーザのウェブページを公開するユーザサイト（User site）[username].github.io でアクセスとの違いは、
-URlが<code>https://[username].github.io/[repository_name/]</code>になることと
-<code>[username].github.io</code> リポジトリのときとは異なり、<code>_deploy/</code> ディレクトリは <code>gh-pages</code> ブランチに設定される。</p>
-
-<p>Octopressのインストールは以前書いたとおり<code>git clone</code>するだけ。<br/>
-あとは必要な<code>gem</code>を<code>bundle --path vendor/bunde</code>、<code>bundel exec rake install</code>でインストール。</p>
-
-<p>事前にGithubでリポジトリを作成しておく。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake setup_github_pages
-</span><span class='line'>Repository url: git@github.com:[username]/[username].github.io.git</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span>git-particular </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git clone -b <span class="o">[</span>blanch_name<span class="o">]</span> https://<span class="o">[</span>repository_address<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>上記によって、以下のことが行われる。</p>
-
-<ul>
-<li><code>git@github.com:[username]/[username].github.io.git</code> が <code>origin remote</code> として追加される</li>
-<li><code>_deploy/</code> ディレクトリがリポジトリの <code>gh-pages</code> ブランチに設定される</li>
-<li>親ディレクトリは <code>source</code> ブランチになる</li>
-</ul>
-
-
-<p>ソースコードを管理するため、remote のリポジトリURLを設定</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ git remote add origin git@github.com:[username]/[repository_name].git 
-</span><span class='line'>$ git config branch.master.remote origin</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
@@ -156,12 +125,12 @@ URlが<code>https://[username].github.io/[repository_name/]</code>になるこ�
 
 
 
-<time class='entry-date' datetime='2016-08-28T14:56:55+00:00'><span class='date'>2016年08月28日</span> <span class='time'>14:56:55</span></time>
+<time class='entry-date' datetime='2016-09-11T08:02:12+00:00'><span class='date'>2016年09月11日</span> <span class='time'>08:02:12</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/octopress/'>octopress</a>
+    <a class='category' href='/blog/categories/git/'>git</a>
   
 </span>
 
@@ -170,7 +139,7 @@ URlが<code>https://[username].github.io/[repository_name/]</code>になるこ�
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2016/08/28/octopress-projectpage-ghpages/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2016/08/28/octopress-projectpage-ghpages/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2016/09/11/git-particular-branch/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2016/09/11/git-particular-branch/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -183,10 +152,8 @@ URlが<code>https://[username].github.io/[repository_name/]</code>になるこ�
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/08/27/octopress-google-analytics/" title="Previous Post: OctopressにGoogle Analytics導入">&laquo; OctopressにGoogle Analytics導入</a>
+        <a class="basic-alignment left" href="/blog/2016/09/10/git-basic/" title="Previous Post: git基本">&laquo; git基本</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/08/28/octopress-facebook-like/" title="Next Post: octopress Facebook Like ボタン日本語化">octopress Facebook Like ボタン日本語化 &raquo;</a>
       
     </p>
   </footer>

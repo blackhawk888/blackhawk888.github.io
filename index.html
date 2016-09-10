@@ -10,7 +10,8 @@
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="gitをいつも使用しているのだが、基本git addしてgit commitしてgit pushするのがメインでたまにしか使わないコマンドもあるので忘れないように備忘録として残しておく Gitを用いた開発の流れ 基本的なGitの作業の流れは下記のようになる。 リポジトリを作成(git init)、 &hellip;">
+  <meta name="description" content="リモートから特定のブランチを指定してcloneには以下を実行 git-particular 1
+$ git clone -b [blanch_name] https://[repository_address] ">
   
   
   <link href="/stylesheets/table.css" rel="stylesheet" type="text/css" />
@@ -81,6 +82,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/09/11/git-particular-branch/">Git-特定のブランチを指定してclone</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-09-11T08:02:12+00:00'><span class='date'>2016年09月11日</span> <span class='time'>08:02:12</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>リモートから特定のブランチを指定してcloneには以下を実行</p>
+
+<figure class='code'><figcaption><span>git-particular </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git clone -b <span class="o">[</span>blanch_name<span class="o">]</span> https://<span class="o">[</span>repository_address<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -469,43 +507,6 @@ slimは高速に書くことができるということなので試してみる�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/09/01/mercurial-git/">MercurialとGitコマンド比較</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-09-01T15:16:42+00:00'><span class='date'>2016年09月01日</span> <span class='time'>15:16:42</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>gitはいつも使っているのだが、他のVCSとしてSubversion、Bazaar、Mercurialとあるが、
-最近Mercurialが気になっていてコマンドの違いを比較してみた。</p>
-
-<p>gitとMercurial の特徴は以下のとおり</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2016/09/01/mercurial-git/">続きを読む &raquo;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -529,6 +530,10 @@ slimは高速に書くことができるということなので試してみる�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/09/11/git-particular-branch/">Git-特定のブランチを指定してclone</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/09/10/git-basic/">Git基本</a>
       </li>
     
@@ -544,19 +549,15 @@ slimは高速に書くことができるということなので試してみる�
         <a href="/blog/2016/09/08/bootstrap-basic/">Bootstrapの基本</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/09/03/octpress-img/">Octopress-画像保存先</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/bootstrap/'>bootstrap (1)</a></li><li><a href='/blog/categories/css/'>css (2)</a></li><li><a href='/blog/categories/git/'>git (2)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/mercurial/'>mercurial (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (19)</a></li><li><a href='/blog/categories/slack/'>slack (3)</a></li><li><a href='/blog/categories/slim/'>slim (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/bootstrap/'>bootstrap (1)</a></li><li><a href='/blog/categories/css/'>css (2)</a></li><li><a href='/blog/categories/git/'>git (3)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/mercurial/'>mercurial (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (19)</a></li><li><a href='/blog/categories/slack/'>slack (3)</a></li><li><a href='/blog/categories/slim/'>slim (1)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 103.15789473684211%'>bitbacket(1)</a> <a href='/blog/categories/bootstrap' style='font-size: 103.15789473684211%'>bootstrap(1)</a> <a href='/blog/categories/css' style='font-size: 106.3157894736842%'>css(2)</a> <a href='/blog/categories/git' style='font-size: 106.3157894736842%'>git(2)</a> <a href='/blog/categories/google-analytics' style='font-size: 103.15789473684211%'>google analytics(1)</a> <a href='/blog/categories/mercurial' style='font-size: 103.15789473684211%'>mercurial(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(19)</a> <a href='/blog/categories/slack' style='font-size: 109.47368421052632%'>slack(3)</a> <a href='/blog/categories/slim' style='font-size: 103.15789473684211%'>slim(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 103.15789473684211%'>bitbacket(1)</a> <a href='/blog/categories/bootstrap' style='font-size: 103.15789473684211%'>bootstrap(1)</a> <a href='/blog/categories/css' style='font-size: 106.3157894736842%'>css(2)</a> <a href='/blog/categories/git' style='font-size: 109.47368421052632%'>git(3)</a> <a href='/blog/categories/google-analytics' style='font-size: 103.15789473684211%'>google analytics(1)</a> <a href='/blog/categories/mercurial' style='font-size: 103.15789473684211%'>mercurial(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(19)</a> <a href='/blog/categories/slack' style='font-size: 109.47368421052632%'>slack(3)</a> <a href='/blog/categories/slim' style='font-size: 103.15789473684211%'>slim(1)</a> </span>
 </section>
 
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-09-10T11:57:23+00:00</updated>
+  <updated>2016-09-10T23:10:07+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,20 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git-特定のブランチを指定してclone]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/09/11/git-particular-branch/"/>
+    <updated>2016-09-11T08:02:12+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/09/11/git-particular-branch</id>
+    <content type="html"><![CDATA[<p>リモートから特定のブランチを指定してcloneには以下を実行</p>
+
+<p><figure class='code'><figcaption><span>git-particular </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git clone -b <span class="o">[</span>blanch_name<span class="o">]</span> &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://&quot;</span>&gt;https://&lt;/a&gt;<span class="o">[</span>repository_address<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Git基本]]></title>
