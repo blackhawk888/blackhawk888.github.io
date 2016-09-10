@@ -1,0 +1,292 @@
+---
+layout: post
+title: "git基本"
+date: 2016-09-10 20:54:11 +0000
+comments: true
+published: true
+categories: [git]
+---
+
+gitをいつも使用しているのだが、基本`git add`して`git commit`して`git push`するのがメインでたまにしか使わないコマンドもあるので忘れないように備忘録として残しておく
+
+## Gitを用いた開発の流れ
+
+基本的なGitの作業の流れは下記のようになる。
+
+1. リポジトリを作成(`git init`)、または複製(`git clone`)する
+2. ファイルの作成、編集を行う
+3. ファイルの作成/変更/削除をgitのインデックスに追加(`git add`)
+4. 変更結果をローカルリポジトリにコミット(`git commit`)
+5. ローカルリポジトリをプッシュしてリモートリポジトリへ反映(`git push`)
+
+<!--more-->
+
+## ブランチを用いた開発の流れ
+
+Gitを用いた開発の流れにある2,3,4をmasterブランチではなく、分岐させたブランチ内で開発していくことになる。
+分岐させたブランチ内でコミットを進め追加機能などのまとまった開発が完成すると、masterブランチに戻り、分岐させたブランチをマージして追加機能などの内容を取り取り込む。
+
+1. masterブランチなどを元に、ブランチを作成 (`git branch [new_branch_name]`)
+2. 作成したブランチに移動 (`git checkout [new_branch_name]`)
+3. 移動先のブランチで開発し、コミット
+4. ブランチでの開発が終わると、分岐元のブランチ（masterブランチ）に戻る (`git checkout master`)
+5. 元のブランチに作成したブランチの内容を取り込む (`git merge [new_branch_name]`)
+
+
+## コミットを取り消す
+
+`git reset`
+
+{% codeblock lang:bash exsample %}
+$ git reset 過去のコミット
+{% endcodeblock %}
+
+過去のコミットでコミットを指定して`git reset`すると、指定した過去のコミットまで戻る。  
+現在のコミットから指定した過去のコミットまでのコミットは取り消される。  
+コミット履歴自体を変更することになるので、注意！！  
+
+直前のコミットを取り消したい場合は以下を実行  
+
+{% codeblock lang:bash exsample %}
+$ git reset HEAD^
+{% endcodeblock %}
+
+オプションによってファイルの変更がどうなるかが決まる
+オプションには `--soft` と `--mixed` と `--hard` がある。
+
+- `git reset --soft 過去のコミット` : ファイル変更は過去に戻らないが、コミットだけ取り消される。それまでのファイル変更はインデックスに追加される。
+- `git reset --mixed 過去のコミッ` : ファイル変更は過去に戻らないが、コミットだけ取り消される。それまでのファイル変更はワーキングツリーに追加される。
+- `git reset --hard 過去のコミット` : ファイル変更も過去に戻り、コミットも取り消される。それまでのコミットは無かったことになる。
+
+オプションのない`git reset`は`--mixed`と同様の結果になる。。
+`--hard`を実行してしまうと、完全に取り消すことになるので注意！！
+
+
+## 差分を表示
+
+`git diff`
+
+{% codeblock lang:bash exsample %}
+$ git diff
+{% endcodeblock %}
+
+`git diff` は色々なコマンドやオプションが用意されている。
+
+- `git diff` : ワーキングツリーとインデックスとの差分を表示
+- `git diff —-cached `: インデックスとHEADとの差分を表示
+- `git diff HEAD^..HEAD` : 直前のコミットと、その更に前のコミットの差分を表示
+
+HEADとは、直前のコミットのこと。   
+HEAD^とは、HEADの更に１つ前のコミットのこと。  
+以下に、作業フローの中での `git diff` の使い方    
+
+1. ファイルを更新する
+2. `git diff` や `git status` で変更を確認
+3. 1,2を繰り返す
+4. `git add . `で更新ファイルをインデックスに追加
+5. `git diff —-cached` や `git status`でこれからコミットする内容の最終チェック
+6. `git commit -m "[commit_message]"` でコミット
+7. `git diff HEAD^..HEAD` で直前にコミットしたもの(HEAD)と、その更に１つ前のコミット(HEAD^)の差分を見ることで、直前のコミットの差分を見ることができる。
+
+
+## ログを確認
+
+`git log`
+
+{% codeblock lang:bash exsample %}
+$ git log
+{% endcodeblock %}
+
+`git log` には便利なオプションがいくつかある。  
+よく使われるのは --stat オプション
+
+{% codeblock lang:bash exsample %}
+$ git log --stat
+{% endcodeblock %}
+
+実行すると、コミットメッセージに加えて、何のファイルがどの程度増減したかも表示される。  
+また、いくつかオプションを組み合わせて実行することで、コミットログが視覚的に把握しやすくなる。
+
+{% codeblock lang:bash exsample %}
+$ git log --graph --decorate --oneline
+{% endcodeblock %}
+
+
+## ブランチに関するコマンド
+
+`git branch`, `git checkout`
+
+### ブランチ作成
+
+{% codeblock lang:bash exsample %}
+$ git branch [branch_name]
+{% endcodeblock %}
+
+### ブランチ移動
+
+{% codeblock lang:bash exsample %}
+$ git checkout [branch_name]
+{% endcodeblock %}
+
+ブランチを作成したら、そのブランチに移動  
+また、` -b` オプションを付与すると、ブランチの作成と移動を一度にすることが可能
+
+{% codeblock lang:bash exsample %}
+$ git checkout -b [blanch_name]
+{% endcodeblock %}
+
+### ブランチ一覧表示
+
+{% codeblock lang:bash exsample %}
+$ git branch
+{% endcodeblock %}
+
+ブランチの一覧を表示すると * master などブランチ名の前に*がついているものがある。  
+これが現在のブランチ
+
+`-a `オプションを付与すると、登録したリモートリポジトリを含めた全てのブランチの一覧を表示
+
+{% codeblock lang:bash exsample %}
+$ git branch -a
+{% endcodeblock %}
+
+### ブランチ削除
+
+{% codeblock lang:bash exsample %}
+$ git branch -d [branch_name]
+{% endcodeblock %}
+
+ブランチが増えてくると煩雑になるので、役目を終えたブランチを削除するようにする。
+
+
+## ブランチを取り込む
+
+`git merge`コマンドの注意すべきこと
+
+- 指定したブランチは影響を受けない
+- 現在のブランチに、指定したブランチのコミット履歴分を取り込む
+
+{% codeblock lang:bash exsample %}
+$ git checkout master
+$ git merge [branch_name]
+{% endcodeblock %}
+
+上記の場合、`git checkout master`としているので、現在のブランチ`はmaster`  
+次のマージコマンドでは、[branch_name]のコミット履歴分が、現在のブランチであるmasterに取り込まれる。  
+したがって、[branch_name]のブランチに影響はないが、`master`のコミット履歴は更新される。  
+
+### merge後のコンフリクト
+
+コンフリクトの解消と再マージ
+
+コンフリクトがおきたファイルを開くと、<<< HEAD, ===, >>> XXXといった形でコンフリクト箇所が示される  
+コンフリクトが起きている箇所を修正し、保存。  
+次に、`git add [file_name]` でコンフリクトした[file_name]をインデックスに追加  
+次に、`git commit -m [commit_message]` でコミット
+
+
+## リモートコマンド
+
+`git clone`
+
+`git clone`コマンドは、公開されているリポジトリをローカルに複製するコマンド
+
+{% codeblock lang:bash exsample %}
+$ git clone [remote repository]
+{% endcodeblock %}
+
+### リモートリポジトリ方式
+
+リモートリポジトリをクローンする際に必要なリモートリポジトリの入力には2種類がある。
+
+- HTTPS方式
+- SSH方式
+
+GitHubの場合
+（ ユーザ名 にはGitHubのユーザ名、リポジトリ名 にはGitHubのリポジトリ名を入力）
+
+- HTTPS方式でクローン
+    - `git clone https://github.com/[user_name]/[repository_name].git`
+- SSH方式でクローン
+    - `git clone git@github.com:[user_name]/[repository_name].git`
+
+
+### リモートリポジトリを操作
+
+`git remote`コマンドはリモートリポジトリの登録や確認を行うコマンド
+
+ローカルリポジトリにリモートリポジトリを登録  
+`git pull` や `git push` などリモートリポジトリと通信する場合に必要な登録
+
+{% codeblock lang:bash exsample %}
+$ git remote add 登録名 [remote repository]
+{% endcodeblock %}
+
+登録名には慣習がある。
+
+- 自分が管理しているリモートリポジトリの場合は、 `origin` 
+- 他人が管理しているリモートリポジトリの場合は、 `upstream`
+
+{% codeblock lang:bash exsample %}
+$ git remote add origin https://github.com/[user_name]/[repository_name].git
+{% endcodeblock %}
+
+初めに一度行えば、今後はリモートリポジトリを `origin` や `upstream `として扱える。
+
+### 登録されているリモートリポジトリ一覧表示
+
+`-v` オプションをつけることで登録したリモートリポジトリの詳細を表示することが可能  
+
+{% codeblock lang:bash exsample %}
+$ git remote -v
+{% endcodeblock %}
+
+### リモートリポジトリの登録削除
+
+{% codeblock lang:bash exsample %}
+$ git remote rm [repository_name]
+{% endcodeblock %}
+
+ローカルリポジトリにあるリモートリポジトリの登録を削除するだけ。  
+リモートリポジトリ自体が削除されるわけではない。
+
+
+### リモートリポジトリへ変更を反映(
+
+`git push`コマンドは、ローカルリポジトリのコミット履歴をリモートリポジトリに反映させるコマンド
+
+{% codeblock lang:bash exsample %}
+$ git push 登録名 [branch_name]
+{% endcodeblock %}
+
+登録名で登録されているリモートリポジトリに向けて、[branch_name]で指定したブランチがプッシュされる。
+
+ローカルリポジトリのmasterブランチの更新を、リモートリポジトリのmasterにマージするコマンド
+
+{% codeblock lang:bash exsample %}
+$ git push origin master
+{% endcodeblock %}
+
+
+### リモートリポジトリの変更を取り込む
+
+`git pull`コマンドは、指定したリモートリポジトリの更新分をマージする。
+プルはリモートリポジトリのブランチからローカルリポジトリのブランチにマージする。
+
+他人がプッシュした変更分を定期的に取り込んでいかなければ、自分のローカルリポジトリはリモートリポジトリに対して遅れを取ることになり、開発を進められなくなる。
+
+{% codeblock lang:bash exsample %}
+$ git pull 登録名 [branch_name]
+{% endcodeblock %}
+
+自分が管理しているリモートリポジトリからmasterブランチの更新を、ローカルリポジトリのmasterにマージするコマンド
+
+{% codeblock lang:bash exsample %}
+$ git checkout master
+$ git pull origin master
+{% endcodeblock %}
+
+プルでもコンフリクトが起こる場合がある。  
+また、`pull`コマンドでは自分のコードと他人のコードがマージされる。  
+まずは取り込むだけにしたい場合は、`fetch`コマンドを実行。
+
