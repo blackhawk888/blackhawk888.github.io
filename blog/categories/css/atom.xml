@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Css | Wivern Blog]]></title>
+  <link href="http://blackhawk888.github.io/blog/categories/css/atom.xml" rel="self"/>
+  <link href="http://blackhawk888.github.io/"/>
+  <updated>2016-09-10T00:17:20+00:00</updated>
+  <id>http://blackhawk888.github.io/</id>
+  <author>
+    <name><![CDATA[wivern]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[CSSセレクタの組み合わせ]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/09/10/css-combination/"/>
+    <updated>2016-09-10T09:13:34+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/09/10/css-combination</id>
+    <content type="html"><![CDATA[<p>CSSを久しぶりに書いて見るとCSSの組み合わせを忘れていたのでメモ。</p>
+
+<!--more-->
+
+
+<p><figure class='code'><figcaption><span>cssSelectorCombination.css </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">/&lt;</span><span class="nt">em</span><span class="o">&gt;</span> <span class="err">複数セレクタ</span>
+</span><span class='line'>  <span class="err">同じスタイルを適用したいセレクタ</span><span class="nt">1</span><span class="err">，セレクタ</span><span class="nt">2</span><span class="err">をまとめる</span> <span class="o">&lt;/</span><span class="nt">em</span><span class="o">&gt;/</span>
+</span><span class='line'><span class="err">セレクタ</span><span class="nt">1</span><span class="o">,</span> <span class="err">セレクタ</span><span class="nt">2</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">&amp;</span><span class="n">hellip</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">p</span><span class="o">&gt;/&lt;</span><span class="nt">em</span><span class="o">&gt;</span> <span class="err">子孫セレクタ</span>
+</span><span class='line'>  <span class="err">セレクタ</span><span class="nt">1</span><span class="err">の要素で囲まれたセレクタ</span><span class="nt">2</span><span class="err">要素にスタイルを適用する。</span>
+</span><span class='line'>  <span class="err">セレクタ</span><span class="nt">1</span><span class="err">要素には適用されない。</span><span class="o">&lt;/</span><span class="nt">em</span><span class="o">&gt;/</span>
+</span><span class='line'><span class="err">セレクタ</span><span class="nt">1</span> <span class="err">セレクタ</span><span class="nt">2</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">&amp;</span><span class="n">hellip</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">p</span><span class="o">&gt;/&lt;</span><span class="nt">em</span><span class="o">&gt;</span> <span class="err">子セレクタ</span>
+</span><span class='line'>  <span class="err">子孫セレクタと比べて、セレクタ</span><span class="nt">2</span><span class="err">要素がセレクタ</span><span class="nt">1</span><span class="err">要素の直下にある場合にセレクタ</span><span class="nt">2</span><span class="err">要素に適用される。</span>
+</span><span class='line'>  <span class="err">セレクタ</span><span class="nt">1</span><span class="err">要素には適用されない。</span><span class="o">&lt;/</span><span class="nt">em</span><span class="o">&gt;/</span>
+</span><span class='line'><span class="err">セレクタ</span><span class="nt">1</span> <span class="o">&gt;</span> <span class="err">セレクタ</span><span class="nt">2</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">&amp;</span><span class="n">hellip</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">p</span><span class="o">&gt;/&lt;</span><span class="nt">em</span><span class="o">&gt;</span> <span class="err">隣接セレクタ</span>
+</span><span class='line'>  <span class="err">同じ階層にある要素同士で、セレクタ</span><span class="nt">1</span><span class="err">要素の直後にセレクタ</span><span class="nt">2</span><span class="err">要素があれば適用する。</span>
+</span><span class='line'>  <span class="err">セレクタ</span><span class="nt">1</span><span class="err">要素には適用されない。</span><span class="o">&lt;/</span><span class="nt">em</span><span class="o">&gt;/</span>
+</span><span class='line'><span class="err">セレクタ</span><span class="nt">1</span> <span class="o">+</span> <span class="err">セレクタ</span><span class="nt">2</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">&amp;</span><span class="n">hellip</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></p>
+]]></content>
+  </entry>
+  
+</feed>

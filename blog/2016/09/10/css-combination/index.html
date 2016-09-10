@@ -6,14 +6,37 @@
 <head>
   <meta charset="utf-8">
   <meta name="google-site-verification" content="vY2EmWIVKKAtlat_5KCgpFUJrL4LWlUa0XZ2xv7RQ1s" />
-  <title>Octopress Facebook Like ボタン日本語化 - Wivern Blog</title>
+  <title>CSSセレクタの組み合わせ - Wivern Blog</title>
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="FacebookのLikeボタン日本語化 以前外部サービス連携でFacebookボタンを追加したが[Like]、[share]と英語表記になっているので
-日本語の[いいね]、[シェア]に変更 source/_includes/facebook_like.htmlの編集 1
+  <meta name="description" content="CSSを久しぶりに書いて見るとCSSの組み合わせを忘れていたのでメモ。 cssSelectorCombination.css 1
 2
-- js.src &hellip;">
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+/* 複数セレクタ &hellip;">
   
   
   <link href="/stylesheets/table.css" rel="stylesheet" type="text/css" />
@@ -24,7 +47,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blackhawk888.github.io/blog/2016/08/28/octopress-facebook-like/">
+  <link rel="canonical" href="http://blackhawk888.github.io/blog/2016/09/10/css-combination/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Wivern Blog" type="application/atom+xml">
@@ -87,7 +110,7 @@
   
   <header>
     
-      <h1 class="entry-title">Octopress Facebook Like ボタン日本語化</h1>
+      <h1 class="entry-title">CSSセレクタの組み合わせ</h1>
     
     
       <p class="meta">
@@ -96,36 +119,77 @@
 
 
 
-<time class='entry-date' datetime='2016-08-28T15:43:39+00:00'><span class='date'>2016年08月28日</span> <span class='time'>15:43:39</span></time>
+<time class='entry-date' datetime='2016-09-10T09:13:34+00:00'><span class='date'>2016年09月10日</span> <span class='time'>09:13:34</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h3>FacebookのLikeボタン日本語化</h3>
-
-<p>以前外部サービス連携でFacebookボタンを追加したが[Like]、[share]と英語表記になっているので
-日本語の[いいね]、[シェア]に変更</p>
+<div class="entry-content"><p>CSSを久しぶりに書いて見るとCSSの組み合わせを忘れていたのでメモ。</p>
 
 <!--more-->
 
 
-<h3><code>source/_includes/facebook_like.html</code>の編集</h3>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+
+<figure class='code'><figcaption><span>cssSelectorCombination.css </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>- js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-</span><span class='line'>+ js.src = "//connect.facebook.net/ja_JP/all.js#appId=212934732101925&xfbml=1";</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="c">/* 複数セレクタ</span>
+</span><span class='line'><span class="c">  同じスタイルを適用したいセレクタ1，セレクタ2をまとめる */</span>
+</span><span class='line'><span class="err">セレクタ</span><span class="nt">1</span><span class="o">,</span> <span class="err">セレクタ</span><span class="nt">2</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">...</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">/* 子孫セレクタ</span>
+</span><span class='line'><span class="c">  セレクタ1の要素で囲まれたセレクタ2要素にスタイルを適用する。</span>
+</span><span class='line'><span class="c">  セレクタ1要素には適用されない。*/</span>
+</span><span class='line'><span class="err">セレクタ</span><span class="nt">1</span> <span class="err">セレクタ</span><span class="nt">2</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">...</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">/* 子セレクタ</span>
+</span><span class='line'><span class="c">  子孫セレクタと比べて、セレクタ2要素がセレクタ1要素の直下にある場合にセレクタ2要素に適用される。</span>
+</span><span class='line'><span class="c">  セレクタ1要素には適用されない。*/</span>
+</span><span class='line'><span class="err">セレクタ</span><span class="nt">1</span> <span class="o">&gt;</span> <span class="err">セレクタ</span><span class="nt">2</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">...</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">/* 隣接セレクタ</span>
+</span><span class='line'><span class="c">  同じ階層にある要素同士で、セレクタ1要素の直後にセレクタ2要素があれば適用する。</span>
+</span><span class='line'><span class="c">  セレクタ1要素には適用されない。*/</span>
+</span><span class='line'><span class="err">セレクタ</span><span class="nt">1</span> <span class="o">+</span> <span class="err">セレクタ</span><span class="nt">2</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">...</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p><code>en_US</code> を <code>ja_JP</code> に変更</p>
 
-<p><strong>変更前</strong>
-<img src="https://i.gyazo.com/d1bf65d5bc104cbe2c271fd9dca76381.png" alt="Facebook Like" /></p>
-
-<p><strong>変更後</strong>
-<img src="https://i.gyazo.com/209f66e232354b53fefa332f6e394dc8.png" alt="Facebook いいね" /></p>
 </div>
 
 
@@ -141,12 +205,12 @@
 
 
 
-<time class='entry-date' datetime='2016-08-28T15:43:39+00:00'><span class='date'>2016年08月28日</span> <span class='time'>15:43:39</span></time>
+<time class='entry-date' datetime='2016-09-10T09:13:34+00:00'><span class='date'>2016年09月10日</span> <span class='time'>09:13:34</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/octopress/'>octopress</a>
+    <a class='category' href='/blog/categories/css/'>css</a>
   
 </span>
 
@@ -155,7 +219,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2016/08/28/octopress-facebook-like/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2016/08/28/octopress-facebook-like/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2016/09/10/css-combination/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2016/09/10/css-combination/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -168,10 +232,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/08/28/octopress-projectpage-ghpages/" title="Previous Post: OctopressをGitHubのProject Pageで作成">&laquo; OctopressをGitHubのProject Pageで作成</a>
+        <a class="basic-alignment left" href="/blog/2016/09/08/bootstrap-basic/" title="Previous Post: Bootstrapの基本">&laquo; Bootstrapの基本</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/08/28/octopress-theme/" title="Next Post: octopress-theme変更">octopress-theme変更 &raquo;</a>
       
     </p>
   </footer>
