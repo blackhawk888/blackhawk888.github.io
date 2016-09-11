@@ -10,8 +10,10 @@
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="gitはいつも使っているのだが、他のVCSとしてSubversion、Bazaar、Mercurialとあるが、
-最近Mercurialが気になっていてコマンドの違いを比較してみた。 gitとMercurial の特徴は以下のとおり ">
+  <meta name="description" content="前回記事でMercurialとGitのコマンド比較をするためMarkdownでTableを作成したのだが、
+bundle exec rake previewを実行しても表が作成されない！
+調べてたらTableをMarkdownで編集できるようにする方法があったので、
+忘れないように書いておく ">
   
   
   <link href="/stylesheets/table.css" rel="stylesheet" type="text/css" />
@@ -82,6 +84,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/09/01/octopress-markdown-table/">Octopress-markdownでtableを作成できるようにする</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-09-01T17:22:02+00:00'><span class='date'>2016年09月01日</span> <span class='time'>17:22:02</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>前回記事でMercurialとGitのコマンド比較をするためMarkdownでTableを作成したのだが、
+<code>bundle exec rake preview</code>を実行しても表が作成されない！
+調べてたらTableをMarkdownで編集できるようにする方法があったので、
+忘れないように書いておく</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/09/01/octopress-markdown-table/">続きを読む &raquo;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -499,57 +538,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/08/28/octopress-theme/">Octopress-theme変更</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-08-28T19:09:08+00:00'><span class='date'>2016年08月28日</span> <span class='time'>19:09:08</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>Octopressのテーマを変更</h3>
-
-<p>今回casperというテーマに変更してみる。
-基本Githubにある<code>README.md</code>の手順どおりに進めればよい。</p>
-
-<h3>Installing</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd &lt;octopress directory&gt;
-</span><span class='line'>$ git clone https://github.com/jkrmr/casper .themes/casper
-</span><span class='line'>$ rake install['casper']
-</span><span class='line'>$ rake generate</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2016/08/28/octopress-theme/">続きを読む &raquo;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -575,6 +563,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/09/11/slack-multiteam/">Slackで複数チームにログイン</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/09/11/git-particular-branch/">Git-特定のブランチを指定してclone</a>
       </li>
     
@@ -590,19 +582,15 @@
         <a href="/blog/2016/09/10/css-combination/">CSSセレクタの組み合わせ</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/09/08/bootstrap-basic/">Bootstrapの基本</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/bootstrap/'>bootstrap (1)</a></li><li><a href='/blog/categories/css/'>css (2)</a></li><li><a href='/blog/categories/git/'>git (3)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/mercurial/'>mercurial (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (19)</a></li><li><a href='/blog/categories/slack/'>slack (3)</a></li><li><a href='/blog/categories/slim/'>slim (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/bootstrap/'>bootstrap (1)</a></li><li><a href='/blog/categories/css/'>css (2)</a></li><li><a href='/blog/categories/git/'>git (3)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/mercurial/'>mercurial (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (19)</a></li><li><a href='/blog/categories/slack/'>slack (4)</a></li><li><a href='/blog/categories/slim/'>slim (1)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 103.15789473684211%'>bitbacket(1)</a> <a href='/blog/categories/bootstrap' style='font-size: 103.15789473684211%'>bootstrap(1)</a> <a href='/blog/categories/css' style='font-size: 106.3157894736842%'>css(2)</a> <a href='/blog/categories/git' style='font-size: 109.47368421052632%'>git(3)</a> <a href='/blog/categories/google-analytics' style='font-size: 103.15789473684211%'>google analytics(1)</a> <a href='/blog/categories/mercurial' style='font-size: 103.15789473684211%'>mercurial(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(19)</a> <a href='/blog/categories/slack' style='font-size: 109.47368421052632%'>slack(3)</a> <a href='/blog/categories/slim' style='font-size: 103.15789473684211%'>slim(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 103.15789473684211%'>bitbacket(1)</a> <a href='/blog/categories/bootstrap' style='font-size: 103.15789473684211%'>bootstrap(1)</a> <a href='/blog/categories/css' style='font-size: 106.3157894736842%'>css(2)</a> <a href='/blog/categories/git' style='font-size: 109.47368421052632%'>git(3)</a> <a href='/blog/categories/google-analytics' style='font-size: 103.15789473684211%'>google analytics(1)</a> <a href='/blog/categories/mercurial' style='font-size: 103.15789473684211%'>mercurial(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(19)</a> <a href='/blog/categories/slack' style='font-size: 112.63157894736842%'>slack(4)</a> <a href='/blog/categories/slim' style='font-size: 103.15789473684211%'>slim(1)</a> </span>
 </section>
 
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Slack | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/slack/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-09-10T23:10:07+00:00</updated>
+  <updated>2016-09-11T10:02:13+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Slackで複数チームにログイン]]></title>
+    <link href="http://blackhawk888.github.io/blog/2016/09/11/slack-multiteam/"/>
+    <updated>2016-09-11T18:58:00+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2016/09/11/slack-multiteam</id>
+    <content type="html"><![CDATA[<p>Slackで複数のチームに所属している場合それぞれアカウント、パスワードが違うとログインするのが
+面倒。</p>
+
+<p>以下の方法で解決</p>
+
+<!--more-->
+
+
+<p><a href="https://slack.com/signin/find">Slack</a></p>
+
+<p>上記にアクセスし<code>Find another team</code>をクリックし自分のメールアドレスを入力すると
+そのアカウントに紐付いてるすべての <code>Team</code> アカウントにログインできるマジックリンクがメールで通知されるので
+リンクをクリックし、自動でチームにログインできる。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Slack-googleカレンダー連携]]></title>
