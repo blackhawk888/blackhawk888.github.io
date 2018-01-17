@@ -6,15 +6,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="google-site-verification" content="vY2EmWIVKKAtlat_5KCgpFUJrL4LWlUa0XZ2xv7RQ1s" />
-  <title>Octopress 記事の削除 - Wivern Blog</title>
+  <title>Railsをbundlerでプロジェクト毎に管理する - Wivern Blog</title>
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="該当するmarkdownファイルを削除しデプロイするだけ。
-ディレクトリの場所: source/_posts/ 1
+  <meta name="description" content="gem install railsを実行すると大量の依存gemがシステムにインストールされてしまうので
+Rails自体もbundlerでプロジェクトごとにインストールする。 1
 2
-$ rm source/_posts/post-title.markdown
-$ rake gen_deploy ">
+$ mkdir hoge
+$ cd Hoge bundle initでGemfileの作成 1
+2
+$ bundle &hellip;">
   
   
   <link href="/stylesheets/table.css" rel="stylesheet" type="text/css" />
@@ -25,7 +27,7 @@ $ rake gen_deploy ">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blackhawk888.github.io/blog/2016/08/29/octopress-post-delete/">
+  <link rel="canonical" href="http://blackhawk888.github.io/blog/2018/01/17/rails-bundler-project/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Wivern Blog" type="application/atom+xml">
@@ -88,7 +90,7 @@ $ rake gen_deploy ">
   
   <header>
     
-      <h1 class="entry-title">Octopress 記事の削除</h1>
+      <h1 class="entry-title">Railsをbundlerでプロジェクト毎に管理する</h1>
     
     
       <p class="meta">
@@ -97,20 +99,84 @@ $ rake gen_deploy ">
 
 
 
-<time class='entry-date' datetime='2016-08-29T20:21:05+00:00'><span class='date'>2016年08月29日</span> <span class='time'>20:21:05</span></time>
+<time class='entry-date' datetime='2018-01-17T15:10:50+00:00'><span class='date'>2018年01月17日</span> <span class='time'>15:10:50</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>該当するmarkdownファイルを削除しデプロイするだけ。<br/>
-ディレクトリの場所: <code>source/_posts/</code></p>
+<div class="entry-content"><p><code>gem install rails</code>を実行すると大量の依存gemがシステムにインストールされてしまうので
+Rails自体もbundlerでプロジェクトごとにインストールする。</p>
+
+<!--more-->
+
+
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ rm source/_posts/post-title.markdown
-</span><span class='line'>$ rake gen_deploy</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ mkdir hoge
+</span><span class='line'>$ cd Hoge</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>bundle init</code>で<code>Gemfile</code>の作成</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">bundle</span> <span class="n">init</span>
+</span><span class='line'><span class="no">Writing</span> <span class="kp">new</span> <span class="no">Gemfile</span> <span class="n">to</span> <span class="sr">/xxx/xxxx</span><span class="o">/</span><span class="n">hoge</span><span class="o">/</span><span class="no">Gemfile</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Gemfileで<code>rails</code>gemを指定</p>
+
+<figure class='code'><figcaption><span>Gemfile </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">source</span> <span class="s2">&quot;https://rubygems.org&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">gem</span> <span class="s2">&quot;rails&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>railsをbundlerで指定のデュレクトリにインストール</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">bundle</span> <span class="n">install</span> <span class="o">--</span><span class="n">path</span> <span class="n">vendor</span><span class="o">/</span><span class="n">bundle</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>bundle exec rails new .</code>でカレントデュレクトリにRailsプロジェクトを作成
+Gemfileを上書きしてよいか聞かれるので<code>Y</code>を打つ。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">bundle</span> <span class="nb">exec</span> <span class="n">rrails</span> <span class="kp">new</span> <span class="o">.</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">exist</span>
+</span><span class='line'>      <span class="n">create</span>  <span class="no">README</span><span class="o">.</span><span class="n">rdoc</span>
+</span><span class='line'>      <span class="n">create</span>  <span class="no">Rakefile</span>
+</span><span class='line'>      <span class="n">create</span>  <span class="n">config</span><span class="o">.</span><span class="n">ru</span>
+</span><span class='line'>      <span class="n">create</span>  <span class="o">.</span><span class="n">gitignore</span>
+</span><span class='line'>    <span class="n">conflict</span>  <span class="no">Gemfile</span>
+</span><span class='line'> <span class="no">Overwrite</span> <span class="sr">/home/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">sandbox</span><span class="o">/</span><span class="no">Gemfile</span><span class="p">?</span> <span class="p">(</span><span class="n">enter</span> <span class="s2">&quot;h&quot;</span> <span class="k">for</span> <span class="n">help</span><span class="p">)</span> <span class="o">[</span><span class="no">Ynaqdh</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>サーバ起動</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">bundle</span> <span class="nb">exec</span> <span class="n">rails</span> <span class="n">s</span>
+</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
@@ -127,12 +193,12 @@ $ rake gen_deploy ">
 
 
 
-<time class='entry-date' datetime='2016-08-29T20:21:05+00:00'><span class='date'>2016年08月29日</span> <span class='time'>20:21:05</span></time>
+<time class='entry-date' datetime='2018-01-17T15:10:50+00:00'><span class='date'>2018年01月17日</span> <span class='time'>15:10:50</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/octopress/'>octopress</a>
+    <a class='category' href='/blog/categories/rails/'>rails</a>
   
 </span>
 
@@ -141,7 +207,7 @@ $ rake gen_deploy ">
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2016/08/29/octopress-post-delete/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2016/08/29/octopress-post-delete/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2018/01/17/rails-bundler-project/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2018/01/17/rails-bundler-project/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -154,10 +220,8 @@ $ rake gen_deploy ">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/08/28/octopress-webmaster/" title="Previous Post: Octopress-Googleウェブマスターツール登録">&laquo; Octopress-Googleウェブマスターツール登録</a>
+        <a class="basic-alignment left" href="/blog/2018/01/17/erb-comment/" title="Previous Post: ERBにコメントを入れる方法">&laquo; ERBにコメントを入れる方法</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/08/29/octopress-newpage/" title="Next Post: Octopress-新規ページ作成">Octopress-新規ページ作成 &raquo;</a>
       
     </p>
   </footer>

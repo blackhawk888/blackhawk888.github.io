@@ -10,8 +10,8 @@
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="日時表示設定 投稿記事の日時はデフォルトでAUG 25TH, 2016 3:00 PMのような表示になっているが、
-rubyの時間表記表現 を使って 好きなように変更可能 ">
+  <meta name="description" content="Twitter, Google+, Facebookボタン追加 _config.yml に Twitter, Google+, Facebook との連携の設定箇所がある。
+twitter_tweet_button、google_plus_one、facebook_likeの値をtrueにすると &hellip;">
   
   
   <link href="/stylesheets/table.css" rel="stylesheet" type="text/css" />
@@ -82,6 +82,44 @@ rubyの時間表記表現 を使って 好きなように変更可能 ">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/08/25/externalservicecooperation/">Octopress外部サービス連携</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-08-25T21:06:09+00:00'><span class='date'>2016年08月25日</span> <span class='time'>21:06:09</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>Twitter, Google+, Facebookボタン追加</h3>
+
+<p><code>_config.yml</code> に <code>Twitter</code>, <code>Google+</code>, <code>Facebook</code> との連携の設定箇所がある。<br/>
+<code>twitter_tweet_button</code>、<code>google_plus_one</code>、<code>facebook_like</code>の値を<code>true</code>にすると、 記事の下にそれぞれのシェアリングボタンが出るようになる(デフォルトだとtwitterだけ表示されるようになっている ) <br/>
+Twitterは<code>twitter_user</code>を記入してやることで 自分のツイート等も表記できるように設定できる。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/08/25/externalservicecooperation/">続きを読む &raquo;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -186,6 +224,10 @@ rubyの時間表記表現 を使って 好きなように変更可能 ">
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/01/17/rails-bundler-project/">Railsをbundlerでプロジェクト毎に管理する</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/01/17/erb-comment/">ERBにコメントを入れる方法</a>
       </li>
     
@@ -201,19 +243,15 @@ rubyの時間表記表現 を使って 好きなように変更可能 ">
         <a href="/blog/2016/09/10/git-basic/">Git基本</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/09/10/css-style-application-order/">CSSスタイル適用順序</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/bootstrap/'>bootstrap (1)</a></li><li><a href='/blog/categories/css/'>css (2)</a></li><li><a href='/blog/categories/git/'>git (3)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/mercurial/'>mercurial (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (19)</a></li><li><a href='/blog/categories/rails/'>rails (1)</a></li><li><a href='/blog/categories/slack/'>slack (4)</a></li><li><a href='/blog/categories/slim/'>slim (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/bootstrap/'>bootstrap (1)</a></li><li><a href='/blog/categories/css/'>css (2)</a></li><li><a href='/blog/categories/git/'>git (3)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/mercurial/'>mercurial (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (19)</a></li><li><a href='/blog/categories/rails/'>rails (2)</a></li><li><a href='/blog/categories/slack/'>slack (4)</a></li><li><a href='/blog/categories/slim/'>slim (1)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 103.15789473684211%'>bitbacket(1)</a> <a href='/blog/categories/bootstrap' style='font-size: 103.15789473684211%'>bootstrap(1)</a> <a href='/blog/categories/css' style='font-size: 106.3157894736842%'>css(2)</a> <a href='/blog/categories/git' style='font-size: 109.47368421052632%'>git(3)</a> <a href='/blog/categories/google-analytics' style='font-size: 103.15789473684211%'>google analytics(1)</a> <a href='/blog/categories/mercurial' style='font-size: 103.15789473684211%'>mercurial(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(19)</a> <a href='/blog/categories/rails' style='font-size: 103.15789473684211%'>rails(1)</a> <a href='/blog/categories/slack' style='font-size: 112.63157894736842%'>slack(4)</a> <a href='/blog/categories/slim' style='font-size: 103.15789473684211%'>slim(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 103.15789473684211%'>bitbacket(1)</a> <a href='/blog/categories/bootstrap' style='font-size: 103.15789473684211%'>bootstrap(1)</a> <a href='/blog/categories/css' style='font-size: 106.3157894736842%'>css(2)</a> <a href='/blog/categories/git' style='font-size: 109.47368421052632%'>git(3)</a> <a href='/blog/categories/google-analytics' style='font-size: 103.15789473684211%'>google analytics(1)</a> <a href='/blog/categories/mercurial' style='font-size: 103.15789473684211%'>mercurial(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(19)</a> <a href='/blog/categories/rails' style='font-size: 106.3157894736842%'>rails(2)</a> <a href='/blog/categories/slack' style='font-size: 112.63157894736842%'>slack(4)</a> <a href='/blog/categories/slim' style='font-size: 103.15789473684211%'>slim(1)</a> </span>
 </section>
 
 

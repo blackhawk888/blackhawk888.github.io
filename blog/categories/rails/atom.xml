@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Rails | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2018-01-17T02:02:01+00:00</updated>
+  <updated>2018-01-17T06:13:21+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,64 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Railsをbundlerでプロジェクト毎に管理する]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/01/17/rails-bundler-project/"/>
+    <updated>2018-01-17T15:10:50+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/01/17/rails-bundler-project</id>
+    <content type="html"><![CDATA[<p><code>gem install rails</code>を実行すると大量の依存gemがシステムにインストールされてしまうので
+Rails自体もbundlerでプロジェクトごとにインストールする。</p>
+
+<!--more-->
+
+
+<pre><code>$ mkdir hoge
+$ cd Hoge
+</code></pre>
+
+<p><code>bundle init</code>で<code>Gemfile</code>の作成</p>
+
+<pre><code class="ruby">$ bundle init
+Writing new Gemfile to /xxx/xxxx/hoge/Gemfile
+</code></pre>
+
+<p>Gemfileで<code>rails</code>gemを指定</p>
+
+<p><figure class='code'><figcaption><span>Gemfile </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">source</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;https://rubygems.org&quot;</span><span class="o">&gt;</span><span class="ss">https</span><span class="p">:</span><span class="sr">//</span><span class="n">rubygems</span><span class="o">.</span><span class="n">org</span><span class="o">&lt;</span><span class="sr">/a&gt;&amp;rdquo;&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="n">gem</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">rails</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>railsをbundlerで指定のデュレクトリにインストール</p>
+
+<pre><code class="ruby">$ bundle install --path vendor/bundle
+</code></pre>
+
+<p><code>bundle exec rails new .</code>でカレントデュレクトリにRailsプロジェクトを作成
+Gemfileを上書きしてよいか聞かれるので<code>Y</code>を打つ。</p>
+
+<pre><code class="ruby">$ bundle exec rrails new .
+
+      exist
+      create  README.rdoc
+      create  Rakefile
+      create  config.ru
+      create  .gitignore
+    conflict  Gemfile
+ Overwrite /home/vagrant/sandbox/Gemfile? (enter "h" for help) [Ynaqdh]
+</code></pre>
+
+<p>サーバ起動</p>
+
+<pre><code class="ruby">$ bundle exec rails s
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ERBにコメントを入れる方法]]></title>

@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2018-01-17T02:02:01+00:00</updated>
+  <updated>2018-01-17T06:13:21+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,86 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Railsをbundlerでプロジェクト毎に管理する]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/01/17/rails-bundler-project/"/>
+    <updated>2018-01-17T15:10:50+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/01/17/rails-bundler-project</id>
+    <content type="html"><![CDATA[<p><code>gem install rails</code>を実行すると大量の依存gemがシステムにインストールされてしまうので
+Rails自体もbundlerでプロジェクトごとにインストールする。</p>
+
+<!--more-->
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ mkdir hoge
+</span><span class='line'>$ cd Hoge</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>bundle init</code>で<code>Gemfile</code>の作成</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">bundle</span> <span class="n">init</span>
+</span><span class='line'><span class="no">Writing</span> <span class="kp">new</span> <span class="no">Gemfile</span> <span class="n">to</span> <span class="sr">/xxx/xxxx</span><span class="o">/</span><span class="n">hoge</span><span class="o">/</span><span class="no">Gemfile</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Gemfileで<code>rails</code>gemを指定</p>
+
+<figure class='code'><figcaption><span>Gemfile </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">source</span> <span class="s2">&quot;https://rubygems.org&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">gem</span> <span class="s2">&quot;rails&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>railsをbundlerで指定のデュレクトリにインストール</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">bundle</span> <span class="n">install</span> <span class="o">--</span><span class="n">path</span> <span class="n">vendor</span><span class="o">/</span><span class="n">bundle</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>bundle exec rails new .</code>でカレントデュレクトリにRailsプロジェクトを作成
+Gemfileを上書きしてよいか聞かれるので<code>Y</code>を打つ。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">bundle</span> <span class="nb">exec</span> <span class="n">rrails</span> <span class="kp">new</span> <span class="o">.</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">exist</span>
+</span><span class='line'>      <span class="n">create</span>  <span class="no">README</span><span class="o">.</span><span class="n">rdoc</span>
+</span><span class='line'>      <span class="n">create</span>  <span class="no">Rakefile</span>
+</span><span class='line'>      <span class="n">create</span>  <span class="n">config</span><span class="o">.</span><span class="n">ru</span>
+</span><span class='line'>      <span class="n">create</span>  <span class="o">.</span><span class="n">gitignore</span>
+</span><span class='line'>    <span class="n">conflict</span>  <span class="no">Gemfile</span>
+</span><span class='line'> <span class="no">Overwrite</span> <span class="sr">/home/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">sandbox</span><span class="o">/</span><span class="no">Gemfile</span><span class="p">?</span> <span class="p">(</span><span class="n">enter</span> <span class="s2">&quot;h&quot;</span> <span class="k">for</span> <span class="n">help</span><span class="p">)</span> <span class="o">[</span><span class="no">Ynaqdh</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>サーバ起動</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">bundle</span> <span class="nb">exec</span> <span class="n">rails</span> <span class="n">s</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ERBにコメントを入れる方法]]></title>
@@ -2461,22 +2541,6 @@ slimは高速に書くことができるということなので試してみる�
 
 <p>ナビゲーションバーに新しく作成したページタイトルが表示されクリックして
 ページが遷移することを確認する。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress 記事の削除]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/08/29/octopress-post-delete/"/>
-    <updated>2016-08-29T20:21:05+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/08/29/octopress-post-delete</id>
-    <content type="html"><![CDATA[<p>該当するmarkdownファイルを削除しデプロイするだけ。<br/>
-ディレクトリの場所: <code>source/_posts/</code></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ rm source/_posts/post-title.markdown
-</span><span class='line'>$ rake gen_deploy</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   
