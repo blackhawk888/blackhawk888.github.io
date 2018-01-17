@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Html | Wivern Blog]]></title>
+  <link href="http://blackhawk888.github.io/blog/categories/html/atom.xml" rel="self"/>
+  <link href="http://blackhawk888.github.io/"/>
+  <updated>2018-01-17T01:55:03+00:00</updated>
+  <id>http://blackhawk888.github.io/</id>
+  <author>
+    <name><![CDATA[wivern]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ERBにコメントを入れる方法]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/01/17/erb-comment/"/>
+    <updated>2018-01-17T10:44:10+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/01/17/erb-comment</id>
+    <content type="html"><![CDATA[<p>ERBのコメントの方法を忘れるのでメモ。</p>
+
+<!--more-->
+
+
+<h2>行コメント</h2>
+
+<p>一般的なコメントアウトは<code>#</code>を使うコメント。</p>
+
+<pre><code>&lt;%# コメントです。表示されません。%%&gt;
+</code></pre>
+
+<p><code>false</code>を使うコメント方法</p>
+
+<pre><code>&lt;% if false %&gt; コメントです。表示されません。 &lt;% end %&gt;
+</code></pre>
+
+<p><code>false</code>を使うことでERBのコードもコメントアウトできる。</p>
+
+<pre><code>&lt;% if false %&gt; コメントです。表示されません。 &lt;%= @example.message %&gt;&lt;% end %&gt;
+</code></pre>
+
+<h2>複数行コメント</h2>
+
+<p>記号は変わらない。複数行でも、一般的なコメントアウトは<code>#</code>を使うコメント。</p>
+
+<pre><code>&lt;%#
+name: Example test
+コメントです。表示されません。
+%&gt;
+</code></pre>
+
+<p><code>false</code>は2つのERBコードに分かれているので、複数行にもできる。</p>
+
+<pre><code>&lt;% if false %&gt;
+name: Example test
+コメントです。表示されません。
+&lt; % end %&gt;
+</code></pre>
+
+<p><code>false</code>は2つのERBコードもコメントアウトできる。ERBコードを含む長いコードをコメントアウトする時は便利。</p>
+
+<pre><code>&lt;% if false %&gt;
+name: Example test
+コメントです。表示されません。
+&lt;%= @example.text %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>rubyなので<code>begin</code>,<code>end</code>もある。</p>
+
+<pre><code>&lt;%
+=begin
+name: Example test
+コメントです。表示されません。
+=end
+%&gt;
+</code></pre>
+
+<p><code>begin</code>,<code>end</code>は分けられるし、ERBコードも挟める。</p>
+
+<pre><code>&lt;% =begin %&gt;
+name: Example test
+コメントです。表示されません。
+&lt;%= @example.text %&gt;
+&lt;% =end %&gt;
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

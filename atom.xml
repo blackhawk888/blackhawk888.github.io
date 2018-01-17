@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2016-09-11T10:02:13+00:00</updated>
+  <updated>2018-01-17T01:55:03+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,108 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ERBにコメントを入れる方法]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/01/17/erb-comment/"/>
+    <updated>2018-01-17T10:44:10+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/01/17/erb-comment</id>
+    <content type="html"><![CDATA[<p>ERBのコメントの方法を忘れるのでメモ。</p>
+
+<!--more-->
+
+
+<h2>行コメント</h2>
+
+<p>一般的なコメントアウトは<code>#</code>を使うコメント。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;%# コメントです。表示されません。%%&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>false</code>を使うコメント方法</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;% if false %&gt; コメントです。表示されません。 &lt;% end %&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>false</code>を使うことでERBのコードもコメントアウトできる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;% if false %&gt; コメントです。表示されません。 &lt;%= @example.message %&gt;&lt;% end %&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>複数行コメント</h2>
+
+<p>記号は変わらない。複数行でも、一般的なコメントアウトは<code>#</code>を使うコメント。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;%#
+</span><span class='line'>name: Example test
+</span><span class='line'>コメントです。表示されません。
+</span><span class='line'>%&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>false</code>は2つのERBコードに分かれているので、複数行にもできる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;% if false %&gt;
+</span><span class='line'>name: Example test
+</span><span class='line'>コメントです。表示されません。
+</span><span class='line'>&lt; % end %&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>false</code>は2つのERBコードもコメントアウトできる。ERBコードを含む長いコードをコメントアウトする時は便利。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;% if false %&gt;
+</span><span class='line'>name: Example test
+</span><span class='line'>コメントです。表示されません。
+</span><span class='line'>&lt;%= @example.text %&gt;
+</span><span class='line'>&lt;% end %&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>rubyなので<code>begin</code>,<code>end</code>もある。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;%
+</span><span class='line'>=begin
+</span><span class='line'>name: Example test
+</span><span class='line'>コメントです。表示されません。
+</span><span class='line'>=end
+</span><span class='line'>%&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>begin</code>,<code>end</code>は分けられるし、ERBコードも挟める。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;% =begin %&gt;
+</span><span class='line'>name: Example test
+</span><span class='line'>コメントです。表示されません。
+</span><span class='line'>&lt;%= @example.text %&gt;
+</span><span class='line'>&lt;% =end %&gt;</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Slackで複数チームにログイン]]></title>
@@ -31,6 +133,10 @@
 <p>上記にアクセスし<code>Find another team</code>をクリックし自分のメールアドレスを入力すると
 そのアカウントに紐付いてるすべての <code>Team</code> アカウントにログインできるマジックリンクがメールで通知されるので
 リンクをクリックし、自動でチームにログインできる。</p>
+
+<p>旗を表示します:<i class="fa fa-flag"></i></p>
+
+<p><i class="icon-tag"></i> icon-tag</p>
 ]]></content>
   </entry>
   
@@ -2370,87 +2476,6 @@ slimは高速に書くことができるということなので試してみる�
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ rm source/_posts/post-title.markdown
 </span><span class='line'>$ rake gen_deploy</span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress-Googleウェブマスターツール登録]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/08/28/octopress-webmaster/"/>
-    <updated>2016-08-28T20:47:11+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/08/28/octopress-webmaster</id>
-    <content type="html"><![CDATA[<h3>Googleウェブマスターツールとは</h3>
-
-<p>Googleが公式で提供するウェブ担当者・管理者のためのツール</p>
-
-<p>Googleウェブマスターツールに登録することで、</p>
-
-<ul>
-<li>自分のサイトをGoogleの検索エンジンに早く見つけてもらえ</li>
-<li>どんなキーワードで表示されているかが分かる</li>
-<li>そのページがよく検索されているのかがわかる</li>
-<li>サイトの集客をアップさせたり、SEOにも役立つ</li>
-</ul>
-
-
-<!--more-->
-
-
-<p>手順は以下のとおり</p>
-
-<ul>
-<li><a href="https://www.google.com/webmasters/tools/home?hl=ja">Googleアカウント</a>でログイン</li>
-<li>サイトのドメインを入力</li>
-<li>[確認方法]タブのHTML ファイルをアップロードにチェック</li>
-<li>確認ファイル(googleXXXXXXXXXXX.html)が作成されるので<code>_deploy</code> ディレクトリにコピーし、リモートにプッシュ</li>
-</ul>
-
-
-<p>上記の手順で確認用URLが表示されるのでアップロードが正しく行われたことの確認を行い、問題なければ確認ボタンを押すことで所有権を紐付ける。<br/>
-ただしこの方法では、次回記事をデプロイした時に確認用ファイルが消されてしまうので、確認用ファイルをリモートにプッシュする方法ではなく
-メタ タグをサイトのホームページに追加する方法にする</p>
-
-<p>以下手順</p>
-
-<ul>
-<li>[確認方法]タブのHTMLタグにチェック</li>
-<li>meta タグが作成されるので、コピーする。</li>
-<li>source/_includes/head.html にメタタグを貼り付ける。</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;!DOCTYPE html&gt;
-</span><span class='line'>&lt;!--[if IEMobile 7 ]&gt;&lt;html class="no-js iem7"&gt;&lt;![endif]--&gt;
-</span><span class='line'>&lt;!--[if lt IE 9]&gt;&lt;html class="no-js lte-ie8"&gt;&lt;![endif]--&gt;
-</span><span class='line'>&lt;!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]&gt;&lt;!--&gt;&lt;html class="no-js" lang="en"&gt;&lt;!--&lt;![endif]--&gt;
-</span><span class='line'>&lt;head&gt;
-</span><span class='line'>  &lt;meta charset="utf-8"&gt;
-</span><span class='line'>+ &lt;meta name="google-site-verification" content="XXXXXXXXXXXX_XXXXXXXXXXXXXXXXXXXX" /&gt;
-</span><span class='line'>  &lt;title&gt;Octopress-Googleウェブマスターツール登録 - Wivern Blog&lt;/title&gt;
-</span><span class='line'>  &lt;meta name="author" content="wivern"&gt;
-</span><span class='line'>
-</span><span class='line'>  
-</span><span class='line'>  &lt;meta name="description" content=""&gt;
-</span><span class='line'>  </span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>デプロイ</li>
-<li>Googleウェブマスターツールのサイトの画面で[確認]をクリックし所有権を紐付ける。</li>
-</ul>
 
 ]]></content>
   </entry>
