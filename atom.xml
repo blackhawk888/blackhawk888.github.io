@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2018-01-17T06:13:21+00:00</updated>
+  <updated>2018-01-17T06:51:37+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,70 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[cloud9でMySQLを使う]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/01/17/cloud9-mysql/"/>
+    <updated>2018-01-17T15:30:03+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/01/17/cloud9-mysql</id>
+    <content type="html"><![CDATA[<p>Cloud9でRailsテンプレートを作成すると最初はSQLiteを使うようになっているが
+MySQLが使えるようなので設定を変更してみる</p>
+
+<!--more-->
+
+
+<p><code>Gemfile</code>を編集
+sqlite3をコメントアウトし、<code>gem 'mysql2', '~&gt; 0.3.20'</code>を追加</p>
+
+<figure class='code'><figcaption><span>Gemfile </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Use sqlite3 as the database for Active Record</span>
+</span><span class='line'><span class="c1">#gem &#39;sqlite3&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;mysql2&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 0.3.20&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>インストール</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">bundle</span> <span class="n">install</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>database接続に必要な<code>config/database.yml</code>の編集<br/>
+今回はCloud9が用意しているDBを使用する。<br/>
+ローカルで動かしているなら、自分で作ったDB名とユーザー名いれて、
+hostにはlocalhostって入れれば接続できる。</p>
+
+<figure class='code'><figcaption><span>config/database.yml </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">development</span><span class="p">:</span>
+</span><span class='line'>    <span class="ss">adapter</span><span class="p">:</span> <span class="n">mysql2</span>
+</span><span class='line'>    <span class="ss">encoding</span><span class="p">:</span> <span class="n">utf8</span>
+</span><span class='line'>    <span class="ss">database</span><span class="p">:</span> <span class="n">c9</span>
+</span><span class='line'>    <span class="ss">username</span><span class="p">:</span> <span class="o">&lt;</span><span class="sx">%=ENV[&#39;C9_USER&#39;]%&gt;</span>
+</span><span class='line'><span class="sx">    host: &lt;%=</span><span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;IP&#39;</span><span class="o">]%&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>MySQL起動</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>mysql-ctl start
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>あとはDBも接続できたので<code>rails g model XXXX</code>・・・・・<code>rake db:migrate</code>を
+実行するだけ。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Railsをbundlerでプロジェクト毎に管理する]]></title>
@@ -2471,76 +2535,6 @@ slimは高速に書くことができるということなので試してみる�
 <p>サイドバーの<code>Recent Posts</code>の上に<code>Profile</code>で作成した<code>About Me</code>が表示される。</p>
 
 <p><img src="https://i.gyazo.com/3e88876a3442a236f47464741b565551.png" alt="octopress-sidebar-profile" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress-新規ページ作成]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/08/29/octopress-newpage/"/>
-    <updated>2016-08-29T21:40:50+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/08/29/octopress-newpage</id>
-    <content type="html"><![CDATA[<p>新規投稿<code>bundle exec rake new_post[title]</code>ではなく新規ページを作成する。</p>
-
-<h3>新規ページ作成</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ bundle exec rake new_page[page_name]
-</span><span class='line'>Creating new page: source/[page_name]/index.markdown</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<!--more-->
-
-
-<h3>新規ページ編集</h3>
-
-<p>ナビゲーションバーから新規ページへのリンクを追加<br/>
-<code>source/_includes/custom/navigation.html</code>を編集</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;ul class="main"&gt;
-</span><span class='line'>    &lt;li&gt;&lt;a href="http://blackhawk888.github.io/"&gt;Blog&lt;/a&gt;&lt;/li&gt;
-</span><span class='line'>    &lt;li&gt;&lt;a href="http://blackhawk888.github.io/blog/archives"&gt;Archives&lt;/a&gt;&lt;/li&gt;
-</span><span class='line'>    + &lt;li&gt;&lt;a href="http://blackhawk888.github.io/about"&gt;[new_page]&lt;/a&gt;&lt;/li&gt;
-</span><span class='line'>&lt;/ul&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>新規ページを編集<br/>
-<code>source/[new_page]/index.markdown</code>を編集</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>---
-</span><span class='line'>layout: page
-</span><span class='line'>title: "[new_page]"
-</span><span class='line'>date: 2016-08-29 21:30
-</span><span class='line'>comments: false
-</span><span class='line'>sharing: true
-</span><span class='line'>footer: true
-</span><span class='line'>---
-</span><span class='line'>
-</span><span class='line'>###本文
-</span><span class='line'>hoge hoge
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ナビゲーションバーに新しく作成したページタイトルが表示されクリックして
-ページが遷移することを確認する。</p>
 ]]></content>
   </entry>
   

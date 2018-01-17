@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://blackhawk888.github.io/blog/2018/01/17/cloud9-mysql/</loc>
+<lastmod>2018-01-17T15:30:03+00:00</lastmod>
+</url>
+<url>
 <loc>http://blackhawk888.github.io/blog/2018/01/17/rails-bundler-project/</loc>
 <lastmod>2018-01-17T15:10:50+00:00</lastmod>
 </url>
@@ -170,5 +174,11 @@
 </url>
 <url>
 <loc>http://blackhawk888.github.io/blog/categories/rails/</loc>
+</url>
+<url>
+<loc>http://blackhawk888.github.io/blog/categories/cloud9/</loc>
+</url>
+<url>
+<loc>http://blackhawk888.github.io/blog/categories/mysql/</loc>
 </url>
 </urlset>
