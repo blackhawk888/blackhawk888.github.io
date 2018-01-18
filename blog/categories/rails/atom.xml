@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Rails | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2018-01-17T06:51:37+00:00</updated>
+  <updated>2018-01-18T04:49:47+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,41 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[RailsでDBをリセットして最初からつくり直す]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/01/18/rails-db-reset/"/>
+    <updated>2018-01-18T13:37:29+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/01/18/rails-db-reset</id>
+    <content type="html"><![CDATA[<p>開発途中にDBを一度全部リセットして最初からつくり直したくなることがある。<br/>
+とりあえずやり方を二つ</p>
+
+<!--more-->
+
+
+<h3>全てレコードを空にしたいようば場合</h3>
+
+<ol>
+<li>全てのテーブルをdrop</li>
+<li><code>db/schema.rb</code>を元にテーブルを再作成</li>
+</ol>
+
+
+<pre><code class="ruby">$ rake db:reset
+</code></pre>
+
+<h3>テーブル定義を変更思でで全てのレコードを空にしたいような場合</h3>
+
+<ol>
+<li>全てのテーブルをdrop</li>
+<li><code>db/migrate</code>以下の全てのmigrationを実行してテーブルを再作成</li>
+</ol>
+
+
+<pre><code class="ruby">$ rake db:migrate:reset
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[cloud9でMySQLを使う]]></title>

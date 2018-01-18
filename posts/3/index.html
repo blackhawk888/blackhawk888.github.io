@@ -10,10 +10,12 @@
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="新規投稿bundle exec rake new_post[title]ではなく新規ページを作成する。 新規ページ作成 1
+  <meta name="description" content="デフォルトでプロフィール用のHTMLは以下の場所に作成されている。
+source/_includes/custom/asides/about.html about.htmlファイルを編集 1
 2
-$ bundle exec rake new_page[page_name]
-Creating new page: source/[page_name]/index. &hellip;">
+3
+4
+&lt;section&gt; &lt;h1&gt;About Me&lt;/h1&gt; & &hellip;">
   
   
   <link href="/stylesheets/table.css" rel="stylesheet" type="text/css" />
@@ -84,6 +86,55 @@ Creating new page: source/[page_name]/index. &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/08/30/octopress-sidebar-profile/">Octopress-サイドバーにProfile追加</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-08-30T13:23:53+00:00'><span class='date'>2016年08月30日</span> <span class='time'>13:23:53</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>デフォルトでプロフィール用のHTMLは以下の場所に作成されている。<br/>
+<code>source/_includes/custom/asides/about.html</code></p>
+
+<h3>about.htmlファイルを編集</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;section&gt;
+</span><span class='line'>  &lt;h1&gt;About Me&lt;/h1&gt;
+</span><span class='line'>  &lt;p&gt;A little something about me.&lt;/p&gt;
+</span><span class='line'>&lt;/section&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/08/30/octopress-sidebar-profile/">続きを読む &raquo;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -454,44 +505,6 @@ GitHubはいいサービスだと思うのですが、ソースコードの共�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/08/26/octopress-category-list/">Octopressにタグクラウドとカテゴリーリストを追加する</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-08-26T23:17:49+00:00'><span class='date'>2016年08月26日</span> <span class='time'>23:17:49</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>タグリストをサイドバーに表示させる。</h3>
-
-<p>Octopressのデフォルトのサイドメニューは<code>Recent Posts</code>のみの表示</p>
-
-<p><img src="https://i.gyazo.com/cf857d8c62f5f7564ddbd25c9c754f90.png" alt="Recent posts" /></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2016/08/26/octopress-category-list/">続きを読む &raquo;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -517,6 +530,10 @@ GitHubはいいサービスだと思うのですが、ソースコードの共�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/01/18/rails-db-reset/">RailsでDBをリセットして最初からつくり直す</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/01/17/cloud9-mysql/">cloud9でMySQLを使う</a>
       </li>
     
@@ -532,19 +549,15 @@ GitHubはいいサービスだと思うのですが、ソースコードの共�
         <a href="/blog/2016/09/11/slack-multiteam/">Slackで複数チームにログイン</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/09/11/git-particular-branch/">Git-特定のブランチを指定してclone</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/bootstrap/'>bootstrap (1)</a></li><li><a href='/blog/categories/cloud9/'>cloud9 (1)</a></li><li><a href='/blog/categories/css/'>css (2)</a></li><li><a href='/blog/categories/git/'>git (3)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/mercurial/'>mercurial (1)</a></li><li><a href='/blog/categories/mysql/'>mysql (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (19)</a></li><li><a href='/blog/categories/rails/'>rails (3)</a></li><li><a href='/blog/categories/slack/'>slack (4)</a></li><li><a href='/blog/categories/slim/'>slim (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/bootstrap/'>bootstrap (1)</a></li><li><a href='/blog/categories/cloud9/'>cloud9 (1)</a></li><li><a href='/blog/categories/css/'>css (2)</a></li><li><a href='/blog/categories/git/'>git (3)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/mercurial/'>mercurial (1)</a></li><li><a href='/blog/categories/mysql/'>mysql (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (19)</a></li><li><a href='/blog/categories/rails/'>rails (4)</a></li><li><a href='/blog/categories/slack/'>slack (4)</a></li><li><a href='/blog/categories/slim/'>slim (1)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 103.15789473684211%'>bitbacket(1)</a> <a href='/blog/categories/bootstrap' style='font-size: 103.15789473684211%'>bootstrap(1)</a> <a href='/blog/categories/cloud9' style='font-size: 103.15789473684211%'>cloud9(1)</a> <a href='/blog/categories/css' style='font-size: 106.3157894736842%'>css(2)</a> <a href='/blog/categories/git' style='font-size: 109.47368421052632%'>git(3)</a> <a href='/blog/categories/google-analytics' style='font-size: 103.15789473684211%'>google analytics(1)</a> <a href='/blog/categories/mercurial' style='font-size: 103.15789473684211%'>mercurial(1)</a> <a href='/blog/categories/mysql' style='font-size: 103.15789473684211%'>mysql(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(19)</a> <a href='/blog/categories/rails' style='font-size: 109.47368421052632%'>rails(3)</a> <a href='/blog/categories/slack' style='font-size: 112.63157894736842%'>slack(4)</a> <a href='/blog/categories/slim' style='font-size: 103.15789473684211%'>slim(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 103.15789473684211%'>bitbacket(1)</a> <a href='/blog/categories/bootstrap' style='font-size: 103.15789473684211%'>bootstrap(1)</a> <a href='/blog/categories/cloud9' style='font-size: 103.15789473684211%'>cloud9(1)</a> <a href='/blog/categories/css' style='font-size: 106.3157894736842%'>css(2)</a> <a href='/blog/categories/git' style='font-size: 109.47368421052632%'>git(3)</a> <a href='/blog/categories/google-analytics' style='font-size: 103.15789473684211%'>google analytics(1)</a> <a href='/blog/categories/mercurial' style='font-size: 103.15789473684211%'>mercurial(1)</a> <a href='/blog/categories/mysql' style='font-size: 103.15789473684211%'>mysql(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(19)</a> <a href='/blog/categories/rails' style='font-size: 112.63157894736842%'>rails(4)</a> <a href='/blog/categories/slack' style='font-size: 112.63157894736842%'>slack(4)</a> <a href='/blog/categories/slim' style='font-size: 103.15789473684211%'>slim(1)</a> </span>
 </section>
 
 

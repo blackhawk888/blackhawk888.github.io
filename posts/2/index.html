@@ -10,9 +10,9 @@
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="このブログはoctpressなので記事はmarkdownで書いているが、一時期静的サイトジェネレータのnanocを使ってたことがありその時にHamlで書いていたのだが
-どうにも使いにくい印象があった。
-slimは高速に書くことができるということなので試してみる。 &hellip;">
+  <meta name="description" content="Octopressでこのブログを投稿するときに画像を挿入する場合はGyazoを使っていたが、
+Octopressのディレクトリ指定の仕方は公式ブログに書いてるとおり以下の設定をすればOK Syntax 1
+{% img [class names] /path/to/image [width] [ &hellip;">
   
   
   <link href="/stylesheets/table.css" rel="stylesheet" type="text/css" />
@@ -83,6 +83,63 @@ slimは高速に書くことができるということなので試してみる�
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/09/03/octpress-img/">Octopress-画像保存先</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-09-03T22:30:43+00:00'><span class='date'>2016年09月03日</span> <span class='time'>22:30:43</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Octopressでこのブログを投稿するときに画像を挿入する場合はGyazoを使っていたが、
+Octopressのディレクトリ指定の仕方は<a href="http://octopress.org/docs/plugins/image-tag/">公式ブログ</a>に書いてるとおり以下の設定をすればOK</p>
+
+<figure class='code'><figcaption><span>Syntax </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="p">{</span><span class="o">%</span> <span class="n">img</span> <span class="o">[</span><span class="k">class</span> <span class="n">names</span><span class="o">]</span> <span class="sr">/path/</span><span class="n">to</span><span class="o">/</span><span class="n">image</span> <span class="o">[</span><span class="n">width</span><span class="o">]</span> <span class="o">[</span><span class="n">height</span><span class="o">]</span> <span class="o">[</span><span class="n">title</span> <span class="n">text</span> <span class="o">[</span><span class="n">alt</span> <span class="n">text</span><span class="o">]]</span> <span class="o">%</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Examples</h3>
+
+<figure class='code'><figcaption><span>Syntax </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="p">{</span><span class="o">%</span> <span class="n">img</span> <span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">placekitten</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="mi">890</span><span class="o">/</span><span class="mi">280</span> <span class="sx">%}</span>
+</span><span class='line'><span class="sx">{% img left http://placekitten.com/320/250 Place Kitten #2 %}</span>
+</span><span class='line'><span class="p">{</span><span class="o">%</span> <span class="n">img</span> <span class="n">right</span> <span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">placekitten</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="mi">300</span><span class="o">/</span><span class="mi">500</span> <span class="mi">150</span> <span class="mi">250</span> <span class="no">Place</span> <span class="no">Kitten</span> <span class="c1">#3 %}</span>
+</span><span class='line'><span class="p">{</span><span class="o">%</span> <span class="n">img</span> <span class="n">right</span> <span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">placekitten</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="mi">300</span><span class="o">/</span><span class="mi">500</span> <span class="mi">150</span> <span class="mi">250</span> <span class="s1">&#39;Place Kitten #4&#39;</span> <span class="s1">&#39;An image of a very cute kitten&#39;</span> <span class="o">%</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/09/03/octpress-img/">続きを読む &raquo;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -483,55 +540,6 @@ slimは高速に書くことができるということなので試してみる�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/08/30/octopress-sidebar-profile/">Octopress-サイドバーにProfile追加</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-08-30T13:23:53+00:00'><span class='date'>2016年08月30日</span> <span class='time'>13:23:53</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>デフォルトでプロフィール用のHTMLは以下の場所に作成されている。<br/>
-<code>source/_includes/custom/asides/about.html</code></p>
-
-<h3>about.htmlファイルを編集</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;section&gt;
-</span><span class='line'>  &lt;h1&gt;About Me&lt;/h1&gt;
-</span><span class='line'>  &lt;p&gt;A little something about me.&lt;/p&gt;
-</span><span class='line'>&lt;/section&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2016/08/30/octopress-sidebar-profile/">続きを読む &raquo;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -557,6 +565,10 @@ slimは高速に書くことができるということなので試してみる�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/01/18/rails-db-reset/">RailsでDBをリセットして最初からつくり直す</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/01/17/cloud9-mysql/">cloud9でMySQLを使う</a>
       </li>
     
@@ -572,19 +584,15 @@ slimは高速に書くことができるということなので試してみる�
         <a href="/blog/2016/09/11/slack-multiteam/">Slackで複数チームにログイン</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/09/11/git-particular-branch/">Git-特定のブランチを指定してclone</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/bootstrap/'>bootstrap (1)</a></li><li><a href='/blog/categories/cloud9/'>cloud9 (1)</a></li><li><a href='/blog/categories/css/'>css (2)</a></li><li><a href='/blog/categories/git/'>git (3)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/mercurial/'>mercurial (1)</a></li><li><a href='/blog/categories/mysql/'>mysql (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (19)</a></li><li><a href='/blog/categories/rails/'>rails (3)</a></li><li><a href='/blog/categories/slack/'>slack (4)</a></li><li><a href='/blog/categories/slim/'>slim (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/bootstrap/'>bootstrap (1)</a></li><li><a href='/blog/categories/cloud9/'>cloud9 (1)</a></li><li><a href='/blog/categories/css/'>css (2)</a></li><li><a href='/blog/categories/git/'>git (3)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/mercurial/'>mercurial (1)</a></li><li><a href='/blog/categories/mysql/'>mysql (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (19)</a></li><li><a href='/blog/categories/rails/'>rails (4)</a></li><li><a href='/blog/categories/slack/'>slack (4)</a></li><li><a href='/blog/categories/slim/'>slim (1)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 103.15789473684211%'>bitbacket(1)</a> <a href='/blog/categories/bootstrap' style='font-size: 103.15789473684211%'>bootstrap(1)</a> <a href='/blog/categories/cloud9' style='font-size: 103.15789473684211%'>cloud9(1)</a> <a href='/blog/categories/css' style='font-size: 106.3157894736842%'>css(2)</a> <a href='/blog/categories/git' style='font-size: 109.47368421052632%'>git(3)</a> <a href='/blog/categories/google-analytics' style='font-size: 103.15789473684211%'>google analytics(1)</a> <a href='/blog/categories/mercurial' style='font-size: 103.15789473684211%'>mercurial(1)</a> <a href='/blog/categories/mysql' style='font-size: 103.15789473684211%'>mysql(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(19)</a> <a href='/blog/categories/rails' style='font-size: 109.47368421052632%'>rails(3)</a> <a href='/blog/categories/slack' style='font-size: 112.63157894736842%'>slack(4)</a> <a href='/blog/categories/slim' style='font-size: 103.15789473684211%'>slim(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 103.15789473684211%'>bitbacket(1)</a> <a href='/blog/categories/bootstrap' style='font-size: 103.15789473684211%'>bootstrap(1)</a> <a href='/blog/categories/cloud9' style='font-size: 103.15789473684211%'>cloud9(1)</a> <a href='/blog/categories/css' style='font-size: 106.3157894736842%'>css(2)</a> <a href='/blog/categories/git' style='font-size: 109.47368421052632%'>git(3)</a> <a href='/blog/categories/google-analytics' style='font-size: 103.15789473684211%'>google analytics(1)</a> <a href='/blog/categories/mercurial' style='font-size: 103.15789473684211%'>mercurial(1)</a> <a href='/blog/categories/mysql' style='font-size: 103.15789473684211%'>mysql(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(19)</a> <a href='/blog/categories/rails' style='font-size: 112.63157894736842%'>rails(4)</a> <a href='/blog/categories/slack' style='font-size: 112.63157894736842%'>slack(4)</a> <a href='/blog/categories/slim' style='font-size: 103.15789473684211%'>slim(1)</a> </span>
 </section>
 
 

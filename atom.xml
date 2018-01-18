@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2018-01-17T06:51:37+00:00</updated>
+  <updated>2018-01-18T04:49:47+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,47 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[RailsでDBをリセットして最初からつくり直す]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/01/18/rails-db-reset/"/>
+    <updated>2018-01-18T13:37:29+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/01/18/rails-db-reset</id>
+    <content type="html"><![CDATA[<p>開発途中にDBを一度全部リセットして最初からつくり直したくなることがある。<br/>
+とりあえずやり方を二つ</p>
+
+<!--more-->
+
+
+<h3>全てレコードを空にしたいようば場合</h3>
+
+<ol>
+<li>全てのテーブルをdrop</li>
+<li><code>db/schema.rb</code>を元にテーブルを再作成</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">rake</span> <span class="ss">db</span><span class="p">:</span><span class="n">reset</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>テーブル定義を変更思でで全てのレコードを空にしたいような場合</h3>
+
+<ol>
+<li>全てのテーブルをdrop</li>
+<li><code>db/migrate</code>以下の全てのmigrationを実行してテーブルを再作成</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">rake</span> <span class="ss">db</span><span class="p">:</span><span class="ss">migrate</span><span class="p">:</span><span class="n">reset</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[cloud9でMySQLを使う]]></title>
@@ -2470,71 +2511,6 @@ slimは高速に書くことができるということなので試してみる�
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>&lt;img src="http://www.gravatar.com/avatar/d193dda398c5fa836f1d8007d64be8de?s=200" alt="Gravatar of wivern " title="Gravatar of wivern" /&gt;</span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress-サイドバーにProfile追加]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/08/30/octopress-sidebar-profile/"/>
-    <updated>2016-08-30T13:23:53+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/08/30/octopress-sidebar-profile</id>
-    <content type="html"><![CDATA[<p>デフォルトでプロフィール用のHTMLは以下の場所に作成されている。<br/>
-<code>source/_includes/custom/asides/about.html</code></p>
-
-<h3>about.htmlファイルを編集</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;section&gt;
-</span><span class='line'>  &lt;h1&gt;About Me&lt;/h1&gt;
-</span><span class='line'>  &lt;p&gt;A little something about me.&lt;/p&gt;
-</span><span class='line'>&lt;/section&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<!--more-->
-
-
-<p>サイドバーにabout.htmlを追加する場合は<code>_config.yml</code>に追記</p>
-
-<h3>_config.ymlの編集</h3>
-
-<p>サイドバーの先頭にプロフィールを表示させたいので、先頭に追記</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># list each of the sidebar modules you want to include, in the order you want them to appear.
-</span><span class='line'># To add custom asides, create files in /source/_includes/custom/asides/ and add them to the list like 'custom/asides/custom_aside_name.html'
-</span><span class='line'># default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
-</span><span class='line'>default_asides: [
-</span><span class='line'>  + custom/asides/about.html,
-</span><span class='line'>    asides/recent_posts.html,
-</span><span class='line'>    custom/asides/category_list.html,
-</span><span class='line'>    custom/asides/tag_cloud.html,
-</span><span class='line'>    asides/github.html, 
-</span><span class='line'>    asides/delicious.html,
-</span><span class='line'>    asides/pinboard.html, 
-</span><span class='line'>    asides/googleplus.html
-</span><span class='line'>    ]</span></code></pre></td></tr></table></div></figure>
-
-
-<p>サイドバーの<code>Recent Posts</code>の上に<code>Profile</code>で作成した<code>About Me</code>が表示される。</p>
-
-<p><img src="https://i.gyazo.com/3e88876a3442a236f47464741b565551.png" alt="octopress-sidebar-profile" /></p>
 ]]></content>
   </entry>
   
