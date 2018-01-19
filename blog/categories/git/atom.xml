@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2018-01-18T04:49:47+00:00</updated>
+  <updated>2018-01-19T01:25:24+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,99 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git取り消す時によく使うコマンド]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/01/19/git-restore-command/"/>
+    <updated>2018-01-19T09:15:40+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/01/19/git-restore-command</id>
+    <content type="html"><![CDATA[<p>コミットのバージョンを戻したりステージングしたものを編集内容ごと取り消したりと
+色々戻す方法があるが、戻す時によく忘れるのでメモ。</p>
+
+<!--more-->
+
+
+<h2>addする前の編集内容を取り消す</h2>
+
+<p><code>git checkout ファイル名</code>または<code>git checkout .</code>
+<code>git checkout .</code>は変更内容を全部ないことにしてくれるが、新規追加したファイルに
+関しては削除されない点に注意！</p>
+
+<pre><code class="bash">$ git checkout [file_name]
+
+$ git checkout .
+</code></pre>
+
+<p>完全に元に戻したい場合は別途削除する必要がある</p>
+
+<pre><code class="bash">$ rm -rf `git status --short | grep '??' | awk '{print $2}'`
+</code></pre>
+
+<h2>ステージングを取り消す</h2>
+
+<p>ステージングを取り下げる。編集内容は残る<br/>
+ファイル名を指定しないと全てのステージングが取り下げられる。</p>
+
+<pre><code class="bash">$ git reset [file_name]
+</code></pre>
+
+<p>ステージしたファイルを最後にコミットした状態に戻す(編集内容は残らない)</p>
+
+<pre><code class="bash">$ git checkout HEAD -- [file_name]
+</code></pre>
+
+<p>編集・ステージングいずれの変更内容を取り消し、最後にコミットした状態に戻す</p>
+
+<pre><code class="bash">$ git reset --hard HEAD
+</code></pre>
+
+<p><code>checkout</code>と<code>reset</code>の違いを説明をざっくりとだけ説明すると、
+大きく分けて違いは二つ</p>
+
+<ul>
+<li><p>作業ディレクトリの未保存の有無をチェック<br/>
+<code>checkout</code>：ある。うまくやれば未変更のファイルを全て更新してくれる<br/>
+<code>reset --hard</code>：ない。容赦無く上書きされる</p></li>
+<li><p>HEADの移動の仕方<br/>
+<code>checkout</code>：HEADそのものが移動。HEADが付いていたブランチに変化はない<br/>
+<code>reset</code>：HEADの示すブランチの方が移動</p></li>
+</ul>
+
+
+<h2>コミットのバージョンを戻す</h2>
+
+<p>コミットidを<code>git log</code>コマンドで調べて戻したいコミットidを指定する</p>
+
+<pre><code class="bash">$ git reset --hard [commit_id]
+</code></pre>
+
+<p><code>reset --hard</code>が戻った以降のコミットをなかったコトにする(コミットログが消える)のに
+対し<code>revert</code>はコミットログを残したまま戻る
+そのまま<code>push</code>したり<code>merge</code>されたりすると、反映されていない変更履歴が残ってしまい、
+戻したくなった時にそれを知らないと混乱させる元になる。
+チーム開発では要注意!</p>
+
+<pre><code class="bash">$ git revert [commit_id]
+</code></pre>
+
+<h2>リモートのバージョンを一つ前に戻す</h2>
+
+<p><strong>結論から言うとそれ用のコマンドは用意されていない！</strong></p>
+
+<p>念の為バックアップを作成</p>
+
+<pre><code class="bash">$ git push origin mastermaster_bak
+</code></pre>
+
+<p><code>remote</code>の<code>master</code>を一旦消す。ローカルを一つ戻す<br/>
+<code>push</code>して反映させる</p>
+
+<pre><code class="bash">$ git push origin :master_bak
+</code></pre>
+
+<p>バックアップを消す</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Git-特定のブランチを指定してclone]]></title>

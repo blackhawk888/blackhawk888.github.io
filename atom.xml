@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2018-01-18T04:49:47+00:00</updated>
+  <updated>2018-01-19T01:25:24+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,119 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git取り消す時によく使うコマンド]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/01/19/git-restore-command/"/>
+    <updated>2018-01-19T09:15:40+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/01/19/git-restore-command</id>
+    <content type="html"><![CDATA[<p>コミットのバージョンを戻したりステージングしたものを編集内容ごと取り消したりと
+色々戻す方法があるが、戻す時によく忘れるのでメモ。</p>
+
+<!--more-->
+
+
+<h2>addする前の編集内容を取り消す</h2>
+
+<p><code>git checkout ファイル名</code>または<code>git checkout .</code>
+<code>git checkout .</code>は変更内容を全部ないことにしてくれるが、新規追加したファイルに
+関しては削除されない点に注意！</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git checkout <span class="o">[</span>file_name<span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ </span>git checkout .
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>完全に元に戻したい場合は別途削除する必要がある</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rm -rf <span class="sb">`</span>git status --short <span class="p">|</span> grep <span class="s1">&#39;??&#39;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span><span class="sb">`</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>ステージングを取り消す</h2>
+
+<p>ステージングを取り下げる。編集内容は残る<br/>
+ファイル名を指定しないと全てのステージングが取り下げられる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git reset <span class="o">[</span>file_name<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ステージしたファイルを最後にコミットした状態に戻す(編集内容は残らない)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git checkout HEAD -- <span class="o">[</span>file_name<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>編集・ステージングいずれの変更内容を取り消し、最後にコミットした状態に戻す</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git reset --hard HEAD
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>checkout</code>と<code>reset</code>の違いを説明をざっくりとだけ説明すると、
+大きく分けて違いは二つ</p>
+
+<ul>
+<li><p>作業ディレクトリの未保存の有無をチェック<br/>
+<code>checkout</code>：ある。うまくやれば未変更のファイルを全て更新してくれる<br/>
+<code>reset --hard</code>：ない。容赦無く上書きされる</p></li>
+<li><p>HEADの移動の仕方<br/>
+<code>checkout</code>：HEADそのものが移動。HEADが付いていたブランチに変化はない<br/>
+<code>reset</code>：HEADの示すブランチの方が移動</p></li>
+</ul>
+
+
+<h2>コミットのバージョンを戻す</h2>
+
+<p>コミットidを<code>git log</code>コマンドで調べて戻したいコミットidを指定する</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git reset --hard <span class="o">[</span>commit_id<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>reset --hard</code>が戻った以降のコミットをなかったコトにする(コミットログが消える)のに
+対し<code>revert</code>はコミットログを残したまま戻る
+そのまま<code>push</code>したり<code>merge</code>されたりすると、反映されていない変更履歴が残ってしまい、
+戻したくなった時にそれを知らないと混乱させる元になる。
+チーム開発では要注意!</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git revert <span class="o">[</span>commit_id<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>リモートのバージョンを一つ前に戻す</h2>
+
+<p><strong>結論から言うとそれ用のコマンドは用意されていない！</strong></p>
+
+<p>念の為バックアップを作成</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git push origin mastermaster_bak
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>remote</code>の<code>master</code>を一旦消す。ローカルを一つ戻す<br/>
+<code>push</code>して反映させる</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git push origin :master_bak
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>バックアップを消す</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[RailsでDBをリセットして最初からつくり直す]]></title>
@@ -2360,157 +2473,6 @@ slimは高速に書くことができるということなので試してみる�
 また下にある<code>published</code>のステートメントは最後の方に判断されるので、 後で投稿しようと思っている下書きがあって、
 今書いているものを投稿しようと<code>bundle exec gen_deploy</code>すると、 中途半端な今の記事と後で投稿する予定だった
 下書きの方が送られてしまうことがあるので ちょっとした変更以外は一旦<code>bundele exec generate</code>した方がよいかもしれない。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress-サイドバーにGravatar追加]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/08/30/octopress-sidebar-gravatar/"/>
-    <updated>2016-08-30T16:00:38+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/08/30/octopress-sidebar-gravatar</id>
-    <content type="html"><![CDATA[<p>サイドバーにProfileを表示させるようにしたのでついでにGravatarも表示させてみる。</p>
-
-<p><a href="https://ja.gravatar.com/site/implement/">Gravatarに開発者向け資料</a>があったので
-見てみるとJSONでプロフィール情報を返すAPIを提供しているようなのでそれ使って情報を持ってきて、
-画面に反映させなきゃいけないと思っていてGithubを眺めていたらOctopressでGravatarを表示させる
-プラグインがあったのでそれを使用してみることにした。</p>
-
-<!--more-->
-
-
-<p><a href="https://github.com/joet3ch/gravatar-octopress">joet3ch/gravatar-octopress</a><br/>
-簡単に説明するとGravatarの画像をimgタグでひっぱってこれるようになるので、
-それを参考にしつつ、souce/_include/custom/asides/about.html を編集するという流れ。</p>
-
-<p>以下手順</p>
-
-<h3>インストール</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone https://github.com/joet3ch/gravatar-octopress.git</span></code></pre></td></tr></table></div></figure>
-
-
-<h3><code>gravatar.html</code>を<code>_includes/custom/asides</code>にコピー</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd gravatar-octopress
-</span><span class='line'>$ cp gravatar.html [directory_name]/_includes/custom/asides</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>_config.ymlに追記</h3>
-
-<figure class='code'><figcaption><span>_config.yml </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'> <span class="l-Scalar-Plain">+</span> <span class="c1"># Gravatar  </span>
-</span><span class='line'> <span class="l-Scalar-Plain">+ gravatar_email</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">youraddress@example.com</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>_config.ymlのdefault_asides変数にgravatar.htmlを追加</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># list each of the sidebar modules you want to include, in the order you want them to appear.
-</span><span class='line'># To add custom asides, create files in /source/_includes/custom/asides/ and add them to the list like 'custom/asides/custom_aside_name.html'
-</span><span class='line'># default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
-</span><span class='line'>default_asides: [
-</span><span class='line'>  + custom/asides/about.html,
-</span><span class='line'>    asides/recent_posts.html,
-</span><span class='line'>    custom/asides/category_list.html,
-</span><span class='line'>    custom/asides/tag_cloud.html,
-</span><span class='line'>    asides/github.html, 
-</span><span class='line'>    asides/delicious.html,
-</span><span class='line'>    asides/pinboard.html, 
-</span><span class='line'>    asides/googleplus.html
-</span><span class='line'>    ]</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>Gravatar導入前</strong></p>
-
-<p><img src="https://i.gyazo.com/26245cde8185fad41104a09e79e3a8cc.png" alt="Gravatar導入前" /></p>
-
-<p><strong>Gravatar導入後</strong></p>
-
-<p><img src="https://i.gyazo.com/0211d5f0a5057fcf087250a9248d0b6c.png" alt="Gravatar導入後" /></p>
-
-<p>Gravatarの画像がProfileの上に来ているので<code>config.yml</code>の<code>asides</code>に設定するのではなく
-<code>souce/_include/custom/asides/about.html</code>を編集するように変更。</p>
-
-<h3>_config.ymlの編集</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># list each of the sidebar modules you want to include, in the order you want them to appear.
-</span><span class='line'># To add custom asides, create files in /source/_includes/custom/asides/ and add them to the list like 'custom/asides/custom_aside_name.html'
-</span><span class='line'># default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
-</span><span class='line'>default_asides: [
-</span><span class='line'>  - custom/asides/about.html,
-</span><span class='line'>    asides/recent_posts.html,
-</span><span class='line'>    custom/asides/category_list.html,
-</span><span class='line'>    custom/asides/tag_cloud.html,
-</span><span class='line'>    asides/github.html, 
-</span><span class='line'>    asides/delicious.html,
-</span><span class='line'>    asides/pinboard.html, 
-</span><span class='line'>    asides/googleplus.html
-</span><span class='line'>    ]</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>souce/_include/custom/asides/about.html編集</h3>
-
-<p><code>about.html</code>を以下のように変更</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;section&gt;
-</span><span class='line'>  &lt;h1&gt;Profile&lt;/h1&gt;
-</span><span class='line'>  
-</span><span class='line'>    &lt;img src="http://www.gravatar.com/avatar/d193dda398c5fa836f1d8007d64be8de" alt="Gravatar of wivern" title="Gravatar of wivern" align="left" style="margin-right:10px;" /&gt;
-</span><span class='line'>  
-</span><span class='line'>  Hoge Hoge
-</span><span class='line'>  &lt;br clear="left"&gt;
-</span><span class='line'>&lt;/section&gt;
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>about.html編集後</strong></p>
-
-<p><img src="https://i.gyazo.com/8459f225d4670991f1b76d844b772e6f.png" alt="about.html編集後" /></p>
-
-<p>Gravatarの画像イメージサイズは<code>gravatar.html</code>を編集することで可能</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;img src="http://www.gravatar.com/avatar/d193dda398c5fa836f1d8007d64be8de?s=200" alt="Gravatar of wivern " title="Gravatar of wivern" /&gt;</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   
