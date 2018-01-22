@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2018-01-22T07:16:03+00:00</updated>
+  <updated>2018-01-22T07:17:56+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Rvmで管理しているrubyのバージョン切り替え方法]]></title>
     <link href="http://blackhawk888.github.io/blog/2018/01/22/rvm-version-switch/"/>
-    <updated>2018-01-22T06:48:53+00:00</updated>
+    <updated>2018-01-22T16:48:53+00:00</updated>
     <id>http://blackhawk888.github.io/blog/2018/01/22/rvm-version-switch</id>
     <content type="html"><![CDATA[<p>rvmを使う頻度は多くはないがcloud9上で使用されているのでインストールされているrubyの
 バージョンを変更する時に忘れがちなのでメモ</p>
