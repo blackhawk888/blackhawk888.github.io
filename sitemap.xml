@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://blackhawk888.github.io/blog/2018/01/22/rvm-version-switch/</loc>
+<lastmod>2018-01-22T06:48:53+00:00</lastmod>
+</url>
+<url>
 <loc>http://blackhawk888.github.io/blog/2018/01/19/git-restore-command/</loc>
 <lastmod>2018-01-19T09:15:40+00:00</lastmod>
 </url>
@@ -188,5 +192,8 @@
 </url>
 <url>
 <loc>http://blackhawk888.github.io/blog/categories/mysql/</loc>
+</url>
+<url>
+<loc>http://blackhawk888.github.io/blog/categories/ruby/</loc>
 </url>
 </urlset>

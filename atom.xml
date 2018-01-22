@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2018-01-19T01:25:24+00:00</updated>
+  <updated>2018-01-22T07:16:03+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,209 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rvmで管理しているrubyのバージョン切り替え方法]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/01/22/rvm-version-switch/"/>
+    <updated>2018-01-22T06:48:53+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/01/22/rvm-version-switch</id>
+    <content type="html"><![CDATA[<p>rvmを使う頻度は多くはないがcloud9上で使用されているのでインストールされているrubyの
+バージョンを変更する時に忘れがちなのでメモ</p>
+
+<!--more-->
+
+
+<h2>現在のインストールされているrubyのバージョン確認</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>ruby -v
+</span><span class='line'>ruby 2.4.0p0 <span class="o">(</span>2016-12-24 revision 57164<span class="o">)</span> <span class="o">[</span>x86_64-linux<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>インストール出来るrubyのバージョンを確認する</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rvm list known
+</span><span class='line'>
+</span><span class='line'>Warning, new version of rvm available <span class="s1">&#39;1.29.3&#39;</span>, you are using older version <span class="s1">&#39;1.29.2&#39;</span>.
+</span><span class='line'>You can disable this warning with:    <span class="nb">echo </span><span class="nv">rvm_autoupdate_flag</span><span class="o">=</span><span class="m">0</span> &gt;&gt; ~/.rvmrc
+</span><span class='line'>You can <span class="nb">enable  </span>auto-update  with:    <span class="nb">echo </span><span class="nv">rvm_autoupdate_flag</span><span class="o">=</span><span class="m">2</span> &gt;&gt; ~/.rvmrc
+</span><span class='line'><span class="c"># MRI Rubies</span>
+</span><span class='line'><span class="o">[</span>ruby-<span class="o">]</span>1.8.6<span class="o">[</span>-p420<span class="o">]</span>
+</span><span class='line'><span class="o">[</span>ruby-<span class="o">]</span>1.8.7<span class="o">[</span>-head<span class="o">]</span> <span class="c"># security released on head</span>
+</span><span class='line'><span class="o">[</span>ruby-<span class="o">]</span>1.9.1<span class="o">[</span>-p431<span class="o">]</span>
+</span><span class='line'><span class="o">[</span>ruby-<span class="o">]</span>1.9.2<span class="o">[</span>-p330<span class="o">]</span>
+</span><span class='line'><span class="o">[</span>ruby-<span class="o">]</span>1.9.3<span class="o">[</span>-p551<span class="o">]</span>
+</span><span class='line'><span class="o">[</span>ruby-<span class="o">]</span>2.0.0<span class="o">[</span>-p648<span class="o">]</span>
+</span><span class='line'><span class="o">[</span>ruby-<span class="o">]</span>2.1<span class="o">[</span>.10<span class="o">]</span>
+</span><span class='line'><span class="o">[</span>ruby-<span class="o">]</span>2.2<span class="o">[</span>.6<span class="o">]</span>
+</span><span class='line'><span class="o">[</span>ruby-<span class="o">]</span>2.3<span class="o">[</span>.3<span class="o">]</span>
+</span><span class='line'><span class="o">[</span>ruby-<span class="o">]</span>2.4<span class="o">[</span>.0<span class="o">]</span>
+</span><span class='line'>ruby-head
+</span><span class='line'>
+</span><span class='line'><span class="c"># for forks use: rvm install ruby-head-&lt;name&gt; --url https://github.com/github/ruby.git --branch 2.2</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># JRuby</span>
+</span><span class='line'>jruby-1.6<span class="o">[</span>.8<span class="o">]</span>
+</span><span class='line'>jruby-1.7<span class="o">[</span>.26<span class="o">]</span>
+</span><span class='line'>jruby<span class="o">[</span>-9.1.7.0<span class="o">]</span>
+</span><span class='line'>jruby-head
+</span><span class='line'>
+</span><span class='line'><span class="c"># Rubinius</span>
+</span><span class='line'>rbx-1<span class="o">[</span>.4.3<span class="o">]</span>
+</span><span class='line'>rbx-2.3<span class="o">[</span>.0<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>インストールしたいrubyのバージョンをインストール(今回はruby2.3.0をインストール)</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rvm instlal 2.3.0
+</span><span class='line'>
+</span><span class='line'>Warning, new version of rvm available <span class="s1">&#39;1.29.3&#39;</span>, you are using older version <span class="s1">&#39;1.29.2&#39;</span>.
+</span><span class='line'>You can disable this warning with:    <span class="nb">echo </span><span class="nv">rvm_autoupdate_flag</span><span class="o">=</span><span class="m">0</span> &gt;&gt; ~/.rvmrc
+</span><span class='line'>You can <span class="nb">enable  </span>auto-update  with:    <span class="nb">echo </span><span class="nv">rvm_autoupdate_flag</span><span class="o">=</span><span class="m">2</span> &gt;&gt; ~/.rvmrc
+</span><span class='line'>Searching <span class="k">for</span> binary rubies, this might take some time.
+</span><span class='line'>Found remote file https://rubies.travis-ci.org/ubuntu/14.04/x86_64/ruby-2.3.0.tar.bz2
+</span><span class='line'>Checking requirements <span class="k">for</span> ubuntu.
+</span><span class='line'>Requirements installation successful.
+</span><span class='line'>ruby-2.3.0 - <span class="c">#configure</span>
+</span><span class='line'>ruby-2.3.0 - <span class="c">#download</span>
+</span><span class='line'>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+</span><span class='line'>                                 Dload  Upload   Total   Spent    Left  Speed
+</span><span class='line'>  <span class="m">0</span>     <span class="m">0</span>    <span class="m">0</span>     <span class="m">0</span>    <span class="m">0</span>     <span class="m">0</span>      <span class="m">0</span>      <span class="m">0</span> --:--:--  0:00:01 --:--:--     0
+</span><span class='line'><span class="m">100</span> 25.1M  <span class="m">100</span> 25.1M    <span class="m">0</span>     <span class="m">0</span>  1073k      <span class="m">0</span>  0:00:23  0:00:23 --:--:-- 1427k
+</span><span class='line'>No checksum <span class="k">for</span> downloaded archive, recording checksum in user configuration.
+</span><span class='line'>ruby-2.3.0 - <span class="c">#validate archive</span>
+</span><span class='line'>ruby-2.3.0 - <span class="c">#extract</span>
+</span><span class='line'>ruby-2.3.0 - <span class="c">#validate binary</span>
+</span><span class='line'>ruby-2.3.0 - <span class="c">#setup</span>
+</span><span class='line'>ruby-2.3.0 - <span class="c">#gemset created /usr/local/rvm/gems/ruby-2.3.0@global</span>
+</span><span class='line'>ruby-2.3.0 - <span class="c">#importing gemset /usr/local/rvm/gemsets/global.gems...................................</span>
+</span><span class='line'>ruby-2.3.0 - <span class="c">#generating global wrappers........</span>
+</span><span class='line'>ruby-2.3.0 - <span class="c">#gemset created /usr/local/rvm/gems/ruby-2.3.0</span>
+</span><span class='line'>ruby-2.3.0 - <span class="c">#importing gemsetfile /usr/local/rvm/gemsets/default.gems evaluated to empty gem list</span>
+</span><span class='line'>ruby-2.3.0 - <span class="c">#generating default wrappers........</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>指定したrubyのバージョンがインストールされたか確認</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rvm list
+</span><span class='line'>
+</span><span class='line'>rvm <span class="nv">rubies</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">=</span>&gt; ruby-2.3.0 <span class="o">[</span> x86_64 <span class="o">]</span>
+</span><span class='line'> * ruby-2.4.0 <span class="o">[</span> x86_64 <span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># =&gt; - current</span>
+</span><span class='line'><span class="c"># =* - current &amp;&amp; default</span>
+</span><span class='line'><span class="c">#  * - default</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>デフォルトのバージョンを変更</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rvm --default use 2.3.0
+</span><span class='line'>Using /usr/local/rvm/gems/ruby-2.3.0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>現在のバージョンを確認</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rvm list
+</span><span class='line'>
+</span><span class='line'>rvm <span class="nv">rubies</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">=</span>* ruby-2.3.0 <span class="o">[</span> x86_64 <span class="o">]</span>
+</span><span class='line'>   ruby-2.4.0 <span class="o">[</span> x86_64 <span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># =&gt; - current</span>
+</span><span class='line'><span class="c"># =* - current &amp;&amp; default</span>
+</span><span class='line'><span class="c">#  * - default</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Git取り消す時によく使うコマンド]]></title>
@@ -2427,52 +2630,6 @@ slimは高速に書くことができるということなので試してみる�
 <code>published: true</code>と<code>author: [author]</code>と記事に頭で<code>&lt;!—more—&gt;</code>が初期値として入るようになるので
 必要に併せて下書き中でdeployしたくなかったら<code>published: false</code>に変更し、<code>&lt;!--more--&gt;</code>タグの
 位置も変更すればよい。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress-下書きをdeployしないようにする]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/08/31/octopress-draft/"/>
-    <updated>2016-08-31T15:59:56+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/08/31/octopress-draft</id>
-    <content type="html"><![CDATA[<p>下書きしていて完成してない状態でも、他の部分だけを公開したい時があると思う。<br/>
-その時はYAMLブロックに<code>published:false</code>加えるとそのファイルは<code>bundle exec rake generate</code>を実行すると
-下書きは生成されないが、<code>bundle exec rake preview</code>をした時は表示される。</p>
-
-<figure class='code'><figcaption><span>exsample.markdown </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">---</span>
-</span><span class='line'><span class="ss">layout</span><span class="p">:</span> <span class="n">post</span>
-</span><span class='line'><span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;exsample&quot;</span>
-</span><span class='line'><span class="ss">date</span><span class="p">:</span> <span class="mi">2016</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">31</span> <span class="mi">08</span><span class="p">:</span><span class="mi">42</span><span class="p">:</span><span class="mi">56</span> <span class="o">+</span><span class="mo">0000</span>
-</span><span class='line'><span class="ss">comments</span><span class="p">:</span> <span class="kp">true</span>
-</span><span class='line'><span class="ss">categories</span><span class="p">:</span> <span class="o">[</span><span class="n">exsample</span><span class="o">]</span>
-</span><span class='line'><span class="ss">published</span><span class="p">:</span> <span class="kp">false</span>
-</span><span class='line'><span class="o">---</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">### 下書き中</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<!--more-->
-
-
-<p><code>bundle exec gen_deploy</code>は<code>generate</code>が失敗した場合でも<code>deploy</code>を実行するので
-<code>generate</code>失敗な形で投稿されてしまうことがある。
-また下にある<code>published</code>のステートメントは最後の方に判断されるので、 後で投稿しようと思っている下書きがあって、
-今書いているものを投稿しようと<code>bundle exec gen_deploy</code>すると、 中途半端な今の記事と後で投稿する予定だった
-下書きの方が送られてしまうことがあるので ちょっとした変更以外は一旦<code>bundele exec generate</code>した方がよいかもしれない。</p>
 ]]></content>
   </entry>
   

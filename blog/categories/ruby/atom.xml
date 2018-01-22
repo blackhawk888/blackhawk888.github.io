@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ruby | Wivern Blog]]></title>
+  <link href="http://blackhawk888.github.io/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://blackhawk888.github.io/"/>
+  <updated>2018-01-22T07:16:03+00:00</updated>
+  <id>http://blackhawk888.github.io/</id>
+  <author>
+    <name><![CDATA[wivern]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Rvmで管理しているrubyのバージョン切り替え方法]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/01/22/rvm-version-switch/"/>
+    <updated>2018-01-22T06:48:53+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/01/22/rvm-version-switch</id>
+    <content type="html"><![CDATA[<p>rvmを使う頻度は多くはないがcloud9上で使用されているのでインストールされているrubyの
+バージョンを変更する時に忘れがちなのでメモ</p>
+
+<!--more-->
+
+
+<h2>現在のインストールされているrubyのバージョン確認</h2>
+
+<pre><code class="bash">
+$ ruby -v
+ruby 2.4.0p0 (2016-12-24 revision 57164) [x86_64-linux]
+</code></pre>
+
+<h2>インストール出来るrubyのバージョンを確認する</h2>
+
+<pre><code>$ rvm list known
+
+Warning, new version of rvm available '1.29.3', you are using older version '1.29.2'.
+You can disable this warning with:    echo rvm_autoupdate_flag=0 &gt;&gt; ~/.rvmrc
+You can enable  auto-update  with:    echo rvm_autoupdate_flag=2 &gt;&gt; ~/.rvmrc
+# MRI Rubies
+[ruby-]1.8.6[-p420]
+[ruby-]1.8.7[-head] # security released on head
+[ruby-]1.9.1[-p431]
+[ruby-]1.9.2[-p330]
+[ruby-]1.9.3[-p551]
+[ruby-]2.0.0[-p648]
+[ruby-]2.1[.10]
+[ruby-]2.2[.6]
+[ruby-]2.3[.3]
+[ruby-]2.4[.0]
+ruby-head
+
+# for forks use: rvm install ruby-head-&lt;name&gt; --url https://github.com/github/ruby.git --branch 2.2
+
+# JRuby
+jruby-1.6[.8]
+jruby-1.7[.26]
+jruby[-9.1.7.0]
+jruby-head
+
+# Rubinius
+rbx-1[.4.3]
+rbx-2.3[.0]
+</code></pre>
+
+<h2>インストールしたいrubyのバージョンをインストール(今回はruby2.3.0をインストール)</h2>
+
+<pre><code>$ rvm instlal 2.3.0
+
+Warning, new version of rvm available '1.29.3', you are using older version '1.29.2'.
+You can disable this warning with:    echo rvm_autoupdate_flag=0 &gt;&gt; ~/.rvmrc
+You can enable  auto-update  with:    echo rvm_autoupdate_flag=2 &gt;&gt; ~/.rvmrc
+Searching for binary rubies, this might take some time.
+Found remote file https://rubies.travis-ci.org/ubuntu/14.04/x86_64/ruby-2.3.0.tar.bz2
+Checking requirements for ubuntu.
+Requirements installation successful.
+ruby-2.3.0 - #configure
+ruby-2.3.0 - #download
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0
+100 25.1M  100 25.1M    0     0  1073k      0  0:00:23  0:00:23 --:--:-- 1427k
+No checksum for downloaded archive, recording checksum in user configuration.
+ruby-2.3.0 - #validate archive
+ruby-2.3.0 - #extract
+ruby-2.3.0 - #validate binary
+ruby-2.3.0 - #setup
+ruby-2.3.0 - #gemset created /usr/local/rvm/gems/ruby-2.3.0@global
+ruby-2.3.0 - #importing gemset /usr/local/rvm/gemsets/global.gems...................................
+ruby-2.3.0 - #generating global wrappers........
+ruby-2.3.0 - #gemset created /usr/local/rvm/gems/ruby-2.3.0
+ruby-2.3.0 - #importing gemsetfile /usr/local/rvm/gemsets/default.gems evaluated to empty gem list
+ruby-2.3.0 - #generating default wrappers........
+</code></pre>
+
+<h2>指定したrubyのバージョンがインストールされたか確認</h2>
+
+<pre><code>$ rvm list
+
+rvm rubies
+
+=&gt; ruby-2.3.0 [ x86_64 ]
+ * ruby-2.4.0 [ x86_64 ]
+
+# =&gt; - current
+# =* - current &amp;&amp; default
+#  * - default
+</code></pre>
+
+<h2>デフォルトのバージョンを変更</h2>
+
+<pre><code>$ rvm --default use 2.3.0
+Using /usr/local/rvm/gems/ruby-2.3.0
+</code></pre>
+
+<h2>現在のバージョンを確認</h2>
+
+<pre><code>$ rvm list
+
+rvm rubies
+
+=* ruby-2.3.0 [ x86_64 ]
+   ruby-2.4.0 [ x86_64 ]
+
+# =&gt; - current
+# =* - current &amp;&amp; default
+#  * - default
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
