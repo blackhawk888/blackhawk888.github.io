@@ -6,15 +6,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="google-site-verification" content="vY2EmWIVKKAtlat_5KCgpFUJrL4LWlUa0XZ2xv7RQ1s" />
-  <title>Octopress 記事の削除 - Wivern Blog</title>
+  <title>Minitestの基本 - Wivern Blog</title>
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="該当するmarkdownファイルを削除しデプロイするだけ。
-ディレクトリの場所: source/_posts/ 1
+  <meta name="description" content="「プロを目指す人のためのRuby入門」という本を今読んでいるのだが、
+第３章にMinitestの基本がのっていたので忘れないようにメモ。 sample.rb 1
 2
-$ rm source/_posts/post-title.markdown
-$ rake gen_deploy ">
+3
+4
+5
+6
+7
+require &#39;minitest/autorun&#39; class SampleTest &lt &hellip;">
   
   
   <link href="/stylesheets/table.css" rel="stylesheet" type="text/css" />
@@ -25,7 +29,7 @@ $ rake gen_deploy ">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blackhawk888.github.io/blog/2016/08/29/octopress-post-delete/">
+  <link rel="canonical" href="http://blackhawk888.github.io/blog/2018/01/28/ruby-test/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Wivern Blog" type="application/atom+xml">
@@ -88,7 +92,7 @@ $ rake gen_deploy ">
   
   <header>
     
-      <h1 class="entry-title">Octopress 記事の削除</h1>
+      <h1 class="entry-title">Minitestの基本</h1>
     
     
       <p class="meta">
@@ -97,20 +101,68 @@ $ rake gen_deploy ">
 
 
 
-<time class='entry-date' datetime='2016-08-29T20:21:05+00:00'><span class='date'>2016年08月29日</span> <span class='time'>20:21:05</span></time>
+<time class='entry-date' datetime='2018-01-28T09:20:25+00:00'><span class='date'>2018年01月28日</span> <span class='time'>09:20:25</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>該当するmarkdownファイルを削除しデプロイするだけ。<br/>
-ディレクトリの場所: <code>source/_posts/</code></p>
+<div class="entry-content"><p>「プロを目指す人のためのRuby入門」という本を今読んでいるのだが、
+第３章にMinitestの基本がのっていたので忘れないようにメモ。</p>
+
+<!--more-->
+
+
+
+
+<figure class='code'><figcaption><span>sample.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;minitest/autorun&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">SampleTest</span> <span class="o">&lt;</span> <span class="no">Minitest</span><span class="o">::</span><span class="no">Test</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">test_sample</span>
+</span><span class='line'>    <span class="n">assert_equal</span> <span class="s1">&#39;RUBY&#39;</span><span class="p">,</span> <span class="s1">&#39;ruby&#39;</span><span class="o">.</span><span class="n">upcaxe</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>１行目 <code>requre 'minitest/autorun'</code>はライブラリを読み込んでブログラム内でMinitestを使えるようにするためのコード</li>
+<li><p>３行目 <code>class SampleTest &lt; Minitest::Test</code>から７行目までがテストコードの本体</p></li>
+<li><p><code>SampleTest</code>はクラスの名前。命名規則は自由だが慣例として<code>JapaneseCalenderTest</code>や<code>TestOrderIterm</code>などTestで終わるかTestで始まる
+名前をつけることが多い。</p></li>
+<li>またテストコードが書かれたファイルクラスのファイル名は<code>japanese_calendar_test.rb</code>や<code>test_order_iterm.rb</code>のようにクラス名と合わせる。</li>
+<li>クラスの名前はキャメルケースでファイルの名前はスネークケースで書く。</li>
+<li>&lt; Minitest:Testの部分はSampleTestクラスがMinitet::Testクラスを継承することを表している。</li>
+<li>４行目のdef <code>test_sample</code>から６行目までが実行対象となるテストメソッド。Minitestでは<code>test_</code>で始まるメソッドを探してそれを実行するので <code>test_</code>ではじめることが必須になる。(テストクラス内では<code>test_</code>で始まるメソッドを複数定義してもかまわない。Minitestは<code>test_</code>で始まるメソッドを全て実行する)</li>
+<li>５行目の<code>assert_equal 'RUBY', 'ruby'.upcase</code>が実行結果を確認するための検証メソッド(assert_equal 期待する結果、テスト対象となる値や式)</li>
+</ul>
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ rm source/_posts/post-title.markdown
-</span><span class='line'>$ rake gen_deploy</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># aがbと等しければパスをする
+</span><span class='line'>assert_equal b, a
+</span><span class='line'>
+</span><span class='line'># aが死んであればパスをする
+</span><span class='line'>assert a
+</span><span class='line'>
+</span><span class='line'># aが義であればパスをする
+</span><span class='line'>refute a</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
@@ -127,12 +179,12 @@ $ rake gen_deploy ">
 
 
 
-<time class='entry-date' datetime='2016-08-29T20:21:05+00:00'><span class='date'>2016年08月29日</span> <span class='time'>20:21:05</span></time>
+<time class='entry-date' datetime='2018-01-28T09:20:25+00:00'><span class='date'>2018年01月28日</span> <span class='time'>09:20:25</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/octopress/'>octopress</a>
+    <a class='category' href='/blog/categories/ruby/'>ruby</a>
   
 </span>
 
@@ -141,7 +193,7 @@ $ rake gen_deploy ">
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2016/08/29/octopress-post-delete/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2016/08/29/octopress-post-delete/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2018/01/28/ruby-test/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2018/01/28/ruby-test/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -154,10 +206,8 @@ $ rake gen_deploy ">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/08/28/octopress-webmaster/" title="Previous Post: Octopress-Googleウェブマスターツール登録">&laquo; Octopress-Googleウェブマスターツール登録</a>
+        <a class="basic-alignment left" href="/blog/2018/01/22/rvm-version-switch/" title="Previous Post: rvmで管理しているrubyのバージョン切り替え方法">&laquo; rvmで管理しているrubyのバージョン切り替え方法</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/08/29/octopress-newpage/" title="Next Post: Octopress-新規ページ作成">Octopress-新規ページ作成 &raquo;</a>
       
     </p>
   </footer>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2018-01-22T07:17:56+00:00</updated>
+  <updated>2018-01-28T03:32:36+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Minitestの基本]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/01/28/ruby-test/"/>
+    <updated>2018-01-28T09:20:25+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/01/28/ruby-test</id>
+    <content type="html"><![CDATA[<p>「プロを目指す人のためのRuby入門」という本を今読んでいるのだが、
+第３章にMinitestの基本がのっていたので忘れないようにメモ。</p>
+
+<!--more-->
+
+
+<p><figure class='code'><figcaption><span>sample.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">minitest</span><span class="o">/</span><span class="n">autorun</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;class SampleTest &amp;lt; Minitest::Test</span>
+</span><span class='line'><span class="sr">  def test_sample</span>
+</span><span class='line'><span class="sr">    assert_equal &amp;lsquo;RUBY&amp;rsquo;, &amp;lsquo;ruby&amp;rsquo;.upcaxe</span>
+</span><span class='line'><span class="sr">  end</span>
+</span><span class='line'><span class="sr">end</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+<li>１行目 <code>requre 'minitest/autorun'</code>はライブラリを読み込んでブログラム内でMinitestを使えるようにするためのコード</li>
+<li><p>３行目 <code>class SampleTest &lt; Minitest::Test</code>から７行目までがテストコードの本体</p></li>
+<li><p><code>SampleTest</code>はクラスの名前。命名規則は自由だが慣例として<code>JapaneseCalenderTest</code>や<code>TestOrderIterm</code>などTestで終わるかTestで始まる
+名前をつけることが多い。</p></li>
+<li>またテストコードが書かれたファイルクラスのファイル名は<code>japanese_calendar_test.rb</code>や<code>test_order_iterm.rb</code>のようにクラス名と合わせる。</li>
+<li>クラスの名前はキャメルケースでファイルの名前はスネークケースで書く。</li>
+<li>&lt; Minitest:Testの部分はSampleTestクラスがMinitet::Testクラスを継承することを表している。</li>
+<li>４行目のdef <code>test_sample</code>から６行目までが実行対象となるテストメソッド。Minitestでは<code>test_</code>で始まるメソッドを探してそれを実行するので <code>test_</code>ではじめることが必須になる。(テストクラス内では<code>test_</code>で始まるメソッドを複数定義してもかまわない。Minitestは<code>test_</code>で始まるメソッドを全て実行する)</li>
+<li>５行目の<code>assert_equal 'RUBY', 'ruby'.upcase</code>が実行結果を確認するための検証メソッド(assert_equal 期待する結果、テスト対象となる値や式)</li>
+</ul>
+
+
+<pre><code># aがbと等しければパスをする
+assert_equal b, a
+
+# aが死んであればパスをする
+assert a
+
+# aが義であればパスをする
+refute a
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rvmで管理しているrubyのバージョン切り替え方法]]></title>

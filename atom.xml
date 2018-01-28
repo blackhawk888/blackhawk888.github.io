@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2018-01-22T07:17:56+00:00</updated>
+  <updated>2018-01-28T03:32:36+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,70 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Minitestの基本]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/01/28/ruby-test/"/>
+    <updated>2018-01-28T09:20:25+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/01/28/ruby-test</id>
+    <content type="html"><![CDATA[<p>「プロを目指す人のためのRuby入門」という本を今読んでいるのだが、
+第３章にMinitestの基本がのっていたので忘れないようにメモ。</p>
+
+<!--more-->
+
+
+
+
+<figure class='code'><figcaption><span>sample.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;minitest/autorun&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">SampleTest</span> <span class="o">&lt;</span> <span class="no">Minitest</span><span class="o">::</span><span class="no">Test</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">test_sample</span>
+</span><span class='line'>    <span class="n">assert_equal</span> <span class="s1">&#39;RUBY&#39;</span><span class="p">,</span> <span class="s1">&#39;ruby&#39;</span><span class="o">.</span><span class="n">upcaxe</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>１行目 <code>requre 'minitest/autorun'</code>はライブラリを読み込んでブログラム内でMinitestを使えるようにするためのコード</li>
+<li><p>３行目 <code>class SampleTest &lt; Minitest::Test</code>から７行目までがテストコードの本体</p></li>
+<li><p><code>SampleTest</code>はクラスの名前。命名規則は自由だが慣例として<code>JapaneseCalenderTest</code>や<code>TestOrderIterm</code>などTestで終わるかTestで始まる
+名前をつけることが多い。</p></li>
+<li>またテストコードが書かれたファイルクラスのファイル名は<code>japanese_calendar_test.rb</code>や<code>test_order_iterm.rb</code>のようにクラス名と合わせる。</li>
+<li>クラスの名前はキャメルケースでファイルの名前はスネークケースで書く。</li>
+<li>&lt; Minitest:Testの部分はSampleTestクラスがMinitet::Testクラスを継承することを表している。</li>
+<li>４行目のdef <code>test_sample</code>から６行目までが実行対象となるテストメソッド。Minitestでは<code>test_</code>で始まるメソッドを探してそれを実行するので <code>test_</code>ではじめることが必須になる。(テストクラス内では<code>test_</code>で始まるメソッドを複数定義してもかまわない。Minitestは<code>test_</code>で始まるメソッドを全て実行する)</li>
+<li>５行目の<code>assert_equal 'RUBY', 'ruby'.upcase</code>が実行結果を確認するための検証メソッド(assert_equal 期待する結果、テスト対象となる値や式)</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># aがbと等しければパスをする
+</span><span class='line'>assert_equal b, a
+</span><span class='line'>
+</span><span class='line'># aが死んであればパスをする
+</span><span class='line'>assert a
+</span><span class='line'>
+</span><span class='line'># aが義であればパスをする
+</span><span class='line'>refute a</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rvmで管理しているrubyのバージョン切り替え方法]]></title>
@@ -2582,54 +2646,6 @@ slimは高速に書くことができるということなので試してみる�
 
 <p>SlackとHerokについては使ってるが、Hubootについては使ったことがないので後で調べて
 見ようと思う。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress-Rakefileカスタマイズ]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/08/31/octopress-edit-rakefile/"/>
-    <updated>2016-08-31T19:06:16+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/08/31/octopress-edit-rakefile</id>
-    <content type="html"><![CDATA[<p>新規作成時<code>bundle exec rake new_post[title]</code>に前回書いた<code>published</code>や<code>&lt;--more--&gt;</code>タグが初期値として
-入ってくれたらよいと思うので<code>Rakefile</code>を修正する。
-115行目あたりにかいてある。</p>
-
-<figure class='code'><figcaption><span>Rakefile </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;---&quot;</span>
-</span><span class='line'><span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;layout: post&quot;</span>
-</span><span class='line'><span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;title: </span><span class="se">\&quot;</span><span class="si">#{</span><span class="n">title</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/&amp;/</span><span class="p">,</span><span class="s1">&#39;&amp;amp;&#39;</span><span class="p">)</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
-</span><span class='line'><span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;date: </span><span class="si">#{</span><span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-%d %H:%M:%S %z&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'><span class="o">+</span> <span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;author: [author]&quot;</span>
-</span><span class='line'><span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;comments: true&quot;</span>
-</span><span class='line'><span class="o">+</span> <span class="n">post</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;published: true</span>
-</span><span class='line'><span class="s2">post.puts &quot;</span><span class="ss">categories</span><span class="p">:</span> <span class="s2">&quot;</span>
-</span><span class='line'><span class="s2">post.puts &quot;</span><span class="o">---</span><span class="s2">&quot;</span>
-</span><span class='line'><span class="s2">+ post.puts &quot;&quot;</span>
-</span><span class='line'><span class="s2">+ post.puts &quot;</span><span class="err">＜</span><span class="o">!--</span><span class="n">more</span><span class="o">--</span><span class="err">＞</span><span class="s2">&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<!--more-->
-
-
-<p><code>published</code>の他に、<code>author</code>の項目があるのでそれも設定。
-これで<code>bunde exec rake new_post[title]</code>を実行するとテンプレートとしてデフォルト
-<code>published: true</code>と<code>author: [author]</code>と記事に頭で<code>&lt;!—more—&gt;</code>が初期値として入るようになるので
-必要に併せて下書き中でdeployしたくなかったら<code>published: false</code>に変更し、<code>&lt;!--more--&gt;</code>タグの
-位置も変更すればよい。</p>
 ]]></content>
   </entry>
   
