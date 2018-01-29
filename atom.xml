@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2018-01-28T03:32:36+00:00</updated>
+  <updated>2018-01-29T08:12:37+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,383 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Shellをbashからzshに変更]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/01/29/zsh/"/>
+    <updated>2018-01-29T17:11:23+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/01/29/zsh</id>
+    <content type="html"><![CDATA[<p>シェルは今まで<code>bash</code>を使っていたのだが、カスタマイズが細かくできるという点、補完が優れているという点で
+もう随分前に<code>zsh</code>に切り替えた。<br/>
+思いの外使い勝手がよいので忘れないうちに設定内容をメモ</p>
+
+<!--more-->
+
+
+<h2>zshをカスタマイズ</h2>
+
+<ul>
+<li>空の<code>~/.zshrc</code>ファイル作成</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>touch ~/.zshrc
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><code>~/.zshrc</code>ファイルを編集</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>~/.zshrc </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+<span class='line-number'>138</span>
+<span class='line-number'>139</span>
+<span class='line-number'>140</span>
+<span class='line-number'>141</span>
+<span class='line-number'>142</span>
+<span class='line-number'>143</span>
+<span class='line-number'>144</span>
+<span class='line-number'>145</span>
+<span class='line-number'>146</span>
+<span class='line-number'>147</span>
+<span class='line-number'>148</span>
+<span class='line-number'>149</span>
+<span class='line-number'>150</span>
+<span class='line-number'>151</span>
+<span class='line-number'>152</span>
+<span class='line-number'>153</span>
+<span class='line-number'>154</span>
+<span class='line-number'>155</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># -------------------------------------</span>
+</span><span class='line'><span class="c"># 環境変数</span>
+</span><span class='line'><span class="c"># -------------------------------------</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># SSHで接続した先で日本語が使えるようにする</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">LC_CTYPE</span><span class="o">=</span>en_US.UTF-8
+</span><span class='line'><span class="nb">export </span><span class="nv">LC_ALL</span><span class="o">=</span>en_US.UTF-8
+</span><span class='line'>
+</span><span class='line'><span class="c"># エディタ</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">EDITOR</span><span class="o">=</span>/usr/local/bin/vim
+</span><span class='line'>
+</span><span class='line'><span class="c"># ページャ</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">PAGER</span><span class="o">=</span>/usr/local/bin/vimpager
+</span><span class='line'><span class="nb">export </span><span class="nv">MANPAGER</span><span class="o">=</span>/usr/local/bin/vimpager
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="c"># -------------------------------------</span>
+</span><span class='line'><span class="c"># zshのオプション</span>
+</span><span class='line'><span class="c"># -------------------------------------</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">## 補完機能の強化</span>
+</span><span class='line'>autoload -U compinit
+</span><span class='line'>compinit
+</span><span class='line'>
+</span><span class='line'><span class="c">## 入力しているコマンド名が間違っている場合にもしかして：を出す。</span>
+</span><span class='line'>setopt correct
+</span><span class='line'>
+</span><span class='line'><span class="c"># ビープを鳴らさない</span>
+</span><span class='line'>setopt nobeep
+</span><span class='line'>
+</span><span class='line'><span class="c">## 色を使う</span>
+</span><span class='line'>setopt prompt_subst
+</span><span class='line'>
+</span><span class='line'><span class="c">## ^Dでログアウトしない。</span>
+</span><span class='line'>setopt ignoreeof
+</span><span class='line'>
+</span><span class='line'><span class="c">## バックグラウンドジョブが終了したらすぐに知らせる。</span>
+</span><span class='line'>setopt no_tify
+</span><span class='line'>
+</span><span class='line'><span class="c">## 直前と同じコマンドをヒストリに追加しない</span>
+</span><span class='line'>setopt hist_ignore_dups
+</span><span class='line'>
+</span><span class='line'><span class="c"># 補完</span>
+</span><span class='line'><span class="c">## タブによるファイルの順番切り替えをしない</span>
+</span><span class='line'>unsetopt auto_menu
+</span><span class='line'>
+</span><span class='line'><span class="c"># cd -[tab]で過去のディレクトリにひとっ飛びできるようにする</span>
+</span><span class='line'>setopt auto_pushd
+</span><span class='line'>
+</span><span class='line'><span class="c"># ディレクトリ名を入力するだけでcdできるようにする</span>
+</span><span class='line'>setopt auto_cd
+</span><span class='line'>
+</span><span class='line'><span class="c"># -------------------------------------</span>
+</span><span class='line'><span class="c"># パス</span>
+</span><span class='line'><span class="c"># -------------------------------------</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 重複する要素を自動的に削除</span>
+</span><span class='line'><span class="nb">typeset</span> -U path cdpath fpath manpath
+</span><span class='line'>
+</span><span class='line'><span class="nv">path</span><span class="o">=(</span>
+</span><span class='line'>    <span class="nv">$HOME</span>/bin<span class="o">(</span>N-/<span class="o">)</span>
+</span><span class='line'>    /usr/local/bin<span class="o">(</span>N-/<span class="o">)</span>
+</span><span class='line'>    /usr/local/sbin<span class="o">(</span>N-/<span class="o">)</span>
+</span><span class='line'>    <span class="nv">$path</span>
+</span><span class='line'><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># -------------------------------------</span>
+</span><span class='line'><span class="c"># プロンプト</span>
+</span><span class='line'><span class="c"># -------------------------------------</span>
+</span><span class='line'>
+</span><span class='line'>autoload -U promptinit<span class="p">;</span> promptinit
+</span><span class='line'>autoload -Uz colors<span class="p">;</span> colors
+</span><span class='line'>autoload -Uz vcs_info
+</span><span class='line'>autoload -Uz is-at-least
+</span><span class='line'>
+</span><span class='line'><span class="c"># begin VCS</span>
+</span><span class='line'>zstyle <span class="s2">&quot;:vcs_info:*&quot;</span> <span class="nb">enable </span>git svn hg bzr
+</span><span class='line'>zstyle <span class="s2">&quot;:vcs_info:*&quot;</span> formats <span class="s2">&quot;(%s)-[%b]&quot;</span>
+</span><span class='line'>zstyle <span class="s2">&quot;:vcs_info:*&quot;</span> actionformats <span class="s2">&quot;(%s)-[%b|%a]&quot;</span>
+</span><span class='line'>zstyle <span class="s2">&quot;:vcs_info:(svn|bzr):*&quot;</span> branchformat <span class="s2">&quot;%b:r%r&quot;</span>
+</span><span class='line'>zstyle <span class="s2">&quot;:vcs_info:bzr:*&quot;</span> use-simple <span class="nb">true</span>
+</span><span class='line'>
+</span><span class='line'>zstyle <span class="s2">&quot;:vcs_info:*&quot;</span> max-exports 6
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> is-at-least 4.3.10<span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    zstyle <span class="s2">&quot;:vcs_info:git:*&quot;</span> check-for-changes <span class="nb">true</span> <span class="c"># commitしていないのをチェック</span>
+</span><span class='line'>    zstyle <span class="s2">&quot;:vcs_info:git:*&quot;</span> stagedstr <span class="s2">&quot;&lt;S&gt;&quot;</span>
+</span><span class='line'>    zstyle <span class="s2">&quot;:vcs_info:git:*&quot;</span> unstagedstr <span class="s2">&quot;&lt;U&gt;&quot;</span>
+</span><span class='line'>    zstyle <span class="s2">&quot;:vcs_info:git:*&quot;</span> formats <span class="s2">&quot;(%b) %c%u&quot;</span>
+</span><span class='line'>    zstyle <span class="s2">&quot;:vcs_info:git:*&quot;</span> actionformats <span class="s2">&quot;(%s)-[%b|%a] %c%u&quot;</span>
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> vcs_prompt_info<span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>    <span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8 vcs_info
+</span><span class='line'>    <span class="o">[[</span> -n <span class="s2">&quot;$vcs_info_msg_0_&quot;</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> -n <span class="s2">&quot; %{$fg[yellow]%}$vcs_info_msg_0_%f&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="c"># end VCS</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">OK</span><span class="o">=</span><span class="s2">&quot;^_^ &quot;</span>
+</span><span class='line'><span class="nv">NG</span><span class="o">=</span><span class="s2">&quot;X_X &quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">PROMPT</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+</span><span class='line'>PROMPT+<span class="o">=</span><span class="s2">&quot;%(?.%F{green}$OK%f.%F{red}$NG%f) &quot;</span>
+</span><span class='line'>PROMPT+<span class="o">=</span><span class="s2">&quot;%F{blue}%~%f&quot;</span>
+</span><span class='line'>PROMPT+<span class="o">=</span><span class="s2">&quot;\$(vcs_prompt_info)&quot;</span>
+</span><span class='line'>PROMPT+<span class="o">=</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="s2">&quot;</span>
+</span><span class='line'>PROMPT+<span class="o">=</span><span class="s2">&quot;%% &quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">RPROMPT</span><span class="o">=</span><span class="s2">&quot;[%*]&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># -------------------------------------</span>
+</span><span class='line'><span class="c"># エイリアス</span>
+</span><span class='line'><span class="c"># -------------------------------------</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># -n 行数表示, -I バイナリファイル無視, svn関係のファイルを無視</span>
+</span><span class='line'><span class="nb">alias </span><span class="nv">grep</span><span class="o">=</span><span class="s2">&quot;grep --color -n -I --exclude=&#39;*.svn-*&#39; --exclude=&#39;entries&#39; --exclude=&#39;*/cache/*&#39;&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># ls</span>
+</span><span class='line'><span class="nb">alias </span><span class="nv">ls</span><span class="o">=</span><span class="s2">&quot;ls -G&quot;</span> <span class="c"># color for darwin</span>
+</span><span class='line'><span class="nb">alias </span><span class="nv">l</span><span class="o">=</span><span class="s2">&quot;ls -la&quot;</span>
+</span><span class='line'><span class="nb">alias </span><span class="nv">la</span><span class="o">=</span><span class="s2">&quot;ls -la&quot;</span>
+</span><span class='line'><span class="nb">alias </span><span class="nv">l1</span><span class="o">=</span><span class="s2">&quot;ls -1&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># tree</span>
+</span><span class='line'><span class="nb">alias </span><span class="nv">tree</span><span class="o">=</span><span class="s2">&quot;tree -NC&quot;</span> <span class="c"># N: 文字化け対策, C:色をつける</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="c"># -------------------------------------</span>
+</span><span class='line'><span class="c"># キーバインド</span>
+</span><span class='line'><span class="c"># -------------------------------------</span>
+</span><span class='line'>
+</span><span class='line'>bindkey -e
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> cdup<span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>   <span class="nb">echo</span>
+</span><span class='line'><span class="nb">   cd</span> ..
+</span><span class='line'>   zle reset-prompt
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>zle -N cdup
+</span><span class='line'>bindkey <span class="s1">&#39;^K&#39;</span> cdup
+</span><span class='line'>
+</span><span class='line'>bindkey <span class="s2">&quot;^R&quot;</span> <span class="nb">history</span>-incremental-search-backward
+</span><span class='line'>
+</span><span class='line'><span class="c"># -------------------------------------</span>
+</span><span class='line'><span class="c"># その他</span>
+</span><span class='line'><span class="c"># -------------------------------------</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># cdしたあとで、自動的に ls する</span>
+</span><span class='line'><span class="k">function</span> chpwd<span class="o">()</span> <span class="o">{</span> ls -1 <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># iTerm2のタブ名を変更する</span>
+</span><span class='line'><span class="k">function</span> title <span class="o">{</span>
+</span><span class='line'>    <span class="nb">echo</span> -ne <span class="s2">&quot;\033]0;&quot;</span><span class="nv">$*</span><span class="s2">&quot;\007&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>設定を保存したら<code>zsh</code>を起動するために<code>zsh</code>コマンドを実行<br/>
+見た目<code>bash</code>のときと違うのがわかる。</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>zsh
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>デフォルトシェルを<code>zsh</code>に変更
+今のままではターミナルを起動するたびに<code>zsh</code>と入力しないと<code>bash</code>から<code>zsh</code>に切り替わらないので
+デフォルトシェルを<code>zsh</code>に変えてしまう。</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>shell </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>chsh -s /bin/zsh
+</span><span class='line'>Changing shell <span class="k">for</span> XXX
+</span><span class='line'>Password <span class="k">for</span> XXX:
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>パスワード入力を求められるのでパスワードを入力し<code>Enter</code>で設定完了</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Minitestの基本]]></title>
@@ -2605,47 +2982,6 @@ slimは高速に書くことができるということなので試してみる�
 
 
 <p>Subversion のものにとても似ているようなので、その2つのツール間の移行を容易にしていると思われる。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Slack-ChatOpsという考え方]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/09/01/slack-chatops/"/>
-    <updated>2016-09-01T10:32:38+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/09/01/slack-chatops</id>
-    <content type="html"><![CDATA[<h3>ChatOpsとは</h3>
-
-<p>ChatOps.はGithub社生み出したOpsスタイル<br/>
-プロダクトやサービス、システムを運用すること、あるいは運用に関わるさまざまなタクスを指す。
-<code>Chat</code> + <code>Ops</code> = <code>ChatOps</code> つまりChatOpsとはチャットを利用して運用を行うという考え方<br/>
-チャット上にCLIを持ち込めば、チャット上で運用タスクができるという発想から生まれた。</p>
-
-<!--more-->
-
-
-<h3>導入のメリット</h3>
-
-<ul>
-<li>誰もが運用に関われる</li>
-<li>運用する = 教えられる、共有できる</li>
-<li>複雑な運用ツールを隠せる</li>
-<li>どんな環境からでも操作できる</li>
-</ul>
-
-
-<h3>ChatOpsを始めるにあたって</h3>
-
-<p>定番ツールというと以下になる。</p>
-
-<ul>
-<li>Slack</li>
-<li>Hubot</li>
-<li>Heroku</li>
-</ul>
-
-
-<p>SlackとHerokについては使ってるが、Hubootについては使ったことがないので後で調べて
-見ようと思う。</p>
 ]]></content>
   </entry>
   
