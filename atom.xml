@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2018-01-29T08:12:37+00:00</updated>
+  <updated>2018-01-30T01:23:09+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iTerm2の画面分割]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/01/30/iterm2/"/>
+    <updated>2018-01-30T10:21:51+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/01/30/iterm2</id>
+    <content type="html"><![CDATA[<p>備忘録としてあまり書くネタもないが、
+ターミナルにiTerm２を使用していて、たまに画面分割しようと思って忘れるのでメモ。</p>
+
+<!--more-->
+
+
+<h2>タブ機能</h2>
+
+<p><code>command</code> + <code>T</code></p>
+
+<h2>ウィンドウ分割機能</h2>
+
+<p><code>command</code> + <code>D</code></p>
+
+<h2>分割した画面移動</h2>
+
+<p><code>command</code> + <code>[</code> または <code>command</code> + <code>]</code></p>
+
+<h2>画面上下分割機能</h2>
+
+<p><code>commnad</code> + <code>Shift</code> + <code>D</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Shellをbashからzshに変更]]></title>
@@ -2881,107 +2910,6 @@ slimは高速に書くことができるということなので試してみる�
 </tbody>
 </table>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[MercurialとGitコマンド比較]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/09/01/mercurial-git/"/>
-    <updated>2016-09-01T15:16:42+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/09/01/mercurial-git</id>
-    <content type="html"><![CDATA[<p>gitはいつも使っているのだが、他のVCSとしてSubversion、Bazaar、Mercurialとあるが、
-最近Mercurialが気になっていてコマンドの違いを比較してみた。</p>
-
-<p>gitとMercurial の特徴は以下のとおり</p>
-
-<!--more-->
-
-
-<h3>Mercurial の特徴</h3>
-
-<ul>
-<li>クロスプラットフォームの分散型バージョン管理システム</li>
-<li>ライセンスはGPL v2</li>
-<li>高度なブランチ機能とマージ機能がある。</li>
-<li>Webインターフェイスもある。</li>
-<li>他のバージョン管理システムで管理されたソースコードを取り込む機能がある。</li>
-</ul>
-
-
-<h3>Git の特徴</h3>
-
-<ul>
-<li>分散型バージョン管理システム</li>
-<li>ライセンスはGPL v2</li>
-<li>中央サーバへのアクセスが不可能な状態であってもリビジョン間の履歴を調査することができる。</li>
-</ul>
-
-
-<table>
-<thead>
-<tr>
-<th style="text-align:left;"> Mercurial </th>
-<th style="text-align:left;"> Git </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;"> hg add </td>
-<td style="text-align:left;"> git add </td>
-</tr>
-<tr>
-<td style="text-align:left;"> hg blame </td>
-<td style="text-align:left;"> git blame </td>
-</tr>
-<tr>
-<td style="text-align:left;"> hg cat </td>
-<td style="text-align:left;"> git show </td>
-</tr>
-<tr>
-<td style="text-align:left;"> hg clone </td>
-<td style="text-align:left;">git clone </td>
-</tr>
-<tr>
-<td style="text-align:left;"> hg commit ; hg push </td>
-<td style="text-align:left;"> git commit -a ; git push </td>
-</tr>
-<tr>
-<td style="text-align:left;"> hg remove </td>
-<td style="text-align:left;"> git rm</td>
-</tr>
-<tr>
-<td style="text-align:left;"> hg diff </td>
-<td style="text-align:left;"> git diff, git diff –cached </td>
-</tr>
-<tr>
-<td style="text-align:left;"> hg help </td>
-<td style="text-align:left;"> git help </td>
-</tr>
-<tr>
-<td style="text-align:left;"> hg log </td>
-<td style="text-align:left;"> git log </td>
-</tr>
-<tr>
-<td style="text-align:left;"> hg revert </td>
-<td style="text-align:left;"> git checkout -f </td>
-</tr>
-<tr>
-<td style="text-align:left;"> hg status </td>
-<td style="text-align:left;"> git status </td>
-</tr>
-<tr>
-<td style="text-align:left;"> hg pull –update </td>
-<td style="text-align:left;"> git pull </td>
-</tr>
-<tr>
-<td style="text-align:left;"> hg move/rename </td>
-<td style="text-align:left;"> git mv </td>
-</tr>
-</tbody>
-</table>
-
-
-<p>Subversion のものにとても似ているようなので、その2つのツール間の移行を容易にしていると思われる。</p>
 ]]></content>
   </entry>
   

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Mac | Wivern Blog]]></title>
+  <link href="http://blackhawk888.github.io/blog/categories/mac/atom.xml" rel="self"/>
+  <link href="http://blackhawk888.github.io/"/>
+  <updated>2018-01-30T01:23:09+00:00</updated>
+  <id>http://blackhawk888.github.io/</id>
+  <author>
+    <name><![CDATA[wivern]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[iTerm2の画面分割]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/01/30/iterm2/"/>
+    <updated>2018-01-30T10:21:51+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/01/30/iterm2</id>
+    <content type="html"><![CDATA[<p>備忘録としてあまり書くネタもないが、
+ターミナルにiTerm２を使用していて、たまに画面分割しようと思って忘れるのでメモ。</p>
+
+<!--more-->
+
+
+<h2>タブ機能</h2>
+
+<p><code>command</code> + <code>T</code></p>
+
+<h2>ウィンドウ分割機能</h2>
+
+<p><code>command</code> + <code>D</code></p>
+
+<h2>分割した画面移動</h2>
+
+<p><code>command</code> + <code>[</code> または <code>command</code> + <code>]</code></p>
+
+<h2>画面上下分割機能</h2>
+
+<p><code>commnad</code> + <code>Shift</code> + <code>D</code></p>
+]]></content>
+  </entry>
+  
+</feed>
