@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Tmux | Wivern Blog]]></title>
+  <link href="http://blackhawk888.github.io/blog/categories/tmux/atom.xml" rel="self"/>
+  <link href="http://blackhawk888.github.io/"/>
+  <updated>2018-01-31T04:32:06+00:00</updated>
+  <id>http://blackhawk888.github.io/</id>
+  <author>
+    <name><![CDATA[wivern]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Tmuxの設定]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/01/31/tmux/"/>
+    <updated>2018-01-31T13:30:32+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/01/31/tmux</id>
+    <content type="html"><![CDATA[<p>ターミナルを多重化するツールであるtmuxの設定ついてメモ。<br/>
+tmuxを使わないとSSH接続が切れたら最初から作業を行わなければ
+ならなかったりするのでこれがないと不便<br/>
+接続が切れてもバックグラウンドで動作したままにできるので
+ログインし直すと再開できたり作業を中断して作業を作業再開が簡単に
+できるようになる。</p>
+
+<!--more-->
+
+
+<h2>tmuxをインストール</h2>
+
+<p>Homebrewから行うのが簡単なのでHomebrewでインストール</p>
+
+<p><figure class='code'><figcaption><span>1.bash</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>brew install tmux
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2>デタッチ・アタッチ</h2>
+
+<p>tmuxはターミナルを閉じずに作業を中断できることがメリット
+バックグランドで動かしたままターミナルから抜けることを<code>デタッチ</code>、
+逆にバックグランドで動かしていたターミナルを開き直すことを<code>アタッチ</code>
+と言う。</p>
+
+<p><code>tmux</code>を実行(tmuxの疑似ターミナルが起動する)</p>
+
+<p><figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>tmux
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p><code>tmux</code>コマンドを実行後は<code>アタッチ</code>した状態。
+テストするため、好きなコマンドを入力し、その後、<code>Ctrl b</code>を押してから<code>d</code>を押して
+デタッチする。</p>
+
+<p><figure class='code'><figcaption><span>tmux </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nb">test</span><span class="p">&amp;</span>rdquo<span class="p">;</span>
+</span><span class='line'><span class="nb">test</span>
+</span><span class='line'><span class="err">$</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>デタッチ後、元のターミナルに戻るのでここで<code>tmux attach</code>と入力する。
+このコマンドは直近にデタッチしたターミナルにアタッチするコマンド。</p>
+
+<p><figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>tmux attach
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>アタッチすると先程テスト入力したコマンドがそのまま残っている</p>
+
+<p><figure class='code'><figcaption><span>tmux </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="err">$</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nb">test</span><span class="p">&amp;</span>rdquo<span class="p">;</span>
+</span><span class='line'><span class="nb">test</span>
+</span><span class='line'><span class="err">$</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2>tmuxの見た目をカスタマイズ</h2>
+
+<p>ホームディレクトリに<code>.tmux.conf</code>を作成</p>
+
+<p><figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~
+</span><span class='line'><span class="nv">$ </span>touch .tmux.conf
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p><code>.tmux.conf</code>ファイルを編集</p>
+
+<p><strong>.tmux.confの内容</strong></p>
+
+<p><figure class='code'><figcaption><span>.tmux.conf </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;<span class="p">&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>ndash<span class="p">;</span>&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;ウィンドウの振る舞い&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;<span class="p">&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>ndash<span class="p">;</span>&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h2&gt;ウィンドウ番号1から開始する&lt;/h2&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;set-option -g base-index 1&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;マウスでスクロールできるようにする&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;set-window-option -g mode-mouse on&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;これを有効にすると、MacでCommand+Cなどができなくなるが、&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Optionを押しながら範囲選択すると、コピーできる。&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;ウィンドウ<span class="o">(</span>タブ<span class="o">)</span>を閉じた時、ウインドウ番号を付番をしなおす&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;set-option -g renumber-windows on&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;<span class="p">&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;</span>-&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;ステータスバーの見た目&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;<span class="p">&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;</span>-&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;色コード: &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html&quot;</span>&gt;http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html&lt;/a&gt;&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;256色サポート&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;set-option -g default-terminal <span class="p">&amp;</span>ldquo<span class="p">;</span>xterm<span class="p">&amp;</span>rdquo<span class="p">;</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;ステータスバーの色&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;set -g status-fg colour253
+</span><span class='line'><span class="nb">set</span> -g status-bg colour237&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;非アクティブなウィンドウの色&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;set-window-option -g window-status-fg default
+</span><span class='line'><span class="nb">set</span>-window-option -g window-status-bg default&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;アクティブなウィンドウの色&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;set-window-option -g window-status-current-fg colour16
+</span><span class='line'><span class="nb">set</span>-window-option -g window-status-current-bg colour178&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;ステータスバーの位置&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;set-option -g status-position bottom&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;ステータスバー左隅に出すもの&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;set -g status-left <span class="p">&amp;</span>lsquo<span class="p">;</span><span class="c">#[fg=colour32, bold]#S&amp;rsquo;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;ステータスバー右隅に出すもの&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;set -g status-right <span class="p">&amp;</span>lsquo<span class="p">;&amp;</span>rsquo<span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2>tmuxで覚えておくべきキーバインド</h2>
+
+<ul>
+<li><code>Ctr b</code> <code>d</code>:デタッチする</li>
+<li><code>Ctr b</code> <code>c</code>:新しいWindowを作成</li>
+<li><code>Ctr b</code> <code>n</code>:次のWindowへ移動</li>
+<li><code>Ctr b</code> <code>p</code>:前のWindowwへ移動</li>
+<li><code>Ctr b</code> <code>,</code>:Windowsに名前をつける</li>
+<li><code>Ctr b</code> <code>%</code>:Windowを左右のPaneに分割</li>
+<li><code>Ctr b</code> <code>"</code>:Windowを上下のPaneに分割</li>
+<li><code>Ctr b</code> <code>o</code>:Pane間を移動</li>
+<li><code>Ctr b</code> <code>?</code>:ヘルプを表示</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

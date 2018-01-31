@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2018-01-30T01:23:09+00:00</updated>
+  <updated>2018-01-31T04:32:06+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,208 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Tmuxの設定]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/01/31/tmux/"/>
+    <updated>2018-01-31T13:30:32+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/01/31/tmux</id>
+    <content type="html"><![CDATA[<p>ターミナルを多重化するツールであるtmuxの設定ついてメモ。<br/>
+tmuxを使わないとSSH接続が切れたら最初から作業を行わなければ
+ならなかったりするのでこれがないと不便<br/>
+接続が切れてもバックグラウンドで動作したままにできるので
+ログインし直すと再開できたり作業を中断して作業を作業再開が簡単に
+できるようになる。</p>
+
+<!--more-->
+
+
+<h2>tmuxをインストール</h2>
+
+<p>Homebrewから行うのが簡単なのでHomebrewでインストール</p>
+
+<figure class='code'><figcaption><span>1.bash</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>brew install tmux
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>デタッチ・アタッチ</h2>
+
+<p>tmuxはターミナルを閉じずに作業を中断できることがメリット
+バックグランドで動かしたままターミナルから抜けることを<code>デタッチ</code>、
+逆にバックグランドで動かしていたターミナルを開き直すことを<code>アタッチ</code>
+と言う。</p>
+
+<p><code>tmux</code>を実行(tmuxの疑似ターミナルが起動する)</p>
+
+<figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>tmux
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>tmux</code>コマンドを実行後は<code>アタッチ</code>した状態。
+テストするため、好きなコマンドを入力し、その後、<code>Ctrl b</code>を押してから<code>d</code>を押して
+デタッチする。</p>
+
+<figure class='code'><figcaption><span>tmux </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;test&quot;</span>
+</span><span class='line'><span class="nb">test</span>
+</span><span class='line'><span class="err">$</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>デタッチ後、元のターミナルに戻るのでここで<code>tmux attach</code>と入力する。
+このコマンドは直近にデタッチしたターミナルにアタッチするコマンド。</p>
+
+<figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>tmux attach
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>アタッチすると先程テスト入力したコマンドがそのまま残っている</p>
+
+<figure class='code'><figcaption><span>tmux </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="err">$</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;test&quot;</span>
+</span><span class='line'><span class="nb">test</span>
+</span><span class='line'><span class="err">$</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>tmuxの見た目をカスタマイズ</h2>
+
+<p>ホームディレクトリに<code>.tmux.conf</code>を作成</p>
+
+<figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~
+</span><span class='line'><span class="nv">$ </span>touch .tmux.conf
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>.tmux.conf</code>ファイルを編集</p>
+
+<p><strong>.tmux.confの内容</strong></p>
+
+<figure class='code'><figcaption><span>.tmux.conf </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># ----------------- #</span>
+</span><span class='line'><span class="c"># ウィンドウの振る舞い #</span>
+</span><span class='line'><span class="c"># ----------------- #</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">## ウィンドウ番号1から開始する</span>
+</span><span class='line'><span class="nb">set</span>-option -g base-index 1
+</span><span class='line'>
+</span><span class='line'><span class="c"># マウスでスクロールできるようにする</span>
+</span><span class='line'><span class="nb">set</span>-window-option -g mode-mouse on
+</span><span class='line'><span class="c"># これを有効にすると、MacでCommand+Cなどができなくなるが、</span>
+</span><span class='line'><span class="c"># Optionを押しながら範囲選択すると、コピーできる。</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># ウィンドウ(タブ)を閉じた時、ウインドウ番号を付番をしなおす</span>
+</span><span class='line'><span class="nb">set</span>-option -g renumber-windows on
+</span><span class='line'>
+</span><span class='line'><span class="c"># ------------------- #</span>
+</span><span class='line'><span class="c"># ステータスバーの見た目 #</span>
+</span><span class='line'><span class="c"># ------------------- #</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 色コード: http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 256色サポート</span>
+</span><span class='line'><span class="nb">set</span>-option -g default-terminal <span class="s2">&quot;xterm&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># ステータスバーの色</span>
+</span><span class='line'><span class="nb">set</span> -g status-fg colour253
+</span><span class='line'><span class="nb">set</span> -g status-bg colour237
+</span><span class='line'>
+</span><span class='line'><span class="c"># 非アクティブなウィンドウの色</span>
+</span><span class='line'><span class="nb">set</span>-window-option -g window-status-fg default
+</span><span class='line'><span class="nb">set</span>-window-option -g window-status-bg default
+</span><span class='line'>
+</span><span class='line'><span class="c"># アクティブなウィンドウの色</span>
+</span><span class='line'><span class="nb">set</span>-window-option -g window-status-current-fg colour16
+</span><span class='line'><span class="nb">set</span>-window-option -g window-status-current-bg colour178
+</span><span class='line'>
+</span><span class='line'><span class="c"># ステータスバーの位置    </span>
+</span><span class='line'><span class="nb">set</span>-option -g status-position bottom
+</span><span class='line'>
+</span><span class='line'><span class="c"># ステータスバー左隅に出すもの</span>
+</span><span class='line'><span class="nb">set</span> -g status-left <span class="s1">&#39;#[fg=colour32, bold]#S&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># ステータスバー右隅に出すもの</span>
+</span><span class='line'><span class="nb">set</span> -g status-right <span class="s1">&#39;&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>tmuxで覚えておくべきキーバインド</h2>
+
+<ul>
+<li><code>Ctr b</code> <code>d</code>:デタッチする</li>
+<li><code>Ctr b</code> <code>c</code>:新しいWindowを作成</li>
+<li><code>Ctr b</code> <code>n</code>:次のWindowへ移動</li>
+<li><code>Ctr b</code> <code>p</code>:前のWindowwへ移動</li>
+<li><code>Ctr b</code> <code>,</code>:Windowsに名前をつける</li>
+<li><code>Ctr b</code> <code>%</code>:Windowを左右のPaneに分割</li>
+<li><code>Ctr b</code> <code>"</code>:Windowを上下のPaneに分割</li>
+<li><code>Ctr b</code> <code>o</code>:Pane間を移動</li>
+<li><code>Ctr b</code> <code>?</code>:ヘルプを表示</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iTerm2の画面分割]]></title>
@@ -2765,147 +2967,6 @@ slimは高速に書くことができるということなので試してみる�
 <td style="text-align:left;"> @[:usergroup] </td>
 <td style="text-align:left;"> あらかじめ作成したUserGroupe </td>
 <td style="text-align:left;"> @channelなどで言及うするには範囲が広いときや特定のメンバーに@するには人数が多いとき(有料プランのみ) </td>
-</tr>
-</tbody>
-</table>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress-markdownでtableを作成できるようにする]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/09/01/octopress-markdown-table/"/>
-    <updated>2016-09-01T17:22:02+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/09/01/octopress-markdown-table</id>
-    <content type="html"><![CDATA[<p>前回記事でMercurialとGitのコマンド比較をするためMarkdownでTableを作成したのだが、
-<code>bundle exec rake preview</code>を実行しても表が作成されない！
-調べてたらTableをMarkdownで編集できるようにする方法があったので、
-忘れないように書いておく</p>
-
-<!--more-->
-
-
-<h3>CSSファイルtable.cssの追加</h3>
-
-<p><code>source/stylesheets/</code>に<code>table.css</code>を追加</p>
-
-<figure class='code'><figcaption><span>table.css </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">border-style</span><span class="o">:</span><span class="k">solid</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">border-width</span><span class="o">:</span><span class="m">1px</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">border-color</span><span class="o">:</span><span class="m">#e7e3e7</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">margin</span><span class="o">:</span> <span class="m">10px</span> <span class="m">0</span> <span class="m">30px</span> <span class="m">0</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">th</span><span class="o">,</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">border-style</span><span class="o">:</span><span class="k">dashed</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">border-width</span><span class="o">:</span><span class="m">1px</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">border-color</span><span class="o">:</span><span class="m">#8888AA</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">th</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">border-top</span><span class="o">:</span>    <span class="m">1px</span> <span class="m">#666688</span> <span class="k">solid</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">border-bottom</span><span class="o">:</span> <span class="m">2px</span> <span class="m">#666688</span> <span class="k">solid</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">font-weight</span><span class="o">:</span><span class="k">bold</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">background-color</span><span class="o">:</span> <span class="m">#C0C0C0</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">2px</span> <span class="m">9px</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">border-bottom</span><span class="o">:</span> <span class="m">1px</span> <span class="m">#666688</span> <span class="k">solid</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">background-color</span><span class="o">:</span> <span class="m">#F0F0F0</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">padding</span><span class="o">:</span> <span class="m">0</span> <span class="m">10px</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">th</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="o">],</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="o">]</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">text-align</span><span class="o">:</span><span class="k">left</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">th</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="o">],</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="o">]</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">text-align</span><span class="o">:</span><span class="k">right</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">th</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="o">],</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="o">]</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">text-align</span><span class="o">:</span><span class="k">center</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>headerにcssのリンクを追加</h3>
-
-<p><code>source/_includes/head.html</code>にコードを追加</p>
-
-<figure class='code'><figcaption><span>head.html </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;/stylesheets/table.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="nt">/&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>記事のMarkdownファイルにTableを書く</h3>
-
-<figure class='code'><figcaption><span>exsample.md </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">hoge</span><span class="o">|</span><span class="nt">foo</span><span class="o">|</span><span class="nt">bar</span>
-</span><span class='line'><span class="nd">:---</span><span class="o">|</span><span class="nd">:--</span><span class="o">:|</span><span class="nt">---</span><span class="o">:</span>
-</span><span class='line'><span class="nt">aa</span><span class="o">|</span><span class="nt">bb</span><span class="o">|</span><span class="nt">cc</span><span class="o">|</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以下のように自動でテーブルに変換される</p>
-
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">hoge</th>
-<th style="text-align:center;">foo</th>
-<th style="text-align:right;">bar</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">aa</td>
-<td style="text-align:center;">bb</td>
-<td style="text-align:right;">cc</td>
 </tr>
 </tbody>
 </table>

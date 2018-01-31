@@ -6,13 +6,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="google-site-verification" content="vY2EmWIVKKAtlat_5KCgpFUJrL4LWlUa0XZ2xv7RQ1s" />
-  <title>HTMLが高速に記述できるslimで書く - Wivern Blog</title>
+  <title>Tmuxの設定 - Wivern Blog</title>
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="このブログはoctpressなので記事はmarkdownで書いているが、一時期静的サイトジェネレータのnanocを使ってたことがありその時にHamlで書いていたのだが
-どうにも使いにくい印象があった。
-slimは高速に書くことができるということなので試してみる。 &hellip;">
+  <meta name="description" content="ターミナルを多重化するツールであるtmuxの設定ついてメモ。
+tmuxを使わないとSSH接続が切れたら最初から作業を行わなければ
+ならなかったりするのでこれがないと不便
+接続が切れてもバックグラウンドで動作したままにできるので
+ログインし直すと再開できたり作業を中断して作業を作業再開が簡単に &hellip;">
   
   
   <link href="/stylesheets/table.css" rel="stylesheet" type="text/css" />
@@ -23,7 +25,7 @@ slimは高速に書くことができるということなので試してみる�
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blackhawk888.github.io/blog/2016/09/02/slim/">
+  <link rel="canonical" href="http://blackhawk888.github.io/blog/2018/01/31/tmux/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Wivern Blog" type="application/atom+xml">
@@ -86,7 +88,7 @@ slimは高速に書くことができるということなので試してみる�
   
   <header>
     
-      <h1 class="entry-title">HTMLが高速に記述できるslimで書く</h1>
+      <h1 class="entry-title">Tmuxの設定</h1>
     
     
       <p class="meta">
@@ -95,129 +97,102 @@ slimは高速に書くことができるということなので試してみる�
 
 
 
-<time class='entry-date' datetime='2016-09-02T17:48:08+00:00'><span class='date'>2016年09月02日</span> <span class='time'>17:48:08</span></time>
+<time class='entry-date' datetime='2018-01-31T13:30:32+00:00'><span class='date'>2018年01月31日</span> <span class='time'>13:30:32</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>このブログはoctpressなので記事はmarkdownで書いているが、一時期静的サイトジェネレータのnanocを使ってたことがありその時にHamlで書いていたのだが
-どうにも使いにくい印象があった。<br/>
-slimは高速に書くことができるということなので試してみる。middlemanはSlimで書くことができるのだがoctpressは書くことができるのだろうか。</p>
-
-<p>試した結論からいうとMarkdownと同じぐらいいやそれ以上に簡単！</p>
-
-<p>Slimeの特徴をあげると</p>
-
-<ul>
-<li>Ruby製のテンプレートエンジン</li>
-<li>高速、軽量</li>
-<li>タブによりHTMLのタグ構造を表すので、必要最低限のコードだけで良いのでコーディング時間が減る</li>
-<li>上記と関係があるがタブにより構造を表すのでインデント必須</li>
-<li>デフォルトでHTMLエスケープをするので安全</li>
-<li>erbに比べて、スピードが速い</li>
-</ul>
-
+<div class="entry-content"><p>ターミナルを多重化するツールであるtmuxの設定ついてメモ。<br/>
+tmuxを使わないとSSH接続が切れたら最初から作業を行わなければ
+ならなかったりするのでこれがないと不便<br/>
+接続が切れてもバックグラウンドで動作したままにできるので
+ログインし直すと再開できたり作業を中断して作業を作業再開が簡単に
+できるようになる。</p>
 
 <!--more-->
 
 
-<h3>Slimの環境</h3>
+<h2>tmuxをインストール</h2>
 
-<p>Rubyのgemなので、Rubyの環境が整っていれば<code>gem install slim</code>でさくっとインストールできる。</p>
+<p>Homebrewから行うのが簡単なのでHomebrewでインストール</p>
 
-<figure class='code'><figcaption><span>slim </span></figcaption>
+<figure class='code'><figcaption><span>1.bash</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>brew install tmux
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>デタッチ・アタッチ</h2>
+
+<p>tmuxはターミナルを閉じずに作業を中断できることがメリット
+バックグランドで動かしたままターミナルから抜けることを<code>デタッチ</code>、
+逆にバックグランドで動かしていたターミナルを開き直すことを<code>アタッチ</code>
+と言う。</p>
+
+<p><code>tmux</code>を実行(tmuxの疑似ターミナルが起動する)</p>
+
+<figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>tmux
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>tmux</code>コマンドを実行後は<code>アタッチ</code>した状態。
+テストするため、好きなコマンドを入力し、その後、<code>Ctrl b</code>を押してから<code>d</code>を押して
+デタッチする。</p>
+
+<figure class='code'><figcaption><span>tmux </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;test&quot;</span>
+</span><span class='line'><span class="nb">test</span>
+</span><span class='line'><span class="err">$</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>デタッチ後、元のターミナルに戻るのでここで<code>tmux attach</code>と入力する。
+このコマンドは直近にデタッチしたターミナルにアタッチするコマンド。</p>
+
+<figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>tmux attach
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>アタッチすると先程テスト入力したコマンドがそのまま残っている</p>
+
+<figure class='code'><figcaption><span>tmux </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">gem</span> <span class="n">install</span> <span class="n">slim</span>
-</span><span class='line'><span class="ss">Fetching</span><span class="p">:</span> <span class="n">temple</span><span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="n">gem</span> <span class="p">(</span><span class="mi">100</span><span class="sx">%)</span>
-</span><span class='line'><span class="sx">Successfully installed temple-0.7.7</span>
-</span><span class='line'><span class="sx">Fetching: slim-3.0.7.gem (100%)</span>
-</span><span class='line'><span class="no">Successfully</span> <span class="n">installed</span> <span class="n">slim</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">7</span>
-</span><span class='line'><span class="mi">2</span> <span class="n">gems</span> <span class="n">installed</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="err">$</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;test&quot;</span>
+</span><span class='line'><span class="nb">test</span>
+</span><span class='line'><span class="err">$</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>では通常どおりHTMLを書くと。。。</p>
+<h2>tmuxの見た目をカスタマイズ</h2>
 
-<figure class='code'><figcaption><span>exsample.html </span></figcaption>
+<p>ホームディレクトリに<code>.tmux.conf</code>を作成</p>
+
+<figure class='code'><figcaption><span>1.bash </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;ja&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;UTF-8&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;title&gt;</span>exsample<span class="nt">&lt;/title&gt;</span>
-</span><span class='line'><span class="nt">&lt;/head&gt;</span>
-</span><span class='line'><span class="nt">&lt;body&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;div&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;h1&gt;</span>Hoge Hoge<span class="nt">&lt;/h1&gt;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nt">&lt;p&gt;</span>foo<span class="nt">&lt;/p&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;p&gt;</span>bar<span class="nt">&lt;/p&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~
+</span><span class='line'><span class="nv">$ </span>touch .tmux.conf
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>これをSlimで書くとこうなる</p>
+<p><code>.tmux.conf</code>ファイルを編集</p>
 
-<figure class='code'><figcaption><span>exsample.slim </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='slim'><span class='line'><span class="nt">doctype</span> html
-</span><span class='line'><span class="nt">html</span>
-</span><span class='line'>  <span class="nt">head</span>
-</span><span class='line'>      <span class="nt">meta</span><span class="na"> chrset</span><span class="p">=</span><span class="s2">&quot;utf-8&quot;</span>
-</span><span class='line'>      <span class="nt">title</span> exsample
-</span><span class='line'>  <span class="nt">body</span>
-</span><span class='line'>      <span class="nf">#contents</span>
-</span><span class='line'>          <span class="nt">h1</span> Hoge Hoge
-</span><span class='line'>
-</span><span class='line'>          <span class="nt">p</span> foo
-</span><span class='line'>          <span class="nt">p</span> bar
-</span></code></pre></td></tr></table></div></figure>
+<p><strong>.tmux.confの内容</strong></p>
 
-
-<p>slimからhtmlへの変換は以下のコマンドを実行</p>
-
-<figure class='code'><figcaption><span>slim </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">slimrb</span> <span class="o">-</span><span class="nb">p</span> <span class="n">exsample</span><span class="o">.</span><span class="n">slim</span> <span class="o">&gt;</span> <span class="n">exsample</span><span class="o">.</span><span class="n">html</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>変換後のコードは以下のようになる</p>
-
-<figure class='code'><figcaption><span>exsample.html </span></figcaption>
+<figure class='code'><figcaption><span>.tmux.conf </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -238,43 +213,89 @@ slimは高速に書くことができるということなので試してみる�
 <span class='line-number'>18</span>
 <span class='line-number'>19</span>
 <span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">chrset=</span><span class="s">&quot;utf-8&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;title&gt;</span>exsample<span class="nt">&lt;/title&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;contents&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;h1&gt;</span>
-</span><span class='line'>        Hoge Hoge
-</span><span class='line'>      <span class="nt">&lt;/h1&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;p&gt;</span>
-</span><span class='line'>        foo
-</span><span class='line'>      <span class="nt">&lt;/p&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;p&gt;</span>
-</span><span class='line'>        bar
-</span><span class='line'>      <span class="nt">&lt;/p&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># ----------------- #</span>
+</span><span class='line'><span class="c"># ウィンドウの振る舞い #</span>
+</span><span class='line'><span class="c"># ----------------- #</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">## ウィンドウ番号1から開始する</span>
+</span><span class='line'><span class="nb">set</span>-option -g base-index 1
+</span><span class='line'>
+</span><span class='line'><span class="c"># マウスでスクロールできるようにする</span>
+</span><span class='line'><span class="nb">set</span>-window-option -g mode-mouse on
+</span><span class='line'><span class="c"># これを有効にすると、MacでCommand+Cなどができなくなるが、</span>
+</span><span class='line'><span class="c"># Optionを押しながら範囲選択すると、コピーできる。</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># ウィンドウ(タブ)を閉じた時、ウインドウ番号を付番をしなおす</span>
+</span><span class='line'><span class="nb">set</span>-option -g renumber-windows on
+</span><span class='line'>
+</span><span class='line'><span class="c"># ------------------- #</span>
+</span><span class='line'><span class="c"># ステータスバーの見た目 #</span>
+</span><span class='line'><span class="c"># ------------------- #</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 色コード: http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 256色サポート</span>
+</span><span class='line'><span class="nb">set</span>-option -g default-terminal <span class="s2">&quot;xterm&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># ステータスバーの色</span>
+</span><span class='line'><span class="nb">set</span> -g status-fg colour253
+</span><span class='line'><span class="nb">set</span> -g status-bg colour237
+</span><span class='line'>
+</span><span class='line'><span class="c"># 非アクティブなウィンドウの色</span>
+</span><span class='line'><span class="nb">set</span>-window-option -g window-status-fg default
+</span><span class='line'><span class="nb">set</span>-window-option -g window-status-bg default
+</span><span class='line'>
+</span><span class='line'><span class="c"># アクティブなウィンドウの色</span>
+</span><span class='line'><span class="nb">set</span>-window-option -g window-status-current-fg colour16
+</span><span class='line'><span class="nb">set</span>-window-option -g window-status-current-bg colour178
+</span><span class='line'>
+</span><span class='line'><span class="c"># ステータスバーの位置    </span>
+</span><span class='line'><span class="nb">set</span>-option -g status-position bottom
+</span><span class='line'>
+</span><span class='line'><span class="c"># ステータスバー左隅に出すもの</span>
+</span><span class='line'><span class="nb">set</span> -g status-left <span class="s1">&#39;#[fg=colour32, bold]#S&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># ステータスバー右隅に出すもの</span>
+</span><span class='line'><span class="nb">set</span> -g status-right <span class="s1">&#39;&#39;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h3>Slim文法</h3>
+<h2>tmuxで覚えておくべきキーバインド</h2>
 
 <ul>
-<li>DOCTYPE宣言は<code>doctype html</code>と書く</li>
-<li>HTMLから&lt;, >, /> を除去。タグ名をそのまま書く</li>
-<li>id名やclass名は、CSSのように#, .が使える。</li>
-<li>２種類のコメントがあり。
-
-<ul>
-<li>/ このコメントは変換後表示されない</li>
-<li>/! このコメントは変換後、HTMLコメントになる</li>
-</ul>
-</li>
-<li>複数行に渡るテキストは｜（パイプ）の後に書く</li>
+<li><code>Ctr b</code> <code>d</code>:デタッチする</li>
+<li><code>Ctr b</code> <code>c</code>:新しいWindowを作成</li>
+<li><code>Ctr b</code> <code>n</code>:次のWindowへ移動</li>
+<li><code>Ctr b</code> <code>p</code>:前のWindowwへ移動</li>
+<li><code>Ctr b</code> <code>,</code>:Windowsに名前をつける</li>
+<li><code>Ctr b</code> <code>%</code>:Windowを左右のPaneに分割</li>
+<li><code>Ctr b</code> <code>"</code>:Windowを上下のPaneに分割</li>
+<li><code>Ctr b</code> <code>o</code>:Pane間を移動</li>
+<li><code>Ctr b</code> <code>?</code>:ヘルプを表示</li>
 </ul>
 
 </div>
@@ -292,12 +313,12 @@ slimは高速に書くことができるということなので試してみる�
 
 
 
-<time class='entry-date' datetime='2016-09-02T17:48:08+00:00'><span class='date'>2016年09月02日</span> <span class='time'>17:48:08</span></time>
+<time class='entry-date' datetime='2018-01-31T13:30:32+00:00'><span class='date'>2018年01月31日</span> <span class='time'>13:30:32</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/slim/'>slim</a>
+    <a class='category' href='/blog/categories/tmux/'>tmux</a>
   
 </span>
 
@@ -306,7 +327,7 @@ slimは高速に書くことができるということなので試してみる�
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2016/09/02/slim/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2016/09/02/slim/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2018/01/31/tmux/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2018/01/31/tmux/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -319,10 +340,8 @@ slimは高速に書くことができるということなので試してみる�
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/09/02/slack-googlecalendar/" title="Previous Post: slack-googleカレンダー連携">&laquo; slack-googleカレンダー連携</a>
+        <a class="basic-alignment left" href="/blog/2018/01/30/iterm2/" title="Previous Post: iTerm2の画面分割">&laquo; iTerm2の画面分割</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/09/03/octpress-img/" title="Next Post: Octopress-画像保存先">Octopress-画像保存先 &raquo;</a>
       
     </p>
   </footer>
