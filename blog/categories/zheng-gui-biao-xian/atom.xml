@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 正規表現 | Wivern Blog]]></title>
+  <link href="http://blackhawk888.github.io/blog/categories/zheng-gui-biao-xian/atom.xml" rel="self"/>
+  <link href="http://blackhawk888.github.io/"/>
+  <updated>2018-02-05T05:43:52+00:00</updated>
+  <id>http://blackhawk888.github.io/</id>
+  <author>
+    <name><![CDATA[wivern]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[正規表現]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/02/05/regex/"/>
+    <updated>2018-02-05T14:42:09+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/02/05/regex</id>
+    <content type="html"><![CDATA[<p>いつも書き方を忘れるのでメモ。</p>
+
+<!--more-->
+
+
+<ul>
+<li><code>\d</code> は「半角数字1文字」を表す</li>
+<li><code>{n,m}</code> は「直前の文字が n 文字以上、m 文字以下」であることを表す</li>
+<li><code>{n}</code> は「直前の文字がちょうど n 文字」であることを表す</li>
+<li><code>[AB]</code> は「AまたはBが1文字」であることを表す</li>
+<li><code>[a-z]</code> と <code>[-az]</code> ではハイフンの意味が異なる</li>
+<li><code>?</code> は「直前の文字が1個、または無し」を表す</li>
+<li><code>.</code> は「任意の1文字」を表す</li>
+<li><code>+</code> は「直前の文字が1個以上」を表す</li>
+<li><code>*</code> は「直前の文字が0個以上」を表す</li>
+<li><code>( )</code> はマッチする部分をキャプチャ（捕捉）する</li>
+<li>キャプチャした部分は置換するときに <code>$1</code> や <code>\1</code> で参照できる</li>
+<li><code>\w</code> は「英単語を校正する文字（半角英数字とアンダースコア）」を表す</li>
+<li><code>[^AB]</code> は「AでもなくBでもない任意の1文字」を表す</li>
+<li>正規表現中の特別な文字は <code>\</code> でエスケープする</li>
+<li><code>( )</code> はキャプチャだけでなく、グループ化にも使われる</li>
+<li><code>(ABC)?</code> は「文字列 ABC があり、または無し」を表す</li>
+<li><code>(?: )</code> はキャプチャ無しでグループ化する場合に使う</li>
+<li><code>*</code> と <code>+</code> は「貪欲」で最長マッチを返すため、使い方を誤ると思いがけない結果が返る</li>
+<li><code>*?</code> や <code>+?</code> にすると、最短マッチを返す</li>
+<li><code>^</code> は行頭を表す</li>
+<li><code>$</code> は行末を表す</li>
+<li><code>\t</code> はタブ文字を表す</li>
+<li><code>\n</code> は改行文字を表す</li>
+<li><code>\s</code> は空白文字（スペース、タブ文字、改行文字等）を表す</li>
+<li><code>ABC|DEF</code> は「文字列ABCまたは文字列DEF」のOR条件を表す</li>
+<li><code>^</code> は行頭の意味になったり、<code>[^ ]</code> で否定の文字クラスの意味になったりする</li>
+<li><code>\b</code> は単語の境界を表す</li>
+<li><code>(?=abc)</code> は「abcという文字列の直前の位置」を表す（先読み）</li>
+<li><code>(?&lt;=abc)</code> 「abcという文字列の直後の位置」を表す（後読み）</li>
+<li><code>(?!abc)</code> は「abcという文字列以外の直前の位置」を表す（否定の先読み）</li>
+<li><code>(?&lt;!abc)</code> 「abcという文字列以外の直後の位置」を表す（否定の後読み）</li>
+<li>キャプチャした文字列は正規表現内でも <code>\1</code> や <code>\2</code> といった連番で参照できる（後方参照）</li>
+<li><code>?</code> や <code>*</code>、<code>+</code> といった量指定子は <code>( )</code> の後ろに付けることもできる</li>
+<li><code>|</code> を使ったOR条件では、各条件内でもメタ文字が使える</li>
+<li>メタ文字はバックスラッシュ（<code>\</code>）でエスケープする</li>
+<li><code>[ ]</code> 内ではメタ文字の種類や使われる位置によって各文字の働きが異なる</li>
+<li><code>{n,}</code> や <code>{,n}</code> はそれぞれ「直前の文字がn個以上」「n個以下」の意味になる</li>
+<li><code>\W</code>、<code>\S</code>、<code>\D</code>、<code>\B</code> はそれぞれ <code>\w</code>、<code>\s</code>、<code>\d</code>、<code>\b</code> の逆の意味になる</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>
