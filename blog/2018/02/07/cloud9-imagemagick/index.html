@@ -1,0 +1,462 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="vY2EmWIVKKAtlat_5KCgpFUJrL4LWlUa0XZ2xv7RQ1s" />
+  <title>Cloud9にmagemagickをインストール - Wivern Blog</title>
+  <meta name="author" content="wivern">
+
+  
+  <meta name="description" content="paperclip導入するにあたりCloud9環境にImagemagickをインストールしようとしたところエラーがでたので
+インストール方法をメモ。 paperclipの導入手順をみるとsudo apt-get install imagemagick -yと記述があったので &hellip;">
+  
+  
+  <link href="/stylesheets/table.css" rel="stylesheet" type="text/css" />
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blackhawk888.github.io/blog/2018/02/07/cloud9-imagemagick/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Wivern Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-83193160-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Wivern Blog</a></h1>
+  
+    <h2>Personal-Tech memorandum</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="blackhawk888.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Cloud9にmagemagickをインストール</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2018-02-07T09:44:10+00:00'><span class='date'>2018年02月07日</span> <span class='time'>09:44:10</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><code>paperclip</code>導入するにあたりCloud9環境に<code>Imagemagick</code>をインストールしようとしたところエラーがでたので
+インストール方法をメモ。</p>
+
+<!--more-->
+
+
+<p><code>paperclip</code>の導入手順をみると<code>sudo apt-get install imagemagick -y</code>と記述があったので
+そのとおりしたところ以下のエラーが発生。</p>
+
+<figure class='code'><figcaption><span>cloud9 </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo apt-get install imagemagick
+</span><span class='line'>Reading package lists... Done
+</span><span class='line'>Building dependency tree
+</span><span class='line'>Reading state information... Done
+</span><span class='line'>Package imagemagick is not available, but is referred to by another package.
+</span><span class='line'>This may mean that the package is missing, has been obsoleted, or
+</span><span class='line'>is only available from another surce
+</span><span class='line'>
+</span><span class='line'>E: Package <span class="s1">&#39;imagemagick&#39;</span> has no installation candidate
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>よくよく調べてみると公式の<code>コミュニティサイト</code><a href="https://community.c9.io/t/install-imagemagick/3608">community.c9.io</a>に
+情報があった。</p>
+
+<ul>
+<li><code>apt-get update</code>でレポジトリの更新</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo apt-get update
+</span><span class='line'>
+</span><span class='line'>Ign http://downloads-distro.mongodb.org dist InRelease
+</span><span class='line'>Ign http://asia-east1.gce.clouds.archive.ubuntu.com trusty InRelease
+</span><span class='line'>Get:1 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-updates InRelease <span class="o">[</span>65.9 kB<span class="o">]</span>
+</span><span class='line'>Get:2 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-backports InRelease <span class="o">[</span>65.9 kB<span class="o">]</span>
+</span><span class='line'>Hit http://ppa.launchpad.net trusty InRelease
+</span><span class='line'>Get:3 http://ppa.launchpad.net trusty InRelease <span class="o">[</span>15.4 kB<span class="o">]</span>
+</span><span class='line'>Hit http://downloads-distro.mongodb.org dist Release.gpg
+</span><span class='line'>Ign http://toolbelt.heroku.com ./ InRelease
+</span><span class='line'>Get:4 http://security.ubuntu.com trusty-security InRelease <span class="o">[</span>65.9 kB<span class="o">]</span>
+</span><span class='line'>Get:5 http://asia-east1.gce.clouds.archive.ubuntu.com trusty Release.gpg <span class="o">[</span><span class="m">933</span> B<span class="o">]</span>
+</span><span class='line'>Hit http://downloads-distro.mongodb.org dist Release
+</span><span class='line'>Hit http://toolbelt.heroku.com ./ Release.gpg
+</span><span class='line'>Get:6 http://asia-east1.gce.clouds.archive.ubuntu.com trusty Release <span class="o">[</span>58.5 kB<span class="o">]</span>
+</span><span class='line'>Hit http://toolbelt.heroku.com ./ Release
+</span><span class='line'>Get:7 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-updates/main Sources <span class="o">[</span><span class="m">506</span> kB<span class="o">]</span>
+</span><span class='line'>Get:8 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-updates/restricted Sources <span class="o">[</span><span class="m">6449</span> B<span class="o">]</span>
+</span><span class='line'>Get:9 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-updates/universe Sources <span class="o">[</span><span class="m">248</span> kB<span class="o">]</span>
+</span><span class='line'>Get:10 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-updates/multiverse Sources <span class="o">[</span><span class="m">7225</span> B<span class="o">]</span>
+</span><span class='line'>Get:11 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-updates/main amd64 Packages <span class="o">[</span><span class="m">1311</span> kB<span class="o">]</span>
+</span><span class='line'>Get:12 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-updates/restricted amd64 Packages <span class="o">[</span>21.4 kB<span class="o">]</span>
+</span><span class='line'>Get:13 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-updates/universe amd64 Packages <span class="o">[</span><span class="m">570</span> kB<span class="o">]</span>
+</span><span class='line'>Get:14 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-updates/multiverse amd64 Packages <span class="o">[</span>16.0 kB<span class="o">]</span>
+</span><span class='line'>Hit http://ppa.launchpad.net trusty/main amd64 Packages
+</span><span class='line'>Get:15 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-updates/main i386 Packages <span class="o">[</span><span class="m">1242</span> kB<span class="o">]</span>
+</span><span class='line'>Get:16 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-updates/restricted i386 Packages <span class="o">[</span>21.1 kB<span class="o">]</span>
+</span><span class='line'>Hit http://ppa.launchpad.net trusty/main i386 Packages
+</span><span class='line'>Get:17 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-updates/universe i386 Packages <span class="o">[</span><span class="m">565</span> kB<span class="o">]</span>
+</span><span class='line'>Get:18 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-updates/multiverse i386 Packages <span class="o">[</span>16.5 kB<span class="o">]</span>
+</span><span class='line'>Get:19 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-backports/main Sources <span class="o">[</span>10.4 kB<span class="o">]</span>
+</span><span class='line'>Get:20 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-backports/restricted Sources <span class="o">[</span><span class="m">40</span> B<span class="o">]</span>
+</span><span class='line'>Get:21 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-backports/universe Sources <span class="o">[</span>41.3 kB<span class="o">]</span>
+</span><span class='line'>Get:22 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-backports/multiverse Sources <span class="o">[</span><span class="m">1747</span> B<span class="o">]</span>
+</span><span class='line'>Get:23 http://ppa.launchpad.net trusty/main amd64 Packages <span class="o">[</span><span class="m">3456</span> B<span class="o">]</span>
+</span><span class='line'>Get:24 http://ppa.launchpad.net trusty/main i386 Packages <span class="o">[</span><span class="m">3456</span> B<span class="o">]</span>
+</span><span class='line'>Get:25 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-backports/main amd64 Packages <span class="o">[</span>14.7 kB<span class="o">]</span>
+</span><span class='line'>Get:26 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-backports/restricted amd64 Packages <span class="o">[</span><span class="m">40</span> B<span class="o">]</span>
+</span><span class='line'>Get:27 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-backports/universe amd64 Packages <span class="o">[</span>52.5 kB<span class="o">]</span>
+</span><span class='line'>Get:28 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-backports/multiverse amd64 Packages <span class="o">[</span><span class="m">1392</span> B<span class="o">]</span>
+</span><span class='line'>Get:29 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-backports/main i386 Packages <span class="o">[</span>14.7 kB<span class="o">]</span>
+</span><span class='line'>Get:30 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-backports/restricted i386 Packages <span class="o">[</span><span class="m">40</span> B<span class="o">]</span>
+</span><span class='line'>Hit http://downloads-distro.mongodb.org dist/10gen amd64 Packages
+</span><span class='line'>Hit http://toolbelt.heroku.com ./ Packages
+</span><span class='line'>Get:31 http://security.ubuntu.com trusty-security/main Sources <span class="o">[</span><span class="m">190</span> kB<span class="o">]</span>
+</span><span class='line'>Get:32 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-backports/universe i386 Packages <span class="o">[</span>52.4 kB<span class="o">]</span>
+</span><span class='line'>Hit http://downloads-distro.mongodb.org dist/10gen i386 Packages
+</span><span class='line'>Get:33 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-backports/multiverse i386 Packages <span class="o">[</span><span class="m">1376</span> B<span class="o">]</span>
+</span><span class='line'>Get:34 http://asia-east1.gce.clouds.archive.ubuntu.com trusty/main Sources <span class="o">[</span><span class="m">1335</span> kB<span class="o">]</span>
+</span><span class='line'>Get:35 http://asia-east1.gce.clouds.archive.ubuntu.com trusty/restricted Sources <span class="o">[</span><span class="m">5335</span> B<span class="o">]</span>
+</span><span class='line'>Get:36 http://asia-east1.gce.clouds.archive.ubuntu.com trusty/universe Sources <span class="o">[</span><span class="m">7926</span> kB<span class="o">]</span>
+</span><span class='line'>Get:37 http://security.ubuntu.com trusty-security/universe Sources <span class="o">[</span>82.1 kB<span class="o">]</span>
+</span><span class='line'>Get:38 http://security.ubuntu.com trusty-security/main amd64 Packages <span class="o">[</span><span class="m">881</span> kB<span class="o">]</span>
+</span><span class='line'>Get:39 http://asia-east1.gce.clouds.archive.ubuntu.com trusty/multiverse Sources <span class="o">[</span><span class="m">211</span> kB<span class="o">]</span>
+</span><span class='line'>Get:40 http://asia-east1.gce.clouds.archive.ubuntu.com trusty/main amd64 Packages <span class="o">[</span><span class="m">1743</span> kB<span class="o">]</span>
+</span><span class='line'>Get:41 http://security.ubuntu.com trusty-security/universe amd64 Packages <span class="o">[</span><span class="m">258</span> kB<span class="o">]</span>
+</span><span class='line'>Get:42 http://asia-east1.gce.clouds.archive.ubuntu.com trusty/restricted amd64 Packages <span class="o">[</span>16.0 kB<span class="o">]</span>
+</span><span class='line'>Get:43 http://security.ubuntu.com trusty-security/main i386 Packages <span class="o">[</span><span class="m">814</span> kB<span class="o">]</span>
+</span><span class='line'>Get:44 http://asia-east1.gce.clouds.archive.ubuntu.com trusty/universe amd64 Packages <span class="o">[</span><span class="m">7589</span> kB<span class="o">]</span>
+</span><span class='line'>Get:45 http://security.ubuntu.com trusty-security/universe i386 Packages <span class="o">[</span><span class="m">251</span> kB<span class="o">]</span>
+</span><span class='line'>Get:46 http://asia-east1.gce.clouds.archive.ubuntu.com trusty/multiverse amd64 Packages <span class="o">[</span><span class="m">169</span> kB<span class="o">]</span>
+</span><span class='line'>Get:47 http://asia-east1.gce.clouds.archive.ubuntu.com trusty/main i386 Packages <span class="o">[</span><span class="m">1739</span> kB<span class="o">]</span>
+</span><span class='line'>Get:48 http://asia-east1.gce.clouds.archive.ubuntu.com trusty/restricted i386 Packages <span class="o">[</span>16.4 kB<span class="o">]</span>
+</span><span class='line'>Get:49 http://asia-east1.gce.clouds.archive.ubuntu.com trusty/universe i386 Packages <span class="o">[</span><span class="m">7597</span> kB<span class="o">]</span>
+</span><span class='line'>Get:50 http://asia-east1.gce.clouds.archive.ubuntu.com trusty/multiverse i386 Packages <span class="o">[</span><span class="m">172</span> kB<span class="o">]</span>
+</span><span class='line'>Fetched 36.0 MB in 25s <span class="o">(</span><span class="m">1401</span> kB/s<span class="o">)</span>
+</span><span class='line'>Reading package lists... Done
+</span><span class='line'>W: Size of file /var/lib/apt/lists/ppa.launchpad.net_git-core_ppa_ubuntu_dists_trusty_main_binary-amd64_Packages.gz is not what the server reported <span class="m">3456</span> 3460
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><code>imagemagick</code>インストール</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo apt-get install imagemagick -y
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><code>imagemagick</code>のバージョン確認</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>convert --version
+</span><span class='line'>Version: ImageMagick 6.7.7-10 2017-07-31 Q16 http://www.imagemagick.org
+</span><span class='line'>Copyright: Copyright <span class="o">(</span>C<span class="o">)</span> 1999-2012 ImageMagick Studio LLC
+</span><span class='line'>Features: OpenMP
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">wivern</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2018-02-07T09:44:10+00:00'><span class='date'>2018年02月07日</span> <span class='time'>09:44:10</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/cloud9/'>cloud9</a>, <a class='category' href='/blog/categories/imagemagick/'>imagemagick</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2018/02/07/cloud9-imagemagick/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2018/02/07/cloud9-imagemagick/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2018/02/05/regex/" title="Previous Post: 正規表現">&laquo; 正規表現</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Profile</h1>
+  
+    <img src="http://www.gravatar.com/avatar/d193dda398c5fa836f1d8007d64be8de" alt="Gravatar of wivern" title="Gravatar of wivern" align="left" style="margin-right:10px;" />
+  
+  <p>Author: Wivern</p>
+  <p>Profession: ネットワーク、サーバエンジニア</p>
+  <br clear="left">
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2018/02/07/cloud9-imagemagick/">Cloud9にmagemagickをインストール</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/02/05/regex/">正規表現</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/01/31/tmux/">Tmuxの設定</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/01/30/iterm2/">iTerm2の画面分割</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/01/29/zsh/">Shellをbashからzshに変更</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/bootstrap/'>bootstrap (1)</a></li><li><a href='/blog/categories/cloud9/'>cloud9 (2)</a></li><li><a href='/blog/categories/css/'>css (2)</a></li><li><a href='/blog/categories/git/'>git (4)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/imagemagick/'>imagemagick (1)</a></li><li><a href='/blog/categories/iterm2/'>iterm2 (1)</a></li><li><a href='/blog/categories/mac/'>mac (1)</a></li><li><a href='/blog/categories/mercurial/'>mercurial (1)</a></li><li><a href='/blog/categories/mysql/'>mysql (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (19)</a></li><li><a href='/blog/categories/rails/'>rails (4)</a></li><li><a href='/blog/categories/ruby/'>ruby (2)</a></li><li><a href='/blog/categories/slack/'>slack (4)</a></li><li><a href='/blog/categories/slim/'>slim (1)</a></li><li><a href='/blog/categories/tmux/'>tmux (1)</a></li><li><a href='/blog/categories/zheng-gui-biao-xian/'>正規表現 (1)</a></li></ul>
+</section>
+<section>
+  <h1>Tag Cloud</h1>
+    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 103.15789473684211%'>bitbacket(1)</a> <a href='/blog/categories/bootstrap' style='font-size: 103.15789473684211%'>bootstrap(1)</a> <a href='/blog/categories/cloud9' style='font-size: 106.3157894736842%'>cloud9(2)</a> <a href='/blog/categories/css' style='font-size: 106.3157894736842%'>css(2)</a> <a href='/blog/categories/git' style='font-size: 112.63157894736842%'>git(4)</a> <a href='/blog/categories/google-analytics' style='font-size: 103.15789473684211%'>google analytics(1)</a> <a href='/blog/categories/imagemagick' style='font-size: 103.15789473684211%'>imagemagick(1)</a> <a href='/blog/categories/iterm2' style='font-size: 103.15789473684211%'>iterm2(1)</a> <a href='/blog/categories/mac' style='font-size: 103.15789473684211%'>mac(1)</a> <a href='/blog/categories/mercurial' style='font-size: 103.15789473684211%'>mercurial(1)</a> <a href='/blog/categories/mysql' style='font-size: 103.15789473684211%'>mysql(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(19)</a> <a href='/blog/categories/rails' style='font-size: 112.63157894736842%'>rails(4)</a> <a href='/blog/categories/ruby' style='font-size: 106.3157894736842%'>ruby(2)</a> <a href='/blog/categories/slack' style='font-size: 112.63157894736842%'>slack(4)</a> <a href='/blog/categories/slim' style='font-size: 103.15789473684211%'>slim(1)</a> <a href='/blog/categories/tmux' style='font-size: 103.15789473684211%'>tmux(1)</a> <a href='/blog/categories/zheng-gui-biao-xian' style='font-size: 103.15789473684211%'>正規表現(1)</a> </span>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2018 - wivern -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/ja_JP/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

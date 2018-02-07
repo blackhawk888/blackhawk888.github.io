@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2018-02-05T05:43:52+00:00</updated>
+  <updated>2018-02-07T00:45:13+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,220 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Cloud9にmagemagickをインストール]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/02/07/cloud9-imagemagick/"/>
+    <updated>2018-02-07T09:44:10+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/02/07/cloud9-imagemagick</id>
+    <content type="html"><![CDATA[<p><code>paperclip</code>導入するにあたりCloud9環境に<code>Imagemagick</code>をインストールしようとしたところエラーがでたので
+インストール方法をメモ。</p>
+
+<!--more-->
+
+
+<p><code>paperclip</code>の導入手順をみると<code>sudo apt-get install imagemagick -y</code>と記述があったので
+そのとおりしたところ以下のエラーが発生。</p>
+
+<figure class='code'><figcaption><span>cloud9 </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo apt-get install imagemagick
+</span><span class='line'>Reading package lists... Done
+</span><span class='line'>Building dependency tree
+</span><span class='line'>Reading state information... Done
+</span><span class='line'>Package imagemagick is not available, but is referred to by another package.
+</span><span class='line'>This may mean that the package is missing, has been obsoleted, or
+</span><span class='line'>is only available from another surce
+</span><span class='line'>
+</span><span class='line'>E: Package <span class="s1">&#39;imagemagick&#39;</span> has no installation candidate
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>よくよく調べてみると公式の<code>コミュニティサイト</code><a href="https://community.c9.io/t/install-imagemagick/3608">community.c9.io</a>に
+情報があった。</p>
+
+<ul>
+<li><code>apt-get update</code>でレポジトリの更新</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo apt-get update
+</span><span class='line'>
+</span><span class='line'>Ign http://downloads-distro.mongodb.org dist InRelease
+</span><span class='line'>Ign http://asia-east1.gce.clouds.archive.ubuntu.com trusty InRelease
+</span><span class='line'>Get:1 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-updates InRelease <span class="o">[</span>65.9 kB<span class="o">]</span>
+</span><span class='line'>Get:2 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-backports InRelease <span class="o">[</span>65.9 kB<span class="o">]</span>
+</span><span class='line'>Hit http://ppa.launchpad.net trusty InRelease
+</span><span class='line'>Get:3 http://ppa.launchpad.net trusty InRelease <span class="o">[</span>15.4 kB<span class="o">]</span>
+</span><span class='line'>Hit http://downloads-distro.mongodb.org dist Release.gpg
+</span><span class='line'>Ign http://toolbelt.heroku.com ./ InRelease
+</span><span class='line'>Get:4 http://security.ubuntu.com trusty-security InRelease <span class="o">[</span>65.9 kB<span class="o">]</span>
+</span><span class='line'>Get:5 http://asia-east1.gce.clouds.archive.ubuntu.com trusty Release.gpg <span class="o">[</span><span class="m">933</span> B<span class="o">]</span>
+</span><span class='line'>Hit http://downloads-distro.mongodb.org dist Release
+</span><span class='line'>Hit http://toolbelt.heroku.com ./ Release.gpg
+</span><span class='line'>Get:6 http://asia-east1.gce.clouds.archive.ubuntu.com trusty Release <span class="o">[</span>58.5 kB<span class="o">]</span>
+</span><span class='line'>Hit http://toolbelt.heroku.com ./ Release
+</span><span class='line'>Get:7 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-updates/main Sources <span class="o">[</span><span class="m">506</span> kB<span class="o">]</span>
+</span><span class='line'>Get:8 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-updates/restricted Sources <span class="o">[</span><span class="m">6449</span> B<span class="o">]</span>
+</span><span class='line'>Get:9 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-updates/universe Sources <span class="o">[</span><span class="m">248</span> kB<span class="o">]</span>
+</span><span class='line'>Get:10 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-updates/multiverse Sources <span class="o">[</span><span class="m">7225</span> B<span class="o">]</span>
+</span><span class='line'>Get:11 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-updates/main amd64 Packages <span class="o">[</span><span class="m">1311</span> kB<span class="o">]</span>
+</span><span class='line'>Get:12 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-updates/restricted amd64 Packages <span class="o">[</span>21.4 kB<span class="o">]</span>
+</span><span class='line'>Get:13 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-updates/universe amd64 Packages <span class="o">[</span><span class="m">570</span> kB<span class="o">]</span>
+</span><span class='line'>Get:14 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-updates/multiverse amd64 Packages <span class="o">[</span>16.0 kB<span class="o">]</span>
+</span><span class='line'>Hit http://ppa.launchpad.net trusty/main amd64 Packages
+</span><span class='line'>Get:15 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-updates/main i386 Packages <span class="o">[</span><span class="m">1242</span> kB<span class="o">]</span>
+</span><span class='line'>Get:16 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-updates/restricted i386 Packages <span class="o">[</span>21.1 kB<span class="o">]</span>
+</span><span class='line'>Hit http://ppa.launchpad.net trusty/main i386 Packages
+</span><span class='line'>Get:17 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-updates/universe i386 Packages <span class="o">[</span><span class="m">565</span> kB<span class="o">]</span>
+</span><span class='line'>Get:18 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-updates/multiverse i386 Packages <span class="o">[</span>16.5 kB<span class="o">]</span>
+</span><span class='line'>Get:19 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-backports/main Sources <span class="o">[</span>10.4 kB<span class="o">]</span>
+</span><span class='line'>Get:20 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-backports/restricted Sources <span class="o">[</span><span class="m">40</span> B<span class="o">]</span>
+</span><span class='line'>Get:21 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-backports/universe Sources <span class="o">[</span>41.3 kB<span class="o">]</span>
+</span><span class='line'>Get:22 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-backports/multiverse Sources <span class="o">[</span><span class="m">1747</span> B<span class="o">]</span>
+</span><span class='line'>Get:23 http://ppa.launchpad.net trusty/main amd64 Packages <span class="o">[</span><span class="m">3456</span> B<span class="o">]</span>
+</span><span class='line'>Get:24 http://ppa.launchpad.net trusty/main i386 Packages <span class="o">[</span><span class="m">3456</span> B<span class="o">]</span>
+</span><span class='line'>Get:25 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-backports/main amd64 Packages <span class="o">[</span>14.7 kB<span class="o">]</span>
+</span><span class='line'>Get:26 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-backports/restricted amd64 Packages <span class="o">[</span><span class="m">40</span> B<span class="o">]</span>
+</span><span class='line'>Get:27 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-backports/universe amd64 Packages <span class="o">[</span>52.5 kB<span class="o">]</span>
+</span><span class='line'>Get:28 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-backports/multiverse amd64 Packages <span class="o">[</span><span class="m">1392</span> B<span class="o">]</span>
+</span><span class='line'>Get:29 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-backports/main i386 Packages <span class="o">[</span>14.7 kB<span class="o">]</span>
+</span><span class='line'>Get:30 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-backports/restricted i386 Packages <span class="o">[</span><span class="m">40</span> B<span class="o">]</span>
+</span><span class='line'>Hit http://downloads-distro.mongodb.org dist/10gen amd64 Packages
+</span><span class='line'>Hit http://toolbelt.heroku.com ./ Packages
+</span><span class='line'>Get:31 http://security.ubuntu.com trusty-security/main Sources <span class="o">[</span><span class="m">190</span> kB<span class="o">]</span>
+</span><span class='line'>Get:32 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-backports/universe i386 Packages <span class="o">[</span>52.4 kB<span class="o">]</span>
+</span><span class='line'>Hit http://downloads-distro.mongodb.org dist/10gen i386 Packages
+</span><span class='line'>Get:33 http://asia-east1.gce.clouds.archive.ubuntu.com trusty-backports/multiverse i386 Packages <span class="o">[</span><span class="m">1376</span> B<span class="o">]</span>
+</span><span class='line'>Get:34 http://asia-east1.gce.clouds.archive.ubuntu.com trusty/main Sources <span class="o">[</span><span class="m">1335</span> kB<span class="o">]</span>
+</span><span class='line'>Get:35 http://asia-east1.gce.clouds.archive.ubuntu.com trusty/restricted Sources <span class="o">[</span><span class="m">5335</span> B<span class="o">]</span>
+</span><span class='line'>Get:36 http://asia-east1.gce.clouds.archive.ubuntu.com trusty/universe Sources <span class="o">[</span><span class="m">7926</span> kB<span class="o">]</span>
+</span><span class='line'>Get:37 http://security.ubuntu.com trusty-security/universe Sources <span class="o">[</span>82.1 kB<span class="o">]</span>
+</span><span class='line'>Get:38 http://security.ubuntu.com trusty-security/main amd64 Packages <span class="o">[</span><span class="m">881</span> kB<span class="o">]</span>
+</span><span class='line'>Get:39 http://asia-east1.gce.clouds.archive.ubuntu.com trusty/multiverse Sources <span class="o">[</span><span class="m">211</span> kB<span class="o">]</span>
+</span><span class='line'>Get:40 http://asia-east1.gce.clouds.archive.ubuntu.com trusty/main amd64 Packages <span class="o">[</span><span class="m">1743</span> kB<span class="o">]</span>
+</span><span class='line'>Get:41 http://security.ubuntu.com trusty-security/universe amd64 Packages <span class="o">[</span><span class="m">258</span> kB<span class="o">]</span>
+</span><span class='line'>Get:42 http://asia-east1.gce.clouds.archive.ubuntu.com trusty/restricted amd64 Packages <span class="o">[</span>16.0 kB<span class="o">]</span>
+</span><span class='line'>Get:43 http://security.ubuntu.com trusty-security/main i386 Packages <span class="o">[</span><span class="m">814</span> kB<span class="o">]</span>
+</span><span class='line'>Get:44 http://asia-east1.gce.clouds.archive.ubuntu.com trusty/universe amd64 Packages <span class="o">[</span><span class="m">7589</span> kB<span class="o">]</span>
+</span><span class='line'>Get:45 http://security.ubuntu.com trusty-security/universe i386 Packages <span class="o">[</span><span class="m">251</span> kB<span class="o">]</span>
+</span><span class='line'>Get:46 http://asia-east1.gce.clouds.archive.ubuntu.com trusty/multiverse amd64 Packages <span class="o">[</span><span class="m">169</span> kB<span class="o">]</span>
+</span><span class='line'>Get:47 http://asia-east1.gce.clouds.archive.ubuntu.com trusty/main i386 Packages <span class="o">[</span><span class="m">1739</span> kB<span class="o">]</span>
+</span><span class='line'>Get:48 http://asia-east1.gce.clouds.archive.ubuntu.com trusty/restricted i386 Packages <span class="o">[</span>16.4 kB<span class="o">]</span>
+</span><span class='line'>Get:49 http://asia-east1.gce.clouds.archive.ubuntu.com trusty/universe i386 Packages <span class="o">[</span><span class="m">7597</span> kB<span class="o">]</span>
+</span><span class='line'>Get:50 http://asia-east1.gce.clouds.archive.ubuntu.com trusty/multiverse i386 Packages <span class="o">[</span><span class="m">172</span> kB<span class="o">]</span>
+</span><span class='line'>Fetched 36.0 MB in 25s <span class="o">(</span><span class="m">1401</span> kB/s<span class="o">)</span>
+</span><span class='line'>Reading package lists... Done
+</span><span class='line'>W: Size of file /var/lib/apt/lists/ppa.launchpad.net_git-core_ppa_ubuntu_dists_trusty_main_binary-amd64_Packages.gz is not what the server reported <span class="m">3456</span> 3460
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><code>imagemagick</code>インストール</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo apt-get install imagemagick -y
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><code>imagemagick</code>のバージョン確認</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>convert --version
+</span><span class='line'>Version: ImageMagick 6.7.7-10 2017-07-31 Q16 http://www.imagemagick.org
+</span><span class='line'>Copyright: Copyright <span class="o">(</span>C<span class="o">)</span> 1999-2012 ImageMagick Studio LLC
+</span><span class='line'>Features: OpenMP
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[正規表現]]></title>
@@ -2942,35 +3156,6 @@ slimは高速に書くことができるということなので試してみる�
 <li>複数行に渡るテキストは｜（パイプ）の後に書く</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Slack-googleカレンダー連携]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/09/02/slack-googlecalendar/"/>
-    <updated>2016-09-02T16:13:12+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/09/02/slack-googlecalendar</id>
-    <content type="html"><![CDATA[<p>Slackの外部サービス連携機能を使いgoogleカレンダーを連携させ
-自分のスケジュールをSlack上で通知されるように設定する。</p>
-
-<!--more-->
-
-
-<h3>連携手順</h3>
-
-<ol>
-<li>Slackログイン後、左メニュー上部に<code>Team</code>名が表示されているのでそれをクリック。</li>
-<li><code>Apps &amp; Custom Integrations</code>を選択</li>
-<li><code>App Directory</code>検索画面で<code>google calendar</code>を入力</li>
-<li>連携させたいSlackグループを選ぶ</li>
-<li>Googleアカウントを同期させ、通知先のチャンネルを設定(どのチャンネルにも設定でき、自分だけに通知が飛ぶようにもできる)</li>
-<li>予定の何分前に通知するか、終日で設定されている予定はいつ通知するか、1日の予定のサマリーを通知するか、1周間の予定のサマリーを通知するか等の設定項目があるが好みで設定。</li>
-<li><code>save Integration</code>をクリックし保存</li>
-<li><code>Your calendar is connected!</code>と表示されるので<code>Im done!</code>をクリックし完了</li>
-</ol>
-
-
-<p>上記の設定を行うと毎朝指定の時間に自分の1日の予定がSlack上に表示することが可能。</p>
 ]]></content>
   </entry>
   
