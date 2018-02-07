@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Imagemagick | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/imagemagick/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2018-02-07T00:45:13+00:00</updated>
+  <updated>2018-02-07T00:59:47+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Cloud9にmagemagickをインストール]]></title>
+    <title type="html"><![CDATA[cloud9にImagemagickをインストール]]></title>
     <link href="http://blackhawk888.github.io/blog/2018/02/07/cloud9-imagemagick/"/>
     <updated>2018-02-07T09:44:10+00:00</updated>
     <id>http://blackhawk888.github.io/blog/2018/02/07/cloud9-imagemagick</id>
