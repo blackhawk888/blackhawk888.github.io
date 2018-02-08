@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2018-02-08T04:21:40+00:00</updated>
+  <updated>2018-02-08T07:03:35+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,129 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopressでコードブロックのエスケープ方法]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/02/08/octopress-escape/"/>
+    <updated>2018-02-08T16:03:40+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/02/08/octopress-escape</id>
+    <content type="html"><![CDATA[<p><code>vimでmarkdownをリアルタイムにプレビューできるようにする</code>の記事を書いた時に
+コードブロックの<code>{</code>のエスケープができずgenerateする時にエラーになったので対処法のメモ</p>
+
+<!--more-->
+
+
+<p><code>bundle exec rake generate</code>で記事を作成しようとすると
+<code>Liquid Exception: Variable '{{' was not properly terminated with regexp: /\}\}/ i</code>のエラー<br/>
+調べてみた。</p>
+
+<h2>コードブロックのエスケープ</h2>
+
+<p><a href="http://stackoverflow.com/questions/15786144/how-to-escape-in-markdown-on-octopress">How to escape in markdown on Octopress? - Stack Overflow</a> にあるように
+にあるように</p>
+
+<p>
+    <code>種類ファイル名
+    コードブロック
+   </code>
+</p>
+
+<p> を<code>{% raw %}</code> と <code>{% endraw %}</code> でくくればうまくいった。</p>
+
+<p> 今回は以下のコードでエラーになった
+<figure class='code'><figcaption><span>.vimrc </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>
+</span><span class='line'> <span class="p">&amp;</span>ldquo<span class="p">;&amp;</span>rdquo<span class="p">;&amp;</span>ldquo<span class="p">;</span> markdown <span class="o">{{{</span>
+</span><span class='line'>   autocmd BufRead,BufNewFile &lt;em&gt;.mkd  <span class="nb">set </span><span class="nv">filetype</span><span class="o">=</span>markdown
+</span><span class='line'>   autocmd BufRead,BufNewFile &lt;/em&gt;.md  <span class="nb">set </span><span class="nv">filetype</span><span class="o">=</span>markdown
+</span><span class='line'>   <span class="p">&amp;</span>rdquo<span class="p">;</span> Need: kannokanno/previm
+</span><span class='line'>   nnoremap &lt;silent&gt; &lt;C-p&gt; :PrevimOpen&lt;CR&gt; <span class="p">&amp;</span>ldquo<span class="p">;</span> Ctrl-pでプレビュー
+</span><span class='line'>   <span class="p">&amp;</span>rdquo<span class="p">;</span> 自動で折りたたまないようにする
+</span><span class='line'>   <span class="nb">let </span>g:vim_markdown_folding_disabled<span class="o">=</span>1
+</span><span class='line'>   <span class="nb">let </span>g:previm_enable_realtime <span class="o">=</span> 1
+</span><span class='line'> <span class="p">&amp;</span>ldquo<span class="p">;</span> <span class="o">}}}</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>このように<code>{% codeblock %}</code>と<code>{% codeblock %}</code>の間をくくってやる。</p>
+
+<p><figure class='code'><figcaption><span>.vimrc </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'> codeblock %<span class="o">}</span>
+</span><span class='line'> raw %<span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'> <span class="p">&amp;</span>ldquo<span class="p">;&amp;</span>rdquo<span class="p">;&amp;</span>ldquo<span class="p">;</span> markdown <span class="o">{{{</span>
+</span><span class='line'>   autocmd BufRead,BufNewFile &lt;em&gt;.mkd  <span class="nb">set </span><span class="nv">filetype</span><span class="o">=</span>markdown
+</span><span class='line'>   autocmd BufRead,BufNewFile &lt;/em&gt;.md  <span class="nb">set </span><span class="nv">filetype</span><span class="o">=</span>markdown
+</span><span class='line'>   <span class="p">&amp;</span>rdquo<span class="p">;</span> Need: kannokanno/previm
+</span><span class='line'>   nnoremap &lt;silent&gt; &lt;C-p&gt; :PrevimOpen&lt;CR&gt; <span class="p">&amp;</span>ldquo<span class="p">;</span> Ctrl-pでプレビュー
+</span><span class='line'>   <span class="p">&amp;</span>rdquo<span class="p">;</span> 自動で折りたたまないようにする
+</span><span class='line'>   <span class="nb">let </span>g:vim_markdown_folding_disabled<span class="o">=</span>1
+</span><span class='line'>   <span class="nb">let </span>g:previm_enable_realtime <span class="o">=</span> 1
+</span><span class='line'> <span class="p">&amp;</span>ldquo<span class="p">;</span> <span class="o">}}}</span>
+</span><span class='line'>
+</span><span class='line'> endraw %<span class="o">}</span>
+</span><span class='line'> endcodeblock %<span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2>文中ののエスケープ</h2>
+
+<p>文中で表示させる場合及びリンクのアンカーなどの分の途中は</p>
+
+<pre><code>
+{{ "{{" }}
+
+</code></pre>
+
+<p>のように書けばエスケープできる。</p>
+
+<h2>文中ののエスケープ</h2>
+
+<pre><code>
+{{ "{%" }}
+
+</code></pre>
+
+<p>を使う</p>
+
+<h2> raw %} と  endraw %}自体のエスケープ</h2>
+
+<pre><code>
+`{{ "{%" }} raw %}` と `{{ "{%" }} endraw %}`
+
+</code></pre>
+
+<p><code>{{</code>をエスケープすること自体あまりしないから調べるのに時間かかってしまった。</p>
+
+<p>ちなみに<a href="https://github.com/octopress/escape-code/blob/master/README.md#octopress-escape-code">Octopress Escape Code</a>
+に書いてあった。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress-画像保存先]]></title>
@@ -336,52 +459,6 @@ Octopressのディレクトリ指定の仕方は<a href="http://octopress.org/do
 また下にある<code>published</code>のステートメントは最後の方に判断されるので、 後で投稿しようと思っている下書きがあって、
 今書いているものを投稿しようと<code>bundle exec gen_deploy</code>すると、 中途半端な今の記事と後で投稿する予定だった
 下書きの方が送られてしまうことがあるので ちょっとした変更以外は一旦<code>bundele exec generate</code>した方がよいかもしれない。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress-サイドバーにProfile追加]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/08/30/octopress-sidebar-profile/"/>
-    <updated>2016-08-30T13:23:53+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/08/30/octopress-sidebar-profile</id>
-    <content type="html"><![CDATA[<p>デフォルトでプロフィール用のHTMLは以下の場所に作成されている。<br/>
-<code>source/_includes/custom/asides/about.html</code></p>
-
-<h3>about.htmlファイルを編集</h3>
-
-<pre><code>&lt;section&gt;
-  &lt;h1&gt;About Me&lt;/h1&gt;
-  &lt;p&gt;A little something about me.&lt;/p&gt;
-&lt;/section&gt;
-</code></pre>
-
-<!--more-->
-
-
-<p>サイドバーにabout.htmlを追加する場合は<code>_config.yml</code>に追記</p>
-
-<h3>_config.ymlの編集</h3>
-
-<p>サイドバーの先頭にプロフィールを表示させたいので、先頭に追記</p>
-
-<pre><code># list each of the sidebar modules you want to include, in the order you want them to appear.
-# To add custom asides, create files in /source/_includes/custom/asides/ and add them to the list like 'custom/asides/custom_aside_name.html'
-# default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
-default_asides: [
-  + custom/asides/about.html,
-    asides/recent_posts.html,
-    custom/asides/category_list.html,
-    custom/asides/tag_cloud.html,
-    asides/github.html, 
-    asides/delicious.html,
-    asides/pinboard.html, 
-    asides/googleplus.html
-    ]
-</code></pre>
-
-<p>サイドバーの<code>Recent Posts</code>の上に<code>Profile</code>で作成した<code>About Me</code>が表示される。</p>
-
-<p><img src="https://i.gyazo.com/3e88876a3442a236f47464741b565551.png" alt="octopress-sidebar-profile" /></p>
 ]]></content>
   </entry>
   

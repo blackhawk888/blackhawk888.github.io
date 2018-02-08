@@ -6,11 +6,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="google-site-verification" content="vY2EmWIVKKAtlat_5KCgpFUJrL4LWlUa0XZ2xv7RQ1s" />
-  <title>Slack-Mention機能 - Wivern Blog</title>
+  <title>Octopressでコードブロックのエスケープ方法 - Wivern Blog</title>
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="Slackを使っていて、たまにMention機能を使おうとして忘れてしまうのでメモを残しておく。 Mention機能とは@を利用してチャンネル内全員や特定の個人、グループに通知をともなって言及する機能 Mention対象者と用途 Mention方法 対象者 用途 @[:username] &hellip;">
+  <meta name="description" content="vimでmarkdownをリアルタイムにプレビューできるようにするの記事を書いた時に
+コードブロックの{のエスケープができずgenerateする時にエラーになったので対処法のメモ bundle exec rake generateで記事を作成しようとすると
+Liquid Exception: &hellip;">
   
   
   <link href="/stylesheets/table.css" rel="stylesheet" type="text/css" />
@@ -21,7 +23,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blackhawk888.github.io/blog/2016/09/02/slack-mention/">
+  <link rel="canonical" href="http://blackhawk888.github.io/blog/2018/02/08/octopress-escape/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Wivern Blog" type="application/atom+xml">
@@ -84,7 +86,7 @@
   
   <header>
     
-      <h1 class="entry-title">Slack-Mention機能</h1>
+      <h1 class="entry-title">Octopressでコードブロックのエスケープ方法</h1>
     
     
       <p class="meta">
@@ -93,59 +95,139 @@
 
 
 
-<time class='entry-date' datetime='2016-09-02T07:53:33+00:00'><span class='date'>2016年09月02日</span> <span class='time'>07:53:33</span></time>
+<time class='entry-date' datetime='2018-02-08T16:03:40+00:00'><span class='date'>2018年02月08日</span> <span class='time'>16:03:40</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Slackを使っていて、たまにMention機能を使おうとして忘れてしまうのでメモを残しておく。</p>
-
-<p>Mention機能とは<code>@</code>を利用してチャンネル内全員や特定の個人、グループに通知をともなって言及する機能</p>
+<div class="entry-content"><p><code>vimでmarkdownをリアルタイムにプレビューできるようにする</code>の記事を書いた時に
+コードブロックの<code>{</code>のエスケープができずgenerateする時にエラーになったので対処法のメモ</p>
 
 <!--more-->
 
 
-<p><strong>Mention対象者と用途</strong></p>
+<p><code>bundle exec rake generate</code>で記事を作成しようとすると
+<code>Liquid Exception: Variable '{{' was not properly terminated with regexp: /\}\}/ i</code>のエラー<br/>
+調べてみた。</p>
 
-<table>
-<thead>
-<tr>
-<th style="text-align:left;"> Mention方法 </th>
-<th style="text-align:left;"> 対象者 </th>
-<th style="text-align:left;"> 用途 </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;"> @[:username] </td>
-<td style="text-align:left;"> 特定の個人 </td>
-<td style="text-align:left;"> 特定の人に言及したいとき、連続で組み合わせることで複数人を対象にできる。 </td>
-</tr>
-<tr>
-<td style="text-align:left;"> @here </td>
-<td style="text-align:left;"> チャンネル内でそのときアクティブなメンバーだけが対象 </td>
-<td style="text-align:left;"> 全員必須ではなくアクティブな人だけに言及したいときや、誰でも良いのでなるべくすぐに返信がほしいとき </td>
-</tr>
-<tr>
-<td style="text-align:left;"> @channel </td>
-<td style="text-align:left;"> チャンネル内全員 </td>
-<td style="text-align:left;"> 全員に言及したいときや、緊急度が高いとき </td>
-</tr>
-<tr>
-<td style="text-align:left;"> @everyone </td>
-<td style="text-align:left;"> チーム全員 </td>
-<td style="text-align:left;"> チームメンバー全員に言及したいとき </td>
-</tr>
-<tr>
-<td style="text-align:left;"> @[:usergroup] </td>
-<td style="text-align:left;"> あらかじめ作成したUserGroupe </td>
-<td style="text-align:left;"> @channelなどで言及うするには範囲が広いときや特定のメンバーに@するには人数が多いとき(有料プランのみ) </td>
-</tr>
-</tbody>
-</table>
+<h2>コードブロックのエスケープ</h2>
 
+<p><a href="http://stackoverflow.com/questions/15786144/how-to-escape-in-markdown-on-octopress">How to escape {{in markdown on Octopress? - Stack Overflow</a> にあるように
+にあるように</p>
+
+<pre><code>```種類ファイル名
+コードブロック
+```
+</code></pre>
+
+<p> を<code>{% raw %}</code> と <code>{% endraw %}</code> でくくればうまくいった。</p>
+
+<p> 今回は以下のコードでエラーになった</p>
+
+<figure class='code'><figcaption><span>.vimrc </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>
+</span><span class='line'> <span class="s2">&quot;&quot;&quot; markdown {{{</span>
+</span><span class='line'><span class="s2">   autocmd BufRead,BufNewFile *.mkd  set filetype=markdown</span>
+</span><span class='line'><span class="s2">   autocmd BufRead,BufNewFile *.md  set filetype=markdown</span>
+</span><span class='line'><span class="s2">   &quot;</span> Need: kannokanno/previm
+</span><span class='line'>   nnoremap &lt;silent&gt; &lt;C-p&gt; :PrevimOpen&lt;CR&gt; <span class="s2">&quot; Ctrl-pでプレビュー</span>
+</span><span class='line'><span class="s2">   &quot;</span> 自動で折りたたまないようにする
+</span><span class='line'>   <span class="nb">let </span>g:vim_markdown_folding_disabled<span class="o">=</span>1
+</span><span class='line'>   <span class="nb">let </span>g:previm_enable_realtime <span class="o">=</span> 1
+</span><span class='line'> <span class="err">&quot;</span> <span class="o">}}}</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>このように<code>{% codeblock %}</code>と<code>{% codeblock %}</code>の間をくくってやる。</p>
+
+<figure class='code'><figcaption><span>.vimrc </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">{</span>% codeblock %<span class="o">}</span>
+</span><span class='line'><span class="o">{</span>%  raw %<span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'> <span class="s2">&quot;&quot;&quot; markdown {{{</span>
+</span><span class='line'><span class="s2">   autocmd BufRead,BufNewFile *.mkd  set filetype=markdown</span>
+</span><span class='line'><span class="s2">   autocmd BufRead,BufNewFile *.md  set filetype=markdown</span>
+</span><span class='line'><span class="s2">   &quot;</span> Need: kannokanno/previm
+</span><span class='line'>   nnoremap &lt;silent&gt; &lt;C-p&gt; :PrevimOpen&lt;CR&gt; <span class="s2">&quot; Ctrl-pでプレビュー</span>
+</span><span class='line'><span class="s2">   &quot;</span> 自動で折りたたまないようにする
+</span><span class='line'>   <span class="nb">let </span>g:vim_markdown_folding_disabled<span class="o">=</span>1
+</span><span class='line'>   <span class="nb">let </span>g:previm_enable_realtime <span class="o">=</span> 1
+</span><span class='line'> <span class="err">&quot;</span> <span class="o">}}}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">{</span>%  endraw %<span class="o">}</span>
+</span><span class='line'><span class="o">{</span>% endcodeblock %<span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>文中の{{のエスケープ</h2>
+
+<p>文中で表示させる場合及びリンクのアンカーなどの分の途中は</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>{{ "{{" }}
+</span><span class='line'></span></code></pre></td></tr></table></div></figure>
+
+
+<p>のように書けばエスケープできる。</p>
+
+<h2>文中の{%のエスケープ</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>{{ "{%" }}
+</span><span class='line'></span></code></pre></td></tr></table></div></figure>
+
+
+<p>を使う</p>
+
+<h2>{% raw %} と {% endraw %}自体のエスケープ</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>`{{ "{%" }} raw %}` と `{{ "{%" }} endraw %}`
+</span><span class='line'></span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>{{</code>をエスケープすること自体あまりしないから調べるのに時間かかってしまった。</p>
+
+<p>ちなみに<a href="https://github.com/octopress/escape-code/blob/master/README.md#octopress-escape-code">Octopress Escape Code</a>
+に書いてあった。</p>
 </div>
 
 
@@ -161,12 +243,12 @@
 
 
 
-<time class='entry-date' datetime='2016-09-02T07:53:33+00:00'><span class='date'>2016年09月02日</span> <span class='time'>07:53:33</span></time>
+<time class='entry-date' datetime='2018-02-08T16:03:40+00:00'><span class='date'>2018年02月08日</span> <span class='time'>16:03:40</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/slack/'>slack</a>
+    <a class='category' href='/blog/categories/markdown/'>markdown</a>, <a class='category' href='/blog/categories/octopress/'>octopress</a>
   
 </span>
 
@@ -175,7 +257,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2016/09/02/slack-mention/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2016/09/02/slack-mention/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2018/02/08/octopress-escape/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2018/02/08/octopress-escape/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -188,10 +270,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/09/01/octopress-markdown-table/" title="Previous Post: Octopress-markdownでtableを作成できるようにする">&laquo; Octopress-markdownでtableを作成できるようにする</a>
+        <a class="basic-alignment left" href="/blog/2018/02/08/vim-markdown/" title="Previous Post: vimでmarkdownをリアルタイムにプレビューできるようにする">&laquo; vimでmarkdownをリアルタイムにプレビューできるようにする</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/09/02/slack-googlecalendar/" title="Next Post: slack-googleカレンダー連携">slack-googleカレンダー連携 &raquo;</a>
       
     </p>
   </footer>
