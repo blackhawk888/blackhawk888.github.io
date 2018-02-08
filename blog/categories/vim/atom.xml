@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Vim | Wivern Blog]]></title>
+  <link href="http://blackhawk888.github.io/blog/categories/vim/atom.xml" rel="self"/>
+  <link href="http://blackhawk888.github.io/"/>
+  <updated>2018-02-08T04:21:40+00:00</updated>
+  <id>http://blackhawk888.github.io/</id>
+  <author>
+    <name><![CDATA[wivern]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Vimでmarkdownをリアルタイムにプレビューできるようにする]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/02/08/vim-markdown/"/>
+    <updated>2018-02-08T13:12:14+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/02/08/vim-markdown</id>
+    <content type="html"><![CDATA[<p>最近markdownでメモをとることが多いのでvimでmarkdownで書いてリアルタイムプレビューできる
+ようにしたときのメモ</p>
+
+<!--more-->
+
+
+<h2>必要なもの</h2>
+
+<ul>
+<li><a href="https://github.com/plasticboy/vim-markdown">plasticboy/vim-markdown</a></li>
+<li><a href="https://github.com/kannokanno/previm">kannokanno/previm</a></li>
+<li><a href="https://github.com/tyru/open-browser.vim">tyru/open-browser.vim</a></li>
+</ul>
+
+
+<h2>インストール</h2>
+
+<p><code>vim-plug</code>でインストールする</p>
+
+<p><figure class='code'><figcaption><span>.vimrc </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Plug <span class="p">&amp;</span>lsquo<span class="p">;</span>tpope/vim-markdown<span class="p">&amp;</span>rsquo<span class="p">;</span>
+</span><span class='line'>Plug <span class="p">&amp;</span>lsquo<span class="p">;</span>kannokanno/previm<span class="p">&amp;</span>rsquo<span class="p">;</span>
+</span><span class='line'>Plug <span class="p">&amp;</span>lsquo<span class="p">;</span>tyru/open-browser.vim<span class="p">&amp;</span>rsquo<span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p><code>source ~/.vimrc</code>で設定を反映させた後、vimで<code>:PlugStatu</code>でインストール</p>
+
+<h2>設定</h2>
+
+<p>使いやすくする為に設定を追加</p>
+
+<p><figure class='code'><figcaption><span>.vimrc </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>
+</span><span class='line'> <span class="p">&amp;</span>ldquo<span class="p">;&amp;</span>rdquo<span class="p">;&amp;</span>ldquo<span class="p">;</span> markdown <span class="o">{{{</span>
+</span><span class='line'>   autocmd BufRead,BufNewFile &lt;em&gt;.mkd  <span class="nb">set </span><span class="nv">filetype</span><span class="o">=</span>markdown
+</span><span class='line'>   autocmd BufRead,BufNewFile &lt;/em&gt;.md  <span class="nb">set </span><span class="nv">filetype</span><span class="o">=</span>markdown
+</span><span class='line'>   <span class="p">&amp;</span>rdquo<span class="p">;</span> Need: kannokanno/previm
+</span><span class='line'>   nnoremap &lt;silent&gt; &lt;C-p&gt; :PrevimOpen&lt;CR&gt; <span class="p">&amp;</span>ldquo<span class="p">;</span> Ctrl-pでプレビュー
+</span><span class='line'>   <span class="p">&amp;</span>rdquo<span class="p">;</span> 自動で折りたたまないようにする
+</span><span class='line'>   <span class="nb">let </span>g:vim_markdown_folding_disabled<span class="o">=</span>1
+</span><span class='line'>   <span class="nb">let </span>g:previm_enable_realtime <span class="o">=</span> 1
+</span><span class='line'> <span class="p">&amp;</span>ldquo<span class="p">;</span> <span class="o">}}}</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p><em>解説</em>
+デフォルトだと拡張子が<code>md</code>のファイルは<code>modula2</code>とうファイルだと認識されてしまうので<code>markdown</code>で開くよう設定。
+また、プレビューを開くためのショートカットを割り当て。</p>
+
+<h2>実行</h2>
+
+<p>vimで<code>.md</code>形式を編集している時に<code>Ctrl-p</code>を押すとブラウザが起動しプレビューされる。<br/>
+さらにファイルを編集するとブラウザをリロードしなくてもリアルタイムに反映される。<br/>
+リアルタイムに反映されると言っても反映されるまでに数秒かかるので
+リアルタイムに反映されるかあとで調べわかったら追記する。</p>
+]]></content>
+  </entry>
+  
+</feed>

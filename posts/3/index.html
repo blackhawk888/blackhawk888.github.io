@@ -10,8 +10,9 @@
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="Slackの外部サービス連携機能を使いgoogleカレンダーを連携させ
-自分のスケジュールをSlack上で通知されるように設定する。 ">
+  <meta name="description" content="このブログはoctpressなので記事はmarkdownで書いているが、一時期静的サイトジェネレータのnanocを使ってたことがありその時にHamlで書いていたのだが
+どうにも使いにくい印象があった。
+slimは高速に書くことができるということなので試してみる。 &hellip;">
   
   
   <link href="/stylesheets/table.css" rel="stylesheet" type="text/css" />
@@ -82,6 +83,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/09/02/slim/">HTMLが高速に記述できるslimで書く</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-09-02T17:48:08+00:00'><span class='date'>2016年09月02日</span> <span class='time'>17:48:08</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>このブログはoctpressなので記事はmarkdownで書いているが、一時期静的サイトジェネレータのnanocを使ってたことがありその時にHamlで書いていたのだが
+どうにも使いにくい印象があった。<br/>
+slimは高速に書くことができるということなので試してみる。middlemanはSlimで書くことができるのだがoctpressは書くことができるのだろうか。</p>
+
+<p>試した結論からいうとMarkdownと同じぐらいいやそれ以上に簡単！</p>
+
+<p>Slimeの特徴をあげると</p>
+
+<ul>
+<li>Ruby製のテンプレートエンジン</li>
+<li>高速、軽量</li>
+<li>タブによりHTMLのタグ構造を表すので、必要最低限のコードだけで良いのでコーディング時間が減る</li>
+<li>上記と関係があるがタブにより構造を表すのでインデント必須</li>
+<li>デフォルトでHTMLエスケープをするので安全</li>
+<li>erbに比べて、スピードが速い</li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/09/02/slim/">続きを読む &raquo;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -481,50 +532,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/08/29/octopress-newpage/">Octopress-新規ページ作成</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-08-29T21:40:50+00:00'><span class='date'>2016年08月29日</span> <span class='time'>21:40:50</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>新規投稿<code>bundle exec rake new_post[title]</code>ではなく新規ページを作成する。</p>
-
-<h3>新規ページ作成</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ bundle exec rake new_page[page_name]
-</span><span class='line'>Creating new page: source/[page_name]/index.markdown</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2016/08/29/octopress-newpage/">続きを読む &raquo;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -550,6 +557,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/02/08/vim-markdown/">Vimでmarkdownをリアルタイムにプレビューできるようにする</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/02/07/cloud9-imagemagick/">cloud9にImagemagickをインストール</a>
       </li>
     
@@ -565,19 +576,15 @@
         <a href="/blog/2018/01/30/iterm2/">iTerm2の画面分割</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2018/01/29/zsh/">Shellをbashからzshに変更</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/bootstrap/'>bootstrap (1)</a></li><li><a href='/blog/categories/cloud9/'>cloud9 (2)</a></li><li><a href='/blog/categories/css/'>css (2)</a></li><li><a href='/blog/categories/git/'>git (4)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/imagemagick/'>imagemagick (1)</a></li><li><a href='/blog/categories/iterm2/'>iterm2 (1)</a></li><li><a href='/blog/categories/mac/'>mac (1)</a></li><li><a href='/blog/categories/mercurial/'>mercurial (1)</a></li><li><a href='/blog/categories/mysql/'>mysql (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (19)</a></li><li><a href='/blog/categories/rails/'>rails (4)</a></li><li><a href='/blog/categories/ruby/'>ruby (2)</a></li><li><a href='/blog/categories/slack/'>slack (4)</a></li><li><a href='/blog/categories/slim/'>slim (1)</a></li><li><a href='/blog/categories/tmux/'>tmux (1)</a></li><li><a href='/blog/categories/zheng-gui-biao-xian/'>正規表現 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/bootstrap/'>bootstrap (1)</a></li><li><a href='/blog/categories/cloud9/'>cloud9 (2)</a></li><li><a href='/blog/categories/css/'>css (2)</a></li><li><a href='/blog/categories/git/'>git (4)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/imagemagick/'>imagemagick (1)</a></li><li><a href='/blog/categories/iterm2/'>iterm2 (1)</a></li><li><a href='/blog/categories/mac/'>mac (1)</a></li><li><a href='/blog/categories/markdown/'>markdown (1)</a></li><li><a href='/blog/categories/mercurial/'>mercurial (1)</a></li><li><a href='/blog/categories/mysql/'>mysql (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (19)</a></li><li><a href='/blog/categories/rails/'>rails (4)</a></li><li><a href='/blog/categories/ruby/'>ruby (2)</a></li><li><a href='/blog/categories/slack/'>slack (4)</a></li><li><a href='/blog/categories/slim/'>slim (1)</a></li><li><a href='/blog/categories/tmux/'>tmux (1)</a></li><li><a href='/blog/categories/vim/'>vim (1)</a></li><li><a href='/blog/categories/zheng-gui-biao-xian/'>正規表現 (1)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 103.15789473684211%'>bitbacket(1)</a> <a href='/blog/categories/bootstrap' style='font-size: 103.15789473684211%'>bootstrap(1)</a> <a href='/blog/categories/cloud9' style='font-size: 106.3157894736842%'>cloud9(2)</a> <a href='/blog/categories/css' style='font-size: 106.3157894736842%'>css(2)</a> <a href='/blog/categories/git' style='font-size: 112.63157894736842%'>git(4)</a> <a href='/blog/categories/google-analytics' style='font-size: 103.15789473684211%'>google analytics(1)</a> <a href='/blog/categories/imagemagick' style='font-size: 103.15789473684211%'>imagemagick(1)</a> <a href='/blog/categories/iterm2' style='font-size: 103.15789473684211%'>iterm2(1)</a> <a href='/blog/categories/mac' style='font-size: 103.15789473684211%'>mac(1)</a> <a href='/blog/categories/mercurial' style='font-size: 103.15789473684211%'>mercurial(1)</a> <a href='/blog/categories/mysql' style='font-size: 103.15789473684211%'>mysql(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(19)</a> <a href='/blog/categories/rails' style='font-size: 112.63157894736842%'>rails(4)</a> <a href='/blog/categories/ruby' style='font-size: 106.3157894736842%'>ruby(2)</a> <a href='/blog/categories/slack' style='font-size: 112.63157894736842%'>slack(4)</a> <a href='/blog/categories/slim' style='font-size: 103.15789473684211%'>slim(1)</a> <a href='/blog/categories/tmux' style='font-size: 103.15789473684211%'>tmux(1)</a> <a href='/blog/categories/zheng-gui-biao-xian' style='font-size: 103.15789473684211%'>正規表現(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 103.15789473684211%'>bitbacket(1)</a> <a href='/blog/categories/bootstrap' style='font-size: 103.15789473684211%'>bootstrap(1)</a> <a href='/blog/categories/cloud9' style='font-size: 106.3157894736842%'>cloud9(2)</a> <a href='/blog/categories/css' style='font-size: 106.3157894736842%'>css(2)</a> <a href='/blog/categories/git' style='font-size: 112.63157894736842%'>git(4)</a> <a href='/blog/categories/google-analytics' style='font-size: 103.15789473684211%'>google analytics(1)</a> <a href='/blog/categories/imagemagick' style='font-size: 103.15789473684211%'>imagemagick(1)</a> <a href='/blog/categories/iterm2' style='font-size: 103.15789473684211%'>iterm2(1)</a> <a href='/blog/categories/mac' style='font-size: 103.15789473684211%'>mac(1)</a> <a href='/blog/categories/markdown' style='font-size: 103.15789473684211%'>markdown(1)</a> <a href='/blog/categories/mercurial' style='font-size: 103.15789473684211%'>mercurial(1)</a> <a href='/blog/categories/mysql' style='font-size: 103.15789473684211%'>mysql(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(19)</a> <a href='/blog/categories/rails' style='font-size: 112.63157894736842%'>rails(4)</a> <a href='/blog/categories/ruby' style='font-size: 106.3157894736842%'>ruby(2)</a> <a href='/blog/categories/slack' style='font-size: 112.63157894736842%'>slack(4)</a> <a href='/blog/categories/slim' style='font-size: 103.15789473684211%'>slim(1)</a> <a href='/blog/categories/tmux' style='font-size: 103.15789473684211%'>tmux(1)</a> <a href='/blog/categories/vim' style='font-size: 103.15789473684211%'>vim(1)</a> <a href='/blog/categories/zheng-gui-biao-xian' style='font-size: 103.15789473684211%'>正規表現(1)</a> </span>
 </section>
 
 
