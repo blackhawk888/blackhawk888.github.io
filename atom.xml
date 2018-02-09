@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2018-02-08T07:03:35+00:00</updated>
+  <updated>2018-02-09T02:27:56+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,138 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Herokuのpushs時のエラー]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/02/09/heroku-deploy/"/>
+    <updated>2018-02-09T11:25:54+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/02/09/heroku-deploy</id>
+    <content type="html"><![CDATA[<p>herokuにrailsアプリをdeployしたが、うまくいかなったので対処した時のメモ</p>
+
+<!--more-->
+
+
+<p>一度<code>git push heroku master</code>に失敗したので<code>herok dashbord</code>からアプリを消してしまった。
+その後herokuにdeployしたが以下のようなエラーmsgが表示された。</p>
+
+<figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git push heroku master
+</span><span class='line'>
+</span><span class='line'>remote: !       No such app as XXXXXXX-XXXXXXX-61482.
+</span><span class='line'>fatal: repository <span class="s1">&#39;https://git.heroku.com/XXXXXXX-XXXXXXX-61482.git/&#39;</span> not found
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上記のエラーmsgは</p>
+
+<ol>
+<li><code>XXXXXXX-XXXXXXX-61482</code>というURIを持つアプリは存在しない</li>
+<li>アップしたいのは、<code>ZZZZZZZ-ZZZZZZZ-71402</code>というURI</li>
+</ol>
+
+
+<p>なので<code>heroku</code>にデータを<code>push</code>しようとしたら、<code>git</code>がないと怒られてしまった！！</p>
+
+<p>調べてみると同様のケースがあった。</p>
+
+<p><a href="http://stackoverflow.com/questions/28749771/cant-push-to-heroku-after-accidentally-deleting-app-on-heroku">http://stackoverflow.com/questions/28749771/cant-push-to-heroku-after-accidentally-deleting-app-on-heroku</a></p>
+
+<ul>
+<li><code>git</code>のリモートURLを変更</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git remote <span class="nb">set</span>-url heroku https://git.heroku.com/ZZZZZZZ-ZZZZZZ-71402.git
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>再度<code>push</code></li>
+</ul>
+
+
+<figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git push heroku master
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>無事<code>heroku</code>に<code>push</code>できた。</p>
+
+<p>と。。あとでもう少し調べて見たが、以下の方法でもできるみたい。</p>
+
+<ul>
+<li><code>.git/config</code>を編集</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> .git
+</span><span class='line'><span class="nv">$ </span>vim config
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>[remote &ldquo;heroku&rdquo;]の部分削除</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>.git/config </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>core<span class="o">]</span>
+</span><span class='line'>        <span class="nv">repositoryformatversion</span> <span class="o">=</span> 0
+</span><span class='line'>        <span class="nv">filemode</span> <span class="o">=</span> <span class="nb">true</span>
+</span><span class='line'><span class="nb">        </span><span class="nv">bare</span> <span class="o">=</span> <span class="nb">false</span>
+</span><span class='line'><span class="nb">        </span><span class="nv">logallrefupdates</span> <span class="o">=</span> <span class="nb">true</span>
+</span><span class='line'><span class="o">[</span>remote <span class="s2">&quot;origin&quot;</span><span class="o">]</span>
+</span><span class='line'>        <span class="nv">url</span> <span class="o">=</span> git@xxxxx.xxxxxxxx/xxxxxx.git
+</span><span class='line'>        <span class="nv">fetch</span> <span class="o">=</span> +refs/heads/*:refs/remotes/origin/*
+</span><span class='line'><span class="o">[</span>branch <span class="s2">&quot;master&quot;</span><span class="o">]</span>
+</span><span class='line'>        <span class="nv">remote</span> <span class="o">=</span> origin
+</span><span class='line'>        <span class="nv">merge</span> <span class="o">=</span> refs/heads/master
+</span><span class='line'><span class="o">[</span>remote <span class="s2">&quot;heroku&quot;</span><span class="o">]</span>
+</span><span class='line'>        <span class="nv">url</span> <span class="o">=</span> https://git.heroku.com/xxxxxxx-xxxxxxxx.git　←削除
+</span><span class='line'>        <span class="nv">fetch</span> <span class="o">=</span> +refs/heads/*:refs/remotes/heroku/*　←削除
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><code>heroku</code>コマンドを実行</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>heroku create
+</span><span class='line'><span class="nv">$ </span>fir puah heroku master
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopressでコードブロックのエスケープ方法]]></title>
@@ -2320,798 +2452,6 @@ HEAD^とは、HEADの更に１つ前のコミットのこと。<br/>
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Bootstrapの基本]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/09/08/bootstrap-basic/"/>
-    <updated>2016-09-08T12:00:30+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/09/08/bootstrap-basic</id>
-    <content type="html"><![CDATA[<h2>Bootstrap</h2>
-
-<p>BootstrapはTwitter社が開発したCSSの「フレームワーク」<br/>
-<a href="http://getbootstrap.com/">Bootstrap公式サイト</a></p>
-
-<h3>レスポンシブ・ウェブデザインに対応</h3>
-
-<p>表示する端末の横幅にあわせ、最適なレイアウトに変化
-<img src="https://i.gyazo.com/8c80f76cf7444a1e489107b949a4e0c3.png" alt="レスポンシブサイト" /></p>
-
-<p><strong>対応ブラウザ</strong></p>
-
-<p><img src="https://i.gyazo.com/3ca27d6ce9a1909cdd7a36731ca7fedb.png" alt="対応ブラウザ" /></p>
-
-<p><strong>Internet Explorer 7以下とFirefox 3.6以下はサポートされない</strong></p>
-
-<!--more-->
-
-
-<h2>Bootstrapを使う準備</h2>
-
-<p>Bootstrapを使用するには、BootstrapとjQuery（JavaScriptのライブラリ）を読み込む必要がある。<br/>
-読み込みの方法は以下2つの方法がある。</p>
-
-<ul>
-<li>ソースをダウンロードしローカルに配置</li>
-<li>ネット上のファイルを利用する方法（CDN）</li>
-</ul>
-
-
-<h3>HTMLファイル作成</h3>
-
-<p><a href="http://getbootstrap.com/">Bootstrap公式サイト</a>の[Getting started]にある<strong>Basic template</strong>のソースをコピーする。
-不必要な箇所のコメントを削除し<code>html lang="en"</code>を`html lang=&ldquo;ja"に変更</p>
-
-<figure class='code'><figcaption><span>index.html </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;ja&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;X-UA-Compatible&quot;</span> <span class="na">content=</span><span class="s">&quot;IE=edge&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content=</span><span class="s">&quot;width=device-width, initial-scale=1&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;title&gt;</span>Bootstrap Sample<span class="nt">&lt;/title&gt;</span>
-</span><span class='line'>    <span class="c">&lt;!-- BootstrapのCSS読み込み --&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>   <span class="nt">&lt;/head&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;h1&gt;</span>Hello, world!<span class="nt">&lt;/h1&gt;</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>    <span class="c">&lt;!-- jQuery読み込み --&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'>     <span class="c">&lt;!-- BootstrapのJS読み込み --&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>画面に<code>Hello, world</code>と表示されていればOK</p>
-
-<p><strong>コードの中身</strong></p>
-
-<figure class='code'><figcaption><span>index.html </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;X-UA-Compatible&quot;</span> <span class="na">content=</span><span class="s">&quot;IE=edge&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>InternetExplorerのブラウザではバージョン毎に異なるレンダリングがされてしまって崩れることがあるので、互換表示をさせないために設定するmetaタグ</p>
-
-<figure class='code'><figcaption><span>index.html </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content=</span><span class="s">&quot;width=device-width, initial-scale=1&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>レスポンシブ・ウェブデザインにするために必要なmetaタグ</p>
-
-<figure class='code'><figcaption><span>index.html </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- BootstrapのCSS読み込み --&gt;</span>
-</span><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="c">&lt;!-- jQuery読み込み --&gt;</span>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'><span class="c">&lt;!-- BootstrapのJS読み込み --&gt;</span>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>重要なのは、BootstrapのJSより、jQueryを先に読み込むこと。そうしないとBootstrapのJavaScriptを使う動きが動作しないので注意</p>
-
-<h2>グリッドシステム</h2>
-
-<p>グリッドシステムを使うことで簡単にレスポンシブ・ウェブデザインでレイアウトを作成することができる。</p>
-
-<p>使用にあたっては以下のルールがある。</p>
-
-<ul>
-<li>class=”container”か”container-fluid”の中に</li>
-<li>class=”row”の中に</li>
-<li>class=”col-{prefix}-{columns}”の形式で</li>
-<li>{columns}は合計値が12になるように指定</li>
-</ul>
-
-
-<p>上記のルールでスタイルをつけると、簡単にレスポンシブ・ウェブデザインに対応した横幅を分割したスタイルを作成可能になる。</p>
-
-<p><img src="https://i.gyazo.com/26ea5ea41f3b307d96aecb6936166735.png" alt="グリッド・システム" /></p>
-
-<p>上記のルールに沿ったコードの使用例</p>
-
-<figure class='code'><figcaption><span>exsample.html </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>    <span class="nt">&lt;header</span> <span class="na">style=</span><span class="s">&quot;background-color:gray&quot;</span><span class="nt">&gt;</span>Header<span class="nt">&lt;/header&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;container-fluid&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;row&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;col-sm-2&quot;</span> <span class="na">style=</span><span class="s">&quot;background-color:red;&quot;</span><span class="nt">&gt;</span>Red<span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;col-sm-8&quot;</span> <span class="na">style=</span><span class="s">&quot;background-color:blue;&quot;</span><span class="nt">&gt;</span>Blue<span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;col-sm-2&quot;</span> <span class="na">style=</span><span class="s">&quot;background-color:yellow;&quot;</span><span class="nt">&gt;</span>Yellow<span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;footer</span> <span class="na">style=</span><span class="s">&quot;background-color:gray&quot;</span><span class="nt">&gt;</span>Footer<span class="nt">&lt;/footer&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>上記ではPCのブラウザでは縦1✕横3で、赤2:青8:黄2の横幅の割合で表示される。<br/>
-モバイル以下のブラウザサイズでは縦3✕横1で表示される。</p>
-
-<p>画面ごとにカラム数が変化するレスポンシブなレイアウト使用例</p>
-
-<figure class='code'><figcaption><span>exsample.html </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>    <span class="nt">&lt;header</span> <span class="na">style=</span><span class="s">&quot;background-color:gray&quot;</span><span class="nt">&gt;</span>Header<span class="nt">&lt;/header&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;container-fluid&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;row&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;col-sm-6 col-md-3&quot;</span> <span class="na">style=</span><span class="s">&quot;background-color:red;&quot;</span><span class="nt">&gt;</span>Red<span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;col-sm-6 col-md-3&quot;</span> <span class="na">style=</span><span class="s">&quot;background-color:blue;&quot;</span><span class="nt">&gt;</span>Blue<span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;col-sm-6 col-md-3&quot;</span> <span class="na">style=</span><span class="s">&quot;background-color:yellow;&quot;</span><span class="nt">&gt;</span>Yellow<span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;col-sm-6 col-md-3&quot;</span> <span class="na">style=</span><span class="s">&quot;background-color:green;&quot;</span><span class="nt">&gt;</span>Green<span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;footer</span> <span class="na">style=</span><span class="s">&quot;background-color:gray&quot;</span><span class="nt">&gt;</span>Footer<span class="nt">&lt;/footer&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>col-sm-6</code>でタブレットサイズ(768px以上）だと２分割、<code>col-md-3</code>でPCサイズ(992px以上）で４分割で表示される。</p>
-
-<p>モバイル以下のサイズ（xs＝768px以下の設定）は<code>col-sm-6</code>を指定した時点でブラウザ幅768px以下は容赦なく縦積みになるので不要。</p>
-
-<p>モバイル以下のサイズ(768px以下)でも１カラム縦積みじゃなくて２分割したい場合は以下のようにする。</p>
-
-<figure class='code'><figcaption><span>exsample.html </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;col-sm-6 col-md-3 col-xs-6&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>col-{prefix}-{columns} の形式で合計値12を振り分けることで、簡単にマルチデバイスに対応したレイアウトを作成できるのがグリッドシステムの特徴</p>
-
-<p><strong>グリッドシステムのprefixの画面サイズの対応表</strong></p>
-
-<table>
-<thead>
-<tr>
-<th style="text-align:left;"> 対応デバイス </th>
-<th style="text-align:left;"> 画面サイズ </th>
-<th style="text-align:left;"> prefixの指定 </th>
-<th style="text-align:left;"> prefixnの意味 </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;"> デスクトップ </td>
-<td style="text-align:left;"> 1200px以上 </td>
-<td style="text-align:left;"> col-lg-* </td>
-<td style="text-align:left;"> Large </td>
-</tr>
-<tr>
-<td style="text-align:left;"> デスクトップ </td>
-<td style="text-align:left;"> 992px以上、1200px未満 </td>
-<td style="text-align:left;"> col-md-* </td>
-<td style="text-align:left;"> Medium </td>
-</tr>
-<tr>
-<td style="text-align:left;"> タブレット </td>
-<td style="text-align:left;"> 768px以上、992px未満 </td>
-<td style="text-align:left;"> col-sm-* </td>
-<td style="text-align:left;"> Small </td>
-</tr>
-<tr>
-<td style="text-align:left;"> モバイル </td>
-<td style="text-align:left;"> 768px以下 </td>
-<td style="text-align:left;"> col-xs-* </td>
-<td style="text-align:left;"> Xtra Small </td>
-</tr>
-</tbody>
-</table>
-
-
-<h2>表示/非表示の制御</h2>
-
-<p><code>visible-{prefix}</code> や <code>hidden-{prefix}</code> を指定することで、画面サイズによってレイアウトを表示/非表示を制御できる。</p>
-
-<p>PCやタブレットでは表示しておきたいが、スマホだと表示しても見にくいだけなので非表示にしてしまう、ということが簡単にできる。</p>
-
-<p>例）Blueの部分をタブレットサイズ（768px以上、992px未満）の時だけ非表示</p>
-
-<figure class='code'><figcaption><span>exsample.html </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;header</span> <span class="na">style=</span><span class="s">&quot;background-color:gray&quot;</span><span class="nt">&gt;</span>Header<span class="nt">&lt;/header&gt;</span>
-</span><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;container-fluid&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;row&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;col-sm-2&quot;</span> <span class="na">style=</span><span class="s">&quot;background-color:red;&quot;</span><span class="nt">&gt;</span>Red<span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;col-sm-8 hidden-sm&quot;</span> <span class="na">style=</span><span class="s">&quot;background-color:blue;&quot;</span><span class="nt">&gt;</span>Blue<span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;col-sm-2&quot;</span> <span class="na">style=</span><span class="s">&quot;background-color:yellow;&quot;</span><span class="nt">&gt;</span>Yellow<span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;footer</span> <span class="na">style=</span><span class="s">&quot;background-color:gray&quot;</span><span class="nt">&gt;</span>Footer<span class="nt">&lt;/footer&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>グリッドシステムの詳細については<a href="http://getbootstrap.com/css/#grid">公式サイト</a>を確認</p>
-
-<h2>table</h2>
-
-<p>tableタグでテーブルレイアウト（表組み）を簡単に装飾</p>
-
-<p>talbeの使用にあたっては以下のルールがある。</p>
-
-<ul>
-<li>class=”container”の中に</li>
-<li>table要素に対してclass=”table”をつける</li>
-</ul>
-
-
-<figure class='code'><figcaption><span>lant:html exsample.html </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;container&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">&quot;table&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;thead&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;tr&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;th&gt;</span>#<span class="nt">&lt;/th&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;th&gt;</span>Name<span class="nt">&lt;/th&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;th&gt;</span>Email<span class="nt">&lt;/th&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;th&gt;</span>Phone<span class="nt">&lt;/th&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/thead&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;tbody&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;tr&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">&quot;row&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/th&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td&gt;</span>Hoge<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td&gt;</span>hogei@example.com<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td&gt;</span>111111111111<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;tr&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">&quot;row&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/th&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td&gt;</span>Foo<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td&gt;</span>foo@example.com<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td&gt;</span>2222222222222<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;tr&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">&quot;row&quot;</span><span class="nt">&gt;</span>3<span class="nt">&lt;/th&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td&gt;</span>Bar<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td&gt;</span>bar@example.com<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td&gt;</span>3333333333333<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/tbody&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/table&gt;</span>
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以下のように表示</p>
-
-<p><img src="https://i.gyazo.com/7a9f5efebf06bf49be413fb11ad6ec32.png" alt="bootstrap-table" /></p>
-
-<h3>1行間隔で背景色を変える</h3>
-
-<figure class='code'><figcaption><span>exsample.html </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">&quot;table table-striped&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'> ...
-</span><span class='line'><span class="nt">&lt;/table&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="https://i.gyazo.com/48c3e079d13c4b16c49434df7233acc3.png" alt="bootstrap-table-striped" /></p>
-
-<h3>枠線をつける</h3>
-
-<p>table要素のclassに table-bordered を追加</p>
-
-<figure class='code'><figcaption><span>exsample.html </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;talbe</span> <span class="na">class=</span><span class="s">&quot;talbe table-bordered&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'> ...
-</span><span class='line'><span class="nt">&lt;/table&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="https://i.gyazo.com/fa34c10cc4931e126f1a147a0c34dd28.png" alt="bootstrap-table-bordered" /></p>
-
-<h3>レスポンシブに対応</h3>
-
-<p><code>div class="container"</code> とtable要素の間に <code>div class="table-responsive"</code> を追加すると、タブレットやスマホでテーブルが全て表示されない場合にtable要素内にスクロールバーが付く</p>
-
-<figure class='code'><figcaption><span>exsample.html </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;container&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;table-responsive&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">&quot;table table-bordered&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    ...
-</span><span class='line'>    <span class="nt">&lt;/table&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="https://i.gyazo.com/33662b4d6230d618314230a4fd25875f.png" alt="bootstrap-table-responsive" /></p>
-
-<p>tableの詳細については<a href="http://getbootstrap.com/css/#tables">公式サイト</a>を確認</p>
-
-<h2>button</h2>
-
-<p>ボタンにスタイルを付けることができる。</p>
-
-<p>buttonの使用にあたっては以下のルールがある。</p>
-
-<ul>
-<li>a要素、button要素のclassに <code>"btn btn-{プロパティ名}"</code> を追加</li>
-</ul>
-
-
-<p>プロパティの指定には以下のようになる。</p>
-
-<table>
-<thead>
-<tr>
-<th style="text-align:left;"> プロパティ名 </th>
-<th style="text-align:left;"> 表示 </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;"> default </td>
-<td style="text-align:left;"> 白地に黒文字 </td>
-</tr>
-<tr>
-<td style="text-align:left;"> primary </td>
-<td style="text-align:left;"> 青地に白文字 </td>
-</tr>
-<tr>
-<td style="text-align:left;"> success </td>
-<td style="text-align:left;"> 緑地に白文字 </td>
-</tr>
-<tr>
-<td style="text-align:left;"> info </td>
-<td style="text-align:left;"> 水色地に白文字 </td>
-</tr>
-<tr>
-<td style="text-align:left;"> warning </td>
-<td style="text-align:left;"> オレンジ色地に白文字 </td>
-</tr>
-<tr>
-<td style="text-align:left;"> danger </td>
-<td style="text-align:left;"> 赤色地に白文字 </td>
-</tr>
-<tr>
-<td style="text-align:left;"> link </td>
-<td style="text-align:left;"> 白地に青文字 </td>
-</tr>
-</tbody>
-</table>
-
-
-<p>button sample</p>
-
-<figure class='code'><figcaption><span>button.html </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-default&quot;</span><span class="nt">&gt;</span>Default<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-primary&quot;</span><span class="nt">&gt;</span>Primary<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-success&quot;</span><span class="nt">&gt;</span>Success<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-info&quot;</span><span class="nt">&gt;</span>Info<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-warning&quot;</span><span class="nt">&gt;</span>Warning<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-danger&quot;</span><span class="nt">&gt;</span>Danger<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-link&quot;</span><span class="nt">&gt;</span>Link<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'>{# endraw %}
-</span><span class='line'>{% endcodeblock %}
-</span><span class='line'>
-</span><span class='line'>以下のように表示
-</span><span class='line'>
-</span><span class='line'>![bootstrap-button](https://i.gyazo.com/b10b129e9812aa8ef7e2ac9ecbaf90f1.png)
-</span><span class='line'>
-</span><span class='line'>### button size 指定
-</span><span class='line'>
-</span><span class='line'>a要素、button要素のclassに `&quot;btn-{プロパティ名}&quot;` を追加すると、ボタンのサイズの指定ができる。
-</span><span class='line'>
-</span><span class='line'>{% codeblock lang:html button.html %}
-</span><span class='line'>{% raw %}
-</span><span class='line'><span class="nt">&lt;p&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-primary btn-lg&quot;</span><span class="nt">&gt;</span>Large button<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-default btn-lg&quot;</span><span class="nt">&gt;</span>Large button<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'><span class="nt">&lt;/p&gt;</span>
-</span><span class='line'><span class="nt">&lt;p&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-primary&quot;</span><span class="nt">&gt;</span>Default button<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-default&quot;</span><span class="nt">&gt;</span>Default button<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'><span class="nt">&lt;/p&gt;</span>
-</span><span class='line'><span class="nt">&lt;p&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-primary btn-sm&quot;</span><span class="nt">&gt;</span>Small button<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-default btn-sm&quot;</span><span class="nt">&gt;</span>Small button<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'><span class="nt">&lt;/p&gt;</span>
-</span><span class='line'><span class="nt">&lt;p&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-primary btn-xs&quot;</span><span class="nt">&gt;</span>Extra small button<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-default btn-xs&quot;</span><span class="nt">&gt;</span>Extra small button<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'><span class="nt">&lt;/p&gt;</span>
-</span><span class='line'>{% endraw % }
-</span><span class='line'>{% endcodeblock %}
-</span><span class='line'>
-</span><span class='line'>![bootstrap-button-size](https://i.gyazo.com/f31d743dcdc1344cf3779200fac4e3f3.png)
-</span><span class='line'>
-</span><span class='line'>### block levelのbutton指定
-</span><span class='line'>
-</span><span class='line'>a要素、button要素のclassに `&quot;btn-block&quot;` を追加すると、ブロックレベルのボタンを指定できる。
-</span><span class='line'>
-</span><span class='line'>{% codeblock lang:html button.html %}
-</span><span class='line'>{% raw %}
-</span><span class='line'><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-primary btn-lg btn-block&quot;</span><span class="nt">&gt;</span>Block level button<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-default btn-lg btn-block&quot;</span><span class="nt">&gt;</span>Block level button<span class="nt">&lt;/button&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="https://i.gyazo.com/e1f37bc98648fefdf272316042ea9fea.png" alt="bootstrap-button-block" /></p>
-
-<p>buttonの詳細については<a href="http://getbootstrap.com/css/#buttons">公式サイト</a>を確認</p>
-
-<h2>from</h2>
-
-<p>整ったデザインフォームを作れる</p>
-
-<p>formの使用にあたっては以下のルールがある。</p>
-
-<ul>
-<li>formタグの中に</li>
-<li>class=&ldquo;form-group"を入れて</li>
-<li>inputタグにclass=&ldquo;form-control"をつける</li>
-</ul>
-
-
-<figure class='code'><figcaption><span>index.html </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>    <span class="nt">&lt;form&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;form-group&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;exsampleInputEmail&quot;</span><span class="nt">&gt;</span>Email<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;email&quot;</span> <span class="na">class=</span><span class="s">&quot;form-control&quot;</span> <span class="na">id=</span><span class="s">&quot;exsampleInputEmail&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Email&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;form-group&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;exsampleInputPassword&quot;</span><span class="nt">&gt;</span>Password<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;password&quot;</span> <span class="na">class=</span><span class="s">&quot;form-control&quot;</span> <span class="na">id=</span><span class="s">&quot;exsampleInputPassword&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Password&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;form-group&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;exsampleInputFile&quot;</span><span class="nt">&gt;</span>File<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;file&quot;</span> <span class="na">id=</span><span class="s">&quot;exsampleInputEmail&quot;</span> <span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;help-block&quot;</span><span class="nt">&gt;</span>ファイルを選択してください。<span class="nt">&lt;/p&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;label&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>check box1
-</span><span class='line'>        <span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;label&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">checkbox</span><span class="nt">&gt;</span>check box2
-</span><span class='line'>        <span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;radio&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;label&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;radio&quot;</span> <span class="na">checked</span><span class="nt">&gt;</span>mele
-</span><span class='line'>        <span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;radio&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;label&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;radio&quot;</span><span class="nt">&gt;</span>female
-</span><span class='line'>        <span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-default&quot;</span><span class="nt">&gt;</span>Submit<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/form&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以下のようになる</p>
-
-<p><img src="https://i.gyazo.com/47fec289f7dec22f103108122230d36e.png" alt="bootstrap-form" /></p>
-
-<ul>
-<li><code>class="help-block</code>クラスを指定した要素でテキストを括ると<code>.help-block</code> ヘルプテキスト用のスタイルを設定できる。</li>
-<li>checkbox と radio は、 .form-group クラスではなくそれぞれ専用のクラスが用意されている。</li>
-</ul>
-
-
-<h3>inline form</h3>
-
-<p>フォームを以下のようにインラインに並べたい場合は、formタグに <code>class="form-inline"</code> をつける。</p>
-
-<figure class='code'><figcaption><span>index.html </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>    <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">&quot;form-inline&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;form-group&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;exsampleInputNmae&quot;</span><span class="nt">&gt;</span>Name<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">class=</span><span class="s">&quot;form-control&quot;</span> <span class="na">id=</span><span class="s">&quot;exsampleInputNmae&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Name&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;form-group&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;exampleInputEmail2&quot;</span><span class="nt">&gt;</span>Email<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;email&quot;</span> <span class="na">class=</span><span class="s">&quot;form-control&quot;</span> <span class="na">id=</span><span class="s">&quot;exampleInputEmail2&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Email&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-default&quot;</span><span class="nt">&gt;</span>submit<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/form&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以下のようになる</p>
-
-<p><img src="https://i.gyazo.com/26f2dc30da97cb0e7045a6e9c7fea662.png" alt="bootstrap-forminline" /></p>
-
-<h3>horizontal form</h3>
-
-<p>ラベルと入力欄を垂直に並べるのではなく、水平に並べたい場合は、formタグに <code>class="form-horizontal"</code> をつける。</p>
-
-<figure class='code'><figcaption><span>index.html </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>    <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">&quot;form-horizontal&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;form-group&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;inputEmail&quot;</span> <span class="na">class=</span><span class="s">&quot;col-sm-2&quot;</span> <span class="na">control-label</span><span class="nt">&gt;</span>Email<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;col-sm-10&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;email&quot;</span> <span class="na">class=</span><span class="s">&quot;form-control&quot;</span> <span class="na">id=</span><span class="s">&quot;inputEmail&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Email&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;form-group&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;inputPassword&quot;</span> <span class="na">class=</span><span class="s">&quot;col-sm-2&quot;</span> <span class="na">control-label</span><span class="nt">&gt;</span>Password<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;col-sm-8&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>              <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;password&quot;</span> <span class="na">class=</span><span class="s">&quot;form-control&quot;</span> <span class="na">id=</span><span class="s">&quot;inputPassword&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Password&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;form-group&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;col-sm-offset-2 col-sm-10&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>              <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>                  <span class="nt">&lt;label&gt;</span>
-</span><span class='line'>                      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>Remenber me
-</span><span class='line'>                  <span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>              <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;form-group&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;col-sm-offset-2 col-sm-10&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>              <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-default&quot;</span><span class="nt">&gt;</span>Sign in<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/div&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以下のようになる</p>
-
-<p><img src="https://i.gyazo.com/eedee1d0ae6715464724a6882922bf44.png" alt="bootstrap-horizontal" /></p>
-
-<ul>
-<li><code>.form-horizontal</code> クラスを指定したブロック要素で括ることで、水平レイアウトを使用できる。</li>
-<li>基本的な考え方は Grid system と同じで、 <code>.col-**-##</code> クラスを使用してレイアウトを調整する。</li>
-<li><code>label</code> タグには、 <code>.control-label</code> クラスも指定する必要がある。</li>
-<li><code>.form-group</code> クラスが <code>.row</code> クラスを兼ねているので、 <code>.row</code> クラスを指定した要素は不要。</li>
-<li>classに<code>"col-md-offset-"</code>などで始まり数字を付加したクラス名をつけると前に指定列数分だけ開けることができる。</li>
-</ul>
-
-
-<p>formの詳細については<a href="button%E3%81%AE%E8%A9%B3%E7%B4%B0%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AF[%E5%85%AC%E5%BC%8F%E3%82%B5%E3%82%A4%E3%83%88](http://getbootstrap.com/css/#buttons">公式サイト</a>を確認)を確認</p>
 ]]></content>
   </entry>
   

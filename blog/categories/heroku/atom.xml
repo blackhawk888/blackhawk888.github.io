@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Heroku | Wivern Blog]]></title>
+  <link href="http://blackhawk888.github.io/blog/categories/heroku/atom.xml" rel="self"/>
+  <link href="http://blackhawk888.github.io/"/>
+  <updated>2018-02-09T02:27:56+00:00</updated>
+  <id>http://blackhawk888.github.io/</id>
+  <author>
+    <name><![CDATA[wivern]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Herokuのpushs時のエラー]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/02/09/heroku-deploy/"/>
+    <updated>2018-02-09T11:25:54+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/02/09/heroku-deploy</id>
+    <content type="html"><![CDATA[<p>herokuにrailsアプリをdeployしたが、うまくいかなったので対処した時のメモ</p>
+
+<!--more-->
+
+
+<p>一度<code>git push heroku master</code>に失敗したので<code>herok dashbord</code>からアプリを消してしまった。
+その後herokuにdeployしたが以下のようなエラーmsgが表示された。</p>
+
+<p><figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git push heroku master&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;remote: !       No such app as XXXXXXX-XXXXXXX-61482.
+</span><span class='line'>fatal: repository <span class="p">&amp;</span>lsquo<span class="p">;</span>&lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://git.heroku.com/XXXXXXX-XXXXXXX-61482.git/&quot;</span>&gt;https://git.heroku.com/XXXXXXX-XXXXXXX-61482.git/&lt;/a&gt;<span class="p">&amp;</span>rsquo<span class="p">;</span> not found&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>上記のエラーmsgは</p>
+
+<ol>
+<li><code>XXXXXXX-XXXXXXX-61482</code>というURIを持つアプリは存在しない</li>
+<li>アップしたいのは、<code>ZZZZZZZ-ZZZZZZZ-71402</code>というURI</li>
+</ol>
+
+
+<p>なので<code>heroku</code>にデータを<code>push</code>しようとしたら、<code>git</code>がないと怒られてしまった！！</p>
+
+<p>調べてみると同様のケースがあった。</p>
+
+<p><a href="http://stackoverflow.com/questions/28749771/cant-push-to-heroku-after-accidentally-deleting-app-on-heroku">http://stackoverflow.com/questions/28749771/cant-push-to-heroku-after-accidentally-deleting-app-on-heroku</a></p>
+
+<ul>
+<li><code>git</code>のリモートURLを変更</li>
+</ul>
+
+
+<p><figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git remote <span class="nb">set</span>-url heroku &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://git.heroku.com/ZZZZZZZ-ZZZZZZ-71402.git&quot;</span>&gt;https://git.heroku.com/ZZZZZZZ-ZZZZZZ-71402.git&lt;/a&gt;
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+<li>再度<code>push</code></li>
+</ul>
+
+
+<p><figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git push heroku master
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>無事<code>heroku</code>に<code>push</code>できた。</p>
+
+<p>と。。あとでもう少し調べて見たが、以下の方法でもできるみたい。</p>
+
+<ul>
+<li><code>.git/config</code>を編集</li>
+</ul>
+
+
+<p><figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> .git
+</span><span class='line'><span class="nv">$ </span>vim config
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+<li>[remote &ldquo;heroku&rdquo;]の部分削除</li>
+</ul>
+
+
+<p><figure class='code'><figcaption><span>.git/config </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>core<span class="o">]</span>
+</span><span class='line'>        <span class="nv">repositoryformatversion</span> <span class="o">=</span> 0
+</span><span class='line'>        <span class="nv">filemode</span> <span class="o">=</span> <span class="nb">true</span>
+</span><span class='line'><span class="nb">        </span><span class="nv">bare</span> <span class="o">=</span> <span class="nb">false</span>
+</span><span class='line'><span class="nb">        </span><span class="nv">logallrefupdates</span> <span class="o">=</span> <span class="nb">true</span>
+</span><span class='line'><span class="o">[</span>remote <span class="p">&amp;</span>ldquo<span class="p">;</span>origin<span class="p">&amp;</span>rdquo<span class="p">;</span><span class="o">]</span>
+</span><span class='line'>        <span class="nv">url</span> <span class="o">=</span> git@xxxxx.xxxxxxxx/xxxxxx.git
+</span><span class='line'>        <span class="nv">fetch</span> <span class="o">=</span> +refs/heads/&lt;em&gt;:refs/remotes/origin/&lt;/em&gt;
+</span><span class='line'><span class="o">[</span>branch <span class="p">&amp;</span>ldquo<span class="p">;</span>master<span class="p">&amp;</span>rdquo<span class="p">;</span><span class="o">]</span>
+</span><span class='line'>        <span class="nv">remote</span> <span class="o">=</span> origin
+</span><span class='line'>        <span class="nv">merge</span> <span class="o">=</span> refs/heads/master
+</span><span class='line'><span class="o">[</span>remote <span class="p">&amp;</span>ldquo<span class="p">;</span>heroku<span class="p">&amp;</span>rdquo<span class="p">;</span><span class="o">]</span>
+</span><span class='line'>        <span class="nv">url</span> <span class="o">=</span> &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://git.heroku.com/xxxxxxx-xxxxxxxx.git%E3%80%80%E2%86%90%E5%89%8A%E9%99%A4&quot;</span>&gt;https://git.heroku.com/xxxxxxx-xxxxxxxx.git%E3%80%80%E2%86%90%E5%89%8A%E9%99%A4&lt;/a&gt;
+</span><span class='line'>        <span class="nv">fetch</span> <span class="o">=</span> +refs/heads/&lt;em&gt;:refs/remotes/heroku/&lt;/em&gt;　←削除
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+<li><code>heroku</code>コマンドを実行</li>
+</ul>
+
+
+<p><figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>heroku create
+</span><span class='line'><span class="nv">$ </span>fir puah heroku master
+</span></code></pre></td></tr></table></div></figure></p>
+]]></content>
+  </entry>
+  
+</feed>

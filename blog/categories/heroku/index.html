@@ -6,14 +6,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="google-site-verification" content="vY2EmWIVKKAtlat_5KCgpFUJrL4LWlUa0XZ2xv7RQ1s" />
-  <title>Vimでmarkdownをリアルタイムにプレビューできるようにする - Wivern Blog</title>
+  <title>Category: Heroku - Wivern Blog</title>
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="最近markdownでメモをとることが多いのでvimでmarkdownで書いてリアルタイムプレビューできる
-ようにしたときのメモ 必要なもの plasticboy/vim-markdown
-kannokanno/previm
-tyru/open-browser.vim インストール vim- &hellip;">
+  <meta name="description" content="Category: heroku">
   
   
   <link href="/stylesheets/table.css" rel="stylesheet" type="text/css" />
@@ -24,7 +21,7 @@ tyru/open-browser.vim インストール vim- &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blackhawk888.github.io/blog/2018/02/08/vim-markdown/">
+  <link rel="canonical" href="http://blackhawk888.github.io/blog/categories/heroku/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Wivern Blog" type="application/atom+xml">
@@ -83,146 +80,35 @@ tyru/open-browser.vim インストール vim- &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">Vimでmarkdownをリアルタイムにプレビューできるようにする</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2018-02-08T13:12:14+00:00'><span class='date'>2018年02月08日</span> <span class='time'>13:12:14</span></time>
-        
-      </p>
+    <h1 class="entry-title">Category: Heroku</h1>
     
   </header>
+  
+  <div id="blog-archives" class="category">
 
 
-<div class="entry-content"><p>最近markdownでメモをとることが多いのでvimでmarkdownで書いてリアルタイムプレビューできる
-ようにしたときのメモ</p>
 
-<!--more-->
+  
+  <h2>2018</h2>
 
+<article>
+  
+<h1><a href="/blog/2018/02/09/heroku-deploy/">Herokuのpushs時のエラー</a></h1>
+<time datetime="2018-02-09T11:25:54+00:00" pubdate><span class='month'>Feb</span> <span class='day'>09</span> <span class='year'>2018</span></time>
 
-<h2>必要なもの</h2>
-
-<ul>
-<li><a href="https://github.com/plasticboy/vim-markdown">plasticboy/vim-markdown</a></li>
-<li><a href="https://github.com/kannokanno/previm">kannokanno/previm</a></li>
-<li><a href="https://github.com/tyru/open-browser.vim">tyru/open-browser.vim</a></li>
-</ul>
-
-
-<h2>インストール</h2>
-
-<p><code>vim-plug</code>でインストールする</p>
-
-<figure class='code'><figcaption><span>.vimrc </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>Plug <span class="s1">&#39;tpope/vim-markdown&#39;</span>
-</span><span class='line'>Plug <span class="s1">&#39;kannokanno/previm&#39;</span>
-</span><span class='line'>Plug <span class="s1">&#39;tyru/open-browser.vim&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/heroku/'>heroku</a>, <a class='category' href='/blog/categories/rails/'>rails</a></span>
+</footer>
 
 
-<p><code>source ~/.vimrc</code>で設定を反映させた後、vimで<code>:PlugStatu</code>でインストール</p>
+</article>
 
-<h2>設定</h2>
-
-<p>使いやすくする為に設定を追加</p>
-
-<figure class='code'><figcaption><span>.vimrc </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>
-</span><span class='line'> <span class="s2">&quot;&quot;&quot; markdown {{{</span>
-</span><span class='line'><span class="s2">   autocmd BufRead,BufNewFile *.mkd  set filetype=markdown</span>
-</span><span class='line'><span class="s2">   autocmd BufRead,BufNewFile *.md  set filetype=markdown</span>
-</span><span class='line'><span class="s2">   &quot;</span> Need: kannokanno/previm
-</span><span class='line'>   nnoremap &lt;silent&gt; &lt;C-p&gt; :PrevimOpen&lt;CR&gt; <span class="s2">&quot; Ctrl-pでプレビュー</span>
-</span><span class='line'><span class="s2">   &quot;</span> 自動で折りたたまないようにする
-</span><span class='line'>   <span class="nb">let </span>g:vim_markdown_folding_disabled<span class="o">=</span>1
-</span><span class='line'>   <span class="nb">let </span>g:previm_enable_realtime <span class="o">=</span> 1
-</span><span class='line'> <span class="err">&quot;</span> <span class="o">}}}</span>
-</span><span class='line'>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><em>解説</em>
-デフォルトだと拡張子が<code>md</code>のファイルは<code>modula2</code>とうファイルだと認識されてしまうので<code>markdown</code>で開くよう設定。
-また、プレビューを開くためのショートカットを割り当て。</p>
-
-<h2>実行</h2>
-
-<p>vimで<code>.md</code>形式を編集している時に<code>Ctrl-p</code>を押すとブラウザが起動しプレビューされる。<br/>
-さらにファイルを編集するとブラウザをリロードしなくてもリアルタイムに反映される。<br/>
-リアルタイムに反映されると言っても反映されるまでに数秒かかるので
-リアルタイムに反映されるかあとで調べわかったら追記する。</p>
 </div>
 
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">wivern</span></span>
-
-      
-
-
-
-
-<time class='entry-date' datetime='2018-02-08T13:12:14+00:00'><span class='date'>2018年02月08日</span> <span class='time'>13:12:14</span></time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/markdown/'>markdown</a>, <a class='category' href='/blog/categories/vim/'>vim</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2018/02/08/vim-markdown/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2018/02/08/vim-markdown/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2018/02/07/cloud9-imagemagick/" title="Previous Post: cloud9にImagemagickをインストール">&laquo; cloud9にImagemagickをインストール</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2018/02/08/octopress-escape/" title="Next Post: octopressでコードブロックのエスケープ方法">octopressでコードブロックのエスケープ方法 &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
 </div>
