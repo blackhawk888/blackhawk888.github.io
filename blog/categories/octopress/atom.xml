@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2018-02-09T02:31:12+00:00</updated>
+  <updated>2018-02-14T01:07:00+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,89 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[zshに切り替えてからOctoppressで記事が作成できない対処方法]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/02/13/swithc-zsh-octopress-nopost/"/>
+    <updated>2018-02-13T12:33:08+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/02/13/swithc-zsh-octopress-nopost</id>
+    <content type="html"><![CDATA[<h2>現象</h2>
+
+<p>shellを<code>bash</code>から<code>zsh</code>に切り替えてからOctopressで記事を作成するとエラーが発生
+shellが<code>bash</code>の時は問題なくできていた。</p>
+
+<p><figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>rake new_post<span class="o">[</span>&lt;code&gt;sample post title&lt;/code&gt;<span class="o">]</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>zsh: no matches found: new_post<span class="o">[</span>sample post title<span class="o">]</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;
+</span></code></pre></td></tr></table></div></figure></p>
+
+<!--more-->
+
+
+<h2>原因</h2>
+
+<p>エラーの原因はグロッビング。
+グロッビングでの特殊文字の使用をするという形になっており、そこに反応したせいで
+引数の<code>*</code>と<code>?</code>と<code>[</code>と<code>]</code>を使うとグロブ展開が行われ、<code>no matches found</code>と
+なってしまう。少しややこしいい。。。</p>
+
+<h2>対処方法</h2>
+
+<ul>
+<li>グロブ展開をさせないために<code>.zshrc</code>に以下を追記</li>
+</ul>
+
+
+<p><figure class='code'><figcaption><span>.zshrc </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>vim .zshrc&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;setopt nonomatch
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+<li><code>.zshrc</code>を変更したので反映させる</li>
+</ul>
+
+
+<p><figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">source</span> ~/.zshrc
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>この記述( setopt nonomatch )もどうやら少し反則的な書き方らしい。。。
+この方法で対処したが他にも方法があったので忘れないようにメモ。
+以下を参考にした<a href="https://github.com/imathis/octopress/issues/117">Not compatible with Zsh #117</a></p>
+
+<h3>aliasを設定する</h3>
+
+<p><code>.zshrc</code>にaliasを設定</p>
+
+<p><figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">alias </span><span class="nv">rake</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span>noglob rake<span class="p">&amp;</span>rdquo<span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h3>クォーテーションで囲む</h3>
+
+<p>記事を作成するときにクォーテーションで囲む</p>
+
+<p><figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>rake <span class="p">&amp;</span>ldquo<span class="p">;</span>new_post<span class="o">[</span>sample post title<span class="o">]</span><span class="p">&amp;</span>rdquo<span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopressでコードブロックのエスケープ方法]]></title>
@@ -410,55 +493,6 @@ Octopressのディレクトリ指定の仕方は<a href="http://octopress.org/do
 <code>published: true</code>と<code>author: [author]</code>と記事に頭で<code>&lt;!—more—&gt;</code>が初期値として入るようになるので
 必要に併せて下書き中でdeployしたくなかったら<code>published: false</code>に変更し、<code>&lt;!--more--&gt;</code>タグの
 位置も変更すればよい。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress-下書きをdeployしないようにする]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/08/31/octopress-draft/"/>
-    <updated>2016-08-31T15:59:56+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/08/31/octopress-draft</id>
-    <content type="html"><![CDATA[<p>下書きしていて完成してない状態でも、他の部分だけを公開したい時があると思う。<br/>
-その時はYAMLブロックに<code>published:false</code>加えるとそのファイルは<code>bundle exec rake generate</code>を実行すると
-下書きは生成されないが、<code>bundle exec rake preview</code>をした時は表示される。</p>
-
-<h2><figure class='code'><figcaption><span>exsample.markdown </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sr">/h2&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="sr">&lt;p&gt;layout: post</span>
-</span><span class='line'><span class="sr">title: &amp;ldquo;exsample&amp;rdquo;</span>
-</span><span class='line'><span class="sr">date: 2016-08-31 08:42:56 +0000</span>
-</span><span class='line'><span class="sr">comments: true</span>
-</span><span class='line'><span class="sr">categories: [exsample]&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">h2</span><span class="o">&gt;</span><span class="ss">published</span><span class="p">:</span> <span class="kp">false</span><span class="o">&lt;</span><span class="sr">/h2&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="sr">&lt;h3&gt;下書き中&lt;/</span><span class="n">h3</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<!--more-->
-
-
-<p><code>bundle exec gen_deploy</code>は<code>generate</code>が失敗した場合でも<code>deploy</code>を実行するので
-<code>generate</code>失敗な形で投稿されてしまうことがある。
-また下にある<code>published</code>のステートメントは最後の方に判断されるので、 後で投稿しようと思っている下書きがあって、
-今書いているものを投稿しようと<code>bundle exec gen_deploy</code>すると、 中途半端な今の記事と後で投稿する予定だった
-下書きの方が送られてしまうことがあるので ちょっとした変更以外は一旦<code>bundele exec generate</code>した方がよいかもしれない。</p>
 ]]></content>
   </entry>
   

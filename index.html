@@ -10,7 +10,11 @@
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="herokuにrailsアプリをdeployしたが、うまくいかなったので対処した時のメモ ">
+  <meta name="description" content="現象 shellをbashからzshに切り替えてからOctopressで記事を作成するとエラーが発生
+shellがbashの時は問題なくできていた。 1.bash 1
+2
+3
+$ bundle exec rake new_post[`sample post title`] $ zsh: no &hellip;">
   
   
   <link href="/stylesheets/table.css" rel="stylesheet" type="text/css" />
@@ -87,7 +91,54 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2018/02/09/heroku-deploy/">Herokuのpushs時のエラー</a></h1>
+      <h1 class="entry-title"><a href="/blog/2018/02/13/swithc-zsh-octopress-nopost/">zshに切り替えてからOctoppressで記事が作成できない対処方法</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2018-02-13T12:33:08+00:00'><span class='date'>2018年02月13日</span> <span class='time'>12:33:08</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>現象</h2>
+
+<p>shellを<code>bash</code>から<code>zsh</code>に切り替えてからOctopressで記事を作成するとエラーが発生
+shellが<code>bash</code>の時は問題なくできていた。</p>
+
+<figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>rake new_post<span class="o">[</span><span class="sb">`</span>sample post title<span class="sb">`</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ </span>zsh: no matches found: new_post<span class="o">[</span>sample post title<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2018/02/13/swithc-zsh-octopress-nopost/">続きを読む &raquo;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/02/09/heroku-deploy/">Herokuのpush時のエラー</a></h1>
     
     
       <p class="meta">
@@ -400,41 +451,6 @@ tmuxを使わないとSSH接続が切れたら最初から作業を行わなけ�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2018/01/22/rvm-version-switch/">Rvmで管理しているrubyのバージョン切り替え方法</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2018-01-22T16:48:53+00:00'><span class='date'>2018年01月22日</span> <span class='time'>16:48:53</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>rvmを使う頻度は多くはないがcloud9上で使用されているのでインストールされているrubyの
-バージョンを変更する時に忘れがちなのでメモ</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2018/01/22/rvm-version-switch/">続きを読む &raquo;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -458,7 +474,11 @@ tmuxを使わないとSSH接続が切れたら最初から作業を行わなけ�
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2018/02/09/heroku-deploy/">Herokuのpushs時のエラー</a>
+        <a href="/blog/2018/02/13/swithc-zsh-octopress-nopost/">zshに切り替えてからOctoppressで記事が作成できない対処方法</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/02/09/heroku-deploy/">Herokuのpush時のエラー</a>
       </li>
     
       <li class="post">
@@ -473,19 +493,15 @@ tmuxを使わないとSSH接続が切れたら最初から作業を行わなけ�
         <a href="/blog/2018/02/07/cloud9-imagemagick/">cloud9にImagemagickをインストール</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2018/02/05/regex/">正規表現</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/bootstrap/'>bootstrap (1)</a></li><li><a href='/blog/categories/cloud9/'>cloud9 (2)</a></li><li><a href='/blog/categories/css/'>css (2)</a></li><li><a href='/blog/categories/git/'>git (4)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/heroku/'>heroku (1)</a></li><li><a href='/blog/categories/imagemagick/'>imagemagick (1)</a></li><li><a href='/blog/categories/iterm2/'>iterm2 (1)</a></li><li><a href='/blog/categories/mac/'>mac (1)</a></li><li><a href='/blog/categories/markdown/'>markdown (2)</a></li><li><a href='/blog/categories/mercurial/'>mercurial (1)</a></li><li><a href='/blog/categories/mysql/'>mysql (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (20)</a></li><li><a href='/blog/categories/rails/'>rails (5)</a></li><li><a href='/blog/categories/ruby/'>ruby (2)</a></li><li><a href='/blog/categories/slack/'>slack (4)</a></li><li><a href='/blog/categories/slim/'>slim (1)</a></li><li><a href='/blog/categories/tmux/'>tmux (1)</a></li><li><a href='/blog/categories/vim/'>vim (1)</a></li><li><a href='/blog/categories/zheng-gui-biao-xian/'>正規表現 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/bash/'>bash (1)</a></li><li><a href='/blog/categories/bitbacket/'>bitbacket (1)</a></li><li><a href='/blog/categories/bootstrap/'>bootstrap (1)</a></li><li><a href='/blog/categories/cloud9/'>cloud9 (2)</a></li><li><a href='/blog/categories/css/'>css (2)</a></li><li><a href='/blog/categories/git/'>git (4)</a></li><li><a href='/blog/categories/google-analytics/'>google analytics (1)</a></li><li><a href='/blog/categories/heroku/'>heroku (1)</a></li><li><a href='/blog/categories/imagemagick/'>imagemagick (1)</a></li><li><a href='/blog/categories/iterm2/'>iterm2 (1)</a></li><li><a href='/blog/categories/mac/'>mac (1)</a></li><li><a href='/blog/categories/markdown/'>markdown (2)</a></li><li><a href='/blog/categories/mercurial/'>mercurial (1)</a></li><li><a href='/blog/categories/mysql/'>mysql (1)</a></li><li><a href='/blog/categories/octopress/'>octopress (21)</a></li><li><a href='/blog/categories/rails/'>rails (5)</a></li><li><a href='/blog/categories/ruby/'>ruby (2)</a></li><li><a href='/blog/categories/shell/'>shell (1)</a></li><li><a href='/blog/categories/slack/'>slack (4)</a></li><li><a href='/blog/categories/slim/'>slim (1)</a></li><li><a href='/blog/categories/tmux/'>tmux (1)</a></li><li><a href='/blog/categories/vim/'>vim (1)</a></li><li><a href='/blog/categories/zsh/'>zsh (2)</a></li><li><a href='/blog/categories/zheng-gui-biao-xian/'>正規表現 (1)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/bitbacket' style='font-size: 103.0%'>bitbacket(1)</a> <a href='/blog/categories/bootstrap' style='font-size: 103.0%'>bootstrap(1)</a> <a href='/blog/categories/cloud9' style='font-size: 106.0%'>cloud9(2)</a> <a href='/blog/categories/css' style='font-size: 106.0%'>css(2)</a> <a href='/blog/categories/git' style='font-size: 112.0%'>git(4)</a> <a href='/blog/categories/google-analytics' style='font-size: 103.0%'>google analytics(1)</a> <a href='/blog/categories/heroku' style='font-size: 103.0%'>heroku(1)</a> <a href='/blog/categories/imagemagick' style='font-size: 103.0%'>imagemagick(1)</a> <a href='/blog/categories/iterm2' style='font-size: 103.0%'>iterm2(1)</a> <a href='/blog/categories/mac' style='font-size: 103.0%'>mac(1)</a> <a href='/blog/categories/markdown' style='font-size: 106.0%'>markdown(2)</a> <a href='/blog/categories/mercurial' style='font-size: 103.0%'>mercurial(1)</a> <a href='/blog/categories/mysql' style='font-size: 103.0%'>mysql(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(20)</a> <a href='/blog/categories/rails' style='font-size: 115.0%'>rails(5)</a> <a href='/blog/categories/ruby' style='font-size: 106.0%'>ruby(2)</a> <a href='/blog/categories/slack' style='font-size: 112.0%'>slack(4)</a> <a href='/blog/categories/slim' style='font-size: 103.0%'>slim(1)</a> <a href='/blog/categories/tmux' style='font-size: 103.0%'>tmux(1)</a> <a href='/blog/categories/vim' style='font-size: 103.0%'>vim(1)</a> <a href='/blog/categories/zheng-gui-biao-xian' style='font-size: 103.0%'>正規表現(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/bash' style='font-size: 102.85714285714286%'>bash(1)</a> <a href='/blog/categories/bitbacket' style='font-size: 102.85714285714286%'>bitbacket(1)</a> <a href='/blog/categories/bootstrap' style='font-size: 102.85714285714286%'>bootstrap(1)</a> <a href='/blog/categories/cloud9' style='font-size: 105.71428571428571%'>cloud9(2)</a> <a href='/blog/categories/css' style='font-size: 105.71428571428571%'>css(2)</a> <a href='/blog/categories/git' style='font-size: 111.42857142857143%'>git(4)</a> <a href='/blog/categories/google-analytics' style='font-size: 102.85714285714286%'>google analytics(1)</a> <a href='/blog/categories/heroku' style='font-size: 102.85714285714286%'>heroku(1)</a> <a href='/blog/categories/imagemagick' style='font-size: 102.85714285714286%'>imagemagick(1)</a> <a href='/blog/categories/iterm2' style='font-size: 102.85714285714286%'>iterm2(1)</a> <a href='/blog/categories/mac' style='font-size: 102.85714285714286%'>mac(1)</a> <a href='/blog/categories/markdown' style='font-size: 105.71428571428571%'>markdown(2)</a> <a href='/blog/categories/mercurial' style='font-size: 102.85714285714286%'>mercurial(1)</a> <a href='/blog/categories/mysql' style='font-size: 102.85714285714286%'>mysql(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>octopress(21)</a> <a href='/blog/categories/rails' style='font-size: 114.28571428571429%'>rails(5)</a> <a href='/blog/categories/ruby' style='font-size: 105.71428571428571%'>ruby(2)</a> <a href='/blog/categories/shell' style='font-size: 102.85714285714286%'>shell(1)</a> <a href='/blog/categories/slack' style='font-size: 111.42857142857143%'>slack(4)</a> <a href='/blog/categories/slim' style='font-size: 102.85714285714286%'>slim(1)</a> <a href='/blog/categories/tmux' style='font-size: 102.85714285714286%'>tmux(1)</a> <a href='/blog/categories/vim' style='font-size: 102.85714285714286%'>vim(1)</a> <a href='/blog/categories/zsh' style='font-size: 105.71428571428571%'>zsh(2)</a> <a href='/blog/categories/zheng-gui-biao-xian' style='font-size: 102.85714285714286%'>正規表現(1)</a> </span>
 </section>
 
 

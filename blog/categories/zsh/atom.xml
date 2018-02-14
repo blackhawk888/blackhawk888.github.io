@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Zsh | Wivern Blog]]></title>
+  <link href="http://blackhawk888.github.io/blog/categories/zsh/atom.xml" rel="self"/>
+  <link href="http://blackhawk888.github.io/"/>
+  <updated>2018-02-14T01:07:00+00:00</updated>
+  <id>http://blackhawk888.github.io/</id>
+  <author>
+    <name><![CDATA[wivern]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[zshに切り替えてからOctoppressで記事が作成できない対処方法]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/02/13/swithc-zsh-octopress-nopost/"/>
+    <updated>2018-02-13T12:33:08+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/02/13/swithc-zsh-octopress-nopost</id>
+    <content type="html"><![CDATA[<h2>現象</h2>
+
+<p>shellを<code>bash</code>から<code>zsh</code>に切り替えてからOctopressで記事を作成するとエラーが発生
+shellが<code>bash</code>の時は問題なくできていた。</p>
+
+<p><figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>rake new_post<span class="o">[</span>&lt;code&gt;sample post title&lt;/code&gt;<span class="o">]</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;<span class="nv">$ </span>zsh: no matches found: new_post<span class="o">[</span>sample post title<span class="o">]</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;
+</span></code></pre></td></tr></table></div></figure></p>
+
+<!--more-->
+
+
+<h2>原因</h2>
+
+<p>エラーの原因はグロッビング。
+グロッビングでの特殊文字の使用をするという形になっており、そこに反応したせいで
+引数の<code>*</code>と<code>?</code>と<code>[</code>と<code>]</code>を使うとグロブ展開が行われ、<code>no matches found</code>と
+なってしまう。少しややこしいい。。。</p>
+
+<h2>対処方法</h2>
+
+<ul>
+<li>グロブ展開をさせないために<code>.zshrc</code>に以下を追記</li>
+</ul>
+
+
+<p><figure class='code'><figcaption><span>.zshrc </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>vim .zshrc&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;setopt nonomatch
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+<li><code>.zshrc</code>を変更したので反映させる</li>
+</ul>
+
+
+<p><figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">source</span> ~/.zshrc
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>この記述( setopt nonomatch )もどうやら少し反則的な書き方らしい。。。
+この方法で対処したが他にも方法があったので忘れないようにメモ。
+以下を参考にした<a href="https://github.com/imathis/octopress/issues/117">Not compatible with Zsh #117</a></p>
+
+<h3>aliasを設定する</h3>
+
+<p><code>.zshrc</code>にaliasを設定</p>
+
+<p><figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">alias </span><span class="nv">rake</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span>noglob rake<span class="p">&amp;</span>rdquo<span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h3>クォーテーションで囲む</h3>
+
+<p>記事を作成するときにクォーテーションで囲む</p>
+
+<p><figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>rake <span class="p">&amp;</span>ldquo<span class="p">;</span>new_post<span class="o">[</span>sample post title<span class="o">]</span><span class="p">&amp;</span>rdquo<span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Shellをbashからzshに変更]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/01/29/zsh/"/>
+    <updated>2018-01-29T17:11:23+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/01/29/zsh</id>
+    <content type="html"><![CDATA[<p>シェルは今まで<code>bash</code>を使っていたのだが、カスタマイズが細かくできるという点、補完が優れているという点で
+もう随分前に<code>zsh</code>に切り替えた。<br/>
+思いの外使い勝手がよいので忘れないうちに設定内容をメモ</p>
+
+<!--more-->
+
+
+<h2>zshをカスタマイズ</h2>
+
+<ul>
+<li>空の<code>~/.zshrc</code>ファイル作成</li>
+</ul>
+
+
+<p><figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>touch ~/.zshrc
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+<li><code>~/.zshrc</code>ファイルを編集</li>
+</ul>
+
+
+<p><figure class='code'><figcaption><span>~/.zshrc </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+<span class='line-number'>138</span>
+<span class='line-number'>139</span>
+<span class='line-number'>140</span>
+<span class='line-number'>141</span>
+<span class='line-number'>142</span>
+<span class='line-number'>143</span>
+<span class='line-number'>144</span>
+<span class='line-number'>145</span>
+<span class='line-number'>146</span>
+<span class='line-number'>147</span>
+<span class='line-number'>148</span>
+<span class='line-number'>149</span>
+<span class='line-number'>150</span>
+<span class='line-number'>151</span>
+<span class='line-number'>152</span>
+<span class='line-number'>153</span>
+<span class='line-number'>154</span>
+<span class='line-number'>155</span>
+<span class='line-number'>156</span>
+<span class='line-number'>157</span>
+<span class='line-number'>158</span>
+<span class='line-number'>159</span>
+<span class='line-number'>160</span>
+<span class='line-number'>161</span>
+<span class='line-number'>162</span>
+<span class='line-number'>163</span>
+<span class='line-number'>164</span>
+<span class='line-number'>165</span>
+<span class='line-number'>166</span>
+<span class='line-number'>167</span>
+<span class='line-number'>168</span>
+<span class='line-number'>169</span>
+<span class='line-number'>170</span>
+<span class='line-number'>171</span>
+<span class='line-number'>172</span>
+<span class='line-number'>173</span>
+<span class='line-number'>174</span>
+<span class='line-number'>175</span>
+<span class='line-number'>176</span>
+<span class='line-number'>177</span>
+<span class='line-number'>178</span>
+<span class='line-number'>179</span>
+<span class='line-number'>180</span>
+<span class='line-number'>181</span>
+<span class='line-number'>182</span>
+<span class='line-number'>183</span>
+<span class='line-number'>184</span>
+<span class='line-number'>185</span>
+<span class='line-number'>186</span>
+<span class='line-number'>187</span>
+<span class='line-number'>188</span>
+<span class='line-number'>189</span>
+<span class='line-number'>190</span>
+<span class='line-number'>191</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;<span class="p">&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;</span>-&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;環境変数&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;<span class="p">&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;</span>-&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;SSHで接続した先で日本語が使えるようにする&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;export <span class="nv">LC_CTYPE</span><span class="o">=</span>en_US.UTF-8
+</span><span class='line'><span class="nb">export </span><span class="nv">LC_ALL</span><span class="o">=</span>en_US.UTF-8&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;エディタ&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;export <span class="nv">EDITOR</span><span class="o">=</span>/usr/local/bin/vim&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;ページャ&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;export <span class="nv">PAGER</span><span class="o">=</span>/usr/local/bin/vimpager
+</span><span class='line'><span class="nb">export </span><span class="nv">MANPAGER</span><span class="o">=</span>/usr/local/bin/vimpager&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;<span class="p">&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;</span>-&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;zshのオプション&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;<span class="p">&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;</span>-&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h2&gt;補完機能の強化&lt;/h2&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;autoload -U compinit
+</span><span class='line'>compinit&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h2&gt;入力しているコマンド名が間違っている場合にもしかして：を出す。&lt;/h2&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;setopt correct&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;ビープを鳴らさない&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;setopt nobeep&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h2&gt;色を使う&lt;/h2&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;setopt prompt_subst&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h2&gt;^Dでログアウトしない。&lt;/h2&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;setopt ignoreeof&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h2&gt;バックグラウンドジョブが終了したらすぐに知らせる。&lt;/h2&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;setopt no_tify&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h2&gt;直前と同じコマンドをヒストリに追加しない&lt;/h2&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;setopt hist_ignore_dups&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;補完&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h2&gt;タブによるファイルの順番切り替えをしない&lt;/h2&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;unsetopt auto_menu&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;cd -<span class="o">[</span>tab<span class="o">]</span>で過去のディレクトリにひとっ飛びできるようにする&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;setopt auto_pushd&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;ディレクトリ名を入力するだけでcdできるようにする&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;setopt auto_cd&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;<span class="p">&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;</span>-&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;パス&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;<span class="p">&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;</span>-&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;重複する要素を自動的に削除&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;typeset -U path cdpath fpath manpath&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;path<span class="o">=(</span>
+</span><span class='line'>    <span class="nv">$HOME</span>/bin<span class="o">(</span>N-/<span class="o">)</span>
+</span><span class='line'>    /usr/local/bin<span class="o">(</span>N-/<span class="o">)</span>
+</span><span class='line'>    /usr/local/sbin<span class="o">(</span>N-/<span class="o">)</span>
+</span><span class='line'>    <span class="nv">$path</span>
+</span><span class='line'><span class="o">)</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;<span class="p">&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;</span>-&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;プロンプト&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;<span class="p">&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;</span>-&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;autoload -U promptinit<span class="p">;</span> promptinit
+</span><span class='line'>autoload -Uz colors<span class="p">;</span> colors
+</span><span class='line'>autoload -Uz vcs_info
+</span><span class='line'>autoload -Uz is-at-least&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;begin VCS&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;zstyle <span class="p">&amp;</span>ldquo<span class="p">;</span>:vcs_info:&lt;em&gt;<span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="nb">enable </span>git svn hg bzr
+</span><span class='line'>zstyle <span class="p">&amp;</span>ldquo<span class="p">;</span>:vcs_info:&lt;/em&gt;<span class="p">&amp;</span>rdquo<span class="p">;</span> formats <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="o">(</span>%s<span class="o">)</span>-<span class="o">[</span>%b<span class="o">]</span><span class="p">&amp;</span>rdquo<span class="p">;</span>
+</span><span class='line'>zstyle <span class="p">&amp;</span>ldquo<span class="p">;</span>:vcs_info:&lt;em&gt;<span class="p">&amp;</span>rdquo<span class="p">;</span> actionformats <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="o">(</span>%s<span class="o">)</span>-<span class="o">[</span>%b<span class="p">|</span>%a<span class="o">]</span><span class="p">&amp;</span>rdquo<span class="p">;</span>
+</span><span class='line'>zstyle <span class="p">&amp;</span>ldquo<span class="p">;</span>:vcs_info:<span class="o">(</span>svn<span class="p">|</span>bzr<span class="o">)</span>:&lt;/em&gt;<span class="p">&amp;</span>rdquo<span class="p">;</span> branchformat <span class="p">&amp;</span>ldquo<span class="p">;</span>%b:r%r<span class="p">&amp;</span>rdquo<span class="p">;</span>
+</span><span class='line'>zstyle <span class="p">&amp;</span>ldquo<span class="p">;</span>:vcs_info:bzr:*<span class="p">&amp;</span>rdquo<span class="p">;</span> use-simple <span class="nb">true</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;zstyle <span class="p">&amp;</span>ldquo<span class="p">;</span>:vcs_info:*<span class="p">&amp;</span>rdquo<span class="p">;</span> max-exports 6&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;if is-at-least 4.3.10<span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    zstyle <span class="p">&amp;</span>ldquo<span class="p">;</span>:vcs_info:git:&lt;em&gt;<span class="p">&amp;</span>rdquo<span class="p">;</span> check-for-changes <span class="nb">true</span> <span class="c"># commitしていないのをチェック</span>
+</span><span class='line'>    zstyle <span class="p">&amp;</span>ldquo<span class="p">;</span>:vcs_info:git:&lt;/em&gt;<span class="p">&amp;</span>rdquo<span class="p">;</span> stagedstr <span class="p">&amp;</span>ldquo<span class="p">;</span>&lt;S&gt;<span class="p">&amp;</span>rdquo<span class="p">;</span>
+</span><span class='line'>    zstyle <span class="p">&amp;</span>ldquo<span class="p">;</span>:vcs_info:git:&lt;em&gt;<span class="p">&amp;</span>rdquo<span class="p">;</span> unstagedstr <span class="p">&amp;</span>ldquo<span class="p">;</span>&lt;U&gt;<span class="p">&amp;</span>rdquo<span class="p">;</span>
+</span><span class='line'>    zstyle <span class="p">&amp;</span>ldquo<span class="p">;</span>:vcs_info:git:&lt;/em&gt;<span class="p">&amp;</span>rdquo<span class="p">;</span> formats <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="o">(</span>%b<span class="o">)</span> %c%u<span class="p">&amp;</span>rdquo<span class="p">;</span>
+</span><span class='line'>    zstyle <span class="p">&amp;</span>ldquo<span class="p">;</span>:vcs_info:git:*<span class="p">&amp;</span>rdquo<span class="p">;</span> actionformats <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="o">(</span>%s<span class="o">)</span>-<span class="o">[</span>%b<span class="p">|</span>%a<span class="o">]</span> %c%u<span class="p">&amp;</span>rdquo<span class="p">;</span>
+</span><span class='line'><span class="k">fi</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;function vcs_prompt_info<span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>    <span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8 vcs_info
+</span><span class='line'>    <span class="o">[[</span> -n <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$vcs_info_msg_0</span>&lt;em&gt;<span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="o">]]</span> <span class="p">&amp;</span>amp<span class="p">;&amp;</span>amp<span class="p">;</span> <span class="nb">echo</span> -n <span class="p">&amp;</span>ldquo<span class="p">;</span> %<span class="o">{</span><span class="nv">$fg</span><span class="o">[</span>yellow<span class="o">]</span>%<span class="o">}</span><span class="nv">$vcs_info_msg_0</span>&lt;/em&gt;%f<span class="p">&amp;</span>rdquo<span class="p">;</span>
+</span><span class='line'><span class="o">}</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;end VCS&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;OK<span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span>^_^ <span class="p">&amp;</span>rdquo<span class="p">;</span>
+</span><span class='line'><span class="nv">NG</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span>X_X <span class="p">&amp;</span>rdquo<span class="p">;</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;PROMPT<span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;&amp;</span>rdquo<span class="p">;</span>
+</span><span class='line'>PROMPT+<span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span>%<span class="o">(</span>?.%F<span class="o">{</span>green<span class="o">}</span><span class="nv">$OK</span>%f.%F<span class="o">{</span>red<span class="o">}</span><span class="nv">$NG</span>%f<span class="o">)</span> <span class="p">&amp;</span>rdquo<span class="p">;</span>
+</span><span class='line'>PROMPT+<span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span>%F<span class="o">{</span>blue<span class="o">}</span>%~%f<span class="p">&amp;</span>rdquo<span class="p">;</span>
+</span><span class='line'>PROMPT+<span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span><span class="se">\$</span><span class="o">(</span>vcs_prompt_info<span class="o">)</span><span class="p">&amp;</span>rdquo<span class="p">;</span>
+</span><span class='line'>PROMPT+<span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span>
+</span><span class='line'><span class="p">&amp;</span>rdquo<span class="p">;</span>
+</span><span class='line'>PROMPT+<span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span>%% <span class="p">&amp;</span>rdquo<span class="p">;</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;RPROMPT<span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span><span class="o">[</span>%*<span class="o">]</span><span class="p">&amp;</span>rdquo<span class="p">;</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;<span class="p">&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;</span>-&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;エイリアス&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;<span class="p">&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;</span>-&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;-n 行数表示, -I バイナリファイル無視, svn関係のファイルを無視&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;alias <span class="nv">grep</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span>grep <span class="p">&amp;</span>ndash<span class="p">;</span>color -n -I <span class="p">&amp;</span>ndash<span class="p">;</span><span class="nv">exclude</span><span class="o">=</span><span class="p">&amp;</span>lsquo<span class="p">;</span>&lt;em&gt;.svn-&lt;/em&gt;<span class="p">&amp;</span>rsquo<span class="p">;</span> <span class="p">&amp;</span>ndash<span class="p">;</span><span class="nv">exclude</span><span class="o">=</span><span class="p">&amp;</span>lsquo<span class="p">;</span>entries<span class="p">&amp;</span>rsquo<span class="p">;</span> <span class="p">&amp;</span>ndash<span class="p">;</span><span class="nv">exclude</span><span class="o">=</span><span class="p">&amp;</span>lsquo<span class="p">;</span>&lt;em&gt;/cache/&lt;/em&gt;<span class="p">&amp;</span>rsquo<span class="p">;&amp;</span>rdquo<span class="p">;</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;ls&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;alias <span class="nv">ls</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span>ls -G<span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="c"># color for darwin</span>
+</span><span class='line'><span class="nb">alias </span><span class="nv">l</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span>ls -la<span class="p">&amp;</span>rdquo<span class="p">;</span>
+</span><span class='line'><span class="nb">alias </span><span class="nv">la</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span>ls -la<span class="p">&amp;</span>rdquo<span class="p">;</span>
+</span><span class='line'><span class="nb">alias </span><span class="nv">l1</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span>ls -1<span class="p">&amp;</span>rdquo<span class="p">;</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;tree&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;alias <span class="nv">tree</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span>tree -NC<span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="c"># N: 文字化け対策, C:色をつける&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;<span class="p">&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;</span>-&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;キーバインド&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;<span class="p">&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;</span>-&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;bindkey -e&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;function cdup<span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>   <span class="nb">echo</span>
+</span><span class='line'><span class="nb">   cd</span> ..
+</span><span class='line'>   zle reset-prompt
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>zle -N cdup
+</span><span class='line'>bindkey <span class="p">&amp;</span>lsquo<span class="p">;</span>^K<span class="p">&amp;</span>rsquo<span class="p">;</span> cdup&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;bindkey <span class="p">&amp;</span>ldquo<span class="p">;</span>^R<span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="nb">history</span>-incremental-search-backward&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;<span class="p">&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;</span>-&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;その他&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;<span class="p">&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;&amp;</span>mdash<span class="p">;</span>-&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;cdしたあとで、自動的に ls する&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;function chpwd<span class="o">()</span> <span class="o">{</span> ls -1 <span class="o">}</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;iTerm2のタブ名を変更する&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;function title <span class="o">{</span>
+</span><span class='line'>    <span class="nb">echo</span> -ne <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="se">\0</span>33<span class="o">]</span>0<span class="p">;&amp;</span>rdquo<span class="p">;</span><span class="nv">$*</span><span class="p">&amp;</span>ldquo<span class="p">;</span><span class="se">\0</span>07<span class="p">&amp;</span>rdquo<span class="p">;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+<li>設定を保存したら<code>zsh</code>を起動するために<code>zsh</code>コマンドを実行<br/>
+見た目<code>bash</code>のときと違うのがわかる。</li>
+</ul>
+
+
+<p><figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>zsh
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+<li>デフォルトシェルを<code>zsh</code>に変更
+今のままではターミナルを起動するたびに<code>zsh</code>と入力しないと<code>bash</code>から<code>zsh</code>に切り替わらないので
+デフォルトシェルを<code>zsh</code>に変えてしまう。</li>
+</ul>
+
+
+<p><figure class='code'><figcaption><span>shell </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>chsh -s /bin/zsh
+</span><span class='line'>Changing shell <span class="k">for</span> XXX
+</span><span class='line'>Password <span class="k">for</span> XXX:
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>パスワード入力を求められるのでパスワードを入力し<code>Enter</code>で設定完了</p>
+]]></content>
+  </entry>
+  
+</feed>

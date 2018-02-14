@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2018-02-09T02:31:12+00:00</updated>
+  <updated>2018-02-14T01:07:00+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -14,7 +14,91 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Herokuのpushs時のエラー]]></title>
+    <title type="html"><![CDATA[zshに切り替えてからOctoppressで記事が作成できない対処方法]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/02/13/swithc-zsh-octopress-nopost/"/>
+    <updated>2018-02-13T12:33:08+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/02/13/swithc-zsh-octopress-nopost</id>
+    <content type="html"><![CDATA[<h2>現象</h2>
+
+<p>shellを<code>bash</code>から<code>zsh</code>に切り替えてからOctopressで記事を作成するとエラーが発生
+shellが<code>bash</code>の時は問題なくできていた。</p>
+
+<figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>rake new_post<span class="o">[</span><span class="sb">`</span>sample post title<span class="sb">`</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ </span>zsh: no matches found: new_post<span class="o">[</span>sample post title<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<!--more-->
+
+
+<h2>原因</h2>
+
+<p>エラーの原因はグロッビング。
+グロッビングでの特殊文字の使用をするという形になっており、そこに反応したせいで
+引数の<code>*</code>と<code>?</code>と<code>[</code>と<code>]</code>を使うとグロブ展開が行われ、<code>no matches found</code>と
+なってしまう。少しややこしいい。。。</p>
+
+<h2>対処方法</h2>
+
+<ul>
+<li>グロブ展開をさせないために<code>.zshrc</code>に以下を追記</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>.zshrc </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>vim .zshrc
+</span><span class='line'>
+</span><span class='line'>setopt nonomatch
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><code>.zshrc</code>を変更したので反映させる</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">source</span> ~/.zshrc
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>この記述( setopt nonomatch )もどうやら少し反則的な書き方らしい。。。
+この方法で対処したが他にも方法があったので忘れないようにメモ。
+以下を参考にした<a href="https://github.com/imathis/octopress/issues/117">Not compatible with Zsh #117</a></p>
+
+<h3>aliasを設定する</h3>
+
+<p><code>.zshrc</code>にaliasを設定</p>
+
+<figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">alias </span><span class="nv">rake</span><span class="o">=</span><span class="s2">&quot;noglob rake&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>クォーテーションで囲む</h3>
+
+<p>記事を作成するときにクォーテーションで囲む</p>
+
+<figure class='code'><figcaption><span>1.bash </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>rake <span class="s2">&quot;new_post[sample post title]&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Herokuのpush時のエラー]]></title>
     <link href="http://blackhawk888.github.io/blog/2018/02/09/heroku-deploy/"/>
     <updated>2018-02-09T11:25:54+00:00</updated>
     <id>http://blackhawk888.github.io/blog/2018/02/09/heroku-deploy</id>
@@ -2379,78 +2463,6 @@ HEAD^とは、HEADの更に１つ前のコミットのこと。<br/>
 </tr>
 </tbody>
 </table>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CSSセレクタの組み合わせ]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/09/10/css-combination/"/>
-    <updated>2016-09-10T09:13:34+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/09/10/css-combination</id>
-    <content type="html"><![CDATA[<p>CSSを久しぶりに書いて見るとCSSの組み合わせを忘れていたのでメモ。</p>
-
-<!--more-->
-
-
-
-
-<figure class='code'><figcaption><span>cssSelectorCombination.css </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="c">/* 複数セレクタ</span>
-</span><span class='line'><span class="c">  同じスタイルを適用したいセレクタ1，セレクタ2をまとめる */</span>
-</span><span class='line'><span class="err">セレクタ</span><span class="nt">1</span><span class="o">,</span> <span class="err">セレクタ</span><span class="nt">2</span> <span class="p">{</span>
-</span><span class='line'>  <span class="o">...</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">/* 子孫セレクタ</span>
-</span><span class='line'><span class="c">  セレクタ1の要素で囲まれたセレクタ2要素にスタイルを適用する。</span>
-</span><span class='line'><span class="c">  セレクタ1要素には適用されない。*/</span>
-</span><span class='line'><span class="err">セレクタ</span><span class="nt">1</span> <span class="err">セレクタ</span><span class="nt">2</span> <span class="p">{</span>
-</span><span class='line'>  <span class="o">...</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">/* 子セレクタ</span>
-</span><span class='line'><span class="c">  子孫セレクタと比べて、セレクタ2要素がセレクタ1要素の直下にある場合にセレクタ2要素に適用される。</span>
-</span><span class='line'><span class="c">  セレクタ1要素には適用されない。*/</span>
-</span><span class='line'><span class="err">セレクタ</span><span class="nt">1</span> <span class="o">&gt;</span> <span class="err">セレクタ</span><span class="nt">2</span> <span class="p">{</span>
-</span><span class='line'>  <span class="o">...</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">/* 隣接セレクタ</span>
-</span><span class='line'><span class="c">  同じ階層にある要素同士で、セレクタ1要素の直後にセレクタ2要素があれば適用する。</span>
-</span><span class='line'><span class="c">  セレクタ1要素には適用されない。*/</span>
-</span><span class='line'><span class="err">セレクタ</span><span class="nt">1</span> <span class="o">+</span> <span class="err">セレクタ</span><span class="nt">2</span> <span class="p">{</span>
-</span><span class='line'>  <span class="o">...</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
 
 ]]></content>
   </entry>
