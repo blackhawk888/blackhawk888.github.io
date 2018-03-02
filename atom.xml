@@ -4,7 +4,7 @@
   <title><![CDATA[Wivern Blog]]></title>
   <link href="http://blackhawk888.github.io/atom.xml" rel="self"/>
   <link href="http://blackhawk888.github.io/"/>
-  <updated>2018-02-14T01:07:00+00:00</updated>
+  <updated>2018-03-02T01:00:12+00:00</updated>
   <id>http://blackhawk888.github.io/</id>
   <author>
     <name><![CDATA[wivern]]></name>
@@ -12,6 +12,69 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[HHKBでCpasLockがかかり小文字入力ができなくなった対処方法]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/03/02/hhkb/"/>
+    <updated>2018-03-02T09:51:30+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/03/02/hhkb</id>
+    <content type="html"><![CDATA[<p>HHKB(Happy Hacking Keyboard)というキーボードを愛用しており、
+入力していて突然大文字英字しか入力できなくなってしまい戻すのに少し
+手間取ってしまったのでメモ。</p>
+
+<!--more-->
+
+
+<p>挙動的に<code>CapsLock</code>がかかったのだとは推測できたがそもそもHHKBには<code>CapsLock</code>キーがありません。<br/>
+それではショートカットキーで元にもどせるのだろうと思い公式サイトを調べたところFAQに記載があった。</p>
+
+<p><a href="https://www.pfu.fujitsu.com/hhkeyboard/hhkb_support/faq_pro.html">Happy Hacking Keyboard サポートFAQ</a></p>
+
+<blockquote><p>Q1:&ldquo;Caps Lock&rdquo; を有効にするにはどうしたらいいですか?<br/>
+A1:キーボード後部のDIPスイッチで、設定したモードにより動作が異なります。<br/>
+【HHKモード】<br/>
+&ldquo;CapsLock"の機能はありません。<br/>
+【Lite拡張モード、Macモード】<br/>
+【Fn】+【Tab】キーで"CapsLock"の働きをします。</p></blockquote>
+
+<h3>Happy Hacking Keyboard Professional2(DIPスイッチ設定)</h3>
+
+<table>
+<thead>
+<tr>
+<th> SW  </th>
+<th> SW2 </th>
+<th> 設定モード         </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> OFF </td>
+<td> OFF </td>
+<td> HHKモード(PC)      </td>
+</tr>
+<tr>
+<td> ON  </td>
+<td> OFF </td>
+<td> Lite拡張モード(PC) </td>
+</tr>
+<tr>
+<td> OFF </td>
+<td> ON  </td>
+<td> Machintoshモード   </td>
+</tr>
+<tr>
+<td> ON  </td>
+<td> ON  </td>
+<td> 設定禁止           </td>
+</tr>
+</tbody>
+</table>
+
+
+<p>私はMacモードで使用していたので<code>Fn + Tab</code>キーで<code>CapsLock</code>を解除できました。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[zshに切り替えてからOctoppressで記事が作成できない対処方法]]></title>
@@ -2387,83 +2450,6 @@ HEAD^とは、HEADの更に１つ前のコミットのこと。<br/>
 <p>プルでもコンフリクトが起こる場合がある。<br/>
 また、<code>pull</code>コマンドでは自分のコードと他人のコードがマージされる。<br/>
 まずは取り込むだけにしたい場合は、<code>fetch</code>コマンドを実行。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CSSスタイル適用順序]]></title>
-    <link href="http://blackhawk888.github.io/blog/2016/09/10/css-style-application-order/"/>
-    <updated>2016-09-10T09:35:59+00:00</updated>
-    <id>http://blackhawk888.github.io/blog/2016/09/10/css-style-application-order</id>
-    <content type="html"><![CDATA[<p>今までは漠然と以下の感じと思っていた</p>
-
-<ul>
-<li>基本的に 下に書かれたものが優先</li>
-<li>CSSはより 詳細なセレクタのほうが優先</li>
-<li>詳細なセレクタはできるだけ下に書くようにする</li>
-</ul>
-
-
-<p>考え方は間違ってはいないと思うが、詳細を調べたのでメモとして残しておく。</p>
-
-<!--more-->
-
-
-<p>セレクタには詳細度というものがあり、セレクタの設定によって詳細度が変化し、セレクタの詳細度によって優先されるスタイルが上書きされる。<br/>
-各セレクタを組み合わせて記述することが多いが組み合わせることで詳細度に変化が生じる。 <br/>
-詳細度の高い方が優先される。(数値の大きいものが優先される)</p>
-
-<h2>詳細度の分類及び具体的な考え方</h2>
-
-<ul>
-<li>要素セレクタの数量より1つのクラスセレクタが優先</li>
-<li>クラスセレクタの数量より1つのIDセレクタが優先</li>
-<li>各セレクタの数量より1つのインラインや!imporantが優先</li>
-</ul>
-
-
-<table>
-<thead>
-<tr>
-<th style="text-align:left;"> 詳細順位 </th>
-<th style="text-align:left;"> セレクタ名 </th>
-<th style="text-align:left;"> 詳細数値 </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;"> 1 </td>
-<td style="text-align:left;"> !important </td>
-<td style="text-align:left;"> 1.0.0.0.0 </td>
-</tr>
-<tr>
-<td style="text-align:left;"> 2 </td>
-<td style="text-align:left;"> インライン記述(style属性) </td>
-<td style="text-align:left;"> 0.1.0.0.0 </td>
-</tr>
-<tr>
-<td style="text-align:left;"> 3 </td>
-<td style="text-align:left;"> idセレクタ </td>
-<td style="text-align:left;"> 0.0.1.0.0 </td>
-</tr>
-<tr>
-<td style="text-align:left;"> 4 </td>
-<td style="text-align:left;"> 属性セレクタ・classセレクタ・擬似クラス   </td>
-<td style="text-align:left;"> 0.0.0.1.0 </td>
-</tr>
-<tr>
-<td style="text-align:left;"> 5 </td>
-<td style="text-align:left;"> 要素セレクタ・擬似要素 </td>
-<td style="text-align:left;"> 0.0.0.0.1 </td>
-</tr>
-<tr>
-<td style="text-align:left;"> 6 </td>
-<td style="text-align:left;"> ユニバーサルセレクタ </td>
-<td style="text-align:left;"> 0.0.0.0.0 </td>
-</tr>
-</tbody>
-</table>
-
 ]]></content>
   </entry>
   

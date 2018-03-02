@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Hhkb | Wivern Blog]]></title>
+  <link href="http://blackhawk888.github.io/blog/categories/hhkb/atom.xml" rel="self"/>
+  <link href="http://blackhawk888.github.io/"/>
+  <updated>2018-03-02T01:00:12+00:00</updated>
+  <id>http://blackhawk888.github.io/</id>
+  <author>
+    <name><![CDATA[wivern]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[HHKBでCpasLockがかかり小文字入力ができなくなった対処方法]]></title>
+    <link href="http://blackhawk888.github.io/blog/2018/03/02/hhkb/"/>
+    <updated>2018-03-02T09:51:30+00:00</updated>
+    <id>http://blackhawk888.github.io/blog/2018/03/02/hhkb</id>
+    <content type="html"><![CDATA[<p>HHKB(Happy Hacking Keyboard)というキーボードを愛用しており、
+入力していて突然大文字英字しか入力できなくなってしまい戻すのに少し
+手間取ってしまったのでメモ。</p>
+
+<!--more-->
+
+
+<p>挙動的に<code>CapsLock</code>がかかったのだとは推測できたがそもそもHHKBには<code>CapsLock</code>キーがありません。<br/>
+それではショートカットキーで元にもどせるのだろうと思い公式サイトを調べたところFAQに記載があった。</p>
+
+<p><a href="https://www.pfu.fujitsu.com/hhkeyboard/hhkb_support/faq_pro.html">Happy Hacking Keyboard サポートFAQ</a></p>
+
+<blockquote><p>Q1:&ldquo;Caps Lock&rdquo; を有効にするにはどうしたらいいですか?<br/>
+A1:キーボード後部のDIPスイッチで、設定したモードにより動作が異なります。<br/>
+【HHKモード】<br/>
+&ldquo;CapsLock"の機能はありません。<br/>
+【Lite拡張モード、Macモード】<br/>
+【Fn】+【Tab】キーで"CapsLock"の働きをします。</p></blockquote>
+
+<h3>Happy Hacking Keyboard Professional2(DIPスイッチ設定)</h3>
+
+<table>
+<thead>
+<tr>
+<th> SW  </th>
+<th> SW2 </th>
+<th> 設定モード         </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> OFF </td>
+<td> OFF </td>
+<td> HHKモード(PC)      </td>
+</tr>
+<tr>
+<td> ON  </td>
+<td> OFF </td>
+<td> Lite拡張モード(PC) </td>
+</tr>
+<tr>
+<td> OFF </td>
+<td> ON  </td>
+<td> Machintoshモード   </td>
+</tr>
+<tr>
+<td> ON  </td>
+<td> ON  </td>
+<td> 設定禁止           </td>
+</tr>
+</tbody>
+</table>
+
+
+<p>私はMacモードで使用していたので<code>Fn + Tab</code>キーで<code>CapsLock</code>を解除できました。</p>
+]]></content>
+  </entry>
+  
+</feed>

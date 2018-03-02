@@ -6,16 +6,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="google-site-verification" content="vY2EmWIVKKAtlat_5KCgpFUJrL4LWlUa0XZ2xv7RQ1s" />
-  <title>cloud9でMySQLを使う - Wivern Blog</title>
+  <title>HHKBでCpasLockがかかり小文字入力ができなくなった対処方法 - Wivern Blog</title>
   <meta name="author" content="wivern">
 
   
-  <meta name="description" content="Cloud9でRailsテンプレートを作成すると最初はSQLiteを使うようになっているが
-MySQLが使えるようなので設定を変更してみる Gemfileを編集
-sqlite3をコメントアウトし、gem 'mysql2', '~&gt; 0.3.20'を追加 Gemfile 1
-2
-3
-# Use &hellip;">
+  <meta name="description" content="HHKB(Happy Hacking Keyboard)というキーボードを愛用しており、
+入力していて突然大文字英字しか入力できなくなってしまい戻すのに少し
+手間取ってしまったのでメモ。 挙動的にCapsLockがかかったのだとは推測できたがそもそもHHKBにはCapsLockキーがありません。 &hellip;">
   
   
   <link href="/stylesheets/table.css" rel="stylesheet" type="text/css" />
@@ -26,7 +23,7 @@ sqlite3をコメントアウトし、gem 'mysql2', '~&gt; 0.3.20'を追加 Gemfi
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blackhawk888.github.io/blog/2018/01/17/cloud9-mysql/">
+  <link rel="canonical" href="http://blackhawk888.github.io/blog/2018/03/02/hhkb/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Wivern Blog" type="application/atom+xml">
@@ -89,7 +86,7 @@ sqlite3をコメントアウトし、gem 'mysql2', '~&gt; 0.3.20'を追加 Gemfi
   
   <header>
     
-      <h1 class="entry-title">cloud9でMySQLを使う</h1>
+      <h1 class="entry-title">HHKBでCpasLockがかかり小文字入力ができなくなった対処方法</h1>
     
     
       <p class="meta">
@@ -98,69 +95,68 @@ sqlite3をコメントアウトし、gem 'mysql2', '~&gt; 0.3.20'を追加 Gemfi
 
 
 
-<time class='entry-date' datetime='2018-01-17T15:30:03+00:00'><span class='date'>2018年01月17日</span> <span class='time'>15:30:03</span></time>
+<time class='entry-date' datetime='2018-03-02T09:51:30+00:00'><span class='date'>2018年03月02日</span> <span class='time'>09:51:30</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Cloud9でRailsテンプレートを作成すると最初はSQLiteを使うようになっているが
-MySQLが使えるようなので設定を変更してみる</p>
+<div class="entry-content"><p>HHKB(Happy Hacking Keyboard)というキーボードを愛用しており、
+入力していて突然大文字英字しか入力できなくなってしまい戻すのに少し
+手間取ってしまったのでメモ。</p>
 
 <!--more-->
 
 
-<p><code>Gemfile</code>を編集
-sqlite3をコメントアウトし、<code>gem 'mysql2', '~&gt; 0.3.20'</code>を追加</p>
+<p>挙動的に<code>CapsLock</code>がかかったのだとは推測できたがそもそもHHKBには<code>CapsLock</code>キーがありません。<br/>
+それではショートカットキーで元にもどせるのだろうと思い公式サイトを調べたところFAQに記載があった。</p>
 
-<figure class='code'><figcaption><span>Gemfile </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Use sqlite3 as the database for Active Record</span>
-</span><span class='line'><span class="c1">#gem &#39;sqlite3&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;mysql2&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 0.3.20&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
+<p><a href="https://www.pfu.fujitsu.com/hhkeyboard/hhkb_support/faq_pro.html">Happy Hacking Keyboard サポートFAQ</a></p>
+
+<blockquote><p>Q1:&ldquo;Caps Lock&rdquo; を有効にするにはどうしたらいいですか?<br/>
+A1:キーボード後部のDIPスイッチで、設定したモードにより動作が異なります。<br/>
+【HHKモード】<br/>
+&ldquo;CapsLock"の機能はありません。<br/>
+【Lite拡張モード、Macモード】<br/>
+【Fn】+【Tab】キーで"CapsLock"の働きをします。</p></blockquote>
+
+<h3>Happy Hacking Keyboard Professional2(DIPスイッチ設定)</h3>
+
+<table>
+<thead>
+<tr>
+<th> SW  </th>
+<th> SW2 </th>
+<th> 設定モード         </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> OFF </td>
+<td> OFF </td>
+<td> HHKモード(PC)      </td>
+</tr>
+<tr>
+<td> ON  </td>
+<td> OFF </td>
+<td> Lite拡張モード(PC) </td>
+</tr>
+<tr>
+<td> OFF </td>
+<td> ON  </td>
+<td> Machintoshモード   </td>
+</tr>
+<tr>
+<td> ON  </td>
+<td> ON  </td>
+<td> 設定禁止           </td>
+</tr>
+</tbody>
+</table>
 
 
-<p>インストール</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">bundle</span> <span class="n">install</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>database接続に必要な<code>config/database.yml</code>の編集<br/>
-今回はCloud9が用意しているDBを使用する。<br/>
-ローカルで動かしているなら、自分で作ったDB名とユーザー名いれて、
-hostにはlocalhostって入れれば接続できる。</p>
-
-<figure class='code'><figcaption><span>config/database.yml </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">development</span><span class="p">:</span>
-</span><span class='line'>    <span class="ss">adapter</span><span class="p">:</span> <span class="n">mysql2</span>
-</span><span class='line'>    <span class="ss">encoding</span><span class="p">:</span> <span class="n">utf8</span>
-</span><span class='line'>    <span class="ss">database</span><span class="p">:</span> <span class="n">c9</span>
-</span><span class='line'>    <span class="ss">username</span><span class="p">:</span> <span class="o">&lt;</span><span class="sx">%=ENV[&#39;C9_USER&#39;]%&gt;</span>
-</span><span class='line'><span class="sx">    host: &lt;%=</span><span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;IP&#39;</span><span class="o">]%&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>MySQL起動</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>mysql-ctl start
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>あとはDBも接続できたので<code>rails g model XXXX</code>・・・・・<code>rake db:migrate</code>を
-実行するだけ。</p>
+<p>私はMacモードで使用していたので<code>Fn + Tab</code>キーで<code>CapsLock</code>を解除できました。</p>
 </div>
 
 
@@ -176,12 +172,12 @@ hostにはlocalhostって入れれば接続できる。</p>
 
 
 
-<time class='entry-date' datetime='2018-01-17T15:30:03+00:00'><span class='date'>2018年01月17日</span> <span class='time'>15:30:03</span></time>
+<time class='entry-date' datetime='2018-03-02T09:51:30+00:00'><span class='date'>2018年03月02日</span> <span class='time'>09:51:30</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/cloud9/'>cloud9</a>, <a class='category' href='/blog/categories/mysql/'>mysql</a>, <a class='category' href='/blog/categories/rails/'>rails</a>
+    <a class='category' href='/blog/categories/hhkb/'>hhkb</a>
   
 </span>
 
@@ -190,7 +186,7 @@ hostにはlocalhostって入れれば接続できる。</p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2018/01/17/cloud9-mysql/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2018/01/17/cloud9-mysql/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blackhawk888.github.io/blog/2018/03/02/hhkb/" data-via="" data-counturl="http://blackhawk888.github.io/blog/2018/03/02/hhkb/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -203,10 +199,8 @@ hostにはlocalhostって入れれば接続できる。</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2018/01/17/rails-bundler-project/" title="Previous Post: Railsをbundlerでプロジェクト毎に管理する">&laquo; Railsをbundlerでプロジェクト毎に管理する</a>
+        <a class="basic-alignment left" href="/blog/2018/02/13/swithc-zsh-octopress-nopost/" title="Previous Post: zshに切り替えてからOctoppressで記事が作成できない対処方法">&laquo; zshに切り替えてからOctoppressで記事が作成できない対処方法</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2018/01/18/rails-db-reset/" title="Next Post: RailsでDBをリセットして最初からつくり直す">RailsでDBをリセットして最初からつくり直す &raquo;</a>
       
     </p>
   </footer>

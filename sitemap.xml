@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://blackhawk888.github.io/blog/2018/03/02/hhkb/</loc>
+<lastmod>2018-03-02T09:51:30+00:00</lastmod>
+</url>
+<url>
 <loc>http://blackhawk888.github.io/blog/2018/02/13/swithc-zsh-octopress-nopost/</loc>
 <lastmod>2018-02-13T12:33:08+00:00</lastmod>
 </url>
@@ -189,10 +193,10 @@
 <lastmod>2016-08-25T15:00:37+00:00</lastmod>
 </url>
 <url>
-<loc>http://blackhawk888.github.io/</loc>
+<loc>http://blackhawk888.github.io/blog/archives/</loc>
 </url>
 <url>
-<loc>http://blackhawk888.github.io/blog/archives/</loc>
+<loc>http://blackhawk888.github.io/</loc>
 </url>
 <url>
 <loc>http://blackhawk888.github.io/about/</loc>
@@ -268,5 +272,8 @@
 </url>
 <url>
 <loc>http://blackhawk888.github.io/blog/categories/heroku/</loc>
+</url>
+<url>
+<loc>http://blackhawk888.github.io/blog/categories/hhkb/</loc>
 </url>
 </urlset>
